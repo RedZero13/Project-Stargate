@@ -50,7 +50,7 @@
 |------|-----|-------------|
 | Unity Personal (free under $200k revenue) / Pro | $0 | ~$2,200/yr |
 | Asset Store: modular sci-fi lab kit, characters, FX, audio packs, tools | $300 | $1,500 |
-| Character art/rigging (Max, Emilia + remnant form) — contractor or Character Creator–style tool | $0 (stock + tweak) | $3,000–8,000 |
+| Character art/rigging (Max, Emilia + Hollow form) — contractor or Character Creator–style tool | $0 (stock + tweak) | $3,000–8,000 |
 | Music + SFX (composer or licensed) | $100 | $2,000–5,000 |
 | Voice acting (6 characters, Chapter 1) | $0 (text only) | $2,000–6,000 |
 | 2D cutscene / storybook art | $0 (self) | $1,500–4,000 |
@@ -142,7 +142,7 @@ Durations assume **one dev at about 25–30 hrs/week**. Halve them roughly for f
    - Tech design: Unity 6 + URP, Input System, Cinemachine 3rd-person rig, NavMesh AI, ScriptableObject data, Addressables, save format.
 2. **Greybox prototype.** One sector in blockout (ProBuilder):
    - Over-the-shoulder controller, aim, one pistol and one melee weapon.
-   - One remnant enemy (chase/attack/stagger) and one human guard (patrol/investigate/alert).
+   - One Hollow enemy (chase/attack/stagger) and one human guard (patrol/investigate/alert).
    - Inventory, one lock-and-key puzzle, and the sanity meter with one hallucination effect.
    - **The test:** is 10 minutes of it tense and fun? If not, iterate before making any art.
 3. **Art direction.** A style guide covering palette (sterile teal/white labs vs rust-red containment), lighting rules (volumetric fog, flashlight as primary light, emergency strobes), character turnarounds for Max and Emilia (human + Hollow), the Hollow design language, and a UI style (diegetic where possible).
