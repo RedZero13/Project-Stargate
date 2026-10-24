@@ -10,7 +10,7 @@
 |-------|----------|
 | Team / budget | Solo; spend as little as possible (the **Lean** column in §1) |
 | Scope cuts in §1 | **Approved**: 3 launch endings, 6-character core cast, sanity as a resource, Ironman opt-in, PC first |
-| Title | **Renamed** to *HOLLOW KIN* (working title). In-world project: **Project LANTERN**. Enemies: **Hollows** |
+| Title | **Confirmed:** *HOLLOW KIN*. In-world project: **Project LANTERN**. Enemies: **Hollows** |
 | Assets | Stock + self-made Blender + AI-assisted concepts |
 | Voice | ElevenLabs |
 | Cutscenes | In-engine animation where possible, with 2D storybook panels elsewhere |
@@ -35,8 +35,8 @@
 | 3 | **Sanity as a 100→0 level timer** fights the RE2-style exploration and backtracking. | A timer punishes exactly what the genre rewards: careful exploring, reading notes, solving puzzles. | Make sanity a **resource** drained by darkness, remnant psychic attacks, gore and drugs, and restored by light, safe rooms and rare items. Low sanity brings hallucinations, aim sway and fake enemies. Keep a hard timer only for set-piece escapes. |
 | 4 | **Souls-like "restart the entire run" difficulty.** | In a 6–10 hr narrative game this is brutal and costly to balance. | Make it an opt-in **Ironman** mode unlocked after the first clear. Balance only Normal at first; derive the others from multipliers. |
 | 5 | **7 endings.** | Each ending needs a cutscene, choice tracking and QA of every path. | Launch with **3 endings** (Human / Remnant / Sacrifice). Add the rest in post-launch DLC or New Game+. |
-| 6 | **Overlapping characters.** Huckley and Marlowe (both psych), Kline / Thompson / Jaz (all "insider who feeds Max info"), and Nate (an ally). | Every NPC costs models, rigs, VO and scripting. | Merge to about 6 core characters: Max, Emilia, Huckley (mentor who falls), Dr. Man (villain), one insider ally (merge Kline + Jaz + Thompson), Nate (combat ally). Vicky, Jasper and Jade appear as remnants or in notes and 2D art. |
-| 7 | **Story contradictions.** Max is "adopted by an elderly couple" but also "went through every foster home until kicked out at 18". He has a dead-end receptionist job, but the prologue has him offered a security-guard job. | Players and testers notice. | Lock one canonical backstory in the narrative bible (Phase 2). |
+| 6 | **Overlapping characters.** Huckley and Marlowe (both psych), Kline / Thompson / Jaz (all "insider who feeds Max info"), and Nate (an ally). | Every NPC costs models, rigs, VO and scripting. | Merge to about 6 core characters: Max, Emilia, Huckley (mentor who falls), Dr. Mán (villain), one insider ally (merge Kline + Jaz + Thompson), Nate (combat ally). Vicky, Jasper and Jade appear as remnants or in notes and 2D art. |
+| 7 | **Story contradictions.** Max is "adopted by an elderly couple" but also "went through every foster home until kicked out at 18". He has a dead-end receptionist job, but the prologue has him offered a security-guard job, which is also too close to the *FNAF* film. | Players and testers notice. | ✅ Fixed in `GDD.md` §3: the job offer is replaced by a paid blood-donation van that is secretly a LANTERN front. |
 | 8 | **The "Stargate" name.** It's a well-known MGM trademark (and a real CIA program). "Remnant" is also taken (*Remnant: From the Ashes*). | A trademark risk on Steam or the App Store, and it's hard to search for. | ✅ Fixed: *HOLLOW KIN* / Project LANTERN / Hollows. Still run a trademark search before the store page goes up. |
 | 9 | **Emilia's design references Eveline (RE7)** directly. | It could feel derivative. | Use it as a mood reference only, and develop a unique silhouette: telekinetic "halo" debris, a nervous-system glow, a hospital gown with ID tags. |
 | 10 | **iPadOS plus realistic 3D horror.** | Mobile GPU, touch controls and memory limits add a whole port project. | **PC first (Windows + macOS)**, with an iPad port after launch. Choose **URP** now so the port stays possible. |
@@ -216,6 +216,6 @@ Durations assume **one dev at about 25–30 hrs/week**. Halve them roughly for f
 ## 5. What I still need from you
 
 1. **Review this PR**: the GDD v2 changes, the cast merge, and the prologue/letter rewrite. Mark up anything that's wrong for your vision.
-2. **The ❓ items in `GDD.md`**: confirm the title (or pick an alternative), and decide what to do about Dr. Man's surname.
+2. ✅ Title (*Hollow Kin*) and Dr. Mán's surname are settled.
 3. **Run Claude on your Mac** (Desktop app, or `claude` in a terminal in this repo) so the Unity MCP tools are available. Then we start the §2 project setup and the Phase 2 greybox.
 4. **Concept images** you already have (Max, Emilia, the facility), dropped into `docs/reference/`.

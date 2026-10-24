@@ -37,7 +37,7 @@ The Hales had taken him in. Walter and June: kind, quiet, smelling of coffee and
 
 A year ago, the Hales had stopped looking at him. Then they'd stopped speaking to him. Then June had changed the locks.
 
-Now there was the studio apartment over the laundromat. There was the front desk at Dell's Hardware, where Mr. Dell apologised every Friday for the size of the envelope. There was the stack of rejection emails: *after reviewing your background check…*
+Now there was the studio apartment over the laundromat. There was the front desk at Dell's Hardware, where Mr. Dell apologised every Friday for the size of the envelope. There was the stack of rejection emails: *after reviewing your background check…* And there was the cotton-ball bruise in the crook of his elbow, from the blood-donation van that had paid him three hundred dollars last month. Three hundred dollars, gone in a week. The van had been parked outside the store again this morning. The nurse waved at him like they were old friends.
 
 And there was the letter.
 
@@ -55,7 +55,7 @@ I'm sorry I disappeared. I know it wasn't my fault (Dr. Lorraine says that a lot
 
 I've drawn you a hundred pictures. Jade said that was too many but I don't think there's such a thing. Some of them are of us at the lake. Some of them are of the house we'll have. It has a room just for drawing and a door that doesn't lock.
 
-The others went home already. Vicky, Jasper and Jade. Nobody said goodbye, but that's okay, I'll find them after. Dr. Man says I'm the most special one, so I had to stay the longest. He says tonight there's one last medicine and then I'm done. It's a little bit scary but it's the **last** one!
+The others went home already. Vicky, Jasper and Jade. Nobody said goodbye, but that's okay, I'll find them after. Dr. Mán says I'm the most special one, so I had to stay the longest. He says tonight there's one last medicine and then I'm done. It's a little bit scary but it's the **last** one!
 
 Please come get me. Don't be late like you always were for school.
 
@@ -92,3 +92,4 @@ The door is open, just a crack. A child's drawing is taped to it at eye level: t
 - The P.S. sets up three things: Emilia's lullaby motif (music and puzzle solutions), her powers (the flickering lights), and her innocence about what the "last medicine" was.
 - "The others went home already" plants the reveal about the Hollow Children.
 - The Hales' betrayal stays a mystery until the Security Hub files in Act 3.
+- The donation van (Halvorsen Biologics) is a LANTERN front. Its return pays off in Act 3, when Max finds his own intake file.

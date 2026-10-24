@@ -1,7 +1,7 @@
 # HOLLOW KIN — Game Design Document v2
 
 > Supersedes *Project Stargate – The Following Saga* (GDD v1).
-> Status: **draft for review**. Everything marked ❓ needs a decision from you.
+> Status: **draft for review**, round 2.
 
 ## 0. Change log vs. v1
 
@@ -14,11 +14,11 @@
 | Sanity = 100→0 level timer | **Sanity = resource** that drains and refills | A timer punishes the exploration the genre is built on. |
 | Souls-like "restart the whole run" | **Ironman** mode, unlocked after the first clear | Optional for players who want it, and not something to balance around. |
 | 7 endings | **3 at launch**, 4 saved for post-launch | Cuts cutscene and QA cost. |
-| Contradictory backstory (adopted vs. "every foster home"; receptionist vs. security-guard job; 1st vs. 3rd person prose) | One canonical timeline (§3) | Consistency. |
+| Contradictory backstory (adopted vs. "every foster home"; receptionist vs. security-guard job (too close to the *FNAF* film's setup); 1st vs. 3rd person prose) | One canonical timeline (§3) | Consistency. |
 | Platform: Mac, Windows, iPad | **macOS + Windows** at launch, iPad later | One developer working on an M4 Max Mac Studio. |
 | 2D-platformer MVP table | Vertical-slice backlog (`ROADMAP.md` §4) | The old table was for a different game. |
 
-❓ **Alternative titles** if you don't like *Hollow Kin*: *Below the Lantern*, *Sister Signal*, *The Quiet Ward*. Whatever you pick needs a USPTO/EUIPO and Steam search before the store page goes up.
+✅ **Title confirmed: *Hollow Kin*.** Still needs a USPTO/EUIPO and Steam search before the store page goes up.
 
 ---
 
@@ -69,13 +69,13 @@ The game is semi-open in the RE2 style: one central sector (Containment) with lo
 | −3 yrs | Max falls in with the wrong crowd. When a dealer the Hales owe money to threatens them, Max takes a **felony possession-with-intent charge** that wasn't his, to keep them out of it. |
 | −1 yr | The Hales turn cold and then openly hostile. (Late-game reveal: LANTERN had been paying them a monthly stipend to report on Max, who may share Emilia's anomaly. When the project began shutting down, the payments stopped and the pressure began.) Max moves into a studio apartment he can barely afford. |
 | −1 yr → now | **Dr. Lorraine Huckley** begins smuggling letters from Emilia to Max. |
-| −1 month | A well-dressed stranger offers Max an absurdly well-paid "night escort" job at a private medical site. Max turns it down. (The stranger was a LANTERN recruiter sizing Max up as a replacement subject.) |
+| −1 month | Broke, Max sells blood for $300 at a **mobile "Halvorsen Biologics" donation van** parked outside Dell's Hardware. The van keeps coming back, and the phlebotomist keeps asking him back for a "follow-up panel". (Halvorsen is a LANTERN front. Max's sample confirmed he carries the same anomaly as Emilia, and the project was preparing to take him in as her replacement once the shutdown wiped her records. In Act 3, Max finds his own subject file: `L-04 / HUNT, M. — PENDING INTAKE`.) |
 | **Day 0** | Huckley's last letter: *Emilia is being released. Meet at the old St. Brigid's clinic on the 14th.* |
 | Day 0 + 6 | Nobody comes, and Huckley stops answering. Max goes to St. Brigid's himself. |
 
 **Max's current life (canonical):** receptionist at Dell's Hardware, a family-run shop that is slowly going under. Job applications bounce because of his record and his lack of qualifications.
 
-**What happened inside:** LANTERN was ordered to shut down. The night before Emilia's release, **Dr. Sebastian Man** injected her with **L-7**, an unstable serum, to recover his life's work before the shutdown. It worked too well. Emilia became a **Hollow** with telekinesis and mind control. In a single night she broke the facility, and broke Huckley's mind. She is still down there, still ten years old inside, waiting for her brother.
+**What happened inside:** LANTERN was ordered to shut down. The night before Emilia's release, **Dr. Sebastian Mán** injected her with **L-7**, an unstable serum, to recover his life's work before the shutdown. It worked too well. Emilia became a **Hollow** with telekinesis and mind control. In a single night she broke the facility, and broke Huckley's mind. She is still down there, still ten years old inside, waiting for her brother.
 
 ### Act structure (Chapter 1)
 
@@ -84,7 +84,7 @@ The game is semi-open in the RE2 style: one central sector (Containment) with lo
 | **Prologue** | Max's walk to work → his apartment → the letter | Tone, poverty, loneliness. Emilia's letter (see `narrative/PROLOGUE.md`). |
 | **Act 1** | St. Brigid's clinic (surface front) → lift to the **Containment Wing** | Tutorial. First Hollow. Meet **Jaz** over the radio. Find the children's dormitory and drawings. |
 | **Act 2** | **Research Labs** + **Maintenance Tunnels** | Meet **Nate**. Learn what L-7 is. Huckley's audio logs grow more and more broken. Boss: **Huckley Hollow**. |
-| **Act 3** | **Security Hub** → Emilia's test chamber | Dr. Man's reveal. Dr. Man boss (a human with a psychic-dampening rig). Emilia confrontation. The ending is decided. |
+| **Act 3** | **Security Hub** → Emilia's test chamber | Dr. Mán's reveal. Dr. Mán boss (a human with a psychic-dampening rig). Emilia confrontation. The ending is decided. |
 
 ---
 
@@ -97,7 +97,7 @@ The game is semi-open in the RE2 style: one central sector (Containment) with lo
 | **Max Hunt** | 21 | Protagonist | Brunette, thin, a worn hoodie and work jacket. Dry humour that hides guilt for not finding her sooner. |
 | **Emilia Hunt** | 15 (10 inside) | Sister / Hollow | Two models: **human** and **Hollow**. Naive, optimistic, with a twisted streak. Talks to Max through intercoms, PA systems and *in his head*. |
 | **Dr. Lorraine Huckley** | mid-30s | Fallen mentor → boss | Blonde, a prodigy psychiatrist. She was kind to Emilia and smuggled the letters. Emilia's power broke her mind; she's now a Hollow boss. Her audio logs trace her decline. |
-| **Dr. Sebastian Man** | 50s | Antagonist | Chinese-born biochemist, a near-Nobel laureate believed dead. Holds that the ends justify any means. Also absorbs Dr. Marlowe's role (the cruel conditioning programme). ❓ "Dr. Man" can read oddly in English dialogue. Consider writing it "Dr. Mán" or giving him a different surname. |
+| **Dr. Sebastian Mán** | 50s | Antagonist | Chinese-born biochemist, a near-Nobel laureate believed dead. Holds that the ends justify any means. Also absorbs Dr. Marlowe's role (the cruel conditioning programme). |
 | **Jasmine "Jaz" Hawkins** | late 20s | Insider ally (radio) | A former LANTERN technician hiding in the Maintenance Tunnels. **Merged from three v1 characters:** Jaz (layout and security knowledge), Dr. Kline (the saboteur who leaves clues) and Agent Thompson (gathering evidence). Mostly a voice on the radio, so cheap to produce. |
 | **Nathaniel "Nate" Carter** | early 30s | Combat ally | An ex-soldier turned subject who escaped containment. Joins for a few set pieces. His fate depends on your choices. |
 
@@ -105,7 +105,7 @@ The game is semi-open in the RE2 style: one central sector (Containment) with lo
 - **Vicky (9), Jasper (7), Jade (11):** the other children. Their drawings and diaries are the key collectible. **Two of them are met as Hollows**, and whether you spare them feeds the ending.
 
 ### Cut (possible DLC or sequel)
-- **Dr. Edward Kline** and **Dr. Eliza Marlowe**: folded into Jaz and Dr. Man.
+- **Dr. Edward Kline** and **Dr. Eliza Marlowe**: folded into Jaz and Dr. Mán.
 - **Agent Sarah Thompson**: her agency becomes the "unknown force" behind a post-launch ending.
 
 ### Emilia: art direction note
@@ -135,7 +135,7 @@ v1 pointed straight at Eveline (RE7). Keep her as a *mood* reference only. Emili
   - **Hollow Screamer:** a psychic shriek that drains sanity, and it calls in other enemies.
   - **Hollow Child:** fast and evasive. Can be *spared*, which affects the ending.
   - **Guard:** human, uses cover, investigates noise.
-  - **Bosses:** Huckley Hollow, Dr. Man.
+  - **Bosses:** Huckley Hollow, Dr. Mán.
 
 ### 5.3 Stealth
 - **Noise:** each action has a sound radius (walk 2 m, run 8 m, gunshot 25 m, thrown bottle as a lure). Guards and Hollows investigate the last noise they heard.
@@ -215,7 +215,7 @@ Emilia is killed · Emilia sacrifices herself · Emilia keeps walking the corrid
 | **Containment Wing** (hub) | Rust-red emergency light, padded cells, the children's dorm | Central hub with locked shortcuts |
 | **Research Labs** | Sterile teal and white, flickering fluorescents | Puzzles, L-7 lore, Huckley boss |
 | **Maintenance Tunnels** | Black, wet, flashlight only | Stealth, Jaz's hideout, shortcuts |
-| **Security Hub** | Cold blue monitor glow | Timed lockdown escape, Dr. Man |
+| **Security Hub** | Cold blue monitor glow | Timed lockdown escape, Dr. Mán |
 
 All sectors are built from one **modular sci-fi lab kit** (stock), re-textured per sector, with hero props modelled in Blender.
 
