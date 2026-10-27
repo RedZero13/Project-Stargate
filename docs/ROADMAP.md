@@ -1,221 +1,199 @@
-# HOLLOW KIN (formerly Project Stargate) — Assessment & Development Roadmap
+# HOLLOW KIN — Development Roadmap (pixel art edition)
 
-> Source: *Project Stargate – The Following Saga* (GDD draft).
-> Engine target: **Unity 6 LTS**, driven via the **Unity CLI** + **Unity MCP** so Claude can work inside the live Editor.
-> Status: **planning only — nothing has been built yet.** The repo has just a README.
-> Companion docs: [`GDD.md`](GDD.md) (design v2, which applies every fix in §1) · [`narrative/PROLOGUE.md`](narrative/PROLOGUE.md)
+> Engine: **Unity 6 LTS, URP 2D Renderer**, driven through the **Unity CLI + Unity MCP** on your Mac.
+> Status: **pre-production.** Design docs are written; no Unity project exists yet.
+> Companion docs: [`GDD.md`](GDD.md) · [`ART_BIBLE.md`](ART_BIBLE.md) · [`levels/CONTAINMENT_WING.md`](levels/CONTAINMENT_WING.md) · [`narrative/PROLOGUE.md`](narrative/PROLOGUE.md)
 
-### Decisions locked (review round 1)
+## Decisions locked
+
 | Topic | Decision |
 |-------|----------|
-| Team / budget | Solo; spend as little as possible (the **Lean** column in §1) |
-| Scope cuts in §1 | **Approved**: 3 launch endings, 6-character core cast, sanity as a resource, Ironman opt-in, PC first |
-| Title | **Confirmed:** *HOLLOW KIN*. In-world project: **Project LANTERN**. Enemies: **Hollows** |
-| Assets | Stock + self-made Blender + AI-assisted concepts |
-| Voice | ElevenLabs |
-| Cutscenes | In-engine animation where possible, with 2D storybook panels elsewhere |
-| Hardware | M4 Max Mac Studio, 64 GB RAM. Unity MCP connected locally |
+| Team / budget | Solo, spending as little as possible |
+| Scope | 3 launch endings, 6-character core cast, sanity as a resource, Ironman opt-in, Chapter 1 first |
+| Title | ***HOLLOW KIN***: in-world Project LANTERN; enemies are Hollows; villain Dr. Sebastian Mán |
+| **Visual format** | **2D top-down pixel art**, ¾ view (Stardew-style perspective, *Signalis* / *Darkwood* tone) |
+| Assets | Stock pixel packs re-coloured to the palette + Aseprite + Blender (optional) + AI-assisted concepts |
+| Voice | ElevenLabs, for key lines only (cutscenes, radio, Emilia, bosses) |
+| Cutscenes | In-engine sprite scenes + portraits + storybook panels |
+| Platforms | macOS + Windows (Steam) at launch; Steam Deck and iPad soon after |
+| Hardware | M4 Max Mac Studio, 64 GB. Unity MCP connected locally |
 
 ---
 
-## 1. Concept assessment
+## 1. Assessment (pixel edition)
 
-### What's strong
-- **Clear emotional core.** Brother rescues his sister, and she might be the monster. That's a good horror hook because the "boss" is the person you came to save.
-- **Proven formula.** RE2-Remake-style semi-open facility, an over-the-shoulder camera, resource scarcity, and backtracking puzzles. Players already understand this loop, and you can study a lot of reference material.
-- **One contained setting.** A single underground facility with four sectors keeps environment art bounded and reusable (modular kits).
-- **Systemic hooks that set it apart.** A sanity meter, drugs with trade-offs, and choice-driven endings give it an identity beyond "RE clone".
+### Why the pixel switch is right
+- **It halves the art load.** A ~32-px character is about 400 hand-drawn frames, against a rigged, textured, animated 3D model. Environments are tilesets instead of modular 3D kits.
+- **It's proven for this genre.** *Signalis* (pixel survival horror, RE-style), *Darkwood* (top-down, line-of-sight horror) and *Faith* show that dread comes from lighting, sound and framing, not polygons.
+- **Every system in the GDD still works.** Lock-and-key, safe rooms, stealth, sanity, drugs, the endings. Stealth actually gets *better*: top-down line of sight is easy to read.
+- **More platforms for free.** 2D runs on Steam Deck and iPad with little extra work.
 
-### Risks and issues found in the GDD
+### New risks to manage
+| Risk | Mitigation |
+|------|------------|
+| Pixel art reads as "cosy" (the Stardew association) | The palette rules in `ART_BIBLE.md` §2: 60% darkness, red only for danger, warmth only in safe rooms |
+| Mixed stock packs look inconsistent | Lock the 16-px grid and 32-colour palette first; re-colour every pack to it |
+| Small sprites can't carry emotion | 96-px dialogue portraits + storybook panels for the big moments |
+| AI pixel art is messy | Use AI for concepts and mood only; draw the final pixels |
+| The pixel-art market is crowded | The hook (*your sister is the monster*) and a *Signalis*-quality atmosphere are the differentiators. Show them in the first 10 seconds of the trailer |
 
-| # | Issue | Why it matters | Recommendation |
-|---|-------|----------------|----------------|
-| 1 | **Scope is AAA-sized for a solo dev.** Semi-open world, stealth, melee + ranged, upgrades, sanity, dynamic difficulty, permadeath mode, 7 endings, ~13 named characters, voice acting, 2D cutscenes, 3 platforms. | The 19–28 month estimate assumes all of it works out. Realistically this is 4–6+ years solo. | Ship in **slices**: a vertical slice first (one wing, ~45 min), then an episodic or "Chapter 1" release. |
-| 2 | **The "MVP" table is from a different game.** It lists *spikes and holes*, *dust particles*, *level select*, *itch page*, and marks everything "Finished". | It's a 2D platformer template. None of it applies, and none of it exists. | Replace it with the vertical-slice backlog in §4. |
-| 3 | **Sanity as a 100→0 level timer** fights the RE2-style exploration and backtracking. | A timer punishes exactly what the genre rewards: careful exploring, reading notes, solving puzzles. | Make sanity a **resource** drained by darkness, remnant psychic attacks, gore and drugs, and restored by light, safe rooms and rare items. Low sanity brings hallucinations, aim sway and fake enemies. Keep a hard timer only for set-piece escapes. |
-| 4 | **Souls-like "restart the entire run" difficulty.** | In a 6–10 hr narrative game this is brutal and costly to balance. | Make it an opt-in **Ironman** mode unlocked after the first clear. Balance only Normal at first; derive the others from multipliers. |
-| 5 | **7 endings.** | Each ending needs a cutscene, choice tracking and QA of every path. | Launch with **3 endings** (Human / Remnant / Sacrifice). Add the rest in post-launch DLC or New Game+. |
-| 6 | **Overlapping characters.** Huckley and Marlowe (both psych), Kline / Thompson / Jaz (all "insider who feeds Max info"), and Nate (an ally). | Every NPC costs models, rigs, VO and scripting. | Merge to about 6 core characters: Max, Emilia, Huckley (mentor who falls), Dr. Mán (villain), one insider ally (merge Kline + Jaz + Thompson), Nate (combat ally). Vicky, Jasper and Jade appear as remnants or in notes and 2D art. |
-| 7 | **Story contradictions.** Max is "adopted by an elderly couple" but also "went through every foster home until kicked out at 18". He has a dead-end receptionist job, but the prologue has him offered a security-guard job, which is also too close to the *FNAF* film. | Players and testers notice. | ✅ Fixed in `GDD.md` §3: the job offer is replaced by a paid blood-donation van that is secretly a LANTERN front. |
-| 8 | **The "Stargate" name.** It's a well-known MGM trademark (and a real CIA program). "Remnant" is also taken (*Remnant: From the Ashes*). | A trademark risk on Steam or the App Store, and it's hard to search for. | ✅ Fixed: *HOLLOW KIN* / Project LANTERN / Hollows. Still run a trademark search before the store page goes up. |
-| 9 | **Emilia's design references Eveline (RE7)** directly. | It could feel derivative. | Use it as a mood reference only, and develop a unique silhouette: telekinetic "halo" debris, a nervous-system glow, a hospital gown with ID tags. |
-| 10 | **iPadOS plus realistic 3D horror.** | Mobile GPU, touch controls and memory limits add a whole port project. | **PC first (Windows + macOS)**, with an iPad port after launch. Choose **URP** now so the port stays possible. |
+### Feasibility
+**Solo, about 25–30 hrs/week:** a **vertical slice/demo in 4–5 months**, and **Chapter 1 on Steam in about 12–15 months** from when the Unity project is created.
 
-### Feasibility verdict
-**Feasible, but only if you cut scope.** As written, the GDD is a studio project. With the cuts above, plus heavy use of Asset Store / marketplace assets, Mixamo-style animation and stock audio, a solo dev or a team of 2–3 can reach a polished **vertical slice in about 6–9 months** and a **Chapter 1 commercial release in about 18–24 months**.
+### Lean budget
+| Item | Cost |
+|------|------|
+| Unity Personal | $0 |
+| Aseprite | ~$20 (or compile the source yourself for free) |
+| Stock pixel tilesets, props, FX (itch.io / Asset Store, bought on sale) | $50–150 |
+| Pixel font | $0 (free licensed fonts) |
+| Music + SFX (CC0 + one paid horror pack) | $0–60 |
+| ElevenLabs (paid plan, only during voice months) | ~$50–100 |
+| Steam Direct fee | $100 |
+| **Total** | **≈ $220–430** |
 
-### Rough budget (indie, solo + contractors)
-
-| Item | Low | Comfortable |
-|------|-----|-------------|
-| Unity Personal (free under $200k revenue) / Pro | $0 | ~$2,200/yr |
-| Asset Store: modular sci-fi lab kit, characters, FX, audio packs, tools | $300 | $1,500 |
-| Character art/rigging (Max, Emilia + Hollow form) — contractor or Character Creator–style tool | $0 (stock + tweak) | $3,000–8,000 |
-| Music + SFX (composer or licensed) | $100 | $2,000–5,000 |
-| Voice acting (6 characters, Chapter 1) | $0 (text only) | $2,000–6,000 |
-| 2D cutscene / storybook art | $0 (self) | $1,500–4,000 |
-| Steam Direct fee / Apple Developer | $100 / $99 per yr | same |
-| Trademark search, capsule art, trailer | $0 | $1,000–3,000 |
-| **Total** | **≈ $600** | **≈ $15k–30k** |
-
-**Your lean plan (chosen):** Unity Personal $0 · Asset Store/Fab packs on sale ≈ $200–400 · ElevenLabs Creator plan ≈ $22/mo only during voice-production months (≈ $100–150 total) · stock music/SFX (free CC0 + one paid pack) ≈ $50 · Steam fee $100 · **total ≈ $450–700**. The Apple Developer fee ($99/yr) is only needed for the iPad port.
+Later and optional: Apple Developer ($99/yr) for the iPad port, and a trademark filing.
 
 ---
 
-## 2. Tooling: Unity CLI + Unity MCP (how Claude works in your Editor)
+## 2. Tooling setup (on your Mac)
 
-This cloud session has **no Unity Editor** and no GPU or display, and the Editor needs your Unity license. So the Editor and the MCP bridge must run **on your M4 Max Mac Studio**, and Claude must be running **on that Mac** (Claude Desktop app, or `claude` in a terminal in this repo) to use the MCP tools. A cloud session can't reach your local MCP.
-
-Mac notes: install the **Apple Silicon** Editor. Mac builds use IL2CPP (native arm64 + x86_64 universal). Windows builds from a Mac use the **Mono** backend; IL2CPP for Windows needs a Windows machine or CI runner, which is fine for the demo.
-
-One-time setup on your machine:
+The Unity Editor and the MCP bridge run **on your Mac**, so Claude has to run there too: the Claude Desktop app, or `claude` in a terminal in this repo. **A cloud session like this one can't reach your local MCP.**
 
 ```bash
-# 1. Install the Unity CLI (beta)
-# macOS / Linux:
+# 1. Unity CLI (beta)
 curl -fsSL https://public-cdn.cloud.unity3d.com/hub/prod/cli/install.sh | UNITY_CLI_CHANNEL=beta bash
-# Windows (PowerShell):
-#   $env:UNITY_CLI_CHANNEL='beta'; irm https://public-cdn.cloud.unity3d.com/hub/prod/cli/install.ps1 | iex
 unity --version
+unity auth login && unity license activate
 
-# 2. Sign in + license (Unity Personal is fine to start)
-unity auth login
-unity license activate
-
-# 3. Install Unity 6 LTS with the platform modules we target
+# 2. Unity 6 LTS (Apple Silicon) + Windows build support
 unity install lts --architecture arm64 --module mac-il2cpp --module windows-mono --yes --accept-eula
-#   (run `unity install-modules --help` for exact module ids on your OS)
+#    (check module ids with: unity install-modules --help)
 
-# 4. Create the project inside this repo (URP 3D template — list ids first)
-unity templates list --editor lts --format json
-unity projects create "HollowKin" --path . --editor-version lts --template <urp-3d-template-id>
+# 3. Create the project from the URP 2D template, inside this repo
+unity templates list --editor lts --format json        # find the 2D URP template id
+unity projects create "HollowKin" --path . --editor-version lts --template <2d-urp-template-id>
 
-# 5. Install the Pipeline package so the CLI/MCP can drive the live Editor
+# 4. Let the CLI/MCP drive the live Editor
 cd HollowKin && unity pipeline install
-
-# 6. Register the Unity MCP server with Claude Code
 unity mcp configure claude-code --project-path "$(pwd)"
-unity status        # should report a connected Editor in state "ready"
+unity status                                            # expect state "ready"
 ```
 
-Repository hygiene, done at project creation:
-- A Unity `.gitignore` (excludes `Library/`, `Temp/`, `Obj/`, `Build/`, `Logs/`, `UserSettings/`).
-- **Git LFS** for `*.fbx *.psd *.png *.tga *.exr *.wav *.mp3 *.ogg *.mp4`. Alternatively, Unity Version Control (UVCS) if the art gets heavy.
-- Packages: Input System, Cinemachine, AI Navigation, TextMeshPro, Timeline, Addressables, Localization (later), URP post-processing.
+**Packages:** 2D Sprite, 2D Tilemap + Tilemap Extras (Rule Tiles), 2D Aseprite Importer, 2D Pixel Perfect (built into URP), Input System, Cinemachine (with its Pixel Perfect extension), Timeline, TextMeshPro, Addressables (later), Localization (later).
 
-### 2.1 Asset pipeline (stock + Blender + AI)
-1. **Concept:** AI-assisted mood boards and character sheets → paint over or pick a direction → lock it in the art bible. Use them as *reference only*; don't ship raw AI images.
-2. **Model:** stock base meshes and the modular kit → customise and kit-bash in **Blender** → export FBX (Apply Transforms, +Y up, scale 1.0) into `Assets/Art/<Category>/`.
-3. **Rig and animate:** humanoid rig → Mixamo / marketplace clips → retarget in Unity.
-4. **Texture:** reuse PBR texture sets, with a per-sector trim sheet to keep draw calls low.
-5. **Ship:** Steam requires an **AI content disclosure** on the store page for AI-generated content. Keep a provenance log (`docs/ASSET_LOG.md`, started in Phase 2): source, license and AI involvement for every asset.
+**Repo hygiene:** a Unity `.gitignore`; **Git LFS** for `*.png *.aseprite *.psd *.wav *.ogg *.mp3`.
+
+**Build notes:** Mac builds use IL2CPP (universal arm64 + x86_64). Windows builds from a Mac use Mono, which is fine for the demo; add a Windows CI runner for IL2CPP later.
+
+### 2.1 Asset pipeline
+1. **Concept:** AI-assisted mood boards → pick a direction → lock it in `ART_BIBLE.md`.
+2. **Stock:** buy packs that match the 16-px grid → re-colour to the 32-colour palette → slice in Unity (Unity's `sprite-editor` skill).
+3. **Draw:** characters, portraits and hero props in **Aseprite** → import `.aseprite` directly.
+4. **Blender (optional):** render tricky rotating objects to frames → paint over them.
+5. **Log every asset** in `docs/ASSET_LOG.md` (source, license, AI involvement). Steam requires AI-content disclosure.
 
 ### 2.2 Voice (ElevenLabs)
-- Use a **paid plan** for commercial rights. Free-tier output can't be used commercially. Use only voices you have rights to (designed voices, or library voices that allow commercial use). Never clone a real person without written consent.
-- Keep a script spreadsheet (`character, line_id, line, direction`) and batch-generate. Name files `VO_<char>_<scene>_<id>.wav`.
-- Import settings: mono, Vorbis, *Compressed In Memory* for lines and *Streaming* for long cutscenes.
-
-Once that's connected, Claude can create scenes, place the modular kit, wire NavMesh, set up the URP volumes for the horror lighting, and write and run C# directly in your Editor.
+- A **paid plan** is required for commercial use. Only use designed voices, or library voices licensed for commercial use. No cloning of real people without written consent.
+- Script sheet: `character, line_id, line, direction` → batch-generate → `VO_<char>_<scene>_<id>.wav`.
+- Import settings: mono, Vorbis; *Compressed In Memory* for lines, *Streaming* for long cutscenes.
 
 ---
 
 ## 3. Phased roadmap
 
-Durations assume **one dev at about 25–30 hrs/week**. Halve them roughly for full-time work or a team of 2–3.
+Durations assume one developer at about 25–30 hrs/week.
 
-### Phase 1 — Planning: concept & research (3–4 weeks)
-- **Lock the pillars:** *Dread over action · Every resource is a choice · The monster is family.*
-- **Genre and comps:** RE2R, RE7, Silent Hill 2R, The Callisto Protocol, Signalis. Play their opening hours and log their pacing.
-- **Audience and platform:** 20–45-year-old story-first players. PC first (Steam), Mac via Steam, iPad later.
-- **Core loop:** *Explore → find key items/notes → solve puzzle → unlock a shortcut or new sector → fight or evade → manage ammo, health and sanity → safe room (save, store, craft) → repeat.*
-- **Scope cut decisions** from §1 (endings, cast, sanity model, difficulty).
-- **Feasibility:** the budget sheet, your skill map (what you'll make vs buy vs commission), and a market check (wishlist counts of comparable indie horror titles).
-- **Proof of concept:** a one-page pitch, a mood board, a paper map of the Containment Wing, and a 60-second "greybox" walkthrough video (see Phase 2).
+### Phase 1 — Planning ✅ mostly done
+- ✅ Concept, pillars, scope cuts, title, canonical story (`GDD.md`)
+- ✅ Pixel art spec and palette (`ART_BIBLE.md`)
+- ✅ Vertical-slice level design (`levels/CONTAINMENT_WING.md`)
+- ✅ Prologue and letter (`narrative/PROLOGUE.md`)
+- ⬜ Mood board in `docs/reference/` (**you**: AI concepts + references)
+- ⬜ Market check: wishlist and review counts for *Signalis*, *Faith*, *Darkwood*, *Mouthwashing*, *World of Horror* (Claude can draft this)
 
-**Deliverables:** pitch one-pager, pillars, a revised feature list (Must/Should/Could/Won't), and the budget.
+### Phase 2 — Pre-production: the "fun" prototype (6–8 weeks)
+Built with **placeholder art** (coloured squares and a free test tileset). The only question it answers is *is this tense and fun?*
+1. **Week 1: project setup** (§2): folders, import presets, Pixel Perfect Camera, sorting layers, the Input System action map.
+2. **Weeks 2–3: core feel.** Top-down movement, the flashlight cone with **2D shadow casters**, aim and shoot, the knife, health.
+3. **Weeks 3–4: enemies.** Hollow Drone (chase, lunge, stagger) and Guard (patrol, hear, see, alert). Pathfinding on a tile grid (A* on the Tilemap; NavMesh isn't needed in 2D).
+4. **Weeks 5–6: systems.** Inventory grid, examine, pickups, doors and keys, one safe room with save/load, and sanity with one hallucination effect.
+5. **Weeks 7–8: greybox the Containment Wing** from the level doc with placeholder tiles, then **playtest with 5+ people**.
 
-### Phase 2 — Pre-production (3–4 months)
-1. **GDD v2.** Rewrite the GDD into living docs in `docs/`:
-   - Narrative bible: canonical backstory, timeline, cast sheets, and the choice → ending matrix.
-   - Systems specs: combat, inventory grid, sanity, drugs/boosts, stealth (sound radius + line of sight), dynamic difficulty, save system.
-   - Level design doc: sector maps, lock-and-key graph, puzzle list, enemy placement.
-   - Tech design: Unity 6 + URP, Input System, Cinemachine 3rd-person rig, NavMesh AI, ScriptableObject data, Addressables, save format.
-2. **Greybox prototype.** One sector in blockout (ProBuilder):
-   - Over-the-shoulder controller, aim, one pistol and one melee weapon.
-   - One Hollow enemy (chase/attack/stagger) and one human guard (patrol/investigate/alert).
-   - Inventory, one lock-and-key puzzle, and the sanity meter with one hallucination effect.
-   - **The test:** is 10 minutes of it tense and fun? If not, iterate before making any art.
-3. **Art direction.** A style guide covering palette (sterile teal/white labs vs rust-red containment), lighting rules (volumetric fog, flashlight as primary light, emergency strobes), character turnarounds for Max and Emilia (human + Hollow), the Hollow design language, and a UI style (diegetic where possible).
-4. **Audio direction.** Reference tracks, an ambience palette (HVAC hum, distant screams, Emilia's psychic "whisper" motif), the heartbeat/low-sanity layer, and the dynamic music states (calm / tension / combat).
+**Gate 1:** testers report tension and want to keep playing. If not, iterate here before drawing anything final.
 
-**Exit criteria (Gate 1):** greybox playtested by 5+ people, core loop confirmed fun, art and audio bibles approved.
+### Phase 3 — Production
 
-### Phase 3 — Production (12–18 months, in milestones)
+**3a. Vertical slice / demo (months 3–5)**
+- Final art for St. Brigid's and the Containment Wing: tilesets, Max, Emilia (both forms), Drone, Child, Guard, portraits, 2 storybook panels.
+- Lighting pass (emergency beacons, fluorescent flicker), post effects (vignette, palette shift, scanline jitter).
+- Audio: ambience, footsteps, weapons, the heartbeat layer, adaptive music, Emilia's lullaby; ElevenLabs lines for the prologue, Jaz and Emilia.
+- Menus: main, pause, settings (rebinding, subtitles, flashing-effects toggle).
+- **Output:** a Steam "Coming Soon" page, a 60-second trailer, and the **demo build**. Wishlists start counting from here.
 
-**3a. Vertical slice (months 1–5)**: the Containment Wing at final quality, about 45 minutes long.
-- **Assets:** a modular sci-fi lab kit (bought, then re-textured), Max, Emilia (human), two Hollow types, one guard. Animations via Mixamo / marketplace, plus a few custom ones.
-- **Environment:** lighting pass, post-processing (film grain, chromatic aberration at low sanity), reflection probes, baked + realtime mix, occlusion culling.
-- **Systems:** full combat, inventory, safe room and save, map, notes/lore viewer, sanity, two drugs, the first puzzle chain, and Nate's first encounter.
-- **Audio:** ambience, footsteps per surface, weapons, enemy VO, and adaptive music via an Audio Mixer.
-- **Output:** a **Steam "Coming Soon" page + trailer + demo build**.
+**3b. Pre-alpha (months 6–8):** greybox the Research Labs, Maintenance Tunnels and Security Hub; the Huckley boss prototype; Nate; the Screamer enemy; all 4 drugs; the map.
 
-**3b. Pre-alpha (months 6–9)**: all Chapter 1 sectors greyboxed (Containment, Research Labs, Security Hub, Maintenance Tunnels), all core systems in, and story beats in placeholder form.
+**3c. Alpha (months 9–11):** feature complete. The Dr. Mán boss, Bond/Taint and the 3 endings, all puzzles, difficulty modes + dynamic difficulty, every cutscene in rough form.
 
-**3c. Alpha (months 10–13)**: feature complete. All enemies, puzzles, upgrades, 3 endings, cutscenes (Timeline plus 2D storybook panels), difficulty modes, settings and accessibility (subtitles, rebinding, aim assist, photosensitivity toggle).
+**3d. Beta (months 12–13):** content complete. Final art for every sector, all VO, balancing, performance on Steam Deck, localization strings extracted.
 
-**3d. Beta (months 14–18)**: content complete. Final art, VO, music, balancing, optimization (target 60 fps on a GTX 1060 / M1-class GPU), and localization strings extracted.
+### Phase 4 — Testing & QA (overlapping, focused months 11–14)
+- **Automated:** EditMode/PlayMode tests (inventory, save/load, Bond/Taint maths, the lock-and-key graph has no dead ends), run with `unity test` in GitHub Actions.
+- **Manual:** a softlock checklist for every key item; a save in every room, then reload.
+- **Balance:** a spreadsheet of the ammo/health economy per sector (see the level doc §5), deaths per room.
+- **Playtests:** Steam Playtest, with a short survey and recorded sessions.
 
-### Phase 4 — Testing & QA (overlaps the 3c/3d milestones, about 3 months focused)
-- **Bug hunting:** automated EditMode/PlayMode tests via `unity test` in CI (GitHub Actions); softlock checks on every lock-and-key path; save/load fuzzing.
-- **Performance:** Profiler and Memory Profiler passes per sector, plus frame-time budgets.
-- **Balancing:** ammo and health economy spreadsheets, dynamic difficulty telemetry (deaths, ammo on hand, time per room), and the sanity drain curve.
-- **Playtesting:** closed tests through Steam Playtest, a feedback form, and recorded sessions (watch where people get lost and where they stop being scared).
+### Phase 5 — Pre-launch (alongside 3c–4)
+- Devlog every 2 weeks (GIFs of the lighting and the Hollow Child encounter work well on X, Reddit r/survivalhorror, r/PixelArt, r/IndieDev, TikTok).
+- Discord; **Steam Next Fest** with the demo; streamer keys (horror streamers love short demos).
+- Final polish, age rating (IARC), store assets, launch trailer.
 
-### Phase 5 — Pre-launch (2–3 months)
-- **Marketing:** devlogs (TikTok / YouTube Shorts / X / Reddit r/survivalhorror, r/IndieDev), a Discord, the Steam Next Fest demo, press/streamer keys, and a launch trailer.
-- **Final polish:** load times (Addressables), crash reporting, a day-one patch branch, store assets and age rating (IARC).
+### Phase 6 — Launch (month ~14–15)
+- Steam for Windows and macOS; itch.io optionally.
+- Watch crash reports and reviews; a hotfix branch ready (`unity build` → SteamPipe).
 
-### Phase 6 — Launch
-- **Distribution:** Steam (Windows + macOS) first. Optionally itch.io and GOG. iPad / App Store as a later port.
-- **Monitoring:** crash dashboards, review sentiment, a hotfix pipeline (`unity build` in CI → SteamPipe upload).
-
-### Phase 7 — Post-launch & LiveOps
-- Patches, balance updates, and performance passes.
-- **New content:** the remaining 4 endings, a "Vicky / Jasper / Jade" backstory DLC (the playable stealth flashbacks from the GDD), New Game+ / Ironman mode, the iPad port, and localization.
-- Live-service features are **not** recommended for this genre; keep it premium, single-player.
+### Phase 7 — Post-launch
+- Patches, Steam Deck Verified, the iPad port.
+- **Content:** the 4 remaining endings, New Game+ / Ironman, the Vicky/Jasper/Jade backstory chapter, then **Chapter 2**.
 
 ---
 
-## 4. Vertical-slice backlog (replaces the old MVP table)
+## 4. Vertical-slice backlog
 
-| # | Task | Type | Unity tech |
-|---|------|------|-----------|
-| 1 | Project setup: Unity 6 LTS URP, Git LFS, packages, CI | Tech | Unity CLI, GitHub Actions |
-| 2 | 3rd-person controller + OTS camera + aim | Code | Input System, Cinemachine |
-| 3 | Interaction system (doors, pickups, examine item) | Code | — |
-| 4 | Inventory grid + item combine | Code/UI | UI Toolkit, ScriptableObjects |
-| 5 | Health, damage, hit reactions | Code | Animator |
-| 6 | Pistol + knife combat | Code/Art | Raycast, VFX Graph |
-| 7 | Hollow AI (chase/attack/stagger/psychic) | Code | AI Navigation |
-| 8 | Guard AI (patrol/hear/see/alert) + stealth | Code | AI Navigation, sensors |
-| 9 | Sanity system + hallucination FX | Code/Art | URP Volumes, post-processing |
-| 10 | Drugs / boosts (2 items with trade-offs) | Code | — |
-| 11 | Safe room: save/load + item box | Code | JSON save |
-| 12 | Map + notes/lore viewer | UI | UI Toolkit |
-| 13 | Containment Wing greybox → art pass | Level | ProBuilder, modular kit |
-| 14 | Lighting & atmosphere pass | Art | URP, volumetric fog, light probes |
-| 15 | First puzzle chain (3 puzzles, 1 hidden room) | Design | — |
-| 16 | Max, Emilia, 2 Hollows, guard: models + anims | Art | Humanoid rig, Mixamo |
-| 17 | Ambience, SFX, adaptive music, heartbeat layer | Audio | Audio Mixer, snapshots |
-| 18 | Opening cutscene (Emilia's letter) + 2D storybook panel | Narrative | Timeline |
-| 19 | Main / pause / settings menus | UI | UI Toolkit |
-| 20 | Demo build (Win + macOS) + Steam page | Release | `unity build` |
+| # | Task | Owner | Unity tech / skill |
+|---|------|-------|-------------------|
+| 1 | Create the project, packages, Git LFS, folder structure, import presets | Claude (on your Mac) | Unity CLI, `unity-package-management` |
+| 2 | Pixel-perfect setup: PPU 16, 480×270, sorting layers | Claude | `2d-pixel-perfect` |
+| 3 | Input actions (keyboard + mouse, gamepad) | Claude | Input System |
+| 4 | Top-down controller + camera that leans toward the aim | Claude | Cinemachine + Pixel Perfect |
+| 5 | Flashlight cone + shadow casters + player vision darkness | Claude | URP 2D Lights |
+| 6 | Aim/shoot/knife + health/damage | Claude | Physics2D raycasts |
+| 7 | Hollow Drone AI + Guard AI (sight cone, noise events) | Claude | Grid A*, ScriptableObjects |
+| 8 | Inventory grid, examine, items as ScriptableObjects | Claude | UI Toolkit |
+| 9 | Doors, keys, pickups, the fuse puzzle | Claude | — |
+| 10 | Safe room: save/load (JSON), item box | Claude | — |
+| 11 | Sanity system + post effects | Claude | URP 2D, shaders |
+| 12 | Bond/Taint tracking + the Hollow Child spare/kill choice | Claude | — |
+| 13 | Placeholder tiles, then greybox S1–C9 from the level doc | Claude | Tilemap, Rule Tiles (`tilemap-*` skills) |
+| 14 | Mood board + AI concept pass for Max, Emilia, Hollows | **You** | — |
+| 15 | Palette file + stock pack purchase and re-colour | **You** (Claude helps slice) | `sprite-editor`, `manage-sprite-atlas` |
+| 16 | Max, Emilia, Drone, Child, Guard sprites + portraits | **You** | Aseprite Importer |
+| 17 | Ambience, SFX, music, lullaby | **You** (stock) + Claude wiring | Audio Mixer (`audio-setup-mixers`) |
+| 18 | ElevenLabs VO: prologue, Jaz, Emilia | **You** (generate) + Claude (script sheet, import) | `optimize-audio` |
+| 19 | Prologue cutscene + storybook panels + menus | Claude (scenes) + **you** (panel art) | Timeline |
+| 20 | Demo build (Mac + Win), Steam page, trailer capture | Both | `unity build` |
 
 ---
 
-## 5. What I still need from you
+## 5. Next steps
 
-1. **Review this PR**: the GDD v2 changes, the cast merge, and the prologue/letter rewrite. Mark up anything that's wrong for your vision.
-2. ✅ Title (*Hollow Kin*) and Dr. Mán's surname are settled.
-3. **Run Claude on your Mac** (Desktop app, or `claude` in a terminal in this repo) so the Unity MCP tools are available. Then we start the §2 project setup and the Phase 2 greybox.
-4. **Concept images** you already have (Max, Emilia, the facility), dropped into `docs/reference/`.
+**You, now:**
+1. **Review and merge the PR** (or comment on anything you want changed).
+2. **Start Claude on your Mac**: open the repo in the Claude Desktop app, or run `claude` in a terminal there. Check `unity status` reports "ready".
+3. Put any reference images or AI concepts in `docs/reference/`.
+
+**Claude, in the first Mac session (backlog 1–5, about one sitting):**
+1. Create the `HollowKin` Unity project in the repo with the 2D URP template, packages, Git LFS and `.gitignore`.
+2. Apply the pixel-perfect spec from `ART_BIBLE.md` §1.
+3. Build a test room with a free placeholder tileset: Max as a coloured capsule, a working **flashlight with real shadows**, and top-down movement.
+4. Commit, then continue down the backlog toward Gate 1.
