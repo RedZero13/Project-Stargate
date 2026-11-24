@@ -31,9 +31,19 @@ Unreal 5 realistic 3D; title *Hollow Kin*; Chapter 1 first, 3 launch endings (hi
 3. Posture (limping at low HP), shoulder swap (removed with my old camera), settings menu, CommonUI/gamepad navigation: not built.
 4. Messages like "AC_SmartObjectAnimation not available" are harmless (a sample component I left out).
 
-## Next steps (roadmap Phase 2 / backlog items 6–14), in order
-Health/damage/death → footstep-noise check → Guard cover/alert → inventory grid/examine, doors, keys, fuse puzzle → sanity audio/aim sway/breakdown → Bond/Taint + Hollow Child choice → greybox the Containment Wing from `levels/CONTAINMENT_WING.md`.
-(See the "Progress log" below for what was finished since this was written.)
+## Next steps (as of 2026-11-24, latest first)
+1. **Human-test the newest Mac build** (`docs/BUILDING.md`: copy the staged folder + the ICU data step). Open items from the developer's testing: window size/position glitches on a 32:9 5120x1440 Retina display (unsolved), pause-menu crash (not reproduced), guards not moving in packaged builds (fixed by dynamic navmesh, unverified), no hit-direction indication (being added), vitals watch in the pause menu.
+2. UI restyle from the references in `docs/UI_REFERENCES.md` (settings tabs + sliders, save slots, item inspect, dialogue box).
+3. Guard cover behaviour, weapon data assets (shotgun/knife), inventory grid + examine, doors/keys, wire `MUS_Tension` / `MUS_Lullaby_MusicBox`, move spawned layout into the saved level, Containment Wing greybox rooms C1–C9/S1–S4.
+(See the "Progress log" below for what was finished.)
+
+## Lessons that cost time (read these)
+- **Never name a Blueprint function like a native one** (`Launch` became `ChaosMover|Launch`, `MakeNoise`). Check read-back for odd `Class|...|Name` prefixes.
+- **Duplicating a widget keeps calls to the original's functions** (`Class|WBPPauseMenu|DoQuit`); re-create the call nodes (`delete_node` + `create_node CallFunction|X` + `connect_pins` from event output pin 1).
+- **Packaged builds:** open levels by full path; list maps in `MapsToCook` (`-allmaps` skipped the corridor); stage ICU data manually; navmesh must be Dynamic (the RecastNavMesh actor is never saved to disk); `ke`/`ExecCmds` cannot trigger widget code reliably.
+- Assets already committed are read-only: `git lfs lock <path>` before `save_assets`, else it returns `false`/"Asset does not exist".
+- `Widget|SetVisibility` needs literal enum strings (no `select`); casts and `IsValid` end the flow, nest the rest inside `(:then ...)`.
+- Screen recordings from the developer land on the Desktop; the filename has a narrow no-break space before `PM`, so use a glob. Frames can be extracted with a small AVFoundation Swift script (see session notes) because ffmpeg is not installed.
 
 ## Progress log
 - Diegetic displays working via screen-space widget components.
