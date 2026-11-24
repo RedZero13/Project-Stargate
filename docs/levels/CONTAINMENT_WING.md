@@ -1,7 +1,7 @@
 # Level design: St. Brigid's + Containment Wing (vertical slice)
 
 > Target: **~45 minutes** for a first playthrough. This is the content of the Steam demo.
-> Scale: rooms are given in 16-px tiles (W×H). The screen shows about 30×17 tiles.
+> Scale: room sizes are floor dimensions in **metres** (W×D). Ceilings are 3 m in corridors and 4–6 m in large rooms. Greybox first with the Modeling Mode tools, then dress with the modular kit.
 
 ## 1. Flow at a glance
 
@@ -30,18 +30,18 @@
 
 | ID | Room | Size | Content | Purpose |
 |----|------|------|---------|---------|
-| S1 | Loading Bay | 24×16 | Child's drawing taped to the door (end of the prologue). Flashlight pickup. | Teaches **movement + flashlight**. Pitch black except for a sodium lamp |
-| S2 | Clinic Lobby | 30×20 | Overturned chairs, dead reception PC, a note about "the Halvorsen van". **First scare:** a shadow passes the window | Teaches **examine**; plants the blood-van subplot |
-| S3 | Records Office | 18×14 | Huckley's desk (her last diary entry, the **Lift Keycard**), a locked filing cabinet (code puzzle, optional) | First **key item**; optional puzzle for **handgun ammo ×10** |
-| S4 | Service Lift | 8×8 | Lift ride cutscene: Emilia's voice over the PA (*"Big brother? Is that you?"*). The lift drops the last metre and dies | Point of no return; Emilia's first line |
-| C1 | Lift Landing | 16×12 | Dead guard with the **pistol + 6 rounds**. Radio crackles: **Jaz's first call** | Teaches **pick up weapon**; meet Jaz |
-| C2 | Decon Corridor | 40×8 | Long and narrow. **First Hollow Drone** shambles out of a decon shower at the far end | Teaches **aim + shoot**. Enough ammo to kill it; tension comes from having to spend it |
-| C3 | Nurses' Station ★ | 16×12 | **Safe room:** warm lamp, save terminal, item box, typewriter-style log. Sedative ×1 | First relief beat. Teaches **save + item box** |
-| C4 | Observation Ring | 36×24 | A circular corridor around a glass observation tank (empty, cracked from the inside). Doors to C5, C6, C9. Hollow Screamer behind the glass on revisit | The **hub loop**. The player passes it 3–4 times |
-| C5 | Cell Block A | 30×18 | 6 cells, 2 open. **Drone patrol** (2 Drones). Cell 4 holds **Fuse A** | Choose: fight (ammo) or sneak round the patrol (stealth) |
-| C6 | Children's Dorm | 24×16 | 4 beds, toys, **3 of Emilia's drawings** (Bond +, sanity +). Under Jade's bed: **Fuse B**. **Hollow Child** encounter: it hides, flees, then cowers. **Spare** or **kill** | The game's **heart**: lore, the first moral choice, Bond/Taint |
-| C7 | Isolation Cells | 28×16 | Dark (flashlight only). **Guard** patrolling with a torch. Lockers for hiding. Breaker panel (**puzzle 2**) | Teaches **stealth, hiding and noise**. The guard is very dangerous here |
-| C8 | Emilia's Room | 16×12 | Door tagged `L-03 / HUNT, E.`. Inside: a bed bolted to the floor, a hundred drawings on the walls, floating debris that stops when Max enters. Emilia isn't there. Final drawing: Max and Emilia at the lake | **Slice ending**: Emilia appears in the glass and whispers *"You came."* The lights die. Title card: **"WISHLIST HOLLOW KIN"** |
+| S1 | Loading Bay | 12×8 m | Child's drawing taped to the door (end of the prologue). Flashlight pickup. | Teaches **movement + flashlight**. Pitch black except for a sodium lamp |
+| S2 | Clinic Lobby | 15×10 m | Overturned chairs, dead reception PC, a note about "the Halvorsen van". **First scare:** a shadow passes the window | Teaches **examine**; plants the blood-van subplot |
+| S3 | Records Office | 9×7 m | Huckley's desk (her last diary entry, the **Lift Keycard**), a locked filing cabinet (code puzzle, optional) | First **key item**; optional puzzle for **handgun ammo ×10** |
+| S4 | Service Lift | 4×4 m | Lift ride cutscene: Emilia's voice over the PA (*"Big brother? Is that you?"*). The lift drops the last metre and dies | Point of no return; Emilia's first line |
+| C1 | Lift Landing | 8×6 m | Dead guard with the **pistol + 6 rounds**. Radio crackles: **Jaz's first call** | Teaches **pick up weapon**; meet Jaz |
+| C2 | Decon Corridor | 20×4 m | Long and narrow. **First Hollow Drone** shambles out of a decon shower at the far end | Teaches **aim + shoot**. Enough ammo to kill it; tension comes from having to spend it |
+| C3 | Nurses' Station ★ | 8×6 m | **Safe room:** warm lamp, save terminal, item box, typewriter-style log. Sedative ×1 | First relief beat. Teaches **save + item box** |
+| C4 | Observation Ring | 18×12 m | A circular corridor around a glass observation tank (empty, cracked from the inside). Doors to C5, C6, C9. Hollow Screamer behind the glass on revisit | The **hub loop**. The player passes it 3–4 times |
+| C5 | Cell Block A | 15×9 m | 6 cells, 2 open. **Drone patrol** (2 Drones). Cell 4 holds **Fuse A** | Choose: fight (ammo) or sneak round the patrol (stealth) |
+| C6 | Children's Dorm | 12×8 m | 4 beds, toys, **3 of Emilia's drawings** (Bond +, sanity +). Under Jade's bed: **Fuse B**. **Hollow Child** encounter: it hides, flees, then cowers. **Spare** or **kill** | The game's **heart**: lore, the first moral choice, Bond/Taint |
+| C7 | Isolation Cells | 14×8 m | Dark (flashlight only). **Guard** patrolling with a torch. Lockers for hiding. Breaker panel (**puzzle 2**) | Teaches **stealth, hiding and noise**. The guard is very dangerous here |
+| C8 | Emilia's Room | 8×6 m | Door tagged `L-03 / HUNT, E.`. Inside: a bed bolted to the floor, a hundred drawings on the walls, floating debris that stops when Max enters. Emilia isn't there. Final drawing: Max and Emilia at the lake | **Slice ending**: Emilia appears in the glass and whispers *"You came."* The lights die. Title card: **"WISHLIST HOLLOW KIN"** |
 | C9 | Lab Door | — | Sealed blast door, panel reads `RESEARCH LABS — LOCKDOWN` | Teases Act 2; locked in the slice |
 
 ## 3. Lock-and-key chain

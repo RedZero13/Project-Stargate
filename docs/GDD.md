@@ -1,7 +1,7 @@
-# HOLLOW KIN — Game Design Document v3 (pixel art)
+# HOLLOW KIN — Game Design Document v4 (Unreal Engine 5, realistic 3D)
 
 > Supersedes *Project Stargate – The Following Saga* (GDD v1).
-> Status: **draft for review**, round 3. v3 moves the game from 3D over-the-shoulder to **2D top-down pixel art**. Story, cast and endings are unchanged.
+> Status: **draft for review**, round 4. v4 moves the game to **Unreal Engine 5** as a **realistic, over-the-shoulder 3D** survival horror game. Story, cast, systems and endings are unchanged from v3; the pixel-art version is kept in git history.
 > Companion docs: [`ART_BIBLE.md`](ART_BIBLE.md) · [`levels/CONTAINMENT_WING.md`](levels/CONTAINMENT_WING.md) · [`ROADMAP.md`](ROADMAP.md)
 
 ## 0. Change log vs. v1
@@ -16,9 +16,9 @@
 | Souls-like "restart the whole run" | **Ironman** mode, unlocked after the first clear | Optional for players who want it, and not something to balance around. |
 | 7 endings | **3 at launch**, 4 saved for post-launch | Cuts cutscene and QA cost. |
 | Contradictory backstory (adopted vs. "every foster home"; receptionist vs. security-guard job (too close to the *FNAF* film's setup); 1st vs. 3rd person prose) | One canonical timeline (§3) | Consistency. |
-| Platform: Mac, Windows, iPad | **macOS + Windows** at launch, iPad later | One developer working on an M4 Max Mac Studio. |
+| Platform: Mac, Windows, iPad | **Windows + macOS** at launch; iPad dropped | Windows is about 95% of Steam players. A realistic UE5 game is too heavy for iPad. |
 | 2D-platformer MVP table | Vertical-slice backlog (`ROADMAP.md` §4) | The old table was for a different game. |
-| 3D over-the-shoulder, realistic art | **2D top-down pixel art** (¾ view, Stardew-style perspective) | Roughly halves the solo timeline and art budget. Proven for horror by *Signalis*, *Darkwood* and *Faith*. |
+| Engine "Unity/Unreal/Godot" | **Unreal Engine 5**, realistic 3D, over-the-shoulder | Lumen lighting, MetaHuman characters, Fab/Megascans environments and Epic's own MCP integration make realistic horror achievable for one developer. (A 2D pixel version was explored in v3 and dropped.) |
 
 ✅ **Title confirmed: *Hollow Kin*.** Still needs a USPTO/EUIPO and Steam search before the store page goes up.
 
@@ -28,13 +28,13 @@
 
 | | |
 |---|---|
-| **Genre** | Top-down survival horror / sci-fi thriller |
-| **Camera** | 2D top-down, ¾ perspective (as in Stardew Valley). Pixel-perfect camera that follows the player and leans toward the aim direction |
-| **Visual references** | *Signalis* (tone, UI), *Darkwood* (lighting, vision), *Faith* (dread), *Stardew Valley* (perspective, readability) |
+| **Genre** | Third-person survival horror / sci-fi thriller |
+| **Camera** | Over-the-shoulder (RE2 Remake / RE4 Remake style), switching shoulders, with a tighter camera when aiming |
+| **Visual references** | *Resident Evil 2 / 4 Remake* (camera, inventory, pacing), *Silent Hill 2 Remake* (fog, sound), *Alan Wake 2* (flashlight, darkness), *The Callisto Protocol* (sci-fi facility) |
 | **Inspirations** | Resident Evil 2 & 7, Silent Hill 2, *Venom* (2018), *Stranger Things* (the Lab) |
 | **Audience** | 20–45, story-first and casual-to-core horror players |
-| **Platforms** | macOS (Apple Silicon) + Windows via Steam; iPadOS / Steam Deck soon after (2D makes both cheap) |
-| **Engine** | Unity 6 LTS, **URP 2D Renderer** (2D lights, shadow casters, Pixel Perfect Camera, Tilemaps) |
+| **Platforms** | **Windows** (Steam) first, with Steam Deck via Proton; **macOS** (Apple Silicon) alongside; iPad dropped (a realistic UE5 game is too heavy for it) |
+| **Engine** | **Unreal Engine 5** (latest 5.x with the Model Context Protocol plugin): Lumen, Nanite, MetaHuman, Enhanced Input, StateTree/Behavior Trees, Sequencer |
 | **Length (Chapter 1)** | 5–7 hours for a first clear |
 | **Business model** | Premium, single-player, no live service |
 
@@ -93,12 +93,12 @@ The game is semi-open in the RE2 style: one central sector (Containment) with lo
 
 ## 4. Characters
 
-### Core cast (full sprite set + portrait, voiced)
+### Core cast (MetaHuman, fully voiced)
 
 | Character | Age | Role | Notes |
 |-----------|-----|------|-------|
 | **Max Hunt** | 21 | Protagonist | Brunette, thin, a worn hoodie and work jacket. Dry humour that hides guilt for not finding her sooner. |
-| **Emilia Hunt** | 15 (10 inside) | Sister / Hollow | Two sprite sets: **human** and **Hollow**. Naive, optimistic, with a twisted streak. Talks to Max through intercoms, PA systems and *in his head*. |
+| **Emilia Hunt** | 15 (10 inside) | Sister / Hollow | Two versions: a **human** MetaHuman, and a **Hollow** form (the MetaHuman with a custom sculpted overlay, gown and glow materials). Naive, optimistic, with a twisted streak. Talks to Max through intercoms, PA systems and *in his head*. |
 | **Dr. Lorraine Huckley** | mid-30s | Fallen mentor → boss | Blonde, a prodigy psychiatrist. She was kind to Emilia and smuggled the letters. Emilia's power broke her mind; she's now a Hollow boss. Her audio logs trace her decline. |
 | **Dr. Sebastian Mán** | 50s | Antagonist | Chinese-born biochemist, a near-Nobel laureate believed dead. Holds that the ends justify any means. Also absorbs Dr. Marlowe's role (the cruel conditioning programme). |
 | **Jasmine "Jaz" Hawkins** | late 20s | Insider ally (radio) | A former LANTERN technician hiding in the Maintenance Tunnels. **Merged from three v1 characters:** Jaz (layout and security knowledge), Dr. Kline (the saboteur who leaves clues) and Agent Thompson (gathering evidence). Mostly a voice on the radio, so cheap to produce. |
@@ -130,21 +130,21 @@ v1 pointed straight at Eveline (RE7). Keep her as a *mood* reference only. Emili
 - "Time-waster" puzzles (from v1) appear only as optional side rooms, never on the critical path.
 
 ### 5.2 Combat
-- **Aiming (top-down):** hold Aim to plant your feet and raise the weapon. A thin laser line shows where it points, and accuracy tightens the longer you hold still. Mouse aims on keyboard; the right stick aims on gamepad. Moving while aiming is slow.
+- **Aiming:** hold Aim to raise the weapon. The camera tightens over the shoulder, and the reticle closes in the longer you hold still (RE2 Remake style). You can walk slowly while aiming, but not run.
 - **Ranged:** pistol, shotgun, and a nail-gun-style lab tool (sci-fi flavour). Ammo is scarce.
-- **Headshots become *weak-point hits*:** a hit landed while the enemy is staggered, or on its glowing lantern node, does extra damage.
+- **Weak points:** headshots, plus each Hollow's glowing "lantern node", do extra damage. Limbs can be shot to stagger or cripple an enemy.
 - **Melee:** a knife that breaks, used for defensive counters and escaping grabs.
 - **Psychic push** (late game, from the L-7 serum): staggers enemies but raises **Taint** (§5.6).
 - **Enemies (Chapter 1):**
-  - **Hollow Drone:** shambling, hits hard, weak to weak-point hits.
+  - **Hollow Drone:** shambling, hits hard, weak to headshots.
   - **Hollow Screamer:** a psychic shriek that drains sanity, and it calls in other enemies.
   - **Hollow Child:** fast and evasive. Can be *spared*, which affects the ending.
   - **Guard:** human, uses cover, investigates noise.
   - **Bosses:** Huckley Hollow, Dr. Mán.
 
 ### 5.3 Stealth
-- **Noise:** each action has a sound radius, measured in tiles (walk 2, run 8, gunshot 25, thrown bottle as a lure). It's shown as a brief ripple ring on Easy and Normal. Guards and Hollows investigate the last noise they heard.
-- **Sight:** enemies have a vision cone, reduced by darkness. **The player's own view is limited too** (as in *Darkwood*): anything outside the flashlight cone and Max's line of sight is drawn in darkness, so enemies there are invisible. Turning the flashlight off cuts detection but costs sanity over time.
+- **Noise:** each action has a sound radius, in metres (walk 2, run 8, gunshot 25, thrown bottle as a lure), using Unreal's AI Perception hearing sense. On Easy, a subtle HUD pulse shows when you're heard. Guards and Hollows investigate the last noise they heard.
+- **Sight:** enemies have a vision cone, reduced by darkness. Darkness is real: with Lumen lighting, unlit areas are genuinely black, and the flashlight is the player's main light source. Turning the flashlight off cuts detection but costs sanity over time.
 - **Hiding:** lockers, under beds, vents. Some Hollows can sense you; hold your breath (a stamina meter) to stay hidden.
 
 ### 5.4 Sanity (redesigned)
@@ -160,8 +160,8 @@ v1 pointed straight at Eveline (RE7). Keep her as a *mood* reference only. Emili
 | Band | Effects |
 |------|---------|
 | 100–70 | Normal |
-| 70–40 | Whispers, edge vignette, a palette shift toward a sickly tone, occasional footsteps that aren't real |
-| 40–15 | **Hallucinated enemies** that vanish when shot, aim sway, sprites that are briefly in the wrong place, a distorted map |
+| 70–40 | Whispers, edge vignette, colour grading shifts toward a sickly tone, occasional footsteps that aren't real |
+| 40–15 | **Hallucinated enemies** that vanish when shot, aim sway, objects and bodies that move when you look away, a distorted map |
 | 15–1 | Fast heartbeat, the screen darkens (as in v1), Emilia's voice gives false directions |
 | 0 | **Breakdown:** a cutscene, then reload from the last save |
 
@@ -214,7 +214,7 @@ Emilia is killed · Emilia sacrifices herself · Emilia keeps walking the corrid
 
 ## 7. Facility: Chapter 1 sectors
 
-| Sector | Mood / palette | Function |
+| Sector | Mood / lighting | Function |
 |--------|---------------|----------|
 | **St. Brigid's Clinic** (surface) | Decaying 1970s clinic, sodium-orange light | Tutorial and the front for the facility |
 | **Containment Wing** (hub) | Rust-red emergency light, padded cells, the children's dorm | Central hub with locked shortcuts |
@@ -222,20 +222,22 @@ Emilia is killed · Emilia sacrifices herself · Emilia keeps walking the corrid
 | **Maintenance Tunnels** | Black, wet, flashlight only | Stealth, Jaz's hideout, shortcuts |
 | **Security Hub** | Cold blue monitor glow | Timed lockdown escape, Dr. Mán |
 
-All sectors are built from **16×16 tilesets** (one stock sci-fi lab tileset, re-coloured per sector) using Unity Tilemaps and Rule Tiles. Hero props are hand-pixelled.
+All sectors are built from **one modular sci-fi/hospital kit from Fab**, with Megascans surfaces and decals for wear, re-dressed per sector by lighting and material instances. Hero props are modelled in Blender.
 
 ---
 
-## 8. Art (pixel)
+## 8. Art (realistic)
 Full spec: [`ART_BIBLE.md`](ART_BIBLE.md).
-- **Style:** dark, desaturated top-down pixel art. Lighting does most of the horror work: Unity's 2D lights for the flashlight cone, emergency strobes and monitor glow, plus shadow casters on walls.
-- **Scale:** 16×16 tiles, characters about 32 px tall, and the game drawn at **480×270**, then scaled up cleanly (×4 = 1080p, ×8 = 4K).
-- **Sources:** stock pixel tilesets and props (itch.io, the Asset Store) re-coloured to the project palette; sprites hand-drawn in **Aseprite**; **Blender** only for rendering awkward objects (rotating machinery, the Emilia debris halo) down into sprite frames; **AI-assisted** work for mood boards and the storybook-panel concepts only, never shipped as final pixel art.
-- **Cutscenes:** in-engine sprite scenes (Timeline) with large hand-drawn **dialogue portraits**, plus **storybook panels** for flashbacks and key horror moments, where the art can be bigger and more detailed than the game sprites.
-- **UI:** a *Signalis*-style clinical interface (inventory grid, files, map). Health shows as Max's posture and a wrist monitor; sanity shows on screen as vignette, palette shift and audio rather than a visible meter on Normal and above.
+- **Style:** grounded realism with a gritty sci-fi edge. Lighting does most of the horror work: Lumen global illumination, volumetric fog, the flashlight as the main light source, emergency strobes and monitor glow.
+- **Characters:** **MetaHuman** for every human (Max, Emilia, Huckley, Dr. Mán, Jaz, Nate, guards). It's free in Unreal and gives realistic faces and bodies without modelling skills. The Hollows start from MetaHuman bodies with custom sculpted damage (Blender) and lantern-glow materials.
+- **Environments:** a modular kit plus Megascans surfaces and decals from **Fab**, assembled in-engine. Hero props (the observation tank, Emilia's bed, L-7 injectors) are modelled in **Blender**.
+- **Animation:** Epic's free **Game Animation Sample** (motion-matched locomotion) as the base for Max, plus Fab and marketplace packs for combat and enemies. Facial animation comes from **MetaHuman Animator**, either driven from the ElevenLabs audio or captured with an iPhone.
+- **Concepts:** **AI-assisted** mood boards and character concepts, used as reference only, never shipped as final art.
+- **Cutscenes:** in-engine with **Sequencer**. Backstory flashbacks are **2D storybook panels** (painted, with a slow parallax pan) for contrast and to save cost.
+- **UI:** mostly diegetic, RE-style: the inventory is a medical tray, health shows in Max's posture and a wrist monitor, and sanity shows as vignette, colour grading and audio rather than a visible meter on Normal and above.
 
 ## 9. Audio
-- **Voice:** ElevenLabs, one consistent voice per character, with direction notes per line (see `ROADMAP.md` §2.2 for licensing). **Voiced:** cutscenes, Jaz's radio calls, Emilia's intercom and in-head lines, boss encounters. **Text only:** examine descriptions, files and minor barks.
+- **Voice:** ElevenLabs, one consistent voice per character, with direction notes per line (see `ROADMAP.md` §2.2 for licensing). **All story dialogue is voiced**: cutscenes, Jaz's radio calls, Emilia's intercom and in-head lines, bosses, and Max's examine comments. Files and notes stay text-only. MetaHuman Animator generates lip-sync from the ElevenLabs audio.
 - **Music:** adaptive states (calm / tension / combat / chase) driven by Audio Mixer snapshots. Emilia has her own melodic motif: a music-box lullaby that slowly distorts.
 - **SFX:** HVAC hum, surface-specific footsteps, Hollow vocals, and the heartbeat layer at low sanity (from v1).
 - **Main menu theme:** short and loopable, built on Emilia's lullaby.

@@ -1,87 +1,97 @@
-# HOLLOW KIN — Pixel Art Bible
+# HOLLOW KIN — Art Bible (Unreal Engine 5, realistic)
 
-> The source of truth for every sprite, tile and UI element. If an asset breaks a rule here, either the asset changes or this document does, on purpose.
+> The source of truth for characters, environments, lighting and UI. If an asset breaks a rule here, either the asset changes or this document does, on purpose.
 
-## 1. Technical spec (locked: changing these later means redrawing everything)
+## 1. Technical baseline
 
 | Setting | Value | Notes |
 |---------|-------|-------|
-| Perspective | Top-down ¾ (as in Stardew Valley) | Walls show their front face; floors are seen from above |
-| Tile size | **16×16 px** | Unity *Pixels Per Unit* = **16** |
-| Character height | **~32 px** (2 tiles) | Children ~24 px; bosses up to 64 px |
-| Internal resolution | **480×270** | Scales cleanly: ×4 = 1920×1080, ×8 = 3840×2160 |
-| Visible area | ~30×17 tiles | Tight framing makes the game scarier |
-| Camera | Unity **Pixel Perfect Camera**, *Upscale Render Texture* on | Keeps 2D lights and post effects pixelated too, so they match the art |
-| Texture import | Filter **Point**, Compression **None**, Mip Maps **off** | Set by an import preset in `Assets/Art/` |
-| Sprite pivot | Bottom-centre (feet) | Correct Y-sorting for the ¾ view |
-| Sorting | Transparency Sort Axis **(0, 1, 0)**, sorting layers `Floor → Decals → Props → Characters → Overhead → FX → UI` | |
-| Sub-pixel motion | Off; positions snapped to the pixel grid | Unity's `2d-pixel-perfect` skill audits this |
-| Lighting material | `Sprite-Lit-Default` (URP 2D) | Normal maps are optional; skip them for the slice |
+| Engine | Unreal Engine 5 (latest 5.x) | Pin one version for the whole project; upgrade only between milestones |
+| Global illumination | **Lumen** (software ray tracing) | Works on the M4 Max and on mid-range Windows GPUs. Hardware RT is optional on Windows |
+| Geometry | **Nanite** for static environment meshes | Not for characters or foliage cards |
+| Shadows | Virtual Shadow Maps | The flashlight's shadows are the most important horror feature |
+| Anti-aliasing / upscaling | TSR (Temporal Super Resolution) | Plus DLSS/FSR plugins on Windows later |
+| Units | 1 Unreal unit = 1 cm | Max is about 178 cm. Doors 100×210 cm, corridors 240–300 cm wide |
+| Performance target | 60 fps at 1080p on an RTX 3060 / M-series Mac; 30–40 fps on Steam Deck (Low preset) | Budget with `stat unit` and Unreal Insights each milestone |
+| Scalability | Low / Medium / High / Epic presets | Lumen and fog quality drop first on Low |
 
-## 2. Palette
+## 2. Look & mood
 
-One master palette of **32 colours** (stored as an Aseprite `.gpl` file in `Assets/Art/Palette/`). Every stock asset is re-coloured to it, which is what makes mixed sources look like one game.
+**Grounded realism with a gritty sci-fi edge.** References: *RE2 Remake* (material realism), *Silent Hill 2 Remake* (fog, decay), *Alan Wake 2* (the flashlight as a character), *The Callisto Protocol* (facility scale).
 
-| Group | Hex (dark → light) | Used for |
-|-------|--------------------|----------|
-| Void | `#07080c` `#0e1118` `#171b25` `#232937` | Darkness, outlines, shadows: about 60% of any screen |
-| Steel | `#343c4d` `#4a5468` `#6b768c` `#98a2b5` | Walls, machinery, metal props |
-| Clinic teal | `#12302f` `#1d4a47` `#2f6e68` `#5fa39a` | Research Labs, monitors, scrubs |
-| Sodium | `#3a2410` `#6b4419` `#a86b22` `#e0a547` | St. Brigid's, warm lamps, safe rooms |
-| Rust / blood | `#2a0d0f` `#4f1418` `#7f1d22` `#b8323a` | Containment, danger, damage. **Red only ever signals danger.** |
-| Skin | `#3b2620` `#6e4a3a` `#a8786a` `#d9b39f` | Characters |
-| Lantern | `#1a2a4a` `#3d6fd1` `#8fd3ff` `#e8fbff` | Hollow glow, Emilia, psychic effects: the only saturated cool tone |
-| Paper | `#5a5650` `#a39d92` `#e3ddd0` `#ffffff` | Notes, drawings, UI text |
+| Rule | Why |
+|------|-----|
+| About **60% of every frame is near-black** | Dread lives in what the player can't see |
+| **Red only signals danger** (emergency beacons, blood, alarms) | Players learn to fear it |
+| **Warm sodium light only in safe rooms and the surface clinic** | Relief should be *felt* |
+| **Lantern blue belongs to Emilia and the Hollows** | If something glows blue, it's psychic |
+| Exposure is fixed per area (no auto-exposure in gameplay) | Stops dark rooms from brightening up, which would kill tension |
 
-Rules:
-- **Fight the cosy look.** No warm, saturated greens or yellows outside safe rooms.
-- **Safe rooms are the only warm, sodium-lit spaces.** Players should *feel* relief in them.
-- The lantern blue belongs to Emilia and the Hollows. If something glows blue, it's psychic.
+### Colour per sector
+| Sector | Key colour | Light sources |
+|--------|-----------|---------------|
+| St. Brigid's Clinic | Sodium orange `#e0a547` | Street lamps through windows, flashlight |
+| Containment Wing | Rust red `#b8323a` | Rotating emergency beacons, flashlight |
+| Research Labs | Clinic teal `#5fa39a` | Flickering fluorescents (light functions / animated intensity) |
+| Maintenance Tunnels | None (void) | **Flashlight only**, plus wet reflections |
+| Security Hub | Monitor blue `#8fd3ff` | Wall of CRT monitors (emissive + rect lights) |
 
-## 3. Character sprite budget (vertical slice)
+**Post-processing** (one global Post Process Volume plus per-area volumes): film grain, a slight vignette, chromatic aberration only at low sanity, LUT colour grading per sector, and volumetric fog in every space.
 
-Bodies face 4 directions (down, up, side, and side mirrored), so **3 are drawn**. The weapon arm is a separate sprite with **8 pre-drawn aim angles**. Rotating pixel art at runtime breaks the pixel grid, so it isn't used.
+## 3. Characters (MetaHuman)
 
-| Character | Animations (frames) | Total frames ≈ |
-|-----------|---------------------|---------------|
-| **Max** | idle 4 · walk 6 · run 6 · aim-walk 6 · hurt 2 · death 6 · interact 3 · knife 4 · hide 3 · examine 2 | ~130 (×3 directions) + 8 aim arms × 3 weapons |
-| **Emilia (human)** | idle 4 · walk 6 · cutscene poses 6 | ~40 |
-| **Emilia (Hollow)** | float idle 6 · drift 6 · psychic cast 8 · scream 6 · halo debris (separate loop) 12 | ~70 |
-| **Hollow Drone** | idle 4 · shamble 8 · lunge 5 · grab 4 · stagger 3 · death 6 | ~90 |
-| **Hollow Child** | idle 4 · scurry 6 · pounce 5 · cower (spare) 4 · death 5 | ~70 |
-| **Guard** | idle 4 · walk 6 · aim 2 · shoot 3 · alert 2 · death 6 | ~70 |
-| **Jaz / Nate / Huckley / Dr. Mán** | Phase 3: idle 4 · walk 6 + cutscene poses | ~40 each |
+| Character | Notes |
+|-----------|-------|
+| **Max** | Early 20s, brunette, thin, tired eyes. Worn hoodie under a cheap work jacket, ripped sneakers. Clothes get dirtier and bloodier per act (3 material variants) |
+| **Emilia (human)** | 15 but small for her age. Brunette, hospital gown with laminated subject tags (`L-03 / HUNT, E.`) and children's drawings taped to her arms |
+| **Emilia (Hollow)** | The same MetaHuman with: a nervous-system glow through the skin (an emissive material mask that pulses with her mood), a slow orbit of debris (Niagara: pens, syringes, toys), bare feet a few centimetres off the floor. **No creepy-girl clichés**: no hair over the face, no crab-walking. Heartbreaking first, frightening second |
+| **Dr. Huckley** | Mid-30s, blonde, lab coat. Her Hollow (boss) form is the MetaHuman with a sculpted overlay: cracked skin with light bleeding through |
+| **Dr. Mán** | 50s, Chinese-born. Immaculate suit under a lab coat. Boss rig: a psychic-dampening harness (Blender model) |
+| **Jaz** | Late 20s. Technician's overalls, a headset, a homemade radio rig |
+| **Nate** | Early 30s, ex-soldier. A subject's gown under scavenged tactical gear |
+| **Guards** | 2–3 MetaHuman variants sharing one uniform |
 
-**Dialogue portraits:** 96×96 px bust, 3–4 expressions per character. These carry the emotion that 32-px sprites can't.
+**Hollows (enemies):** MetaHuman bodies with heavy sculpted damage made in Blender, plus shared "lantern node" glow materials. Each has a readable silhouette:
+- **Drone:** hunched, one oversized arm.
+- **Screamer:** an elongated jaw.
+- **Child:** small, fast, crouched.
 
-**Production shortcut:** Max's 3 directions can be roughed in from a stock 32-px base character, then repainted. Re-colour the guard from Max's base so their proportions match.
+**Workflow:** create in MetaHuman Creator → assemble in Unreal → add clothing (Fab, or Marvelous Designer / Blender) → set up LODs for gameplay.
 
-## 4. Environment
+## 4. Environments
+- **One modular kit** (sci-fi lab/hospital, from Fab) for every interior, varied per sector by lighting, decals and **material instances**, never by new meshes.
+- **Megascans surfaces and decals** for grime, water damage, blood, paper debris.
+- **Hero props** in Blender: the cracked observation tank, Emilia's bolted bed, L-7 injectors, the breaker panel, the lift.
+- **Emilia's drawings** are the only deliberately "childish" art: scanned crayon drawings (draw them yourself or AI-assist, then clean up) on decals and paper meshes.
+- Level workflow: **greybox** with Modeling Mode / simple blocks → playtest → dress with the kit → lighting pass.
 
-| Sector | Tileset base | Palette weight | Light sources |
-|--------|-------------|----------------|---------------|
-| St. Brigid's Clinic | Stock "abandoned hospital" set | Sodium + Steel | Orange street lamps through windows, flashlight |
-| Containment Wing | Sci-fi lab set, re-coloured | Rust + Void | Rotating red emergency beacons, flashlight |
-| Research Labs | Same lab set | Clinic teal + Steel | Flickering fluorescents (animated light intensity) |
-| Maintenance Tunnels | Sewer/industrial set | Void (90%) | **Flashlight only** |
-| Security Hub | Lab set + monitors | Steel + Lantern | Wall of CRT monitors (animated sprites + lights) |
+## 5. Animation
+| Source | Used for |
+|--------|----------|
+| **Game Animation Sample** (Epic, free) | Max's motion-matched locomotion, traversal |
+| Fab / marketplace packs | Pistol, shotgun and knife sets; zombie-style locomotion for Hollows; hit reactions |
+| **MetaHuman Animator** | Facial animation from audio (ElevenLabs lines) or iPhone capture |
+| Control Rig in Sequencer | Hand-keyed fixes for cutscenes |
+| Physics (ragdoll / physical animation) | Deaths, stagger blending |
 
-- Use **Rule Tiles** for walls and floors (Unity's `tilemap-ruletile-createfromsegment` skill), with a **Tile Palette** per sector.
-- Every wall tile gets a **2D shadow caster**, so the flashlight casts real shadows. This is the single most important horror feature in the engine.
-- Decals (blood, papers, children's drawings) go on their own tilemap layer, so one set of floor tiles yields many variations.
+## 6. Storybook panels & key art
+- 2D painted panels for flashbacks (the crash, the children, Huckley's letters), shown with a slow parallax pan.
+- **This is where AI-assisted concepts help most:** generate the composition and mood, then paint over it. Never ship raw AI output, and record every use in `ASSET_LOG.md` for Steam's AI disclosure.
 
-## 5. Storybook panels & key art
-- 480×270 (the full screen) or larger, painted at 2× pixel density, with a slow parallax pan.
-- **This is where AI-assisted concepts help:** generate the composition and mood, then redraw it in palette. Never ship raw AI output; record every use in `ASSET_LOG.md` for Steam's AI disclosure.
-- Emilia's in-world drawings are deliberately "child-drawn": crayon textures, paper palette, the only intentionally messy art in the game.
+## 7. UI
+- RE-style diegetic and clinical: the inventory is a medical tray with a grid of 6–10 slots, files open as photographed paper, the map is a clinical facility plan.
+- Font: a licensed clinical sans plus a monospace for terminals (free options such as *IBM Plex Sans / Mono*).
+- Built with **CommonUI + UMG**, so it supports gamepad from day one.
+- Damage: a red edge pulse. Low sanity: vignette, grain and grading. Flashing effects can be switched off in settings.
 
-## 6. UI
-- *Signalis*-inspired clinical UI: a monospace pixel font (for example *m5x7* or *Pixel Operator*, both free), thin steel frames, a paper palette for documents.
-- Inventory: a grid of 6–10 slots shown as a medical tray. Items drawn at 24×24.
-- Screen effects (shaders on the upscale render texture): vignette, palette shift toward a sickly tone at low sanity, scanline jitter on hallucinations, red edge pulse on damage. Flashing effects can be switched off in settings.
-
-## 7. Tools & file layout
-- **Aseprite** (~$20) for sprites and tiles. Export sprite sheets and JSON, or import `.aseprite` files directly with Unity's `2D Aseprite Importer` package.
-- **Blender** (optional): render 3D blockouts to 32-px frames for awkward rotations (machinery, the debris halo), then paint over them.
-- Folders: `Assets/Art/{Characters,Tiles,Props,FX,UI,Portraits,Storybook,Palette}/`
-- Naming: `chr_max_walk_down.aseprite`, `tile_containment_wall.png`, `prop_locker_01.png`, `fx_lantern_glow.png`.
+## 8. Content folder & naming
+```
+Content/HollowKin/
+  Characters/{Max,Emilia,Huckley,Man,Jaz,Nate,Guards,Hollows}/
+  Environments/{Kit,Props,Decals,Materials}/
+  Maps/{Prologue,Clinic,Containment,Labs,Tunnels,Security}/
+  Blueprints/{Player,AI,Items,Interactables,Systems}/
+  Audio/{Music,SFX,VO,Ambience}/
+  UI/  Cinematics/  FX/
+```
+Prefixes: `BP_` Blueprint, `SK_` skeletal mesh, `SM_` static mesh, `M_` / `MI_` material / instance, `T_` texture, `NS_` Niagara, `ABP_` anim blueprint, `WBP_` widget, `LS_` level sequence, `DA_` data asset, `SW_`/`SC_` sound wave / cue.

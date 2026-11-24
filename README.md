@@ -1,9 +1,9 @@
 # HOLLOW KIN (formerly Project Stargate)
 
-Top-down pixel-art survival horror, planned in Unity 6 (URP 2D) for macOS and Windows.
+Realistic third-person survival horror, planned in Unreal Engine 5 for Windows and macOS.
 
 - [Game Design Document](docs/GDD.md)
-- [Pixel Art Bible](docs/ART_BIBLE.md)
+- [Art Bible (Unreal Engine 5, realistic)](docs/ART_BIBLE.md)
 - [Level design: Containment Wing (vertical slice)](docs/levels/CONTAINMENT_WING.md)
 - [Development roadmap & next steps](docs/ROADMAP.md)
 - [Prologue & Emilia's letter (draft)](docs/narrative/PROLOGUE.md)
