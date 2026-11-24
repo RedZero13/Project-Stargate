@@ -32,7 +32,7 @@ Unreal 5 realistic 3D; title *Hollow Kin*; Chapter 1 first, 3 launch endings (hi
 4. Messages like "AC_SmartObjectAnimation not available" are harmless (a sample component I left out).
 
 ## Next steps (roadmap Phase 2 / backlog items 6–14), in order
-Health/damage/death → Guard enemy → footstep noise → inventory grid/examine, doors, keys, fuse puzzle → sanity audio/aim sway/breakdown → Bond/Taint + Hollow Child choice → greybox the Containment Wing from `levels/CONTAINMENT_WING.md`.
+Health/damage/death → footstep-noise check → Guard cover/alert → inventory grid/examine, doors, keys, fuse puzzle → sanity audio/aim sway/breakdown → Bond/Taint + Hollow Child choice → greybox the Containment Wing from `levels/CONTAINMENT_WING.md`.
 (See the "Progress log" below for what was finished since this was written.)
 
 ## Progress log
@@ -45,4 +45,5 @@ Health/damage/death → Guard enemy → footstep noise → inventory grid/examin
 - Footstep noise: `TickFootsteps` (running > 380 cm/s emits noise radius 8 m, sprint 12 m). Main-menu CONTINUE enabled when a save exists (`SetupContinue`, `DoContinue`). Compiles and runs without errors; footstep-triggered drone reactions not yet verified by hand.
 - Fuse/breaker/door puzzle: `Items/BP_Pickup_Fuse` (kind 3, `BP_Max.Fuses`), `Interactables/BP_BreakerPanel` (needs 2 fuses → `BP_Max.bPowerOn`), `Interactables/BP_PowerDoor` (slides up when power is on). Verified in Play. **These pieces are spawned by `BP_ThirdPersonGameMode.SpawnTestLayout`, not placed in the level**, because the editor stopped writing newly placed actors to disk (one-file-per-actor level): placing + `Save Current Level` worked earlier but not later in the session. Move them into the level (place, save, confirm new files in `__ExternalActors__`) when that is fixed, then delete `SpawnTestLayout`.
 - Mac build: `docs/BUILDING.md`. Packaged and launched OK (main menu loads); full playthrough of the packaged build still to be verified by a human. Fixed cook error by adding the `GameFeatureData` Asset Manager entry.
+- Guard: `AI/BP_Guard` is a child of `BP_HollowDrone` with `bRanged=true` (stops at up to 14 m with line of sight, faces Max, shoots every 1.4 s, 70% hit, 12 dmg, blue tracer). Spawned by `SpawnTestLayout`. Verified in Play. Same mannequin look as drones (child components can't be restyled via the tools; set a different mesh in the editor). Not done: cover use, investigating noise before sight, alerting other enemies.
 - (update this list after every finished step)
