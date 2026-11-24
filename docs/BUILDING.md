@@ -34,3 +34,7 @@ Built successfully on 2026-11-24 (took about 1.5 minutes after the first compile
 
 ## Known limits of this build
 Placeholder art (grey blocks, mannequin characters, cube pistol), almost no audio, no settings menu, Development build (not optimised, console available), Windows build not possible from a Mac (see `ROADMAP.md` §2.3).
+
+## Fixes after first human test (2026-11-24)
+- **Crash at launch** (`FICUInternationalization::Initialize` fatal): the build had no `Engine/Content/Internationalization` (ICU data). Fixed by `InternationalizationPreset=English` + `CulturesToStage=en` in `DefaultGame.ini`. Rebuild required.
+- **Menu not clickable on a 32:9 5120x1440 monitor:** cause not confirmed. Default window is now 1920x1080 windowed (`DefaultGameUserSettings.ini`). If clicks still miss, report the window size and whether hover highlights appear.
