@@ -9,3 +9,6 @@ Realistic third-person survival horror, planned in Unreal Engine 5 for Windows a
 - [Prologue & Emilia's letter (draft)](docs/narrative/PROLOGUE.md)
 - [HUD & menu design](docs/UI_DESIGN.md)
 - [Local-only assets (Game Animation Sample)](docs/LOCAL_ASSETS.md)
+- [Genre research and checklist](docs/GENRE_RESEARCH.md)
+- [Asset plan (what you can work on)](docs/ASSET_PLAN.md)
+- [Asset log](docs/ASSET_LOG.md)
