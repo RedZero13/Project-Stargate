@@ -19,7 +19,7 @@ Unreal 5 realistic 3D; title *Hollow Kin*; Chapter 1 first, 3 launch endings (hi
 - Commit trailer: `Co-Authored-By: <the model you are> <noreply@anthropic.com>` (last session: Claude Opus 5.5).
 - **The playable slice is `Maps/Containment/Lvl_ContainmentWing`** (menus, death-restart and CONTINUE open it). `Lvl_TestCorridor` is now only a sandbox.
 - **Saving the level works:** `AssetTools.save_assets` with an **empty list** (`{"asset_paths":[]}`) writes new and changed level actors (one-file-per-actor). `save_actor` and `save_assets` on the map path do not.
-- **Fab:** the editor's `FabToolset` lists your library (`SearchFabMyLibrary`) and installs packs (`InstallFabListing`) straight into the project; sign in once with `FabSignIn`. Downloads run one at a time and are slow. **Loading another level cancels all pending Fab downloads** — don't `load_level` while they run.
+- **Fab:** the editor's `FabToolset` lists your library (`SearchFabMyLibrary`) and installs packs (`InstallFabListing`) straight into the project; sign in once with `FabSignIn`. Downloads run one at a time and are slow. **Loading another level, or a network change (Wi-Fi blip, `Network path changed` in the log), cancels all pending Fab downloads** — don't `load_level` while they run; Play is fine. `tools/unreal_mcp/fabget.sh "<name>" install` searches the library and installs the first match. Downloads stage in `$TMPDIR/FabLibrary/<listingId>` (watch its size for progress).
 - Editor preference changed for testing: *Use Less CPU when in Background* is **off** (`EditorPerformanceSettings.bThrottleCPUWhenNotForeground=false`), otherwise Play runs at 3 fps while the editor isn't focused.
 
 ## What exists (all under `HollowKin/Content/`)
@@ -56,6 +56,10 @@ Unreal 5 realistic 3D; title *Hollow Kin*; Chapter 1 first, 3 launch endings (hi
 - The level uses **manual exposure** tuned for the flashlight: point lights need ~30–200 cd to read.
 - Testing in Play without hands: `set_actor_transform` on `UEDPIE_0_...BP_Max_C_0` teleports Max, and overlaps fire on teleport (that is how the fuse→breaker→door→ending chain was verified). `time.sleep` inside `execute_tool_script` blocks the game thread. Long scripts can exceed the old 120 s `ct.sh` timeout (now 600 s). Drones near the teleport target will kill Max in seconds; C5 has two, C7 has the guard.
 - The over-the-shoulder camera sits 40 cm right of Max, so a zero-width camera trace grazes past targets that look centred; `FirePistol` now uses a 12 cm sphere sweep.
+- **`write_graph_dsl` leaves the old nodes behind** (dead, unconnected to the exec flow). Run `tools/unreal_mcp/prune.sh <graph>` after a rewrite; `nodeinfo.sh <graph> [type]` lists nodes with their pin values (read-back hides values such as component tags).
+- Write tag lookups exactly like `gen.py`'s `T()` helper: `(Utilities|Array|Get(acopy) (Actor|GetComponentsbyTag :ComponentClass "..." :Tag "Pistol") 0)`. Positional args dropped the tag (became `None`).
+- Attaching with `SnapToTarget` resets a component's relative rotation, so a rotation set in the Blueprint defaults is lost. The pistol is now pointed along the aim direction every frame in `AimFlashlight` (M1911 barrel is the mesh's −X axis).
+- `CaptureViewport` renders the editor world, not Play; setting `bAiming` by property does not play the aim pose. Gun look needs a human check.
 - Screen recordings from the developer land on the Desktop; the filename has a narrow no-break space before `PM`, so use a glob. Frames can be extracted with a small AVFoundation Swift script (see session notes) because ffmpeg is not installed.
 
 ## Progress log
@@ -92,3 +96,11 @@ Unreal 5 realistic 3D; title *Hollow Kin*; Chapter 1 first, 3 launch endings (hi
 - **Audio/hints:** per-room `AmbientSound` loops (tag `SliceAudio`, Horror Ambient SFX pack), music bed `WAV_AMBIENCE_LOOP_Dimly_Lit_Basement` in the wing and `WAV_MENU_FULL_Systolic_Menace` on the main menu (Horror Music Free Starter Kit), pickup/breaker/hint sounds (Interface & Item Sounds). `Interactables/BP_Hint` (box trigger + editable `Message`, once) with 7 objective hints C1–C7 (tag `SliceHint`).
 - **Fab packs installed this session (local-only):** see `docs/LOCAL_ASSETS.md`.
 - (update this list after every finished step)
+
+### 2026-11-25 (pack wiring)
+- **Re-queued Fab packs** (the second batch had been cancelled by a network change). Arrived: M1911, Modern Pistols SFX (`MW_Pistol_SK`), Save Room music, NEON WEX muzzle flash (`NW_MuzzleFX`), Dead Bodies poses, Warning signs decals (`FD_WarningSigns_V1`), Essential Footsteps (`Essential_Foosteps_SK`), Realistic Starter VFX Vol2, Tablelamp, Military Radio. Still downloading at the end of this step: **Horror Hospital** (~16 GB), chalk drawings, Fog Area. `UnrealBucket` turned out to be a sword kit (unused).
+- **Pistol:** cube replaced by the M1911 mesh (`PistolMesh`, scale 1); `AimFlashlight` points it along the aim each frame. `MuzzleFx` now plays `SQ_03_Pistol_Type3_Fire_Cue` at the gun, spawns the Niagara `FXS_Pistol_MuzzleFlash` at the barrel (offset −16,0,4) and a `P_Concrete` impact puff at the hit point (tracer + light flash kept). `ReloadPistol` plays a reload sound only when it actually reloads.
+- **Footsteps:** `TickFootsteps` plays concrete boot walk/jog/run cues at Max's feet (0.55/0.38/0.30 s apart, not while falling); enemies still only hear jogging/running (800/1200 radius).
+- **Level dressing** (`tools/unreal_mcp/dress_slice.py`, tag `SliceDress`, folder `Slice/Dressing`, re-runnable): desk lamp + telephone + radio in C3, walkie-talkie in C1, headphones on the C7 lockers, dripping water (C2, C5, C7), shower steam and sparks (C2), sparks at the C9 blast door, a dead guard slumped in C1 and a dead orderly in C5 (dead-body poses on the mannequin), warning-sign decals (STOP RUN in C2, biohazard on the C4 tank, NO LIFE in C5, POISON + STOP in C7, radiation on C9). `A_C3_Music` plays the Save Room loop *Rest For A While* in the safe room.
+- Compiles and saves; props/pose checked in editor renders. **Not verified:** how the M1911 looks in Max's hand while aiming, gunshot/footstep sound levels, the Niagara flash position, decal visibility under the flashlight.
+
