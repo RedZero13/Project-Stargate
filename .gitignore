@@ -12,3 +12,13 @@ Build/
 
 # Local-only editor/MCP settings
 .mcp.json
+
+# Game Animation Sample assets: kept on the developer's Mac only (about 1.2 GB, too big for GitHub LFS).
+# See docs/LOCAL_ASSETS.md for how to restore them.
+HollowKin/Content/Audio/
+HollowKin/Content/Blueprints/
+HollowKin/Content/Levels/
+HollowKin/Content/Misc/
+HollowKin/Content/Characters/UEFN_Mannequin/
+HollowKin/Content/Input/IA_*.uasset
+HollowKin/Content/Input/IMC_Sandbox.uasset
