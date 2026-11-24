@@ -16,7 +16,20 @@
    - Panel fill: near-black `#0b0f10` at ~70% opacity
 5. **Type:** Condensed uppercase sans with wide letter-spacing for labels; large bold numerals for values. (Engine Roboto for now; swap to IBM Plex Sans/Mono per the Art Bible when fonts are imported.)
 
-## In-game HUD (1920×1080 reference)
+## Default: diegetic UI (decision)
+The game ships **diegetic by default**; the screen overlay below is an **optional setting** (variable `bShowOverlayHUD` on `BP_Max`, off by default; a Protocols toggle comes later). The overlay is built so we can finish it once the art style and overall design are final.
+
+| Info | Diegetic version (default) | Where it lives |
+|------|---------------------------|----------------|
+| HP + status word | Glowing **wrist monitor** on Max's left forearm: number, bar, `STABLE / CAUTION / CRITICAL` | `WBP_WristMonitor` (3D widget on `BP_Max`) |
+| Sanity | Thin blue bar on the wrist monitor, plus a **blue screen tint** that grows as sanity falls | `WBP_WristMonitor`, `WBP_ScreenFX` |
+| Ammo | Display on the **pistol** (loaded / reserve); the gun only appears while aiming | `WBP_GunDisplay` (3D widget on the pistol) |
+| Taking damage | **Red flash** over the screen that fades out | `WBP_ScreenFX` |
+| Posture | Max moves hunched/limping at low HP (**not built yet**, needs animation) | later |
+
+Wrist monitor and gun display are 3D widgets, so they glow in the dark. Their placement on the arm and pistol has not been visually tuned yet.
+
+## Optional screen overlay HUD (1920×1080 reference)
 
 | Element | Where | Content |
 |---------|-------|---------|
@@ -35,7 +48,7 @@
 ### Sanity rules wired up so far
 - Drains slowly while the **flashlight is off** (darkness); stops when it is on. Floor at 0.
 - Not yet connected: set-piece drains, drawings (+25), sedatives (+40), safe-room refill (to a 60 cap) — see GDD §5.4.
-- The GDD originally hid the meter on Normal and above. Decision: the meter is **visible by default** and can be turned off in Protocols (settings) later.
+- The GDD hides meters on Normal and above (diegetic first). The overlay meters are an **opt-in** setting (see above).
 
 ## Accessibility and platform notes (from the Art Bible)
 - **Flashing / pulsing effects** (damage flash, critical flicker) get a settings toggle; reduced mode shows a steady tint instead.
