@@ -26,7 +26,7 @@ Unreal 5 realistic 3D; title *Hollow Kin*; Chapter 1 first, 3 launch endings (hi
 - **Config:** sample plugins in `.uproject`, gameplay tags in `Config/DefaultGameplayTags.ini`, console vars/collision channels in `DefaultEngine.ini`.
 
 ## Known problems / unfinished
-1. **The 3D diegetic displays (`WristMonitor` on Max's back via `spine_03`, `GunDisplay` on the pistol) do not render in Play.** Checked: visible, attached, class and size set. Next ideas: test the widget in Screen space to see if it draws at all; check the widget's design size / root canvas; use a simple emissive mesh with a dynamic material text, or a Scene-Capture/Render-Target approach.
+1. The diegetic displays (`WristMonitor` on Max's back via `spine_03`, `GunDisplay` on the pistol) now use **screen-space** widget components (they track the body and show live data). True 3D world-space widget planes never drew in Play (cause unknown; tried blend modes, rotations, offsets) — revisit only if a real 3D look is needed.
 2. Shooting, pause key `P`, and menu button clicks are wired but only partly verified by hand.
 3. Posture (limping at low HP), shoulder swap (removed with my old camera), settings menu, CommonUI/gamepad navigation: not built.
 4. Messages like "AC_SmartObjectAnimation not available" are harmless (a sample component I left out).
@@ -36,4 +36,5 @@ Health/damage/death → Hollow Drone (Behavior Tree + AI Perception) and Guard �
 (See the "Progress log" below for what was finished since this was written.)
 
 ## Progress log
+- Diegetic displays working via screen-space widget components.
 - (update this list after every finished step)
