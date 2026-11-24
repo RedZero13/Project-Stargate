@@ -79,6 +79,8 @@
 - **This is where AI-assisted concepts help most:** generate the composition and mood, then paint over it. Never ship raw AI output, and record every use in `ASSET_LOG.md` for Steam's AI disclosure.
 
 ## 7. UI
+> Detailed HUD and menu spec: [`UI_DESIGN.md`](UI_DESIGN.md). Where the two differ, `UI_DESIGN.md` is newer.
+
 - RE-style diegetic and clinical: the inventory is a medical tray with a grid of 6–10 slots, files open as photographed paper, the map is a clinical facility plan.
 - Font: a licensed clinical sans plus a monospace for terminals (free options such as *IBM Plex Sans / Mono*).
 - Built with **CommonUI + UMG**, so it supports gamepad from day one.
