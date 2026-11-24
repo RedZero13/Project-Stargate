@@ -1,0 +1,14 @@
+# Unreal Engine generated folders (rebuilt on demand)
+Binaries/
+DerivedDataCache/
+Intermediate/
+Saved/
+Build/
+.vs/
+*.xcworkspace
+*.xcodeproj
+.idea/
+.DS_Store
+
+# Local-only editor/MCP settings
+.mcp.json
