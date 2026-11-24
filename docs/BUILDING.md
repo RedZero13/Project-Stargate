@@ -38,3 +38,4 @@ Placeholder art (grey blocks, mannequin characters, cube pistol), almost no audi
 ## Fixes after first human test (2026-11-24)
 - **Crash at launch** (`FICUInternationalization::Initialize` fatal): the build had no `Engine/Content/Internationalization` (ICU data). Fixed by `InternationalizationPreset=English` + `CulturesToStage=en` in `DefaultGame.ini`. Rebuild required.
 - **Menu not clickable on a 32:9 5120x1440 monitor:** cause not confirmed. Default window is now 1920x1080 windowed (`DefaultGameUserSettings.ini`). If clicks still miss, report the window size and whether hover highlights appear.
+- Config staging alone did not copy the ICU data. **Manual step after each build:** `cp -R "/Users/Shared/Epic Games/UE_5.8/Engine/Content/Internationalization/English/." <build>/Engine/Content/Internationalization/` (mkdir first). Launch then runs without the crash. A `DirectoriesToAlwaysStageAsNonUFS` entry was added to try to automate this; unverified.
