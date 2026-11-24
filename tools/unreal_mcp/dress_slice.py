@@ -17,6 +17,8 @@ ITEMS = [  # (label, asset, x, y, z, yaw, scale)
     ("FX_C2_Sparks", VFX + "Sparks/P_Sparks_A.P_Sparks_A", 2300, 0, 290, 0, 0.6),
     ("FX_C5_Drip", VFX + "Water/P_Water_Dripping_B.P_Water_Dripping_B", 4500, -1350, 345, 0, 1.0),
     ("FX_C7_Drip", VFX + "Water/P_Water_Dripping_A.P_Water_Dripping_A", 5900, -900, 295, 0, 1.0),
+    ("D_C6_Chalk", "/Game/Kid_Chalk_Drawing/StaticMesh/SM_Car_Chalk_Drawing_cargvd.SM_Car_Chalk_Drawing_cargvd", 4150, 950, 0.5, 15, 0.6),
+    ("D_C8_Chalk", "/Game/Kid_Chalk_Drawing/StaticMesh/SM_Car_Chalk_Drawing_cargvd.SM_Car_Chalk_Drawing_cargvd", 6800, -1150, 0.5, -30, 0.7),
     ("FX_C9_Sparks", VFX + "Sparks/P_Sparks_B.P_Sparks_B", 5700, 170, 420, 0, 0.6),
 ]
 DB = "/Game/DeadBodies_Poses_nikoff/"

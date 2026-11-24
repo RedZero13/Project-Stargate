@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Builds the editor-side script that places the Containment Wing greybox.
 
-usage: python3 tools/slice_layout.py > slice.json
+usage: python3 tools/unreal_mcp/build_slice.py --retexture > script.py   (just re-apply MATS)
+       python3 tools/slice_layout.py > slice.json
        python3 tools/unreal_mcp/build_slice.py slice.json > script.py
        then send script.py to ProgrammaticToolset.execute_tool_script (see build_slice.sh)
 
@@ -10,16 +11,16 @@ the Outliner folder "Slice/...", so the whole greybox can be found, re-textured 
 """
 import json, sys
 
-MATS = {  # material key -> material path (greybox; swapped for kit materials later)
-    "wall": "/Game/LevelPrototyping/Materials/MI_PrototypeGrid_Gray.MI_PrototypeGrid_Gray",
-    "ceiling": "/Game/LevelPrototyping/Materials/MI_PrototypeGrid_Gray_02.MI_PrototypeGrid_Gray_02",
-    "concrete_floor": "/Game/LevelPrototyping/Materials/MI_PrototypeGrid_TopDark.MI_PrototypeGrid_TopDark",
-    "tile_floor": "/Game/LevelPrototyping/Materials/MI_PrototypeGrid_Gray_Round.MI_PrototypeGrid_Gray_Round",
-    "warm_floor": "/Game/LevelPrototyping/Materials/MI_PrototypeGrid_TopDark.MI_PrototypeGrid_TopDark",
-    "prop": "/Game/LevelPrototyping/Materials/MI_DefaultColorway.MI_DefaultColorway",
-    "metal": "/Game/LevelPrototyping/Materials/MI_PrototypeGrid_TopDark.MI_PrototypeGrid_TopDark",
+MATS = {  # material key -> material (Horror Hospital textures through the world-tiling M_HK_WorldTile; see docs)
+    "wall": "/Game/HollowKin/Materials/MI_HK_Wall.MI_HK_Wall",
+    "ceiling": "/Game/HollowKin/Materials/MI_HK_Ceiling.MI_HK_Ceiling",
+    "concrete_floor": "/Game/HollowKin/Materials/MI_HK_Concrete.MI_HK_Concrete",
+    "tile_floor": "/Game/HollowKin/Materials/MI_HK_TileFloor.MI_HK_TileFloor",
+    "warm_floor": "/Game/HollowKin/Materials/MI_HK_WarmFloor.MI_HK_WarmFloor",
+    "prop": "/Game/HollowKin/Materials/MI_HK_Prop.MI_HK_Prop",
+    "metal": "/Game/HollowKin/Materials/MI_HK_Metal.MI_HK_Metal",
     "glass": "/Game/LevelPrototyping/Materials/MI_DefaultColorway.MI_DefaultColorway",
-    "bed": "/Game/LevelPrototyping/Materials/MI_PrototypeGrid_Gray_02.MI_PrototypeGrid_Gray_02",
+    "bed": "/Game/HollowKin/Materials/MI_HK_Prop.MI_HK_Prop",
 }
 
 TEMPLATE = r'''
@@ -69,6 +70,24 @@ def run():
     return {"placed": n}
 '''
 
-if __name__ == "__main__":
+RETEXTURE = r'''
+import json
+MATS = json.loads(%(mats)r)
+def T(name, args):
+    return execute_tool(name, json.dumps(args))
+def run():
+    n = {}
+    for key, mat in MATS.items():
+        for a in T("editor_toolset.toolsets.scene.SceneTools.find_actors", {"name": "", "tag": "M_" + key, "collision_channels": []})["returnValue"]:
+            T("editor_toolset.toolsets.object.ObjectTools.set_properties", {
+                "instance": {"refPath": a["refPath"] + ".StaticMeshComponent0"}, "values": json.dumps({"OverrideMaterials": [mat]})})
+            n[key] = n.get(key, 0) + 1
+    return {"retextured": n}
+'''
+
+if __name__ == "__main__" and len(sys.argv) > 1 and sys.argv[1] == "--retexture":
+    # only swap materials on the existing blocks (by their M_<key> tags)
+    print(RETEXTURE % {"mats": json.dumps(MATS)})
+elif __name__ == "__main__":
     data = open(sys.argv[1]).read()
     print(TEMPLATE % {"data": data, "mats": json.dumps(MATS)})
