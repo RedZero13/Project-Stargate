@@ -19,3 +19,9 @@ They are ignored via `.gitignore`; the exact list is in [`gasp_local_files.txt`]
 
 ## Back-ups
 Anything not in git exists only on this Mac. Keep a Time Machine (or similar) back-up.
+
+## Fab packs (local-only, from the developer's Fab library)
+Installed into `HollowKin/Content/<PackFolder>/` from inside the editor (`FabToolset` → `InstallFabListing`, or Window → Fab → Add to Project). They are ignored by the Content allow-list in `.gitignore`.
+Used by the slice right now: **Horror Ambient Sound Effects Pack_01** (`HorrorAmbientSFX`, room ambience), **Horror Music - Free Starter Kit** (music bed + menu theme), **Interface & Item Sounds Pack** (pickup/breaker/hint sounds). The sound waves listed in `tools/unreal_mcp/build_slice.py`-era scripts were set to *Looping* locally; re-set `bLooping` after reinstalling.
+Installed for upcoming work: Table Lamp, Free Interaction Animation, FREE Dramatic Death, Realistic Starter VFX Pack Vol 2, Military Radio.
+Queued (may still be downloading): Horror Hospital (environment kit), M1911 (FREE), Modern Pistols SFX, Essential Footsteps SFX, NEON WEX Free Muzzle Flash FX, Save Room (Music Pack), Survival Character, Warning signs decals Vol. 1, Kid/Sun/Car/Cloud Chalk Drawing, Drip Streak + Dust Smudge Alpha, Free Realistic CCTV Security Camera System, FREE 15 Survival / Sci-Fi Flat Icons, Fog Area, Glitch Noises, InfinitelyCloseNightmare music, LAMENT music, Essential Ambience SFX, Dead Bodies Sitting & Lying Poses, Misc Props - UB Free Pack.
