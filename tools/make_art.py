@@ -85,3 +85,12 @@ for i in range(60): vd.ellipse((i*4,i*4,S-i*4,S-i*4),outline=int(255*(1-i/60)**2
 vig=vig.filter(ImageFilter.GaussianBlur(25))
 red=Image.new('RGBA',(S,S),(90,0,3,0)); red.putalpha(vig.point(lambda v:int(v*0.7)))
 bl=Image.alpha_composite(red,bl); bl.save(os.path.join(OUT,'T_BloodOverlay.png'))
+# ---- wristwatch panel for the pause menu (strap + case + dark face)
+W2,H2=700,520; wt=Image.new('RGBA',(W2,H2),(0,0,0,0)); d=ImageDraw.Draw(wt)
+d.rounded_rectangle((250,0,450,H2),24,fill=(28,32,31,255),outline=(60,68,66,255),width=4)     # strap
+for y in range(20,H2,36): d.line((262,y,438,y),fill=(40,46,44,255),width=2)
+d.rounded_rectangle((90,110,610,410),44,fill=(52,58,57,255),outline=(110,122,120,255),width=8)    # case
+d.rounded_rectangle((122,140,578,380),26,fill=(6,12,12,255),outline=(30,60,58,255),width=4)       # face
+for i in range(4): d.line((160+i*0,170+i*60,540,170+i*60),fill=(14,26,25,255),width=1)           # faint scan lines
+d.ellipse((600,230,630,260),fill=(90,100,98,255))                                                 # crown
+wt=glow(wt,6); wt.save(os.path.join(OUT,'T_Watch.png'))
