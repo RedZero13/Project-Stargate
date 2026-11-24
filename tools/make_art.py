@@ -66,3 +66,22 @@ def drawing(d,c):
     d.line((128,150,100,170),fill=c+(255,),width=5); d.line((128,150,156,170),fill=c+(255,),width=5)
 for n,fn,c in(('T_Icon_Ammo',ammo,AMB),('T_Icon_Gel',gel,(110,220,150)),('T_Icon_Sedative',sed,BLUE),('T_Icon_Fuse',fuse,WHITE),('T_Icon_Keycard',key,RED),('T_Icon_Drawing',drawing,TEAL)): icon(n,fn,c)
 print(sorted(os.listdir(OUT)))
+# ---- blood overlay (RE7-style): organic edge-weighted blood splatter, transparent centre
+import random
+random.seed(11)
+S=1024; m=Image.new('L',(S,S),0); d=ImageDraw.Draw(m)
+for _ in range(900):
+    a=random.random()*6.283; rr=(random.random()**0.45)*S*0.62+S*0.18   # weighted to the edges
+    x=S/2+math.cos(a)*rr; y=S/2+math.sin(a)*rr*0.8
+    r=random.choice([2,3,4,6,8,12,18,28,45]); d.ellipse((x-r,y-r,x+r,y+r),fill=255)
+    if random.random()<0.18: d.line((x,y,x+random.randint(-6,6),y+random.randint(30,170)),fill=255,width=random.randint(2,6))
+m=m.filter(ImageFilter.GaussianBlur(7)).point(lambda v:255 if v>110 else 0).filter(ImageFilter.GaussianBlur(1.4))
+tone=Image.effect_noise((S,S),40).point(lambda v:v//3)
+bl=Image.new('RGBA',(S,S),(115,0,6,0)); bl.putalpha(m.point(lambda v:int(v*0.92)))
+shade=Image.merge('RGBA',(tone.point(lambda v:90+v//2),Image.new('L',(S,S),0),Image.new('L',(S,S),4),Image.new('L',(S,S),0)))
+shade.putalpha(m); bl=Image.alpha_composite(bl,shade)
+vig=Image.new('L',(S,S),0); vd=ImageDraw.Draw(vig)
+for i in range(60): vd.ellipse((i*4,i*4,S-i*4,S-i*4),outline=int(255*(1-i/60)**2),width=6)
+vig=vig.filter(ImageFilter.GaussianBlur(25))
+red=Image.new('RGBA',(S,S),(90,0,3,0)); red.putalpha(vig.point(lambda v:int(v*0.7)))
+bl=Image.alpha_composite(red,bl); bl.save(os.path.join(OUT,'T_BloodOverlay.png'))
