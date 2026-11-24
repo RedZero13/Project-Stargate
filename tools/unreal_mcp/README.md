@@ -17,3 +17,6 @@ cd tools/unreal_mcp
 - Gotchas learned: `set_properties` values must be a JSON *string*; on live PIE objects write vectors as `"(X=1,Y=2,Z=3)"` (a JSON dict only sets X);
   LFS-tracked `.uasset` files are read-only until `git lfs lock <file>`; run `export PATH=/opt/homebrew/bin:$PATH` so git finds git-lfs;
   a Message Log window may pop over Play - close it with `SlateInspectorToolset Windows {"action":"close","index":1}`.
+
+- **Do not call `SlateInspectorToolset Windows close` repeatedly right after starting Play**: once it hung the editor's game thread (had to wait/restart). Prefer leaving the Message Log popup alone, or fix the cause of the load-error message.
+- Naming: do not name a Blueprint function the same as a native one (e.g. `MakeNoise`); use `EmitNoise`.

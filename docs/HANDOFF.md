@@ -37,4 +37,6 @@ Health/damage/death → Hollow Drone (Behavior Tree + AI Perception) and Guard �
 
 ## Progress log
 - Diegetic displays working via screen-space widget components.
+- Death/respawn: `Die` on `BP_Max` (HP 0 → `WBP_DeathScreen`, level restarts after 3.5 s). Built, not yet tested by hand.
+- Hollow Drone: `Blueprints/AI/BP_HollowDrone` (custom sight/hearing/patrol/chase/attack/stagger/ragdoll logic in `Think`, `UpdateSight`, `HearNoise`, `TakeHit`, `DroneDie`); Max emits gunshot noise via `EmitNoise`. Navmesh volume + 2 drones placed in `Lvl_TestCorridor`. **Untested in Play** (editor froze while starting the test — see tools README).
 - (update this list after every finished step)
