@@ -32,7 +32,7 @@ Unreal 5 realistic 3D; title *Hollow Kin*; Chapter 1 first, 3 launch endings (hi
 4. Messages like "AC_SmartObjectAnimation not available" are harmless (a sample component I left out).
 
 ## Next steps (roadmap Phase 2 / backlog items 6–14), in order
-Health/damage/death → Hollow Drone (Behavior Tree + AI Perception) and Guard → noise events → inventory/pickups/doors/keys → safe room save/load → sanity effects + hallucination → Bond/Taint + Hollow Child choice → greybox the Containment Wing from `levels/CONTAINMENT_WING.md`.
+Health/damage/death → Guard enemy → footstep noise → inventory grid/examine, doors, keys, fuse puzzle → sanity audio/aim sway/breakdown → Bond/Taint + Hollow Child choice → greybox the Containment Wing from `levels/CONTAINMENT_WING.md`.
 (See the "Progress log" below for what was finished since this was written.)
 
 ## Progress log
@@ -41,4 +41,5 @@ Health/damage/death → Hollow Drone (Behavior Tree + AI Perception) and Guard �
 - Hollow Drone: `Blueprints/AI/BP_HollowDrone` (custom sight/hearing/patrol/chase/attack/stagger/ragdoll logic in `Think`, `UpdateSight`, `HearNoise`, `TakeHit`, `DroneDie`); Max emits gunshot noise via `EmitNoise`. Navmesh volume + 2 drones placed in `Lvl_TestCorridor`. **Verified in Play:** drones patrol, see Max (sight range shrinks if his flashlight is off), chase, hit for 20 every 1.6 s, wrist monitor HP drops; at 0 HP the `TERMINATED` screen shows and the level restarts. Not yet verified by hand: pistol killing a drone (3 shots), stagger, ragdoll, hearing gunshots.
 - Pickups: `Blueprints/Items/BP_Pickup` (+ `_Ammo` +6 reserve, `_Gel` +50 HP, `_Sedative` +40 sanity); walking into one calls `BP_Max.Collect`. Verified in Play; 4 placed in `Lvl_TestCorridor`.
 - Safe-room save/load: `Interactables/BP_SaveTerminal` (walk in → `BP_Max.SaveCheckpoint`: saves HP/sanity/ammo/position to slot `HollowKinSlot1`, lifts sanity to 60); `LoadCheckpoint` runs once at start (from `EnsureCombatInput`); `NEW ADMISSION` deletes the slot. Verified (died → reloaded at the terminal). Main menu `CONTINUE` still greyed out.
+- Hallucinations: `AI/BP_Hallucination` (blue-lit mannequin; vanishes when shot, approached within 2.6 m, or after 7 s). `BP_Max.TickHallucination` spawns one every 15–35 s while sanity < 40. Verified in Play. Still to do for sanity (GDD §5.4): whispers/audio, aim sway, heartbeat, breakdown at 0, restore from drawings / bright rooms.
 - (update this list after every finished step)
