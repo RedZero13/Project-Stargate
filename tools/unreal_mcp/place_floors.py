@@ -85,13 +85,14 @@ for k, fl in enumerate(floors):
     n_en = 0 if fl['gate'] == 'ending' else 2 if m == 'wards' else 3
     for i in range(n_en):
         r = rooms[(k + 2 * i + 1) % len(rooms)]
-        put(DR, '%s_Hollow%d' % (L, i), r['x'], r['y'], z + 120, folder='Enemies')
+        nurse = (i == 0) and (m == 'wards' or k % 2 == 0)
+        put(DR, '%s_%s%d' % (L, 'UndeadNurse' if nurse else 'Hollow', i), r['x'], r['y'], z + 120, folder='Enemies', tags=(('Nurse',) if nurse else ()))
     if m == 'deep' and L in ('B12', 'B14'):
         r = rooms[1]; put(DR, '%s_Experiment' % L, r['x'] + 100, r['y'], z + 120, scale=1.25, tags=('Elite',), folder='Enemies')
     # dead staff / soldiers
     for i in range(3):
         r = rooms[(k + i * 2) % len(rooms)]
-        put(SOL, '%s_Dead%d' % (L, i), r['x'] + random.randint(-200, 200), r['y'] + r['side'] * random.randint(-120, 60), z,
+        put(B + 'Props/BP_DeadNurse.BP_DeadNurse' if i == 1 else SOL, '%s_Dead%s%d' % (L, 'Nurse' if i == 1 else '', i), r['x'] + random.randint(-200, 200), r['y'] + r['side'] * random.randint(-120, 60), z,
             yaw=random.randint(0, 359), props={'PoseAnim': {'refPath': AN + POSES[(k + i) % len(POSES)] + '.' + POSES[(k + i) % len(POSES)]}}, folder='Dressing')
     # pickups: ammo, gel/sedative, crafting parts
     loot = [(0, 6), (1 if k % 2 == 0 else 2, 40), (4, 1), (5, 1)]
