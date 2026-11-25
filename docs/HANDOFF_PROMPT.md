@@ -10,13 +10,14 @@ You are continuing work on **HOLLOW KIN**, a realistic third-person survival-hor
 3. Make sure the editor is open on `HollowKin/HollowKin.uproject` (MCP server on `http://127.0.0.1:8000/mcp`). Without unreal-mcp tools, use `tools/unreal_mcp/*.sh` (`ct.sh`, `rdsl.sh`/`wdsl.sh` to read/write Blueprint graphs, `fnt.sh` to find node types).
 4. New machine: Git LFS (`brew install git-lfs && git lfs install`), `export PATH=/opt/homebrew/bin:$PATH`, and the GitHub token for pushing.
 
-**State:** the playable slice is `Maps/Containment/Lvl_ContainmentWing` (greybox rooms C1–C9, lights, ambience, hints, drones/guard/Hollow Child, fuses → breaker → power door → ending → main menu). The fuse/breaker/door/ending chain and the save terminal were verified in Play by teleporting Max. Not yet verified by a human: killing a drone with the pistol, menu clicks, walking the full route.
+**State:** NEW ADMISSION → `Maps/City/Lvl_City` (rainy night town, phone call from Jaz, walk to St. Brigid's Clinic) → clinic door → `Maps/Containment/Lvl_ContainmentWing` (hospital-textured rooms C1–C9, Whisper-skinned Hollows, guard, elite Brute in C4, explosive barrels + electric puddles, safe room that restores sanity, fuses → breaker → power door → ending → main menu). Max uses the Survival Character mesh; punch on V, aim toggle on T. The developer played the wing start to finish by hand and confirmed pistol kills. Read the Progress log in `docs/HANDOFF.md` for what is verified.
 
 **Fab:** the editor's `FabToolset` reads the developer's Fab library and installs packs into the project (sign in once with `FabSignIn`). Downloads are slow and one at a time; **don't load another level while they run** (it cancels them). Check which packs from `docs/LOCAL_ASSETS.md` ("Queued") actually arrived under `HollowKin/Content/`, and re-queue any that are missing.
 
 **Next, in order** (build → test in Play → commit/push → append to the Progress log in `docs/HANDOFF.md`):
-1. Ask the developer for the results of their hand playthrough and fix what they report.
-2. Wire the downloaded packs: M1911 mesh on the pistol (replace the cube, tag `Gun`), Modern Pistols SFX on fire/reload, Essential Footsteps SFX in `TickFootsteps`, Save Room music in C3, NEON WEX muzzle flash, Horror Hospital materials/props on the greybox (blocks are tagged `M_<key>`; edit `tools/unreal_mcp/build_slice.py` MATS and re-run), Emilia's chalk drawings in C6/C8, a dead-guard pose in C1, warning-sign decals.
+1. Ask the developer for results from the new Mac build (city → wing) and fix what they report.
+2. Follow **Next steps A–D** in `docs/HANDOFF.md` (guards in the Tactical Soldier outfit, Rampage mini-boss, new zones: recreation room, break area, reception/lobby, diagnostic labs, abandoned power plant).
+3. Polish: swap the wing's box props (beds, desk, lockers, bed in C8) for Horror Hospital meshes, add grime/blood decals from the kit, more chalk drawings in C6/C8, a real explosion sound for barrels.
 3. Guard cover / investigate-noise behaviour; footstep noise verification.
 4. Inventory grid + examine view (data assets), keys.
 5. Sanity audio / aim sway; Hollow Child flee/cower + spare/kill check.

@@ -8,9 +8,10 @@ From the repo folder, in a terminal:
 ```bash
 "/Users/Shared/Epic Games/UE_5.8/Engine/Build/BatchFiles/RunUAT.sh" BuildCookRun \
   -project="$PWD/HollowKin/HollowKin.uproject" -noP4 -platform=Mac -clientconfig=Development \
-  -build -cook -allmaps -stage -pak -archive \
+  -build -cook -stage -pak -archive \
   -archivedirectory="$HOME/Documents/Unreal Projects/Builds/HollowKinMac" -utf8output
 ```
+- Cooks only the maps in `MapsToCook` (`Config/DefaultGame.ini`: main menu, city, wing, test corridor). Do **not** use `-allmaps` (it would cook every Fab demo map).
 - Takes roughly 15–40 minutes the first time (shaders and the 1.2 GB animation set are cooked).
 - **The runnable build is the staged folder** `HollowKin/Saved/StagedBuilds/Mac/` (contains `HollowKin.app`, `HollowKin/Content/Paks`, `Engine/`; about 1.8 GB). Copy the **whole folder** somewhere (e.g. `~/Documents/Unreal Projects/Builds/HollowKinMac_Test`) and open `HollowKin.app` inside it. The `-archive` output only contains the bare executable and will not start (missing libraries and content) — ignore it.
 - First launch may need right-click → Open because it is unsigned.
@@ -39,3 +40,10 @@ Placeholder art (grey blocks, mannequin characters, cube pistol), almost no audi
 - **Crash at launch** (`FICUInternationalization::Initialize` fatal): the build had no `Engine/Content/Internationalization` (ICU data). Fixed by `InternationalizationPreset=English` + `CulturesToStage=en` in `DefaultGame.ini`. Rebuild required.
 - **Menu not clickable on a 32:9 5120x1440 monitor:** cause not confirmed. Default window is now 1920x1080 windowed (`DefaultGameUserSettings.ini`). If clicks still miss, report the window size and whether hover highlights appear.
 - Config staging alone did not copy the ICU data. **Manual step after each build:** `cp -R "/Users/Shared/Epic Games/UE_5.8/Engine/Content/Internationalization/English/." <build>/Engine/Content/Internationalization/` (mkdir first). Launch then runs without the crash. A `DirectoriesToAlwaysStageAsNonUFS` entry was added to try to automate this; unverified.
+
+## Sending the build to another Mac (2026-11-25)
+1. After the build, copy the ICU data (manual step above) into the staged folder.
+2. Zip the **whole** staged folder `HollowKin/Saved/StagedBuilds/Mac/` (right-click → Compress, or `ditto -c -k --keepParent <folder> HollowKinMac.zip`).
+3. On the other Mac: unzip, then because the app is unsigned run `xattr -cr <folder>/HollowKin.app` once in Terminal (or right-click → Open → Open). Apple Silicon or Intel Mac with Metal SM6 support.
+4. Trackpad play: two-finger click held = aim, or press **T** to toggle aim; click / **E** = fire, **V** punch, **R** reload, **F** flashlight, **Tab** swap shoulder, **P/Esc** pause.
+5. The game starts borderless full screen at the monitor's resolution (works on 16:9, 21:9 and 32:9). Alt+Enter / F11 switches to a window.
