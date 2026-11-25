@@ -21,3 +21,6 @@ cd tools/unreal_mcp
 - **Do not call `SlateInspectorToolset Windows close` repeatedly right after starting Play**: once it hung the editor's game thread (had to wait/restart). Prefer leaving the Message Log popup alone, or fix the cause of the load-error message.
 - Naming: do not name a Blueprint function the same as a native one (e.g. `MakeNoise`); use `EmitNoise`.
 - **Saving placed level actors:** this level uses one-file-per-actor. `save_assets` on the level and `save_actor` do NOT write newly added actors. Use `SlateInspectorToolset Snapshot` to find the "Save Current Level" button ref (e.g. `b5`) then `Click {"ref":"b5","button":"left"}`; confirm new files appear under `Content/__ExternalActors__/`. Lock the `.umap` first (`git lfs lock`).
+
+- **Saving new actors in one-file-per-actor levels (works reliably):** `AssetTools.save_assets` with an **empty list** saves every dirty package, including new external actors. (`save_actor` fails for actors that were never saved; the toolbar/File-menu clicks are unreliable.)
+- **Ambiguous node names in the DSL** (e.g. `GetDynamicMaterial`, `SetScalarParameterValue`, functions called `Setup`/`UpdateHUD`/`ApplySavedVolumes` that exist on several classes): create the node with `create_node` + `declaring_class`, or give our functions unique names.
