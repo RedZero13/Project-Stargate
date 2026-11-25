@@ -1,8 +1,8 @@
-"""BP_Max.ApplySettings: difficulty multipliers, overlay HUD, reduce flashing, motion blur, look prefs."""
+"""BP_Max.ApplyMaxSettings (renamed from ApplySettings, which clashed with GameUserSettings.ApplySettings): difficulty multipliers, overlay HUD, reduce flashing, motion blur, look prefs."""
 from ui_lib import call
 BT = 'editor_toolset.toolsets.blueprint.BlueprintTools'
 MAX = '/Game/HollowKin/Blueprints/Player/BP_Max.BP_Max'
-dsl = '''(fn ApplySettings ()
+dsl = '''(fn ApplyMaxSettings ()
   (Variables|Default|SetDmgMul 1.0)
   (Variables|Default|SetDrainMul 1.0)
   (Variables|Default|SetLootMul 1.0)
@@ -27,4 +27,4 @@ dsl = '''(fn ApplySettings ()
         (Variables|Default|SetDrainMul 1.8)
         (Variables|Default|SetLootMul 0.5)))
     (:CastFailed)))'''
-print(call(BT, 'write_graph_dsl', {'graph': {'refPath': MAX + ':ApplySettings'}, 'code': dsl}))
+print(call(BT, 'write_graph_dsl', {'graph': {'refPath': MAX + ':ApplyMaxSettings'}, 'code': dsl}))

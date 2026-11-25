@@ -34,7 +34,7 @@ def T(name, args):
 
 def run():
     lvl = T("editor_toolset.toolsets.scene.SceneTools.get_current_level", {})["returnValue"]
-    if "Lvl_ContainmentWing" not in str(lvl):
+    if %(level)r not in str(lvl):
         return {"error": "wrong level " + str(lvl)}
     # remove a previous build of the slice
     old = T("editor_toolset.toolsets.scene.SceneTools.find_actors", {"name": "", "tag": "Slice", "collision_channels": []})["returnValue"]
@@ -90,4 +90,5 @@ if __name__ == "__main__" and len(sys.argv) > 1 and sys.argv[1] == "--retexture"
     print(RETEXTURE % {"mats": json.dumps(MATS)})
 elif __name__ == "__main__":
     data = open(sys.argv[1]).read()
-    print(TEMPLATE % {"data": data, "mats": json.dumps(MATS)})
+    level = sys.argv[2] if len(sys.argv) > 2 else "Lvl_ContainmentWing"   # e.g. Lvl_DeepLabs (tools/deep_layout.py)
+    print(TEMPLATE % {"data": data, "mats": json.dumps(MATS), "level": level})

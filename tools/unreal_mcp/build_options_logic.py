@@ -67,7 +67,7 @@ fn('ApplyLive', '''(fn ApplyLive ()
   (for w (Widget|GetAllWidgetsOfClass "/Game/HollowKin/UI/Diegetic/WBP_ScreenFX.WBP_ScreenFX_C" false)
     (Class|WBPScreenFX|ApplyTextSize :self (Utilities|Casting|CastToWBP_ScreenFX w)))
   (bind m (Utilities|Casting|CastToBP_Max (Game|GetPlayerPawn 0))
-    (:then (Class|BPMax|ApplySettings :self m))
+    (:then (Class|BPMax|ApplyMaxSettings :self m))
     (:CastFailed)))''')
 # ---------- save-backed toggles ----------
 def save_edit(name, set_expr_existing, set_expr_new):
