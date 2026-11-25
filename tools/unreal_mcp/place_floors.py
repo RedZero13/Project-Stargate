@@ -82,7 +82,7 @@ for k, fl in enumerate(floors):
                     scale=random.choice([0.85, 0.9, 0.95]), folder='Ending')
         put(HINT, '%s_HintChildren' % L, rooms[0]['x'], 0, z + 100, props={'Message': "Five other children, L-01 to L-06 on the cell doors. They watch you without blinking. Emilia's cell is in the middle."})
     # enemies: 2 Hollows (3 on deep floors), the last deep floors get an Elite
-    n_en = 2 if m == 'wards' else 3
+    n_en = 0 if fl['gate'] == 'ending' else 2 if m == 'wards' else 3
     for i in range(n_en):
         r = rooms[(k + 2 * i + 1) % len(rooms)]
         put(DR, '%s_Hollow%d' % (L, i), r['x'], r['y'], z + 120, folder='Enemies')

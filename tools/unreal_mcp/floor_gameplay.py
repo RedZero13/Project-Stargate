@@ -16,7 +16,9 @@ LOADING = '/Game/HollowKin/UI/Menus/WBP_Loading.WBP_Loading_C'
 def mk(path, vars_):
     if not call(A, 'exists', {'path': path.split('.')[0]}).get('returnValue'):
         print(call(BT, 'create', {'folder_path': F, 'asset_name': path.split('.')[-1], 'asset_type': {'refPath': '/Script/Engine.Actor'}}))
+    have = call(BT, 'list_variables', {'blueprint': {'refPath': path}}).get('returnValue') or []
     for n, t in vars_:
+        if n in have: continue
         call(BT, 'add_variable', {'blueprint': {'refPath': path}, 'name': n, 'type_name': t})
         call(BT, 'set_variable_instance_editable', {'blueprint': {'refPath': path}, 'variable_name': n, 'instance_editable': True})
     call(BT, 'compile_blueprint', {'blueprint': {'refPath': path}, 'warnings_as_errors': False})
@@ -36,9 +38,14 @@ mk(LIFT, [('Label', 'string'), ('Gate', 'int'), ('bUnlocked', 'bool'), ('Target'
 mk(CARD, [('Label', 'string'), ('bTaken', 'bool')])
 mk(SW, [('Label', 'string'), ('Idx', 'int'), ('bLit', 'bool'), ('Cool', 'float')])
 mk(GEN, [('Label', 'string'), ('bDone', 'bool')])
+for bp in (SW, GEN):
+    have = call(BT, 'list_variables', {'blueprint': {'refPath': bp}}).get('returnValue') or []
+    if 'Lamp' not in have:
+        print(call(BT, 'add_object_variable', {'blueprint': {'refPath': bp}, 'name': 'Lamp', 'object_class': {'refPath': '/Script/Engine.PointLightComponent'}}))
+    call(BT, 'compile_blueprint', {'blueprint': {'refPath': bp}, 'warnings_as_errors': False})
 
 # ---------------- lift ----------------
-fn(LIFT, 'Unlock', '''(fn Unlock ()
+fn(LIFT, 'PowerLift', '''(fn PowerLift ()
   (if (not (Variables|Default|GetUnlocked))
     (Variables|Default|SetUnlocked true)
     (Audio|PlaySound2D "/Game/Interface_And_Item_Sounds/WAV/Special_Powerup_03.Special_Powerup_03" 0.6)
@@ -52,13 +59,15 @@ fn(LIFT, 'SeqHit', '''(fn SeqHit (Idx)
   (if (Utilities|String|EqualExactly(String) want (Utilities|String|ToString(Integer) Idx))
     (Variables|Default|SetProgress (+ (Variables|Default|GetProgress) 1))
     (Audio|PlaySound2D "/Game/Interface_And_Item_Sounds/WAV/Flick_Switch_03.Flick_Switch_03" 0.8)
-    (if (>= (Variables|Default|GetProgress) 3) (CallFunction|Unlock))
+    (if (>= (Variables|Default|GetProgress) 3) (CallFunction|PowerLift))
     (return true)
     (else
       (Variables|Default|SetProgress 0)
       (Audio|PlaySound2D "/Game/Interface_And_Item_Sounds/WAV/Error_Buzz_02.Error_Buzz_02" 0.7)
-      (for s (Actor|GetAllActorswithTag (Utilities|String|StringToName (Utilities|String|Append "Seq_" (Variables|Default|GetLabel))))
-        (Class|BPSeqSwitch|SetLit :self (Utilities|Casting|CastToBP_SeqSwitch s) :On false))
+      (for s (Actor|GetAllActorsOfClass "/Game/HollowKin/Blueprints/Floors/BP_SeqSwitch.BP_SeqSwitch_C")
+        (bind sw (Utilities|Casting|CastToBP_SeqSwitch s))
+        (if (Utilities|String|EqualExactly(String) (Class|BPSeqSwitch|GetLabel :self sw) (Variables|Default|GetLabel))
+          (Class|BPSeqSwitch|SetLit :self sw :On false)))
       (return false))))''', params=[('Idx', 'int', True), ('Ok', 'bool', False)])
 fn(LIFT, 'GoDown', '''(fn GoDown ()
   (Variables|Default|SetBusy true)
@@ -116,15 +125,17 @@ ev(CARD, '''(event EventTick (DeltaSeconds)
       (if (and (not (Variables|Default|GetTaken)) (< (Transformation|GetDistanceTo self m) 120.0))
         (Variables|Default|SetTaken true)
         (Class|BPMax|Notify :self m :Msg (Utilities|String|Append (Utilities|String|Append "KEYCARD  " (Variables|Default|GetLabel)) "  -  the lift will accept it.") :Seconds 3.5)
-        (for x (Actor|GetAllActorswithTag (Utilities|String|StringToName (Utilities|String|Append "Lift_" (Variables|Default|GetLabel))))
-          (Class|BPFloorLift|Unlock :self (Utilities|Casting|CastToBP_FloorLift x)))
+        (for x (Actor|GetAllActorsOfClass "/Game/HollowKin/Blueprints/Floors/BP_FloorLift.BP_FloorLift_C")
+          (bind lf (Utilities|Casting|CastToBP_FloorLift x))
+          (if (Utilities|String|EqualExactly(String) (Class|BPFloorLift|GetLabel :self lf) (Variables|Default|GetLabel))
+            (Class|BPFloorLift|PowerLift :self lf)))
         (Actor|DestroyActor :self self)))
     (:CastFailed)))''' % MAXCAST)
 
 # ---------------- switch ----------------
 fn(SW, 'SetLit', '''(fn SetLit (On)
   (Variables|Default|SetLit On)
-  (Rendering|Components|Light|SetLightColor :self (Utilities|Casting|CastToPointLightComponent (Actor|GetComponentByClass "/Script/Engine.PointLightComponent")) :NewLightColor (select On (Math|Color|MakeColor 0.2 1.0 0.4 1.0) (Math|Color|MakeColor 1.0 0.15 0.1 1.0))))''', params=[('On', 'bool', True)])
+  (Rendering|Components|Light|SetLightColor :self (Variables|Default|GetLamp) :NewLightColor (select On (Math|Color|MakeColor 0.2 1.0 0.4 1.0) (Math|Color|MakeColor 1.0 0.15 0.1 1.0))))''', params=[('On', 'bool', True)])
 ev(SW, '''(event EventBeginPlay
   (bind c (Utilities|Casting|CastToStaticMeshComponent (Game|AddComponentbyClass self "/Script/Engine.StaticMeshComponent")))
   (Components|StaticMesh|SetStaticMesh c "/Game/LevelPrototyping/Meshes/SM_Cylinder.SM_Cylinder")
@@ -139,6 +150,7 @@ ev(SW, '''(event EventBeginPlay
   (Transformation|SetRelativeLocation :self l :NewLocation (Math|Vector|MakeVector 0.0 0.0 40.0))
   (Rendering|Components|Light|SetIntensity :self l :NewIntensity 80.0)
   (Rendering|Lighting|SetAttenuationRadius :self l :NewRadius 180.0)
+  (Variables|Default|SetLamp l)
   (CallFunction|SetLit :On false))''')
 ev(SW, '''(event EventTick (DeltaSeconds)
   (bind m %s
@@ -146,9 +158,11 @@ ev(SW, '''(event EventTick (DeltaSeconds)
       (bind now (Utilities|Time|GetTimeSeconds))
       (if (and (and (not (Variables|Default|GetLit)) (> now (Variables|Default|GetCool))) (< (Transformation|GetDistanceTo self m) 150.0))
         (Variables|Default|SetCool (+ now 1.5))
-        (for x (Actor|GetAllActorswithTag (Utilities|String|StringToName (Utilities|String|Append "Lift_" (Variables|Default|GetLabel))))
-          (bind ok (Class|BPFloorLift|SeqHit :self (Utilities|Casting|CastToBP_FloorLift x) :Idx (Variables|Default|GetIdx)))
-          (if ok (CallFunction|SetLit :On true)))))
+        (for x (Actor|GetAllActorsOfClass "/Game/HollowKin/Blueprints/Floors/BP_FloorLift.BP_FloorLift_C")
+          (bind lf (Utilities|Casting|CastToBP_FloorLift x))
+          (if (Utilities|String|EqualExactly(String) (Class|BPFloorLift|GetLabel :self lf) (Variables|Default|GetLabel))
+            (bind ok (Class|BPFloorLift|SeqHit :self lf :Idx (Variables|Default|GetIdx)))
+            (if ok (CallFunction|SetLit :On true))))))
     (:CastFailed)))''' % MAXCAST)
 
 # ---------------- generator ----------------
@@ -159,17 +173,20 @@ ev(GEN, '''(event EventBeginPlay
   (Transformation|SetRelativeLocation :self l :NewLocation (Math|Vector|MakeVector 0.0 0.0 120.0))
   (Rendering|Components|Light|SetIntensity :self l :NewIntensity 60.0)
   (Rendering|Components|Light|SetLightColor :self l :NewLightColor (Math|Color|MakeColor 1.0 0.35 0.1 1.0))
-  (Rendering|Lighting|SetAttenuationRadius :self l :NewRadius 260.0))''')
+  (Rendering|Lighting|SetAttenuationRadius :self l :NewRadius 260.0)
+  (Variables|Default|SetLamp l))''')
 ev(GEN, '''(event EventTick (DeltaSeconds)
   (bind m %s
     (:then
-      (if (and (not (Variables|Default|GetDone)) (< (Transformation|GetDistanceTo self m) 200.0))
+      (if (and (not (Variables|Default|GetDone)) (< (Transformation|GetDistanceTo self m) 280.0))
         (Variables|Default|SetDone true)
         (Audio|PlaySound2D "/Game/Interface_And_Item_Sounds/WAV/Flick_Switch_01.Flick_Switch_01" 0.9)
-        (Rendering|Components|Light|SetLightColor :self (Utilities|Casting|CastToPointLightComponent (Actor|GetComponentByClass "/Script/Engine.PointLightComponent")) :NewLightColor (Math|Color|MakeColor 0.3 1.0 0.5 1.0))
+        (Rendering|Components|Light|SetLightColor :self (Variables|Default|GetLamp) :NewLightColor (Math|Color|MakeColor 0.3 1.0 0.5 1.0))
         (Class|BPMax|Notify :self m :Msg "The generator coughs, then roars.  Power returns to the lift." :Seconds 3.5)
-        (for x (Actor|GetAllActorswithTag (Utilities|String|StringToName (Utilities|String|Append "Lift_" (Variables|Default|GetLabel))))
-          (Class|BPFloorLift|Unlock :self (Utilities|Casting|CastToBP_FloorLift x)))))
+        (for x (Actor|GetAllActorsOfClass "/Game/HollowKin/Blueprints/Floors/BP_FloorLift.BP_FloorLift_C")
+          (bind lf (Utilities|Casting|CastToBP_FloorLift x))
+          (if (Utilities|String|EqualExactly(String) (Class|BPFloorLift|GetLabel :self lf) (Variables|Default|GetLabel))
+            (Class|BPFloorLift|PowerLift :self lf)))))
     (:CastFailed)))''' % MAXCAST)
 for bp in (LIFT, CARD, SW, GEN):
     print(bp.split('.')[-1], call(BT, 'compile_blueprint', {'blueprint': {'refPath': bp}, 'warnings_as_errors': False}))
