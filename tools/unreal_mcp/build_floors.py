@@ -18,7 +18,7 @@ KINDS = {
     'barrier': 'SM_Medical_Barrier_01_p02', 'dentist': 'SM_Dentist_Chair_01_v01', 'scanmon': 'SM_Scanner_Monitor_01_v1',
     'beddev': 'SM_Bed_Devices_01_v01', 'bloodcab': 'SM_Blood_Cabinet_01_v01', 'cam': 'SM_Security_Cam_01_v01', 'lift': 'SM_Lift_02_p02',
     'reception': 'SM_Reception_02_v01', 'bench': 'SM_Bench_01_v01', 'disinf': 'SM_Disinfector_03_v01', 'cylinder': 'SM_Cylinder_01_v01',
-    'tray': 'SM_Tray_02_v02', 'sign_xray': 'SM_Sign_Text_Radiology_X_Ray', 'sign_surgery': 'SM_Sign_Text_Surgery',
+    'tray': 'SM_Tray_02_v02', 'washstand': 'SM_Washstand_02_v1', 'sign_xray': 'SM_Sign_Text_Radiology_X_Ray', 'sign_surgery': 'SM_Sign_Text_Surgery',
     'sign_nursery': 'SM_Sign_Text_Nursery', 'sign_lab': 'SM_Sign_Text_Laboratory', 'sign_reception': 'SM_Sign_Text_Reception',
 }
 ON_DESK = {'monitor', 'micro'}          # sit on a desk (75 cm) instead of the floor

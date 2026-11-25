@@ -57,44 +57,45 @@ for k, fl in enumerate(floors):
         # switch puzzle: code is a permutation of 0,1,2; the note gives it as roman numerals
         if gate == 2:
             order = random.sample([0, 1, 2], 3); props['Code'] = ''.join(str(i) for i in order)
-        put(F + 'BP_FloorLift.BP_FloorLift', '%s_Lift' % L, lx, ly, z + 100, props=props)
+        put(F + 'BP_FloorLift.BP_FloorLift', '%s_Lift' % L, lx, ly, z + 100, props=props, tags=('Lift_' + L,))
         if gate == 1:   # keycard in the deepest room on the south side
-            r = rooms[5]; put(F + 'BP_Keycard.BP_Keycard', '%s_Keycard' % L, r['x'] + 150, r['y'] + r['side'] * 120, z + 95, props={'Label': L})
+            r = rooms[-1]; put(F + 'BP_Keycard.BP_Keycard', '%s_Keycard' % L, r['x'] + 150, r['y'] + r['side'] * 120, z + 95, props={'Label': L})
         elif gate == 2:
-            spots = [rooms[0], rooms[4], rooms[2]]
+            spots = [rooms[0], rooms[-2], rooms[len(rooms) // 2]]
             for i, r in enumerate(spots):
-                put(F + 'BP_SeqSwitch.BP_SeqSwitch', '%s_Switch%d' % L if False else '%s_Switch%d' % (L, i), r['x'] - 200, r['y'] - r['side'] * 150, z + 2, props={'Label': L, 'Idx': i})
+                put(F + 'BP_SeqSwitch.BP_SeqSwitch', '%s_Switch%d' % L if False else '%s_Switch%d' % (L, i), r['x'] - 200, r['y'] - r['side'] * 150, z + 2, props={'Label': L, 'Idx': i}, tags=('Seq_' + L,))
             roman = ['I', 'II', 'III']
             note = "A child's drawing pinned to the wall: three stick figures holding hands, numbered %s, %s, %s.  Underneath, in crayon: 'THIS IS THE WAY HOME'." % tuple(roman[i] for i in order)
-            r = rooms[3]; put(HINT, '%s_HintOrder' % L, r['x'], r['y'] - r['side'] * 200, z + 100, props={'Message': note})
+            r = rooms[1]; put(HINT, '%s_HintOrder' % L, r['x'], r['y'] - r['side'] * 200, z + 100, props={'Message': note})
         elif gate == 3:
-            r = next((x for x in rooms if x['theme'] == 'storage'), rooms[4])
+            r = next((x for x in rooms if x['type'] in ('plant', 'store', 'storage')), rooms[-1])
             put(F + 'BP_FloorGenerator.BP_FloorGenerator', '%s_Generator' % L, r['x'] + 220, r['y'] + r['side'] * 60, z + 2, yaw=90)
     if fl['gate'] == 'ending':   # B15: Emilia in the middle north cell, the other five children in the rest
         for i, r in enumerate(rooms):
+            if r['type'] != 'iso': continue
             cx, cy = r['x'], r['y'] - r['side'] * 40
-            if i == 1:
+            if r['id'] == 'N1':
                 put(B + 'Props/BP_Emilia.BP_Emilia', '%s_Emilia' % L, cx, cy, z + 2, yaw=90 if r['side'] < 0 else 270, folder='Ending')
                 put(B + 'Interactables/BP_EndingTrigger.BP_EndingTrigger', '%s_EndingTrigger' % L, r['x'], r['y'] - r['side'] * 230, z + 100, folder='Ending')
             else:
                 put(B + 'Props/BP_Child.BP_Child', '%s_Child%d' % (L, i), cx, cy, z + 2, yaw=90 if r['side'] < 0 else 270,
                     scale=random.choice([0.85, 0.9, 0.95]), folder='Ending')
-        put(HINT, '%s_HintChildren' % L, rooms[0]['x'] + 300, 0, z + 100, props={'Message': "Five other children, L-01 to L-06 on the cell doors. They watch you without blinking. Emilia's cell is in the middle."})
+        put(HINT, '%s_HintChildren' % L, rooms[0]['x'], 0, z + 100, props={'Message': "Five other children, L-01 to L-06 on the cell doors. They watch you without blinking. Emilia's cell is in the middle."})
     # enemies: 2 Hollows (3 on deep floors), the last deep floors get an Elite
     n_en = 2 if m == 'wards' else 3
     for i in range(n_en):
-        r = rooms[(k + 2 * i + 1) % 6]
+        r = rooms[(k + 2 * i + 1) % len(rooms)]
         put(DR, '%s_Hollow%d' % (L, i), r['x'], r['y'], z + 120, folder='Enemies')
     if m == 'deep' and L in ('B12', 'B14'):
         r = rooms[1]; put(DR, '%s_Experiment' % L, r['x'] + 100, r['y'], z + 120, scale=1.25, tags=('Elite',), folder='Enemies')
     # dead staff / soldiers
     for i in range(3):
-        r = rooms[(k + i * 2) % 6]
+        r = rooms[(k + i * 2) % len(rooms)]
         put(SOL, '%s_Dead%d' % (L, i), r['x'] + random.randint(-200, 200), r['y'] + r['side'] * random.randint(-120, 60), z,
             yaw=random.randint(0, 359), props={'PoseAnim': {'refPath': AN + POSES[(k + i) % len(POSES)] + '.' + POSES[(k + i) % len(POSES)]}}, folder='Dressing')
     # pickups: ammo, gel/sedative, crafting parts
     loot = [(0, 6), (1 if k % 2 == 0 else 2, 40), (4, 1), (5, 1)]
     for i, (kind, amt) in enumerate(loot):
-        r = rooms[(k + i) % 6]
+        r = rooms[(k + i) % len(rooms)]
         put(PU, '%s_Pickup%d' % (L, i), r['x'] + random.randint(-250, 250), r['y'] + r['side'] * random.randint(100, 220), z + 40, props={'PickupKind': kind, 'Amount': amt}, folder='Pickups')
 print(call(A, 'save_assets', {'asset_paths': []}))
