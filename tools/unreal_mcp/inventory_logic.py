@@ -38,10 +38,14 @@ fn('Collect', '''(fn Collect (Kind Amount)
               %s
               (elif (== Kind 6)
                 (Variables|Default|SetBottles (+ (Variables|Default|GetBottles) 1))
-                %s))))))))''' % (
+                %s
+                (elif (== Kind 7)
+                  (Variables|Default|SetBond (+ (Variables|Default|GetBond) 20.0))
+                  %s)))))))))''' % (
     N('HEALTH GEL  +1     (open your backpack with I to use it)'), N('SEDATIVE  +1     (open your backpack with I to use it)'),
     N('FUSE COLLECTED'), N('SCRAP PARTS  +1     (workbench: I, then WORKBENCH)', 2.5), N('CHEMICALS  +1     (workbench: I, then WORKBENCH)', 2.5),
-    N('GLASS BOTTLE  +1     (G throws it to lure Hollows away)', 2.5)))
+    N('GLASS BOTTLE  +1     (G throws it to lure Hollows away)', 2.5),
+    N("EMILIA'S DRAWING.  Crayon: two stick figures holding hands, 'MAX + EM'. You fold it into your jacket.", 6.0)))
 fn('UseGel', '''(fn UseGel ()
   (if (> (Variables|Default|GetGels) 0)
     (Variables|Default|SetGels (- (Variables|Default|GetGels) 1))
