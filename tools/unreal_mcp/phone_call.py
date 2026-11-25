@@ -27,5 +27,5 @@ DSL = '''(event EventBeginPlay
     (Class|BPMax|ShowNote m "MAX:  ...Em?   (The line goes dead.)" 4.5)
     (Utilities|FlowControl|Delay 4.5)
     (Class|BPMax|SetObjectiveNote m "%(o2)s")
-    (Class|BPMax|ShowNote m "NEW OBJECTIVE  -  top left of the screen. Press E at the clinic door to go inside." 8.0)))''' % {'o1': OBJ1, 'o2': OBJ2}
+    (Class|BPMax|ShowNote m "NEW OBJECTIVE  (top left of the screen).  Walk up to the clinic door to go inside." 8.0)))''' % {'o1': OBJ1, 'o2': OBJ2}
 print(call(BT, 'write_graph_dsl', {'graph': {'refPath': BP + ':EventGraph'}, 'code': DSL}))
