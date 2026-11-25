@@ -32,13 +32,23 @@ f2=F('DIN Alternate Bold.ttf',70); sub='SURVIVAL HORROR  //  PROJECT LANTERN'
 ws=width(d,sub,f2,18)
 tracked(d,((W-ws)//2,y+330),sub,f2,TEAL+(230,),18)
 # KIN is replaced by hollow-outline treatment appended after HOLLOW? keep single line title 'HOLLOW KIN'
+# Final logo: the lantern ring wraps the first O of HOLLOW and sits behind it (the O becomes the "hollow").
 logo=Image.new('RGBA',(W,H),(0,0,0,0)); d=ImageDraw.Draw(logo)
-d.arc((cx-r,cy-r,cx+r,cy+r),-60,230,fill=TEAL+(255,),width=14)
-d.arc((cx-r+34,cy-r+34,cx+r-34,cy+r-34),110,400,fill=TEAL+(120,),width=5)
-d.ellipse((cx-9,cy-9,cx+9,cy+9),fill=AMB+(255,))
 title='HOLLOW KIN'; f=F('DIN Condensed Bold.ttf',300); wt=width(d,title,f,40)
-tracked(d,((W-wt)//2,y-30),title,f,WHITE+(255,),40)
-tracked(d,((W-ws)//2,y+300),sub,f2,TEAL+(230,),18)
+tx,ty=(W-wt)//2, 250
+ox=tx+d.textlength('H',font=f)+40                     # left edge of the first O
+ow=d.textlength('O',font=f)
+bb=d.textbbox((0,0),'O',font=f)                        # glyph box (top offset inside the font cell)
+ocx,ocy=ox+ow/2, ty+(bb[1]+bb[3])/2                    # centre of the O
+rx,ry=ow/2+24,(bb[3]-bb[1])/2+28                   # oval hugging the O, inside the letter gaps
+ring=Image.new('RGBA',(W,H),(0,0,0,0)); rd=ImageDraw.Draw(ring)
+rd.arc((ocx-rx,ocy-ry,ocx+rx,ocy+ry),-60,230,fill=TEAL+(255,),width=10)
+rd.arc((ocx-rx+14,ocy-ry+14,ocx+rx-14,ocy+ry-14),110,400,fill=TEAL+(150,),width=3)
+rd.ellipse((ocx-9,ocy-9,ocx+9,ocy+9),fill=AMB+(255,))
+logo=Image.alpha_composite(logo,glow(ring,14))
+d=ImageDraw.Draw(logo)
+tracked(d,(tx,ty),title,f,WHITE+(255,),40)
+tracked(d,((W-ws)//2,ty+360),sub,f2,TEAL+(230,),18)
 glow(logo,18).save(os.path.join(OUT,'T_Logo_HollowKin.png'))
 # ---- icons 256
 def icon(name,draw_fn,col):
