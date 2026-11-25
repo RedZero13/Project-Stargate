@@ -55,3 +55,16 @@ The first test build was 4.3 GB. Why, and what changed:
 - **Compressed paks** (`-compressed`, `bCompressed=True`): Oodle compression of the game data.
 - **Textures capped at 2048** on Mac (`Config/DefaultDeviceProfiles.ini`): Fab packs ship 4K textures; the cook now drops the top mip. Raise `MaxLODSize` back to 16384 for a high-quality build.
 - Biggest remaining item: the Game Animation Sample animation set (about 1.2 GB raw). Trimming unused animations is a later step.
+
+## Windows build (needs a Windows PC)
+Unreal cannot build a Windows game from a Mac. To make one:
+1. On a Windows 10/11 PC (or a cloud Windows machine such as AWS/Azure/Shadow with a GPU), install the Epic Games Launcher, then **Unreal Engine 5.8**. In the engine's install options, tick the Windows target.
+2. Install **Visual Studio 2022** (Community is free) with the workloads "Game development with C++" and "Desktop development with C++", plus a Windows 10/11 SDK.
+3. Install **Git** and **Git LFS**, then clone: `git clone https://github.com/RedZero13/Project-Stargate.git`, check out `claude/unity-game-roadmap-hpl2oh`, and run `git lfs pull`.
+4. Copy the Fab packs across. They are not in git. Either re-install each pack from Fab inside the editor (list in `docs/LOCAL_ASSETS.md`), or copy the `HollowKin/Content/<PackName>` folders from the Mac.
+5. Open `HollowKin/HollowKin.uproject` once so shaders compile. Then, in a Command Prompt at the repo folder:
+   ```
+   "C:\Program Files\Epic Games\UE_5.8\Engine\Build\BatchFiles\RunUAT.bat" BuildCookRun -project="%CD%\HollowKin\HollowKin.uproject" -noP4 -platform=Win64 -clientconfig=Shipping -build -cook -stage -pak -compressed -utf8output
+   ```
+6. The game is in `HollowKin\Saved\StagedBuilds\Windows\`. Zip that whole folder. The app icon comes from `HollowKin/Build/Windows/Application.ico`.
+On Windows, the ICU copy step is usually not needed; if the game crashes at start with an ICU/Internationalization error, copy `Engine\Content\Internationalization\English` the same way as on the Mac.
