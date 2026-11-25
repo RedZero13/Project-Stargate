@@ -71,4 +71,4 @@ On Windows, the ICU copy step is usually not needed; if the game crashes at star
 
 ## Final Mac build (2026-11-26)
 - Compressed Shipping, includes Deep Labs. Built in ~1 min (incremental cook). App 1.4 GB, zip 1.0 GB (`~/Documents/Unreal Projects/Builds/HollowKin-Mac.zip`, contains `HollowKin.app` with the ICU data copied in).
-- RAM (macOS footprint, editor also open): **5.7 GB on the main menu** (was 6.4 GB before the caps, 8+ GB originally), **~7.7 GB in the wing**. Lumen is the biggest remaining cost (about −2.3 GB if switched off; Options → Graphics → Global Illumination Low).
+- RAM (macOS footprint, editor also open): **5.7 GB on the main menu** (was 6.4 GB before the caps, 8+ GB originally), **~7.7 GB in the wing**. Lumen is the biggest remaining cost (about −2.3 GB if switched off). In-game, Options → Graphics quality MEDIUM/LOW lowers it.
