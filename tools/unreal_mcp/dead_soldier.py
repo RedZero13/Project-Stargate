@@ -32,5 +32,6 @@ print('BeginPlay', call(BT, 'write_graph_dsl', {'graph': {'refPath': B + ':Event
   (CallFunction|AddLayer :Mesh (Variables|Default|GetOutfitMesh) :Leader lead)
   (CallFunction|AddLayer :Mesh (Variables|Default|GetHelmetMesh) :Leader lead)
   (Rendering|SetRenderInMainPass lead false)
+  (Rendering|SetRenderinDepthPass :self lead :bValue false)
   (Rendering|SetCastShadow lead false))'''}))
 print(call(BT, 'compile_blueprint', {'blueprint': {'refPath': B}, 'warnings_as_errors': False}))

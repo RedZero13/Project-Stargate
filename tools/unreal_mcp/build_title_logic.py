@@ -63,10 +63,10 @@ fn('AnimTick', ['Dt'], '''(fn AnimTick (Dt)
     'co': op('SplashCo', fade(4.6)), 'cooff': op('SplashCo', '0.0'), 'G_co': G('SplashCo'),
     's1': op('Splash1', fade(3.4)), 's1off': op('Splash1', '0.0'),
     's2': op('Splash2', fade(4.4)), 's2off': op('Splash2', '0.0'),
-    'logo': op('TitleLogo', cl('(/ t 1.6)')), 'smoke': op('BgSmoke', cl('(/ t 2.5)')), 'smoke1': op('BgSmoke', '1.0'),
+    'logo': op('TitleImg', cl('(/ t 1.6)')), 'smoke': op('BgSmoke', cl('(/ t 2.5)')), 'smoke1': op('BgSmoke', '1.0'),
     'press': op('PressText', '(* %s (+ 0.55 (* 0.45 (Math|Trig|Sin(Radians) (* t 3.0)))))' % cl('(- t 1.6)')),
     'copy': op('Copyright', cl('(- (/ t 1.6) 0.5)')), 'copy1': op('Copyright', '0.8'),
-    'logoout': op('TitleLogo', cl('(- 1.0 (* t 2.5))')), 'pressout': op('PressText', '0.0'),
+    'logoout': op('TitleImg', cl('(- 1.0 (* t 2.5))')), 'pressout': op('PressText', '0.0'),
     'menu': cl('(* (- t 0.25) 1.8)')})
 fn('AnyKey', [], '''(fn AnyKey ()
   (if (< (Variables|Default|GetPhase) 3)
