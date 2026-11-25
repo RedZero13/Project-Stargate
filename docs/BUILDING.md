@@ -7,9 +7,8 @@ From the repo folder, in a terminal:
 
 ```bash
 "/Users/Shared/Epic Games/UE_5.8/Engine/Build/BatchFiles/RunUAT.sh" BuildCookRun \
-  -project="$PWD/HollowKin/HollowKin.uproject" -noP4 -platform=Mac -clientconfig=Development \
-  -build -cook -stage -pak -archive \
-  -archivedirectory="$HOME/Documents/Unreal Projects/Builds/HollowKinMac" -utf8output
+  -project="$PWD/HollowKin/HollowKin.uproject" -noP4 -platform=Mac -clientconfig=Shipping \
+  -build -cook -stage -pak -compressed -utf8output
 ```
 - Cooks only the maps in `MapsToCook` (`Config/DefaultGame.ini`: main menu, city, wing, test corridor). Do **not** use `-allmaps` (it would cook every Fab demo map).
 - Takes roughly 15–40 minutes the first time (shaders and the 1.2 GB animation set are cooked).
@@ -47,3 +46,11 @@ Placeholder art (grey blocks, mannequin characters, cube pistol), almost no audi
 3. On the other Mac: unzip, then because the app is unsigned run `xattr -cr <folder>/HollowKin.app` once in Terminal (or right-click → Open → Open). Apple Silicon or Intel Mac with Metal SM6 support.
 4. Trackpad play: two-finger click held = aim, or press **T** to toggle aim; click / **E** = fire, **V** punch, **R** reload, **F** flashlight, **Tab** swap shoulder, **P/Esc** pause.
 5. The game starts borderless full screen at the monitor's resolution (works on 16:9, 21:9 and 32:9). Alt+Enter / F11 switches to a window.
+
+## Smaller builds (2026-11-25)
+The first test build was 4.3 GB. Why, and what changed:
+- **Half of it was a duplicate.** The staged folder holds the game twice: inside `HollowKin.app/Contents/UE/` and again in the loose `HollowKin/` + `Engine/` folders next to it. The app only reads the copy inside itself, so **send only `HollowKin.app`** (zip it alone).
+- **Shipping instead of Development:** the executable drops from 433 MB to a fraction of that, with no debug console (`-clientconfig=Shipping`, `BuildConfiguration=PPBC_Shipping`).
+- **Compressed paks** (`-compressed`, `bCompressed=True`): Oodle compression of the game data.
+- **Textures capped at 2048** on Mac (`Config/DefaultDeviceProfiles.ini`): Fab packs ship 4K textures; the cook now drops the top mip. Raise `MaxLODSize` back to 16384 for a high-quality build.
+- Biggest remaining item: the Game Animation Sample animation set (about 1.2 GB raw). Trimming unused animations is a later step.
