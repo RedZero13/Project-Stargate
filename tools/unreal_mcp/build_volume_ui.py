@@ -28,6 +28,7 @@ def logic():
     ok = '\n        '.join(label_set(b, l, '(Class|BPSettingsSave|Get%sVol :self s)' % k) for b, k, l in ROWS)
     bad = '\n      '.join(label_set(b, l, '100') for b, k, l in ROWS)
     refresh = '''(fn RefreshLabels ()
+  (CallFunction|RefreshGraphics)
   (bind s (Utilities|Casting|CastToBP_SettingsSave (SaveGame|LoadGameFromSlot "HollowKinSettings" 0))
     (:then
       (if (Class|BPSettingsSave|GetOverlayHUD :self s)
