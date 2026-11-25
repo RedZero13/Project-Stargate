@@ -49,6 +49,7 @@ Placeholder art (grey blocks, mannequin characters, cube pistol), almost no audi
 
 ## Smaller builds (2026-11-25)
 The first test build was 4.3 GB. Why, and what changed:
+- **Result (2026-11-25):** app 1.4 GB, zip 0.97 GB. Copy the ICU data into `HollowKin-Mac-Shipping.app/Contents/UE/Engine/Content/Internationalization/`, rename the app to `HollowKin.app`, zip it alone with `ditto -c -k --keepParent`.
 - **Half of it was a duplicate.** The staged folder holds the game twice: inside `HollowKin.app/Contents/UE/` and again in the loose `HollowKin/` + `Engine/` folders next to it. The app only reads the copy inside itself, so **send only `HollowKin.app`** (zip it alone).
 - **Shipping instead of Development:** the executable drops from 433 MB to a fraction of that, with no debug console (`-clientconfig=Shipping`, `BuildConfiguration=PPBC_Shipping`).
 - **Compressed paks** (`-compressed`, `bCompressed=True`): Oodle compression of the game data.
