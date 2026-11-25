@@ -1,5 +1,5 @@
 """Window fits the screen (2026-11-26): on every launch the menu controller checks the window; in windowed mode a
-window taller/wider than the desktop (e.g. the 14" MacBook Pro, notch + menu bar) is shrunk to 80% of the desktop
+window taller/wider than the desktop (or smaller than half its height, e.g. 1280x720 pixels on a Retina screen) (e.g. the 14" MacBook Pro, notch + menu bar) is shrunk to 80% of the desktop
 height at 16:9 and re-applied. The menu keeps the mouse locked inside the window (LockAlways)."""
 from ui_lib import call
 BT = 'editor_toolset.toolsets.blueprint.BlueprintTools'
@@ -17,7 +17,7 @@ w(PC + ':FitWindow', '''(fn FitWindow ()
   (bind dw (* dwi 1.0))
   (switch Utilities|FlowControl|Switch|SwitchonEWindowMode (Settings|GetFullscreenMode :self gus)
     (:Windowed
-      (if (or (> (* chi 1.0) (* dh 0.88)) (> (* cwi 1.0) (* dw 0.95)))
+      (if (or (or (> (* chi 1.0) (* dh 0.88)) (> (* cwi 1.0) (* dw 0.95))) (< (* chi 1.0) (* dh 0.5)))
         (bind h (* dh 0.8))
         (bind wd (Math|Float|Min(Float) (* h 1.7778) (* dw 0.9)))
         (Settings|SetScreenResolution :self gus :Resolution (Utilities|Struct|MakeIntPoint (Math|Float|Truncate wd) (Math|Float|Truncate h)))
