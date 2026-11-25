@@ -69,9 +69,13 @@ def build():
                           sx=(i1 - i + 1) * G, sy=(j1 - j + 1) * G, sz=WALL_H))
     out = list(boxes)
     for n, (x0, y0, x1, y1, h, m) in ROOMS.items():
-        out.append(dict(name=n + "_Floor", mat=m + "_floor", x=x0 - G, y=y0 - G, z=-20, sx=x1 - x0 + 2 * G, sy=y1 - y0 + 2 * G, sz=20))
-        out.append(dict(name=n + "_Ceiling", mat="ceiling", x=x0 - G, y=y0 - G, z=h, sx=x1 - x0 + 2 * G, sy=y1 - y0 + 2 * G, sz=20))
+        # exact room bounds (no overlap with the neighbours' floors/ceilings: overlapping coplanar faces z-fought
+        # in doorways); walls cover the seams
+        out.append(dict(name=n + "_Floor", mat=m + "_floor", x=x0, y=y0, z=-20, sx=x1 - x0, sy=y1 - y0, sz=20))
+        out.append(dict(name=n + "_Ceiling", mat="ceiling", x=x0, y=y0, z=h, sx=x1 - x0, sy=y1 - y0, sz=20))
     for n, (x0, y0, x1, y1) in DOORS.items():
+        if x1 - x0 > 0 and y1 - y0 > 0:   # floor strip through the wall, 1 mm lower than the rooms
+            out.append(dict(name="DoorFloor_" + n, mat="concrete_floor", x=x0, y=y0, z=-20.1, sx=x1 - x0, sy=y1 - y0, sz=20))
         out.append(dict(name="Lintel_" + n, mat="wall", x=x0, y=y0, z=DOOR_H, sx=x1 - x0, sy=y1 - y0, sz=WALL_H - DOOR_H))
     out += PROPS
     return out
@@ -83,10 +87,6 @@ PROPS = [
     # C1: dead lift behind the player, a crate
     P("C1_LiftDoors", 0, -150, 20, 300, 260, "metal"),
     P("C1_Crate", 600, 180, 90, 90, 80),
-    # C2: decon shower stalls along the corridor
-    P("C2_Shower1", 1300, 140, 120, 60, 260, "metal"),
-    P("C2_Shower2", 1900, -200, 120, 60, 260, "metal"),
-    P("C2_Shower3", 2400, 140, 120, 60, 260, "metal"),
     # C3: safe room desk + item box
     P("C3_Desk", 3300, 160, 200, 80, 75),
     P("C3_ItemBox", 2900, -280, 120, 60, 70, "metal"),
@@ -100,10 +100,8 @@ PROPS = [
     # C6: four beds and a toy chest
     *[P(f"C6_Bed{k}", 3700 + k * 270, 1200, 100, 200, 50, "bed") for k in range(4)],
     P("C6_ToyChest", 4600, 700, 120, 60, 60, "warm_floor"),
-    # C7: lockers (hiding later) and isolation booths
+    # C7: lockers (hiding later)
     *[P(f"C7_Locker{k}", 5200 + k * 70, -780, 60, 50, 200, "metal") for k in range(4)],
-    P("C7_Booth1", 5700, -1525, 250, 250, 300, "concrete_floor"),
-    P("C7_Booth2", 6050, -1525, 250, 250, 300, "concrete_floor"),
     # C8: the bolted bed
     P("C8_Bed", 7050, -1400, 200, 100, 50, "bed"),
     # C9: sealed blast door

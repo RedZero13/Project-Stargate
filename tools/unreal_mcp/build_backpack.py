@@ -8,20 +8,7 @@ A = 'editor_toolset.toolsets.asset.AssetTools'
 BODY_F = '/Game/HollowKin/UI/Fonts/BarlowSemiCondensed-SemiBold_Font.BarlowSemiCondensed-SemiBold_Font'
 TITLE_F = '/Game/HollowKin/UI/Fonts/Cinzel-Variable_Font.Cinzel-Variable_Font'
 P = '/Game/HollowKin/UI/Menus/WBP_Backpack'
-ITEMS = [  # key, label, icon text, icon colour, max var, description, usable fn
-    ('Ammo', 'PISTOL ROUNDS', '9mm', 'c9a24a', 'ReserveAmmo', '.45 rounds for the M1911. Reload with R.', None),
-    ('Gel', 'HEALTH GEL', '+HP', '3fae6a', 'Gels', 'Field wound gel. Restores 40 health. Click to use.', 'UseGel'),
-    ('Sed', 'SEDATIVE', 'Rx', '4f8fd8', 'Sedatives', 'Calms the mind. Restores 35 sanity. Click to use.', 'UseSedative'),
-    ('Bottle', 'GLASS BOTTLE', 'GLS', '7fb0a8', 'Bottles', 'Throw with G. It shatters where it lands and Hollows go to the noise.', None),
-    ('Fuse', 'FUSE', 'FUSE', 'dfe9e6', 'Fuses', 'Ceramic power fuse. The breaker needs two.', None),
-    ('Parts', 'SCRAP PARTS', 'PRT', '9a8a78', 'Parts', 'Springs, casings and wire. A workbench ingredient.', None),
-    ('Chem', 'CHEMICALS', 'CHM', 'b56fd6', 'Chem', 'Lab reagents. A workbench ingredient.', None),
-    ('Tape', 'CASSETTE TAPES', 'TAPE', 'e0a547', 'Tapes', 'Messages you recorded for Emilia at save points.', None),
-]
-RECIPES = [  # key, result label, icon, colour, ingredients [(item key, need)], craft fn, description
-    ('RAmmo', '6 PISTOL ROUNDS', '9mm', 'c9a24a', [('Parts', 2), ('Chem', 1)], 'CraftAmmo', 'Pack spare casings with powder from the lab reagents.'),
-    ('RTonic', 'SEDATIVE', 'Rx', '4f8fd8', [('Chem', 2)], 'CraftTonic', 'Mix a calming tonic from two reagents.'),
-]
+from backpack_spec import ITEMS, RECIPES
 if call(A, 'exists', {'path': P}).get('returnValue'):
     call(A, 'delete', {'path': P})
 call(A, 'duplicate', {'path': '/Game/HollowKin/UI/Menus/WBP_Loading', 'new_path': P})
@@ -89,7 +76,7 @@ for i, (k, label, icon, icol, mv, desc, use) in enumerate(ITEMS):
 rv, _ = W.add('VerticalBox', 'Recipes', 'CasePages')
 labels = {k: (label, icon, icol) for (k, label, icon, icol, mv, desc, use) in ITEMS}
 for (rk, rlabel, ricon, rcol, ings, cfn, rdesc) in RECIPES:
-    card, cs = box(rk + 'Card', 'Recipes', '0b1113', 0.9, padding={'left': 24, 'top': 18, 'right': 24, 'bottom': 18}); bslot(cs, pad=(0, 0, 0, 22))
+    card, cs = box(rk + 'Card', 'Recipes', '0b1113', 0.9, padding={'left': 24, 'top': 12, 'right': 24, 'bottom': 12}); bslot(cs, pad=(0, 0, 0, 12))
     row, _ = W.add('HorizontalBox', rk + 'Row', rk + 'Card')
     for j, (ik, need) in enumerate(ings):
         if j:

@@ -7,7 +7,7 @@ dsl = '''(fn TickFX ()
   (Utilities|IsValid %(fx)s
     (:"Is Valid"
       (Class|WBPScreenFX|UpdateFX :self %(fx)s :Sanity (Variables|Default|GetSanity) :Hurt (* (Variables|Default|GetHurtFlash) (select (Variables|Default|GetReduceFlash) 0.3 1.0)))
-      (Class|WBPScreenFX|SetBlood :self %(fx)s :Amount (Math|Float|Clamp(Float) (+ (/ (- 60.0 (Variables|Default|GetHealth)) 60.0) (* (Variables|Default|GetHurtFlash) 0.2)) 0.0 0.55))
+      (Class|WBPScreenFX|SetBlood :self %(fx)s :Amount (Math|Float|Clamp(Float) (+ (* (/ (- 45.0 (Variables|Default|GetHealth)) 45.0) 0.3) (* (Variables|Default|GetHurtFlash) 0.08)) 0.0 0.32))
       (Class|WBPScreenFX|SetAim :self %(fx)s :Aiming (Variables|Default|GetAiming))
       (Class|WBPScreenFX|UpdateRing :self %(fx)s :Ammo (Variables|Default|GetAmmo) :Reserve (Variables|Default|GetReserveAmmo) :Health (Variables|Default|GetHealth) :Aiming (Variables|Default|GetAiming))
       (Class|WBPScreenFX|SetRingShown :self %(fx)s :Shown (Variables|Default|GetHasPistol)))

@@ -12,4 +12,5 @@ ITEMS = [  # key, label, icon text, icon colour, max var, description, usable fn
 RECIPES = [  # key, result label, icon, colour, ingredients [(item key, need)], craft fn, description
     ('RAmmo', '6 PISTOL ROUNDS', '9mm', 'c9a24a', [('Parts', 2), ('Chem', 1)], 'CraftAmmo', 'Pack spare casings with powder from the lab reagents.'),
     ('RTonic', 'SEDATIVE', 'Rx', '4f8fd8', [('Chem', 2)], 'CraftTonic', 'Mix a calming tonic from two reagents.'),
+    ('RGel', 'HEALTH GEL', '+HP', '3fae6a', [('Parts', 1), ('Chem', 1)], 'CraftGel', 'Bind scrap gauze with a reagent into a wound gel. Restores 40 health.'),
 ]
