@@ -1,0 +1,422 @@
+[
+ {
+  "label": "B2",
+  "name": "ADMISSIONS",
+  "z": 0,
+  "gate": "keycard",
+  "arrival": [
+   250,
+   0,
+   100
+  ],
+  "lift": [
+   3825,
+   0,
+   0
+  ],
+  "rooms": [
+   {
+    "id": "N0",
+    "theme": "reception",
+    "x": 1250.0,
+    "y": -475.0,
+    "side": -1
+   },
+   {
+    "id": "N1",
+    "theme": "office",
+    "x": 1975.0,
+    "y": -475.0,
+    "side": -1
+   },
+   {
+    "id": "N2",
+    "theme": "ward",
+    "x": 2700.0,
+    "y": -475.0,
+    "side": -1
+   },
+   {
+    "id": "S0",
+    "theme": "ward",
+    "x": 1250.0,
+    "y": 475.0,
+    "side": 1
+   },
+   {
+    "id": "S1",
+    "theme": "records",
+    "x": 1975.0,
+    "y": 475.0,
+    "side": 1
+   },
+   {
+    "id": "S2",
+    "theme": "storage",
+    "x": 2700.0,
+    "y": 475.0,
+    "side": 1
+   }
+  ]
+ },
+ {
+  "label": "B3",
+  "name": "PAEDIATRIC WARD",
+  "z": -1500,
+  "gate": "switches",
+  "arrival": [
+   250,
+   0,
+   -1400
+  ],
+  "lift": [
+   3825,
+   0,
+   -1500
+  ],
+  "rooms": [
+   {
+    "id": "N0",
+    "theme": "paed",
+    "x": 1250.0,
+    "y": -475.0,
+    "side": -1
+   },
+   {
+    "id": "N1",
+    "theme": "paed",
+    "x": 1975.0,
+    "y": -475.0,
+    "side": -1
+   },
+   {
+    "id": "N2",
+    "theme": "office",
+    "x": 2700.0,
+    "y": -475.0,
+    "side": -1
+   },
+   {
+    "id": "S0",
+    "theme": "paed",
+    "x": 1250.0,
+    "y": 475.0,
+    "side": 1
+   },
+   {
+    "id": "S1",
+    "theme": "storage",
+    "x": 1975.0,
+    "y": 475.0,
+    "side": 1
+   },
+   {
+    "id": "S2",
+    "theme": "paed",
+    "x": 2700.0,
+    "y": 475.0,
+    "side": 1
+   }
+  ]
+ },
+ {
+  "label": "B4",
+  "name": "RADIOLOGY",
+  "z": -3000,
+  "gate": "keycard",
+  "arrival": [
+   250,
+   0,
+   -2900
+  ],
+  "lift": [
+   3825,
+   0,
+   -3000
+  ],
+  "rooms": [
+   {
+    "id": "N0",
+    "theme": "xray",
+    "x": 1250.0,
+    "y": -475.0,
+    "side": -1
+   },
+   {
+    "id": "N1",
+    "theme": "mri",
+    "x": 1975.0,
+    "y": -475.0,
+    "side": -1
+   },
+   {
+    "id": "N2",
+    "theme": "office",
+    "x": 2700.0,
+    "y": -475.0,
+    "side": -1
+   },
+   {
+    "id": "S0",
+    "theme": "xray",
+    "x": 1250.0,
+    "y": 475.0,
+    "side": 1
+   },
+   {
+    "id": "S1",
+    "theme": "storage",
+    "x": 1975.0,
+    "y": 475.0,
+    "side": 1
+   },
+   {
+    "id": "S2",
+    "theme": "mri",
+    "x": 2700.0,
+    "y": 475.0,
+    "side": 1
+   }
+  ]
+ },
+ {
+  "label": "B5",
+  "name": "SURGERY",
+  "z": -4500,
+  "gate": "power",
+  "arrival": [
+   250,
+   0,
+   -4400
+  ],
+  "lift": [
+   3825,
+   0,
+   -4500
+  ],
+  "rooms": [
+   {
+    "id": "N0",
+    "theme": "surgery",
+    "x": 1250.0,
+    "y": -475.0,
+    "side": -1
+   },
+   {
+    "id": "N1",
+    "theme": "surgery",
+    "x": 1975.0,
+    "y": -475.0,
+    "side": -1
+   },
+   {
+    "id": "N2",
+    "theme": "storage",
+    "x": 2700.0,
+    "y": -475.0,
+    "side": -1
+   },
+   {
+    "id": "S0",
+    "theme": "ward",
+    "x": 1250.0,
+    "y": 475.0,
+    "side": 1
+   },
+   {
+    "id": "S1",
+    "theme": "surgery",
+    "x": 1975.0,
+    "y": 475.0,
+    "side": 1
+   },
+   {
+    "id": "S2",
+    "theme": "office",
+    "x": 2700.0,
+    "y": 475.0,
+    "side": 1
+   }
+  ]
+ },
+ {
+  "label": "B6",
+  "name": "PHARMACY & BLOOD LAB",
+  "z": -6000,
+  "gate": "switches",
+  "arrival": [
+   250,
+   0,
+   -5900
+  ],
+  "lift": [
+   3825,
+   0,
+   -6000
+  ],
+  "rooms": [
+   {
+    "id": "N0",
+    "theme": "lab",
+    "x": 1250.0,
+    "y": -475.0,
+    "side": -1
+   },
+   {
+    "id": "N1",
+    "theme": "blood",
+    "x": 1975.0,
+    "y": -475.0,
+    "side": -1
+   },
+   {
+    "id": "N2",
+    "theme": "storage",
+    "x": 2700.0,
+    "y": -475.0,
+    "side": -1
+   },
+   {
+    "id": "S0",
+    "theme": "blood",
+    "x": 1250.0,
+    "y": 475.0,
+    "side": 1
+   },
+   {
+    "id": "S1",
+    "theme": "lab",
+    "x": 1975.0,
+    "y": 475.0,
+    "side": 1
+   },
+   {
+    "id": "S2",
+    "theme": "office",
+    "x": 2700.0,
+    "y": 475.0,
+    "side": 1
+   }
+  ]
+ },
+ {
+  "label": "B7",
+  "name": "MORGUE",
+  "z": -7500,
+  "gate": "keycard",
+  "arrival": [
+   250,
+   0,
+   -7400
+  ],
+  "lift": [
+   3825,
+   0,
+   -7500
+  ],
+  "rooms": [
+   {
+    "id": "N0",
+    "theme": "morgue",
+    "x": 1250.0,
+    "y": -475.0,
+    "side": -1
+   },
+   {
+    "id": "N1",
+    "theme": "morgue",
+    "x": 1975.0,
+    "y": -475.0,
+    "side": -1
+   },
+   {
+    "id": "N2",
+    "theme": "office",
+    "x": 2700.0,
+    "y": -475.0,
+    "side": -1
+   },
+   {
+    "id": "S0",
+    "theme": "morgue",
+    "x": 1250.0,
+    "y": 475.0,
+    "side": 1
+   },
+   {
+    "id": "S1",
+    "theme": "storage",
+    "x": 1975.0,
+    "y": 475.0,
+    "side": 1
+   },
+   {
+    "id": "S2",
+    "theme": "surgery",
+    "x": 2700.0,
+    "y": 475.0,
+    "side": 1
+   }
+  ]
+ },
+ {
+  "label": "B8",
+  "name": "SECURITY & RECORDS",
+  "z": -9000,
+  "gate": "power",
+  "arrival": [
+   250,
+   0,
+   -8900
+  ],
+  "lift": [
+   3825,
+   0,
+   -9000
+  ],
+  "rooms": [
+   {
+    "id": "N0",
+    "theme": "security",
+    "x": 1250.0,
+    "y": -475.0,
+    "side": -1
+   },
+   {
+    "id": "N1",
+    "theme": "records",
+    "x": 1975.0,
+    "y": -475.0,
+    "side": -1
+   },
+   {
+    "id": "N2",
+    "theme": "office",
+    "x": 2700.0,
+    "y": -475.0,
+    "side": -1
+   },
+   {
+    "id": "S0",
+    "theme": "records",
+    "x": 1250.0,
+    "y": 475.0,
+    "side": 1
+   },
+   {
+    "id": "S1",
+    "theme": "storage",
+    "x": 1975.0,
+    "y": 475.0,
+    "side": 1
+   },
+   {
+    "id": "S2",
+    "theme": "security",
+    "x": 2700.0,
+    "y": 475.0,
+    "side": 1
+   }
+  ]
+ }
+]

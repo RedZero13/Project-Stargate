@@ -157,3 +157,9 @@ D. Whisper has its own animations (walk/run/attack x3/hit/death) — an Anim Blu
 - Custom hardware cursor: `Content/Slate/Cursors/HK_Arrow.png` + `HardwareCursors` in DefaultEngine.ini (shows in packaged builds).
 - Not verified in play: walking the full wing → Deep Labs route with real power-on; rifle hold angle.
 - Still open: SFX packs (Essential Ambience, 50 Free Game Sounds) not re-queued; company logo PNG still needed for the CoLogo splash slot; RE4-style save-slot main menu; hit-react/death anims.
+
+### 2026-11-26 (playtest fixes + 15-floor expansion start)
+- Fixes: torch toggle (debounced), auto-reload + reserve cap 40, CraftGel recipe (1 part + 1 chem), sanity drops when hurt, softer blood overlay, brute takes 60% damage, barrels block bullets, Hollows have red eye glow + an alert stinger when they spot you, Deep Labs lights x3, odd cubes/bays removed, Emilia grounded, floor/ceiling z-fighting fixed in `slice_layout.build()`, indoor drips removed.
+- Window: Retina-aware (`NSHighResolutionCapable` true + `bAllowHighDPIInGameMode`), render scale 70%, window always sized to 80% of the desktop height (`BP_MenuPlayerController.FitWindow`), cursor locked to the window. **Mac fullscreen = the window's green button / Ctrl+Cmd+F** (UE's own windowed-fullscreen left the window off-screen and clicks dead on the 32:9 monitor; verified the native one works). F11 uses `BP_HKGameInstance.ToggleFullscreen` on Windows only.
+- Cursor: 32 px syringe (`tools/make_cursor.py`). Lumen only on High+ (`Config/DefaultScalability.ini`).
+- Expansion (docs/EXPANSION_PLAN.md): `tools/floors_layout.py` + `build_floors.py` built **Lvl_Wards B2-B8** (7 floors, Horror Hospital props by room theme). Gameplay BPs (`floor_gameplay.py`: lift/keycard/switches/generator), `place_floors.py`, `floors_links.py` written; deep floors B10-B15 next.
