@@ -111,3 +111,8 @@ Unreal 5 realistic 3D; title *Hollow Kin*; Chapter 1 first, 3 launch endings (hi
 - Kid chalk drawing on the C6 and C8 floors (`dress_slice.py`). Sun/Cloud chalk and Fog Area were still downloading.
 - Horror Hospital also has many props (beds, cabinets, doors, desks, medical machines) and decals (blood, cracks, dirt) not placed yet — the next easy visual win: swap the box props (`C6_Bed*`, `C3_Desk`, `C7_Locker*`, `C8_Bed`) for kit meshes and add grime decals.
 - **Save fix:** the hospital retexture had not actually been written to disk (read-only actor files, see Lessons). Made the wing's actor files writable, re-applied and saved (93 blocks), and removed 19 stale duplicate prop files left from the first dressing run. A save now logs no errors.
+
+### 2026-11-25 (developer playthrough, recording 7.48 AM)
+- **Full run completed by hand**: menu → C1 → … → fuses → breaker → power door → Emilia's room → LANTERN ending in ~5 min, with one death (a drone followed Max into the C3 safe room at ~1:05) and a restart. Pistol fires (tracer seen). Breaker refusal/power messages and hints work.
+- **Fixes from it:** (1) `NAV_SafeRoom` NavModifierVolume (`NavArea_Null`) over C3: verified in Play that a chasing drone that sees Max stops at the doorway and cannot hurt him inside. (2) Blood overlay (`BP_Max.TickFX`): now `clamp((60 − Health)/60 + HurtFlash·0.2, 0, 0.55)` — none above 60 HP, at most 55 % (it was ~70 % at half health and covered the screen for minutes). (3) Brighter rooms: L_C4b/c 60, L_C5 70, L_C7 45, L_C8 110 cd (also in `tools/slice_layout.py`).
+- Seen but not changed: hints show again after a death-restart (by design, level reloads); the ending fires the moment you enter C8 (abrupt but works).
