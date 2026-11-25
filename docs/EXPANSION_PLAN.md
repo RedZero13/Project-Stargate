@@ -45,3 +45,11 @@ load times down.
 ## Assets
 Already installed: Horror Hospital (2,400+ props), Dead Bodies poses, Survival Character, civilian girl, Whisper.
 Added for this: Zombie Female Nurse (free), Zombie Mutant (free, UE 5.5 package).
+
+## Status (2026-11-26)
+Done: zoned floor plans after real hospital layouts (`tools/floors_layout.py`, drawings in `docs/floorplans/`), Lvl_Wards
+B2-B8 and B10-B15 under the Deep Labs built and furnished, lifts + keycard / switch-sequence / generator puzzles
+(tested in play: keycard lift, switch order, generator), Wing -> Wards -> Deep Labs chain, Emilia + 5 children in
+the B15 isolation chambers, undead nurses and dead nurses (Zombie Nurse pack).
+Next: camera cutscenes (B9 arrival, B12 experiment reveal, B15 children, Emilia reunion), Zombie Mutant
+"experiments" (UE 5.5 Fab package), then the gameplay trailer from the packaged build.
