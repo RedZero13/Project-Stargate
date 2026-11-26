@@ -3,7 +3,7 @@ readable level without lit rooms blowing out, with a per-level bias (clinic neut
 import sys, json
 from ui_lib import call
 S = 'editor_toolset.toolsets.scene.SceneTools'; O = 'editor_toolset.toolsets.object.ObjectTools'
-LV = {'Lvl_Clinic': 0.0, 'Lvl_ContainmentWing': 0.7, 'Lvl_Wards': 0.6, 'Lvl_DeepLabs': 0.9, 'Lvl_City': 0.3}
+LV = {'Lvl_Clinic': 1.0, 'Lvl_ContainmentWing': 1.7, 'Lvl_Wards': 1.6, 'Lvl_DeepLabs': 1.9, 'Lvl_City': 1.2}   # UE default compensation is +1.0
 for lv, bias in LV.items():
     path = {'Lvl_Clinic': 'Clinic/Lvl_Clinic', 'Lvl_ContainmentWing': 'Containment/Lvl_ContainmentWing', 'Lvl_Wards': 'Wards/Lvl_Wards',
             'Lvl_DeepLabs': 'Deep/Lvl_DeepLabs', 'Lvl_City': 'City/Lvl_City'}[lv]

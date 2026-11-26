@@ -273,7 +273,7 @@ def build(mapname):
                 for j in range(nl):
                     lx = x0 + (j + 0.5) * wd / nl
                     dim = 0.6 if t in ('morgue', 'cold', 'storage', 'plant', 'store') else 1.0
-                    out['lights'].append(dict(name='%s_L%s%d' % (label, rid, j), x=round(lx), y=round((y0 + y1) / 2), z=z + 300, i=int(130 * dim),
+                    out['lights'].append(dict(name='%s_L%s%d' % (label, rid, j), x=round(lx), y=round((y0 + y1) / 2), z=z + 300, i=int(130 * dim * (3.0 if clean else 1.0)),
                                               r=col[0], g=col[1], b=col[2], rad=650))
                 x = x1 + T
         S.ROOMS = {label + '_' + n: r for n, r in rooms.items()}
@@ -286,9 +286,13 @@ def build(mapname):
             out['boxes'].append(b)
         out['boxes'] += dressing(label, z, rooms, doors, clean, rnd)
         for i, lx in enumerate(range(WEST, EAST + 1, 800)):
-            out['lights'].append(dict(name='%s_LC%d' % (label, i), x=lx, y=0, z=z + 300, i=110, r=col[0], g=col[1], b=col[2], rad=800))
-        out['lights'] += [dict(name=label + '_LA', x=500, y=0, z=z + 300, i=170, r=1.0, g=(0.97 if clean else 0.7), b=(0.92 if clean else 0.45), rad=800),
-                          dict(name=label + '_LL', x=ex + 350, y=0, z=z + 300, i=220, r=1.0, g=0.85, b=0.6, rad=800)]
+            out['lights'].append(dict(name='%s_LC%d' % (label, i), x=lx, y=0, z=z + 300, i=(330 if clean else 110), r=col[0], g=col[1], b=col[2], rad=800))
+        for cid in ('StairW', 'StairE', 'WCW'):
+            cx0, cy0, cx1, cy1 = rooms[cid][:4]
+            out['lights'].append(dict(name='%s_L%s' % (label, cid), x=round((cx0 + cx1) / 2), y=round((cy0 + cy1) / 2), z=z + 300,
+                                      i=(300 if clean else 90), r=col[0], g=col[1], b=col[2], rad=600))
+        out['lights'] += [dict(name=label + '_LA', x=500, y=0, z=z + 300, i=(450 if clean else 170), r=1.0, g=(0.97 if clean else 0.7), b=(0.92 if clean else 0.45), rad=800),
+                          dict(name=label + '_LL', x=ex + 350, y=0, z=z + 300, i=(450 if clean else 220), r=1.0, g=0.85, b=0.6, rad=800)]
         out['furnish'] += [dict(kind='lift', x=ex + 670, y=0, z=z, yaw=270), dict(kind='bench', x=ex + 200, y=330, z=z, yaw=180),
                            dict(kind='lift', x=30, y=0, z=z, yaw=90), dict(kind='bench', x=500, y=-330, z=z, yaw=0),
                            dict(kind='washstand', x=WEST - 190, y=CORR + 25 + DEPTH - 60, z=z, yaw=180)]
