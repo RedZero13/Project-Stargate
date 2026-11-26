@@ -86,7 +86,7 @@ for k, fl in enumerate(floors):
             cx, cy = r['x'], r['y'] - r['side'] * 40
             if r['id'] == 'N1':
                 put(B + 'Props/BP_Emilia.BP_Emilia', '%s_Emilia' % L, cx, cy, z + 2, yaw=90 if r['side'] < 0 else 270, folder='Ending')
-                put(B + 'Interactables/BP_EndingTrigger.BP_EndingTrigger', '%s_EndingTrigger' % L, r['x'], r['y'] - r['side'] * 230, z + 100, folder='Ending')
+                put(B + 'Interactables/BP_EndingTrigger.BP_EndingTrigger', '%s_EndingTrigger' % L, r['x'] + 120, r['y'] + r['side'] * 60, z + 100, folder='Ending')   # beside Emilia, well past her cutscene at the door
             else:
                 put(B + 'Props/BP_Child.BP_Child', '%s_Child%d' % (L, i), cx, cy, z + 2, yaw=90 if r['side'] < 0 else 270,
                     scale=random.choice([0.85, 0.9, 0.95]), folder='Ending')

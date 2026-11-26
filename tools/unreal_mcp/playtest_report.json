@@ -1,0 +1,207 @@
+[
+ {
+  "step": "City loads",
+  "ok": true,
+  "info": ""
+ },
+ {
+  "step": "Phone call finishes and sets clinic objective",
+  "ok": true,
+  "info": "Walk north up Main Street to St. Brigid's Clinic. Its door is under the green light."
+ },
+ {
+  "step": "Clinic door -> Lvl_Clinic",
+  "ok": true,
+  "info": ""
+ },
+ {
+  "step": "G gate solved (gate 1)",
+  "ok": true,
+  "info": "The lift is working. Take it down."
+ },
+ {
+  "step": "G lift ride",
+  "ok": true,
+  "info": "z 1588"
+ },
+ {
+  "step": "F1 gate solved (gate 2)",
+  "ok": true,
+  "info": "The lift is working. Take it down."
+ },
+ {
+  "step": "F1 lift -> Containment Wing",
+  "ok": true,
+  "info": ""
+ },
+ {
+  "step": "Wing: both fuses collected",
+  "ok": true,
+  "info": "{'Fuses': 2, 'Bond': 100}"
+ },
+ {
+  "step": "Wing: drawings raise Bond",
+  "ok": true,
+  "info": "bond 0 -> 100"
+ },
+ {
+  "step": "Wing: pistol picked up",
+  "ok": true,
+  "info": ""
+ },
+ {
+  "step": "Wing: sparing the Hollow Child adds Bond (+40)",
+  "ok": false,
+  "info": "bond 100 -> 100"
+ },
+ {
+  "step": "Wing: breaker restores power",
+  "ok": true,
+  "info": ""
+ },
+ {
+  "step": "Wing exit -> Lvl_Wards",
+  "ok": true,
+  "info": ""
+ },
+ {
+  "step": "Carry-over keeps pistol into Wards",
+  "ok": true,
+  "info": ""
+ },
+ {
+  "step": "B2 gate solved (gate 1)",
+  "ok": true,
+  "info": "The lift is working. Take it down."
+ },
+ {
+  "step": "B2 lift ride",
+  "ok": true,
+  "info": "z -1412"
+ },
+ {
+  "step": "B3 gate solved (gate 2)",
+  "ok": true,
+  "info": "The lift is working. Take it down."
+ },
+ {
+  "step": "B3 lift ride",
+  "ok": true,
+  "info": "z -2912"
+ },
+ {
+  "step": "B4 gate solved (gate 1)",
+  "ok": true,
+  "info": "The lift is working. Take it down."
+ },
+ {
+  "step": "B4 lift ride",
+  "ok": true,
+  "info": "z -4412"
+ },
+ {
+  "step": "B5 gate solved (gate 3)",
+  "ok": true,
+  "info": "The lift is working. Take it down."
+ },
+ {
+  "step": "B5 lift ride",
+  "ok": true,
+  "info": "z -5912"
+ },
+ {
+  "step": "B6 gate solved (gate 2)",
+  "ok": true,
+  "info": "The lift is working. Take it down."
+ },
+ {
+  "step": "B6 lift ride",
+  "ok": true,
+  "info": "z -7412"
+ },
+ {
+  "step": "B7 gate solved (gate 1)",
+  "ok": true,
+  "info": "The lift is working. Take it down."
+ },
+ {
+  "step": "B7 lift ride",
+  "ok": true,
+  "info": "z -8912"
+ },
+ {
+  "step": "B8 gate solved (gate 3)",
+  "ok": true,
+  "info": "The lift is working. Take it down."
+ },
+ {
+  "step": "B8 lift -> Deep Labs",
+  "ok": true,
+  "info": ""
+ },
+ {
+  "step": "B9 generator powers lift",
+  "ok": true,
+  "info": ""
+ },
+ {
+  "step": "B9 lift -> B10",
+  "ok": true,
+  "info": "z -1912"
+ },
+ {
+  "step": "B10 gate solved (gate 1)",
+  "ok": true,
+  "info": "The lift is working. Take it down."
+ },
+ {
+  "step": "B10 lift ride",
+  "ok": true,
+  "info": "z -3412"
+ },
+ {
+  "step": "B11 gate solved (gate 2)",
+  "ok": true,
+  "info": "The lift is working. Take it down."
+ },
+ {
+  "step": "B11 lift ride",
+  "ok": true,
+  "info": "z -4912"
+ },
+ {
+  "step": "B12 gate solved (gate 3)",
+  "ok": true,
+  "info": "The lift is working. Take it down."
+ },
+ {
+  "step": "B12 lift ride",
+  "ok": true,
+  "info": "z -6412"
+ },
+ {
+  "step": "B13 gate solved (gate 1)",
+  "ok": true,
+  "info": "The lift is working. Take it down."
+ },
+ {
+  "step": "B13 lift ride",
+  "ok": true,
+  "info": "z -7912"
+ },
+ {
+  "step": "B14 gate solved (gate 2)",
+  "ok": true,
+  "info": "The lift is working. Take it down."
+ },
+ {
+  "step": "B14 lift ride",
+  "ok": true,
+  "info": "z -9412"
+ },
+ {
+  "step": "Ending reached at B15",
+  "ok": false,
+  "info": "bond 100 taint 0 -> expected Homecoming"
+ }
+]
