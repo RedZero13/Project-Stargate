@@ -91,8 +91,8 @@ def run():
     a = T("editor_toolset.toolsets.scene.SceneTools.add_to_scene_from_asset", {"asset_path": "/Game/HollowKin/Blueprints/Interactables/BP_LevelDoor.BP_LevelDoor", "name": "CL_ClinicDoor",
         "xform": {"location": {"x": x, "y": y, "z": z}, "scale": {"x": 0.6, "y": 0.8, "z": 1}}})["returnValue"]
     T("editor_toolset.toolsets.object.ObjectTools.set_properties", {"instance": a, "values": json.dumps({
-        "TargetLevel": "/Game/HollowKin/Maps/Containment/Lvl_ContainmentWing",
-        "Message": "St. Brigid's Clinic. The door is unlocked, just like Jaz said. The lobby is dark and stripped bare. Behind reception a service lift still has power, and only one button works: SUB-LEVEL 2."})})
+        "TargetLevel": "/Game/HollowKin/Maps/Clinic/Lvl_Clinic",
+        "Message": "St. Brigid's Clinic. The door is unlocked, just like Jaz said. Inside, the lights are on. Two floors of a spotless, empty clinic, and somewhere a service lift that only staff can call."})})
     tag(a, "CL_ClinicDoor", "City/Story")
     x, y, z = sp["rain"]
     a = T("editor_toolset.toolsets.scene.SceneTools.add_to_scene_from_asset", {"asset_path": "/Game/HollowKin/FX/NS_Rain.NS_Rain", "name": "CL_Rain", "xform": {"location": {"x": x, "y": y, "z": z}}})["returnValue"]

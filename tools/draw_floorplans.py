@@ -88,7 +88,7 @@ def sheet(fl, d):
     dr.text((W - PAD, Hh - 18), 'HOLLOW KIN  //  Terratales Media Entertainment  //  generated from tools/floors_layout.py', font=F_X, fill=DIM, anchor='rm')
     return im
 sheets = []
-for m in ('wards', 'deep'):
+for m in ('clinic', 'wards', 'deep'):
     d = FL.build(m)
     for fl in d['floors']:
         im = sheet(fl, d); im.save(os.path.join(OUT, fl['label'] + '.png')); sheets.append(im)

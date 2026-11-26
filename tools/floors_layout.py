@@ -50,6 +50,12 @@ MAPS = {
         ('B8', 'SECURITY & RECORDS', 'power', (0.9, 0.9, 1.0),
          [('security', 2), ('records', 3), ('office', 1.2)], [('records', 2), ('plant', 2), ('office', 1.2), ('wc', 1), ('store', 1)]),
     ],
+    'clinic': [
+        ('G', 'GROUND FLOOR  //  RECEPTION & OPD', 'keycard', (1.0, 0.97, 0.92),
+         [('waiting', 3), ('reception', 2), ('doctor', 1.2), ('doctor', 1.2)], [('pharmacy', 2), ('emergency', 3), ('wc', 1), ('office', 1.4)]),
+        ('F1', 'FIRST FLOOR  //  WARDS', 'switches', (1.0, 0.97, 0.92),
+         [('ward', 3), ('private', 1.5), ('private', 1.5)], [('nurse', 1.4), ('icu', 3), ('wc', 1), ('store', 1)]),
+    ],
     'deep': [
         ('B10', 'SPECIMEN STORAGE', 'keycard', (0.6, 0.9, 0.85),
          [('storage', 2), ('cold', 2), ('lab', 2)], [('lab', 2), ('storage', 2), ('morgue', 2), ('wc', 1)]),
@@ -65,7 +71,10 @@ MAPS = {
          [('iso', 1), ('iso', 1), ('iso', 1)], [('iso', 1), ('observe', 1.2), ('iso', 1), ('iso', 1)]),
     ],
 }
-BASE_Z = {'wards': 0, 'deep': -2000}
+BASE_Z = {'wards': 0, 'deep': -2000, 'clinic': 0}
+DZ_SIGN = {'wards': -1, 'deep': -1, 'clinic': 1}       # clinic floors go UP (ground, first)
+CLEAN = {'clinic'}                                     # bright modern interiors (above ground)
+import random
 
 def split(prog):
     """widths (cm, multiples of 25) for a side so rooms + walls exactly fill WEST..EAST."""
@@ -143,10 +152,56 @@ def furnish(t, x0, y0, x1, y1, side):
 SIGN = {'xray': 'sign_xray', 'mri': 'sign_xray', 'ot': 'sign_surgery', 'scrub': 'sign_surgery', 'nicu': 'sign_nursery', 'lab': 'sign_lab',
         'blood': 'sign_lab', 'testing': 'sign_lab', 'reception': 'sign_reception', 'waiting': 'sign_reception'}
 
+def dressing(label, z, rooms, doors, clean, rnd):
+    """flat LED ceiling panels everywhere; clean floors also get floor inlay strips, accent door frames, handrails and
+    frosted daylight windows on the outer walls."""
+    bx = []
+    def B(name, mat, x, y, zz, sx, sy, sz): bx.append(dict(name='%s_%s' % (label, name), mat=mat, x=x, y=y, z=z + zz, sx=sx, sy=sy, sz=sz))
+    led = 'led' if clean else 'led_dim'
+    n = 0
+    for rid, (x0, y0, x1, y1, h, m) in rooms.items():
+        w, d = x1 - x0, y1 - y0
+        if rid in ('StairW', 'StairE', 'WCW'): continue
+        nx = max(1, int(w // 300)); ny = max(1, int(d // 300))
+        for i in range(nx):
+            for j in range(ny):
+                if not clean and rnd.random() < 0.18: continue          # dead panels in the basements
+                cx = x0 + (i + 0.5) * w / nx; cy = y0 + (j + 0.5) * d / ny
+                B('LED%d' % n, led, cx - 60, cy - 30, h - 3, 120, 60, 3); n += 1
+    if not clean: return bx
+    corr = rooms['Corr']
+    for k, yy in enumerate((-90, 90)):                                     # grey inlay strips along the passage
+        B('Inlay%d' % k, 'clean_inlay', corr[0] + 50, yy - 6, 0.2, corr[2] - corr[0] - 100, 12, 0.6)
+    for xx in range(int(corr[0]) + 300, int(corr[2]) - 100, 400):          # cross bands every 4 m
+        B('Band%d' % xx, 'clean_inlay', xx, -60, 0.2, 40, 120, 0.6)
+    acc = 'clean_yellow' if label == 'G' else 'clean_teal'
+    gaps = {-1: [], 1: []}
+    for rid, (dx0, dy0, dx1, dy1) in doors.items():
+        if dy1 - dy0 == 25 and abs(dy0 + 12.5) >= CORR - 15:              # doors in the corridor walls
+            side = -1 if dy0 < 0 else 1
+            gaps[side].append((dx0, dx1))
+            fy = -CORR if side < 0 else CORR - 4
+            B('Frame%sL' % rid, acc, dx0 - 12, fy, 0, 12, 4, 245); B('Frame%sR' % rid, acc, dx1, fy, 0, 12, 4, 245)
+            B('Frame%sT' % rid, acc, dx0 - 12, fy, 240, dx1 - dx0 + 24, 4, 12)
+    for side in (-1, 1):                                                   # handrails between the doors
+        xs = [corr[0] + 20] + [v for g in sorted(gaps[side]) for v in (g[0] - 20, g[1] + 20)] + [corr[2] - 20]
+        ry = -CORR if side < 0 else CORR - 6
+        for i in range(0, len(xs) - 1, 2):
+            if xs[i + 1] - xs[i] > 40: B('Rail%d%d' % (side + 1, i), 'clean_rail', xs[i], ry, 88, xs[i + 1] - xs[i], 6, 8)
+    for rid, (x0, y0, x1, y1, h, m) in rooms.items():                      # frosted daylight windows on outer walls
+        if rid[0] in 'NS' and rid[1:].isdigit():
+            wy = y0 - 2 if rid[0] == 'N' else y1 - 1
+            for i in range(max(1, int((x1 - x0) // 350))):
+                cx = x0 + (i + 0.5) * (x1 - x0) / max(1, int((x1 - x0) // 350))
+                B('Win%s%d' % (rid, i), 'window', cx - 90, wy, 110, 180, 3, 120)
+    return bx
+
 def build(mapname):
     out = dict(boxes=[], lights=[], furnish=[], floors=[])
     for k, (label, name, gate, col, north, south) in enumerate(MAPS[mapname]):
-        z = BASE_Z[mapname] - k * FLOOR_DZ
+        z = BASE_Z[mapname] + DZ_SIGN.get(mapname, -1) * k * FLOOR_DZ
+        clean = mapname in CLEAN
+        rnd = random.Random(hash(label) & 0xffff)
         rooms, doors, info_rooms = {}, {}, []
         # circulation + cores
         rooms['Corr'] = (WEST - 350, -CORR, EAST + 350, CORR, H, 'tile')
@@ -193,10 +248,14 @@ def build(mapname):
         S.DOORS = {label + '_' + n: d for n, d in doors.items()}
         S.PROPS = []
         for b in S.build():
-            b = dict(b); b['z'] += z; b['name'] = label + '_' + b['name']; out['boxes'].append(b)
+            b = dict(b); b['z'] += z; b['name'] = label + '_' + b['name']
+            if clean:
+                b['mat'] = {'wall': 'clean_wall', 'ceiling': 'clean_ceiling'}.get(b['mat'], 'clean_floor' if b['mat'].endswith('_floor') else b['mat'])
+            out['boxes'].append(b)
+        out['boxes'] += dressing(label, z, rooms, doors, clean, rnd)
         for i, lx in enumerate(range(WEST, EAST + 1, 800)):
             out['lights'].append(dict(name='%s_LC%d' % (label, i), x=lx, y=0, z=z + 300, i=110, r=col[0], g=col[1], b=col[2], rad=800))
-        out['lights'] += [dict(name=label + '_LA', x=500, y=0, z=z + 300, i=170, r=1.0, g=0.7, b=0.45, rad=800),
+        out['lights'] += [dict(name=label + '_LA', x=500, y=0, z=z + 300, i=170, r=1.0, g=(0.97 if clean else 0.7), b=(0.92 if clean else 0.45), rad=800),
                           dict(name=label + '_LL', x=ex + 350, y=0, z=z + 300, i=220, r=1.0, g=0.85, b=0.6, rad=800)]
         out['furnish'] += [dict(kind='lift', x=ex + 670, y=0, z=z, yaw=270), dict(kind='bench', x=ex + 200, y=330, z=z, yaw=180),
                            dict(kind='lift', x=30, y=0, z=z, yaw=90), dict(kind='bench', x=500, y=-330, z=z, yaw=0),

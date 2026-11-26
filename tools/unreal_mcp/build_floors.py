@@ -7,6 +7,10 @@ Furniture: Horror Hospital meshes; each prop is dropped so its bounding box sits
 import json, sys, os, subprocess
 from ui_lib import call
 from build_slice import MATS
+CM = '/Game/HollowKin/Materials/Clean/'
+MATS = dict(MATS, **{k: CM + v + '.' + v for k, v in {'clean_wall': 'M_Clean_Wall', 'clean_floor': 'M_Clean_Floor', 'clean_inlay': 'M_Clean_Inlay',
+    'clean_ceiling': 'M_Clean_Ceiling', 'clean_yellow': 'M_Clean_Yellow', 'clean_teal': 'M_Clean_Teal', 'clean_rail': 'M_Clean_Rail',
+    'led': 'M_LED_Panel', 'led_dim': 'M_LED_Dim', 'window': 'M_LED_Dim'}.items()})
 HH = '/Game/Horror_Hospital/Meshes/'
 KINDS = {
     'bed': 'SM_Bed_01_p03', 'iv': 'SM_IVstand_01_v02', 'stretcher': 'SM_Stretcher_02_v01', 'treat': 'SM_Treatment_Table_06_v01',

@@ -26,7 +26,10 @@ DR = B + 'AI/BP_HollowDrone.BP_HollowDrone'; PU = B + 'Items/BP_Pickup.BP_Pickup
 SOL = B + 'Props/BP_DeadSoldier.BP_DeadSoldier'; AN = '/Game/DeadBodies_Poses_nikoff/Animations/'
 POSES = ['AS_DeadBody_Pose_Lie_02', 'AS_DeadBody_Pose_Lie_05', 'AS_DeadBody_Pose_Sit_01', 'AS_DeadBody_Pose_Lie_09', 'AS_DeadBody_Pose_Sit_03', 'AS_DeadBody_Pose_Lie_12']
 DEEP_NEXT = '/Game/HollowKin/Maps/Deep/Lvl_DeepLabs'
+WING_NEXT = '/Game/HollowKin/Maps/Containment/Lvl_ContainmentWing'
 INTRO = {
+    'G': "St. Brigid's ground floor. It looks like a normal clinic: bright, clean, chairs in rows. Too clean. Nobody has sat here in days. The staff keycard for the lift will be behind reception or in the offices.",
+    'F1': "First floor, the wards. The beds are made. The lights hum. A child's drawing is taped to the nurse station glass. The service lift at the east end is the only way down to the basements.",
     'B2': "Admissions. Halvorsen's front desk for children nobody would come looking for. The lift down is at the far end of the corridor.",
     'B3': "The paediatric ward. Tiny beds. Crayon on the walls. Something hums a nursery tune behind the curtains.",
     'B4': "Radiology. The X-ray machines still have films clipped to them: small ribcages, wrong in ways you can't name.",
@@ -54,6 +57,8 @@ for k, fl in enumerate(floors):
             props.update({'Target': {'x': nxt['arrival'][0], 'y': nxt['arrival'][1], 'z': nxt['arrival'][2]}, 'NextLabel': nxt['label'], 'NextName': nxt['name']})
         elif m == 'wards':
             props.update({'NextLevel': DEEP_NEXT, 'NextLabel': 'B9', 'NextName': 'DEEP LABS'})
+        elif m == 'clinic':
+            props.update({'NextLevel': WING_NEXT, 'NextLabel': 'B1', 'NextName': 'CONTAINMENT WING'})
         # switch puzzle: code is a permutation of 0,1,2; the note gives it as roman numerals
         if gate == 2:
             order = random.sample([0, 1, 2], 3); props['Code'] = ''.join(str(i) for i in order)
@@ -82,7 +87,7 @@ for k, fl in enumerate(floors):
                     scale=random.choice([0.85, 0.9, 0.95]), folder='Ending')
         put(HINT, '%s_HintChildren' % L, rooms[0]['x'], 0, z + 100, props={'Message': "Five other children, L-01 to L-06 on the cell doors. They watch you without blinking. Emilia's cell is in the middle."})
     # enemies: 2 Hollows (3 on deep floors), the last deep floors get an Elite
-    n_en = 0 if fl['gate'] == 'ending' else 2 if m == 'wards' else 3
+    n_en = 0 if fl['gate'] == 'ending' else 0 if m == 'clinic' else 2 if m == 'wards' else 3
     for i in range(n_en):
         r = rooms[(k + 2 * i + 1) % len(rooms)]
         nurse = (i == 0) and (m == 'wards' or k % 2 == 0)
