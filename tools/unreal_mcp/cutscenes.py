@@ -18,6 +18,8 @@ if 'Cam' not in have:
 call(BT, 'compile_blueprint', {'blueprint': {'refPath': CS}, 'warnings_as_errors': False})
 if 'Step' not in have:
     call(BT, 'add_variable', {'blueprint': {'refPath': CS}, 'name': 'Step', 'type_name': 'int'})
+if 'SavedMul' not in have:
+    call(BT, 'add_variable', {'blueprint': {'refPath': CS}, 'name': 'SavedMul', 'type_name': 'float'})
 call(BT, 'compile_blueprint', {'blueprint': {'refPath': CS}, 'warnings_as_errors': False})
 MAXC = '(Utilities|Casting|CastToBP_Max (Game|GetPlayerPawn 0))'
 call(BT, 'add_function_graph', {'blueprint': {'refPath': CS}, 'graph_name': 'StepScene'})
@@ -37,6 +39,8 @@ r = call(BT, 'write_graph_dsl', {'graph': {'refPath': CS + ':StepScene'}, 'code'
           (Utilities|Time|SetTimerbyFunctionName :Object self :FunctionName "StepScene" :Time 1.0 :bLooping false)
           (else
             (Input|EnableInput :self m :PlayerController (Game|GetPlayerController 0))
+            (Class|BPMax|HKLog :self m :Msg "CUTSCENE end")
+            (Class|BPMax|SetDmgMul :self m :DmgMul (Variables|Default|GetSavedMul))
             (if (not (Utilities|String|EqualExactly(String) (Variables|Default|GetObjective) ""))
               (Class|BPMax|SetObjectiveNote :self m :Msg (Variables|Default|GetObjective)))
             (Actor|DestroyActor :self (Variables|Default|GetCam))))))
@@ -48,8 +52,11 @@ dsl = '''(event EventTick (DeltaSeconds)
       (if (and (and (not (Variables|Default|GetDone)) (> (Utilities|Time|GetGameTimeinSeconds) 2.5)) (< (Transformation|GetDistanceTo self m) (Variables|Default|GetRadius)))
         (Variables|Default|SetDone true)
         (Variables|Default|SetStep 0)
+        (Class|BPMax|HKLog :self m :Msg (Utilities|String|Append "CUTSCENE start " (Variables|Default|GetLine1)))
         (bind pc (Game|GetPlayerController 0))
         (Input|DisableInput :self m :PlayerController pc)
+        (Variables|Default|SetSavedMul (Class|BPMax|GetDmgMul :self m))
+        (Class|BPMax|SetDmgMul :self m :DmgMul 0.0)
         (bind camloc (+ (Transformation|GetActorLocation self) (Variables|Default|GetCamOffset)))
         (bind look (+ (Transformation|GetActorLocation self) (Variables|Default|GetLookOffset)))
         (Variables|Default|SetCam (Utilities|Casting|CastToCameraActor (Game|SpawnActorfromClass :Class "/Script/Engine.CameraActor" :SpawnTransform (Math|Transform|MakeTransform camloc (Math|Rotator|FindLookatRotation camloc look)) :CollisionHandlingOverride "AlwaysSpawn")))

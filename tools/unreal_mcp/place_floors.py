@@ -53,7 +53,12 @@ for k, fl in enumerate(floors):
         lx, ly, lz = fl['lift']
         gate = {'keycard': 1, 'switches': 2, 'power': 3}.get(fl['gate'], 0)
         props = {'Label': L, 'Gate': gate}
+        OBJ = {'keycard': ": find this floor's KEYCARD (a glowing red card, usually in the far rooms), then take the lift at the east end.",
+               'switches': ": read the drawing that gives the switch order, then step on floor switches I, II, III in that order. The lift is at the east end.",
+               'power': ": the lift has no power. Find the dead generator in the plant room or store and restart it.",
+               'ending': ": find Emilia's cell, L-03, in the middle of the north side."}
         if nxt:
+            props['NextObjective'] = nxt['label'] + OBJ.get(nxt['gate'], '')
             props.update({'Target': {'x': nxt['arrival'][0], 'y': nxt['arrival'][1], 'z': nxt['arrival'][2]}, 'NextLabel': nxt['label'], 'NextName': nxt['name']})
         elif m == 'wards':
             props.update({'NextLevel': DEEP_NEXT, 'NextLabel': 'B9', 'NextName': 'DEEP LABS'})
@@ -74,7 +79,7 @@ for k, fl in enumerate(floors):
             r = rooms[1]; put(HINT, '%s_HintOrder' % L, r['x'], r['y'] - r['side'] * 200, z + 100, props={'Message': note})
         elif gate == 3:
             r = next((x for x in rooms if x['type'] in ('plant', 'store', 'storage')), rooms[-1])
-            put(F + 'BP_FloorGenerator.BP_FloorGenerator', '%s_Generator' % L, r['x'] + 220, r['y'] + r['side'] * 60, z + 2, yaw=90)
+            put(F + 'BP_FloorGenerator.BP_FloorGenerator', '%s_Generator' % L, r['x'] + 220, r['y'] + r['side'] * 60, z + 2, yaw=90, props={'Label': L})
     if fl['gate'] == 'ending':   # B15: Emilia in the middle north cell, the other five children in the rest
         for i, r in enumerate(rooms):
             if r['type'] != 'iso': continue

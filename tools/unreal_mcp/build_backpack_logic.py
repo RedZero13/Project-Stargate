@@ -66,10 +66,14 @@ for (rk, rl, ri, rc, ings, cfn, rd) in RECIPES:
     desc('Desc' + rk, rl, rd + '   Needs ' + need + '.'); hover[rk + 'Craft'] = 'Desc' + rk; hover[rk + 'Out'] = 'Desc' + rk
 fn('CloseCase', '''(fn CloseCase ()
   (bind pc (Game|GetPlayerController 0))
-  (Game|SetGamePaused false)
-  (Input|SetInputModeGameOnly pc false)
-  (Class|PlayerController|SetShowMouseCursor :self pc :bShowMouseCursor false)
-  (Widget|RemoveFromParent self))''')
+  (Widget|RemoveFromParent self)
+  (bind pm (Widget|GetAllWidgetsOfClass :WidgetClass "/Game/HollowKin/UI/Menus/WBP_PauseMenu.WBP_PauseMenu_C" :TopLevelOnly true))
+  (if (> (Utilities|Array|Length pm) 0)
+    (Input|SetInputModeUIOnly :PlayerController pc :InWidgetToFocus (Utilities|Array|Get(acopy) pm 0) :InMouseLockMode "LockAlways")
+    (else
+      (Game|SetGamePaused false)
+      (Input|SetInputModeGameOnly pc false)
+      (Class|PlayerController|SetShowMouseCursor :self pc :bShowMouseCursor false))))''')
 fn('OnKeyDown', '''(fn OnKeyDown (MyGeometry InKeyEvent)
   (bind k (Utilities|String|ToString(Text) (Input|Key|GetKeyDisplayName (Input|KeyEvent|GetKey InKeyEvent))))
   (if (or (or (Utilities|String|Equal,CaseInsensitive(String) k "Escape") (Utilities|String|Equal,CaseInsensitive(String) k "P")) (Utilities|String|Equal,CaseInsensitive(String) k "I"))
