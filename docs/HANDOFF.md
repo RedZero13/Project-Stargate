@@ -163,3 +163,14 @@ D. Whisper has its own animations (walk/run/attack x3/hit/death) — an Anim Blu
 - Window: Retina-aware (`NSHighResolutionCapable` true + `bAllowHighDPIInGameMode`), render scale 70%, window always sized to 80% of the desktop height (`BP_MenuPlayerController.FitWindow`), cursor locked to the window. **Mac fullscreen = the window's green button / Ctrl+Cmd+F** (UE's own windowed-fullscreen left the window off-screen and clicks dead on the 32:9 monitor; verified the native one works). F11 uses `BP_HKGameInstance.ToggleFullscreen` on Windows only.
 - Cursor: 32 px syringe (`tools/make_cursor.py`). Lumen only on High+ (`Config/DefaultScalability.ini`).
 - Expansion (docs/EXPANSION_PLAN.md): `tools/floors_layout.py` + `build_floors.py` built **Lvl_Wards B2-B8** (7 floors, Horror Hospital props by room theme). Gameplay BPs (`floor_gameplay.py`: lift/keycard/switches/generator), `place_floors.py`, `floors_links.py` written; deep floors B10-B15 next.
+
+### 2026-11-26 (evening: achievements, collectibles, rewards)
+- **Achievements (19)**, kept across runs in save slot `HollowKinProgress` (`BP_ProgressSave`: AchList, Endings, Kills, Crafts, BestDrawings, BestFiles). List in `tools/unreal_mcp/achievements_data.py`. GI functions `LoadProgress / SaveProgress / Unlock / AddKill / AddCraft / AddEnding / RecordCollectibles` (`progress_system.py`). Toast "ACHIEVEMENT UNLOCKED // Title" + sound.
+- Hooks (`achievement_hooks.py`): `BP_Max.AchTick` runs from the 2 s `HKTrace` (pistol, power, reached Wards / Deep Labs / B15, collectible counts); `HKLog` turns "ENDING X" lines into ending unlocks (Every Door = all 3); `DroneDie` counts kills (Elite tag = brute/Experiment); craft functions count crafts; Hollow Child gives Mercy / Something Darkens.
+- **Collectibles**: one of Emilia's drawings (kind 7, Amount 3 = +3 Bond) and one numbered **patient file** (new pickup kind 8, case-folder model, each shows a lore line) on every stacked floor except B15 (`place_floors.py`, tag `Collectible`). Totals: 17 drawings (3 in the wing), 14 files. Counters `Drawings / Files` carry between levels (StoreCarry/RestoreCarry).
+- **Rewards**: every 5 drawings → +1 health gel; every 5 files → +6 rounds.
+- **Main menu → ACHIEVEMENTS** (`WBP_Achievements`, `build_achievements.py`): unlocked/locked list, best-run collectibles, endings seen, total kills.
+- Gotcha: a SaveGame variable named `Unlocked` resolved to `BP_FloorLift.bUnlocked` in the DSL (bool getters drop the b) — renamed `AchList`.
+- Builds: `bash tools/make_builds.sh` makes both builds (Shipping + Development playtest), copies ICU data, zips, deletes staging.
+- Play-time estimate: first clear ~2 h; 100% ~5–5.5 h (three endings need three runs because EndRun deletes the save). Chapter select would cut 100% to ~3.5 h.
+- Known limit: drawing/file counters are not in the checkpoint save, so Continue after quitting resets the per-run count (the best count stays in the progress save).

@@ -1,6 +1,6 @@
 """World pickups use real item models (the same meshes rendered into the backpack icons, tools/../SourceArt/Items):
 0 ammo = ammo case, 1 health gel = salve jar, 2 sedative = dropper bottle, 3 fuse = ceramic cylinder,
-4 scrap parts = electronic junk, 5 chemicals = jerry can, 6 glass bottle = vial, 7 drawing = paper.
+4 scrap parts = electronic junk, 5 chemicals = jerry can, 6 glass bottle = vial, 7 drawing = paper, 8 patient file = case folder.
 Each is scaled to a readable size, recentred, set on the floor (actor sits 40 cm up) and keeps its coloured glow."""
 from ui_lib import call
 BT = 'editor_toolset.toolsets.blueprint.BlueprintTools'
@@ -14,7 +14,8 @@ K = {0: ('/Game/Military_Radio/StaticMesh/SM_RadioBattary.SM_RadioBattary', 0.9,
      4: (HH + 'SM_Small_Device_02_v01.SM_Small_Device_02_v01', 0.6, 0.0, 0.0, (0.85, 0.75, 0.6)),
      5: (HH + 'SM_Canister_01_v01.SM_Canister_01_v01', 0.55, 0.0, 0.0, (0.8, 0.45, 1.0)),
      6: (HH + 'SM_Botlle_01_v01.SM_Botlle_01_v01', 3.5, 0.3, 0.0, (0.6, 0.9, 0.85)),
-     7: (HH + 'SM_Paper_01_v01.SM_Paper_01_v01', 1.3, 0.0, 0.0, (1.0, 0.9, 0.7))}
+     7: (HH + 'SM_Paper_01_v01.SM_Paper_01_v01', 1.3, 0.0, 0.0, (1.0, 0.9, 0.7)),
+     8: (HH + 'SM_Book_01_v03.SM_Book_01_v03', 1.4, 0.0, 0.0, (0.55, 0.8, 1.0))}
 def branch(k):
     m, s, ox, oy, c = K[k]
     return '''(Components|StaticMesh|SetStaticMesh :self sm :NewMesh "%s")

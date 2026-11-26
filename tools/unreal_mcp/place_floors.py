@@ -109,4 +109,11 @@ for k, fl in enumerate(floors):
     for i, (kind, amt) in enumerate(loot):
         r = rooms[(k + i) % len(rooms)]
         put(PU, '%s_Pickup%d' % (L, i), r['x'] + random.randint(-250, 250), r['y'] + r['side'] * random.randint(100, 220), z + 40, props={'PickupKind': kind, 'Amount': amt}, folder='Pickups')
+    # collectibles (achievement_hooks.py): one of Emilia's drawings (Amount 3 = +3 Bond) and one numbered patient file per floor
+    if fl['gate'] != 'ending':
+        fileno = {'clinic': 1, 'wards': 3, 'deep': 10}[m] + k
+        r = rooms[(k + 5) % len(rooms)]
+        put(PU, '%s_Drawing' % L, r['x'] - 120, r['y'] + r['side'] * 160, z + 40, props={'PickupKind': 7, 'Amount': 3}, folder='Collectibles', tags=('Collectible',))
+        r = rooms[(k + 3) % len(rooms)]
+        put(PU, '%s_PatientFile' % L, r['x'] + 180, r['y'] + r['side'] * 40, z + 40, props={'PickupKind': 8, 'Amount': fileno}, folder='Collectibles', tags=('Collectible',))
 print(call(A, 'save_assets', {'asset_paths': []}))
