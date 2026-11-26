@@ -1,12 +1,15 @@
-"""FirePistol rewritten with auto-reload (0.5 s after the last round, or on an empty trigger pull with reserve left)."""
+"""FirePistol: the trace starts level with Max along the aim line (not at the camera, which can sit inside a wall when Max hugs cover), plus auto-reload (0.5 s after the last round, or on an empty trigger pull with reserve left)."""
 from ui_lib import call
 BT = 'editor_toolset.toolsets.blueprint.BlueprintTools'
 MAX = '/Game/HollowKin/Blueprints/Player/BP_Max.BP_Max'
 r = call(BT, 'write_graph_dsl', {'graph': {'refPath': MAX + ':FirePistol'}, 'code': '''(fn FirePistol ()
   (bind now (Utilities|Time|GetTimeSeconds))
   (bind cam (Game|GetPlayerCameraManager 0))
-  (bind start (Camera|GetCameraLocation cam))
-  (bind dir (Math|Random|RandomUnitVectorInConeInDegrees (Math|Vector|GetForwardVector (Camera|GetCameraRotation cam)) (+ 0.3 (* (- 100.0 (Variables|Default|GetSanity)) 0.04))))
+  (bind camL (Camera|GetCameraLocation cam))
+  (bind fwd (Math|Vector|GetForwardVector (Camera|GetCameraRotation cam)))
+  (bind along (Math|Vector|DotProduct (- (+ (Transformation|GetActorLocation) (Math|Vector|MakeVector 0.0 0.0 50.0)) camL) fwd))
+  (bind start (+ camL (* fwd (+ (Math|Float|Max(Float) along 0.0) 30.0))))
+  (bind dir (Math|Random|RandomUnitVectorInConeInDegrees fwd (+ 0.3 (* (- 100.0 (Variables|Default|GetSanity)) 0.04))))
   (bind endp (+ start (* dir (Variables|Default|GetPistolRange))))
   (if (and (Variables|Default|GetAiming) (>= (- now (Variables|Default|GetLastFireTime)) (Variables|Default|GetFireInterval)))
     (Variables|Default|SetLastFireTime now)

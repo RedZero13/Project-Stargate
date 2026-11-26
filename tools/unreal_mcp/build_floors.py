@@ -22,7 +22,8 @@ KINDS = {
     'barrier': 'SM_Medical_Barrier_01_p02', 'dentist': 'SM_Dentist_Chair_01_v01', 'scanmon': 'SM_Scanner_Monitor_01_v1',
     'beddev': 'SM_Bed_Devices_01_v01', 'bloodcab': 'SM_Blood_Cabinet_01_v01', 'cam': 'SM_Security_Cam_01_v01', 'lift': 'SM_Lift_02_p02',
     'reception': 'SM_Reception_02_v01', 'bench': 'SM_Bench_01_v01', 'disinf': 'SM_Disinfector_03_v01', 'cylinder': 'SM_Cylinder_01_v01',
-    'tray': 'SM_Tray_02_v02', 'washstand': 'SM_Washstand_02_v1', 'sign_xray': 'SM_Sign_Text_Radiology_X_Ray', 'sign_surgery': 'SM_Sign_Text_Surgery',
+    'tray': 'SM_Tray_02_v02', 'washstand': 'SM_Washstand_02_v1',
+    'booth': 'R:SM_Booth', 'rtable': 'R:SM_Table', 'rchair': 'R:SM_Chair', 'shelves': 'R:SM_WallShelves', 'mug': 'R:SM_CoffeMug', 'pot': 'R:SM_PlantPot', 'sign_xray': 'SM_Sign_Text_Radiology_X_Ray', 'sign_surgery': 'SM_Sign_Text_Surgery',
     'sign_nursery': 'SM_Sign_Text_Nursery', 'sign_lab': 'SM_Sign_Text_Laboratory', 'sign_reception': 'SM_Sign_Text_Reception',
 }
 ON_DESK = {'monitor', 'micro'}          # sit on a desk (75 cm) instead of the floor
@@ -83,7 +84,9 @@ def floor_data(d, fl):
         if f['z'] != z: continue
         k = f['kind']
         lift = 75 if k in ON_DESK else 230 if k in WALL else (f.get('dz', 0) if k.startswith('sign') else 0)
-        g = dict(f, mesh=HH + KINDS[k] + '.' + KINDS[k], lift=lift)
+        mk = KINDS[k]
+        mesh = ('/Game/RestaurantScene/Meshes/%s.%s' % (mk[2:], mk[2:])) if mk.startswith('R:') else HH + mk + '.' + mk
+        g = dict(f, mesh=mesh, lift=(75 if k == 'mug' else lift))
         if k.startswith('sign'):
             g['lift'] = 0; g['z'] = f['z']        # signs keep their own height (z already +250 in the layout)
         furn.append(g)

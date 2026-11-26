@@ -27,7 +27,9 @@ def img(c, a):
             'outlineSettings': {'width': 0, 'cornerRadii': {'x': 0, 'y': 0, 'z': 0, 'w': 0}, 'color': {'specifiedColor': {'r': 0, 'g': 0, 'b': 0, 'a': 0}, 'colorUseRule': 'UseColor_Specified'}, 'roundingType': 'FixedRadius', 'bUseBrushTransparency': False}}
 def var(*names):
     for n in names: call(U, 'ToggleWidgetAsVariable', {'widgetBlueprint': W.ref, 'widget': {'refPath': W.widget(n)}, 'bIsVariable': True})
-def tile(prefix, parent, label, icon, icol, clickable):
+ICONS = {k: '/Game/HollowKin/UI/Icons/T_Item_%s.T_Item_%s' % (k, k) for k in ('Ammo', 'Gel', 'Sed', 'Fuse', 'Parts', 'Chem', 'Bottle', 'Drawing')}
+OUTKEY = {'RAmmo': 'Ammo', 'RTonic': 'Sed', 'RGel': 'Gel'}
+def tile(prefix, parent, label, icon, icol, clickable, key=None):
     """Tile: [Button or Border] -> Border(frame) -> VBox: icon block, name, count."""
     if clickable:
         b, s = W.add('Button', prefix, parent)
@@ -42,9 +44,14 @@ def tile(prefix, parent, label, icon, icol, clickable):
     setp(sz, {'widthOverride': 190, 'heightOverride': 150, 'bOverride_WidthOverride': True, 'bOverride_HeightOverride': True})
     vb, _ = W.add('VerticalBox', prefix + 'VB', prefix + 'Size')
     isz, iss = W.add('SizeBox', prefix + 'IconSz', prefix + 'VB')
-    setp(isz, {'widthOverride': 76, 'heightOverride': 64, 'bOverride_WidthOverride': True, 'bOverride_HeightOverride': True}); bslot(iss, h='HAlign_Left')
-    ib, _ = box(prefix + 'Icon', prefix + 'IconSz', icol, 0.85, padding={'left': 4, 'top': 4, 'right': 4, 'bottom': 4}, horizontalAlignment='HAlign_Center', verticalAlignment='VAlign_Center')
-    T(prefix + 'IconT', prefix + 'Icon', icon, 20, '0b0f10', 1.0, 40, just='Center')
+    setp(isz, {'widthOverride': 96, 'heightOverride': 80, 'bOverride_WidthOverride': True, 'bOverride_HeightOverride': True}); bslot(iss, h='HAlign_Left')
+    if key in ICONS:   # rendered item model (same mesh as the pickup in the world) on a soft coloured disc
+        ib, _ = box(prefix + 'IconBg', prefix + 'IconSz', icol, 0.18, padding={'left': 2, 'top': 2, 'right': 2, 'bottom': 2}, horizontalAlignment='HAlign_Fill', verticalAlignment='VAlign_Fill')
+        im, _ = W.add('Image', prefix + 'Icon', prefix + 'IconBg')
+        setp(im, {'brush': {'resourceObject': {'refPath': ICONS[key]}, 'imageSize': {'x': 92, 'y': 76}, 'drawAs': 'Image'}})
+    else:
+        ib, _ = box(prefix + 'Icon', prefix + 'IconSz', icol, 0.85, padding={'left': 4, 'top': 4, 'right': 4, 'bottom': 4}, horizontalAlignment='HAlign_Center', verticalAlignment='VAlign_Center')
+        T(prefix + 'IconT', prefix + 'Icon', icon, 20, '0b0f10', 1.0, 40, just='Center')
     t, ts = T(prefix + 'Name', prefix + 'VB', label, 18, WHITE, 0.95, 60); bslot(ts, pad=(0, 10, 0, 2))
     t, ts = T(prefix + 'Count', prefix + 'VB', 'x 0', 26, WHITE, 1.0, 20); bslot(ts, pad=(0, 0, 0, 0))
     var(prefix, prefix + 'Count')
@@ -70,7 +77,7 @@ var('CasePages')
 g, _ = W.add('UniformGridPanel', 'ItemGrid', 'CasePages')
 setp(g, {'slotPadding': {'left': 10, 'top': 10, 'right': 10, 'bottom': 10}})
 for i, (k, label, icon, icol, mv, desc, use) in enumerate(ITEMS):
-    b, s = tile('It' + k, 'ItemGrid', label, icon, icol, bool(use))
+    b, s = tile('It' + k, 'ItemGrid', label, icon, icol, bool(use), key=k)
     setp(s, {'row': i // 4, 'column': i % 4})
 # workbench page: recipe cards
 rv, _ = W.add('VerticalBox', 'Recipes', 'CasePages')
@@ -82,10 +89,10 @@ for (rk, rlabel, ricon, rcol, ings, cfn, rdesc) in RECIPES:
         if j:
             t, ts = T(rk + 'Plus%d' % j, rk + 'Row', '+', 40, WHITE, 0.6, 0); bslot(ts, pad=(14, 0, 14, 0), v='VAlign_Center')
         lb, ic, cc = labels[ik]
-        b, s = tile(rk + ik, rk + 'Row', lb, ic, cc, False)
+        b, s = tile(rk + ik, rk + 'Row', lb, ic, cc, False, key=ik)
         bslot(s, v='VAlign_Center')
     t, ts = T(rk + 'Arrow', rk + 'Row', u'→', 48, AMBER, 0.9, 0); bslot(ts, pad=(26, 0, 26, 0), v='VAlign_Center')
-    b, s = tile(rk + 'Out', rk + 'Row', rlabel, ricon, rcol, False); bslot(s, v='VAlign_Center')
+    b, s = tile(rk + 'Out', rk + 'Row', rlabel, ricon, rcol, False, key=OUTKEY.get(rk)); bslot(s, v='VAlign_Center')
     cb, cbs = W.add('Button', rk + 'Craft', rk + 'Row')
     setp(cb, {'widgetStyle': {'normal': img(AMBER, 0.85), 'hovered': img(AMBER, 1.0), 'pressed': img(AMBER, 0.7), 'disabled': img(DIM, 0.6)}})
     bslot(cbs, pad=(32, 0, 0, 0), v='VAlign_Center')
@@ -95,7 +102,7 @@ for (rk, rlabel, ricon, rcol, ings, cfn, rdesc) in RECIPES:
 vb, s = W.add('VerticalBox', 'DescBox', 'Root'); cslot(s, 0.5, 1, 0, -150, 0, 0, alx=0.5, aly=1.0); setp(s, {'bAutoSize': True})
 T('DescName', 'DescBox', '', 30, WHITE, 1.0, 60, TITLE_F, just='Center'); T('DescText', 'DescBox', 'Hover over an item.', 22, WHITE, 0.8, 10, just='Center', wrapTextAt=900)
 var('DescName', 'DescText')
-T('Hints', 'Root', 'I / ESC   Close          CLICK   Use / Craft', 18, WHITE, 0.7, 120, just='Center')
+T('Hints', 'Root', 'B  Backpack     I  Workbench     ESC  Close     CLICK  Use / Craft', 18, WHITE, 0.7, 120, just='Center')
 for x in call(U, 'GetWidgets', {'widgetBlueprint': W.ref})['returnValue']['widgets']:
     if x['widget']['refPath'].endswith('.Hints'): cslot(x['slot']['refPath'], 0.5, 1, 0, -70, 0, 0, alx=0.5); setp(x['slot']['refPath'], {'bAutoSize': True})
 print(call(U, 'CompileWidgetBlueprint', {'widgetBlueprint': W.ref}))

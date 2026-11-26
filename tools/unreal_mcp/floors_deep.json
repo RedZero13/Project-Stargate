@@ -681,7 +681,7 @@
  },
  {
   "label": "B14",
-  "name": "SEDATION WARD",
+  "name": "SEDATION & ISOLATION",
   "z": -8000,
   "gate": "switches",
   "arrival": [
@@ -709,7 +709,7 @@
    },
    {
     "id": "N1",
-    "type": "icu",
+    "type": "isoward",
     "zone": "clinical",
     "x0": 2800,
     "y0": -925,
@@ -733,7 +733,7 @@
    },
    {
     "id": "S1",
-    "type": "private",
+    "type": "suite",
     "zone": "clinical",
     "x0": 1825,
     "y0": 225,
@@ -745,7 +745,7 @@
    },
    {
     "id": "S2",
-    "type": "private",
+    "type": "suite",
     "zone": "clinical",
     "x0": 2600,
     "y0": 225,

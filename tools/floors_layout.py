@@ -30,31 +30,34 @@ ZONE = {  # type -> (zone, floor material, display name)
     'reception': ('support', 'warm', 'RECEPTION'), 'pharmacy': ('support', 'warm', 'PHARMACY'), 'emergency': ('clinical', 'tile', 'EMERGENCY WARD'),
     'doctor': ('staff', 'warm', "DOCTOR'S ROOM"), 'office': ('staff', 'warm', 'OFFICE'), 'records': ('staff', 'warm', 'RECORDS'),
     'security': ('staff', 'warm', 'SECURITY'), 'wc': ('service', 'concrete', 'W.C.'), 'store': ('service', 'concrete', 'STORE'),
-    'sluice': ('service', 'concrete', 'SLUICE'), 'plant': ('service', 'concrete', 'PLANT ROOM'), 'storage': ('service', 'concrete', 'SPECIMEN STORE'),
+    'sluice': ('service', 'concrete', 'SLUICE'),
+    'maternity': ('clinical', 'warm', 'MATERNITY WARD'), 'opd': ('support', 'warm', 'OPD CONSULT'), 'break': ('staff', 'warm', 'STAFF BREAK ROOM'),
+    'recreation': ('support', 'warm', 'RECREATION ROOM'), 'lounge': ('support', 'warm', 'FAMILY LOUNGE'), 'suite': ('clinical', 'warm', 'PRIVATE SUITE'),
+    'commonward': ('clinical', 'tile', 'COMMON WARD'), 'isoward': ('clinical', 'tile', 'ISOLATION WARD'), 'plant': ('service', 'concrete', 'PLANT ROOM'), 'storage': ('service', 'concrete', 'SPECIMEN STORE'),
 }
 # floor programs: north rooms west->east and south rooms west->east as (type, relative width)
 MAPS = {
     'wards': [
-        ('B2', 'ADMISSIONS', 'keycard', (1.0, 0.82, 0.6),
-         [('waiting', 3), ('reception', 2), ('doctor', 1.2), ('doctor', 1.2)], [('pharmacy', 2), ('emergency', 3), ('wc', 1), ('office', 1.4)]),
+        ('B2', 'COMMON WARDS', 'keycard', (1.0, 0.82, 0.6),
+         [('commonward', 3), ('commonward', 3), ('store', 1)], [('nurse', 1.4), ('recreation', 2.4), ('wc', 1), ('break', 1.4)]),
         ('B3', 'PAEDIATRIC WARD', 'switches', (1.0, 0.75, 0.75),
-         [('ward', 3), ('ward', 3), ('private', 1.5)], [('nicu', 2.2), ('nurse', 1.4), ('wc', 1), ('store', 1), ('private', 1.5)]),
+         [('ward', 3), ('recreation', 2.2), ('private', 1.5)], [('nicu', 2.2), ('nurse', 1.4), ('wc', 1), ('store', 1), ('lounge', 1.5)]),
         ('B4', 'RADIOLOGY', 'keycard', (0.6, 0.85, 1.0),
          [('xray', 2), ('control', 1), ('xray', 2), ('mri', 2.6)], [('waiting', 2.2), ('nurse', 1.2), ('mri', 2.6), ('wc', 1), ('store', 1)]),
         ('B5', 'SURGERY', 'power', (0.75, 1.0, 0.85),
-         [('ot', 3), ('scrub', 1), ('ot', 3)], [('recovery', 3), ('plant', 1.4), ('nurse', 1.2), ('sluice', 1), ('store', 1)]),
+         [('ot', 3), ('scrub', 1), ('ot', 3)], [('recovery', 3), ('plant', 1.4), ('nurse', 1.2), ('sluice', 1), ('break', 1.2)]),
         ('B6', 'PHARMACY & BLOOD LAB', 'switches', (1.0, 0.55, 0.5),
          [('pharmacy', 3), ('blood', 2), ('lab', 2)], [('lab', 2), ('cold', 2), ('office', 1.2), ('wc', 1), ('store', 1)]),
         ('B7', 'MORGUE', 'keycard', (0.55, 0.75, 0.95),
          [('morgue', 3), ('autopsy', 2), ('cold', 2)], [('viewing', 2), ('office', 1.2), ('store', 1), ('sluice', 1), ('morgue', 2.4)]),
         ('B8', 'SECURITY & RECORDS', 'power', (0.9, 0.9, 1.0),
-         [('security', 2), ('records', 3), ('office', 1.2)], [('records', 2), ('plant', 2), ('office', 1.2), ('wc', 1), ('store', 1)]),
+         [('security', 2), ('records', 3), ('office', 1.2)], [('records', 2), ('plant', 2), ('break', 1.4), ('wc', 1), ('store', 1)]),
     ],
     'clinic': [
-        ('G', 'GROUND FLOOR  //  RECEPTION & OPD', 'keycard', (1.0, 0.97, 0.92),
-         [('waiting', 3), ('reception', 2), ('doctor', 1.2), ('doctor', 1.2)], [('pharmacy', 2), ('emergency', 3), ('wc', 1), ('office', 1.4)]),
-        ('F1', 'FIRST FLOOR  //  WARDS', 'switches', (1.0, 0.97, 0.92),
-         [('ward', 3), ('private', 1.5), ('private', 1.5)], [('nurse', 1.4), ('icu', 3), ('wc', 1), ('store', 1)]),
+        ('G', 'GROUND FLOOR  //  OPD & EMERGENCY', 'keycard', (1.0, 0.97, 0.92),
+         [('reception', 2), ('waiting', 2.6), ('opd', 1.2), ('opd', 1.2)], [('emergency', 3), ('pharmacy', 1.6), ('wc', 1), ('break', 1.5)]),
+        ('F1', 'FIRST FLOOR  //  MATERNITY & NICU', 'switches', (1.0, 0.97, 0.92),
+         [('maternity', 3), ('suite', 1.6), ('suite', 1.6)], [('nicu', 2.4), ('nurse', 1.2), ('lounge', 1.8), ('wc', 1)]),
     ],
     'deep': [
         ('B10', 'SPECIMEN STORAGE', 'keycard', (0.6, 0.9, 0.85),
@@ -65,8 +68,8 @@ MAPS = {
          [('ot', 2.4), ('testing', 2), ('morgue', 2)], [('testing', 2), ('lab', 2), ('plant', 1.6), ('sluice', 1)]),
         ('B13', 'OBSERVATION', 'keycard', (0.7, 0.8, 1.0),
          [('observe', 2), ('testing', 2), ('observe', 2)], [('security', 2), ('records', 2), ('office', 1.2), ('wc', 1)]),
-        ('B14', 'SEDATION WARD', 'switches', (0.8, 0.7, 1.0),
-         [('icu', 3), ('icu', 3)], [('nurse', 1.2), ('private', 1.5), ('private', 1.5), ('store', 1), ('wc', 1)]),
+        ('B14', 'SEDATION & ISOLATION', 'switches', (0.8, 0.7, 1.0),
+         [('icu', 3), ('isoward', 3)], [('nurse', 1.2), ('suite', 1.5), ('suite', 1.5), ('store', 1), ('wc', 1)]),
         ('B15', 'ISOLATION CHAMBERS', 'ending', (0.75, 0.7, 1.0),
          [('iso', 1), ('iso', 1), ('iso', 1)], [('iso', 1), ('observe', 1.2), ('iso', 1), ('iso', 1)]),
     ],
@@ -145,11 +148,40 @@ def furnish(t, x0, y0, x1, y1, side):
     elif t in ('doctor', 'office'):
         out += [('desk', cx, back + (-side) * 40, face), ('chair', cx, back + (-side) * 110, face + 180), ('monitor', cx, back + (-side) * 30, face),
                 ('cabinet', x1 - 70, back, face), ('treat' if t == 'doctor' else 'rack', x0 + 110, cy, 90 if t == 'doctor' else face)]
+    elif t in ('commonward', 'isoward'):
+        n = max(2, int((w - 100) // 230))
+        row('bed', n, by, 90 if side < 0 else 270, 140); row('iv', n, back, 0, 230)
+        row('bed', max(1, n - 1), y0 + 160 if side > 0 else y1 - 160, 270 if side < 0 else 90, 230)     # second row facing
+        if t == 'isoward': row('barrier', n - 1, cy, 0, 250)
+        else: row('curtain', n - 1, by + (-side) * 30, 0, 250)
+        out.append(('cabinet', x1 - 70, front, 90))
+    elif t == 'maternity':
+        n = max(1, int((w - 100) // 280))
+        row('bed', n, by, 90 if side < 0 else 270, 160); row('beddev', n, by + (-side) * 150, face, 250)   # bassinet/monitor beside each bed
+        row('chair', n, by + (-side) * 220, face + 180, 200); row('curtain', max(1, n - 1), cy, 0, 300)
+        out.append(('bedside', x1 - 80, back, face))
+    elif t == 'suite':
+        out += [('bed', cx + 40, by, 90 if side < 0 else 270), ('bedside', cx + 170, back, face), ('booth', x0 + 90, cy + side * 40, 90),
+                ('rtable', x0 + 120, front - side * -40, 0), ('cabinet', x1 - 70, front, 90), ('pot', x1 - 70, back, 0), ('monitor', x0 + 90, back, face)]
+    elif t == 'opd':
+        out += [('desk', cx + 40, back + (-side) * 40, face), ('chair', cx + 40, back + (-side) * 110, face + 180), ('rchair', cx + 40, back + (-side) * 220, face),
+                ('treat', x0 + 100, cy, 90), ('curtain', x0 + 200, cy, 90), ('washstand', x1 - 60, front, 270), ('monitor', cx + 40, back + (-side) * 30, face)]
+    elif t == 'break':
+        out += [('rtable', cx, cy, 0), ('rchair', cx - 70, cy, 90), ('rchair', cx + 70, cy, 270), ('rchair', cx, cy - 70, 0), ('fridge', x1 - 60, back, face),
+                ('washstand', x0 + 70, back, face), ('shelves', cx, back, face), ('mug', cx + 20, cy + 10, 0), ('rack', x1 - 60, front, 270)]
+    elif t == 'recreation':
+        for i in range(max(1, int(w // 300))):
+            tx = x0 + 150 + i * 280
+            out += [('rtable', tx, cy, 0), ('rchair', tx - 70, cy, 90), ('rchair', tx + 70, cy, 270)]
+        out += [('shelves', x0 + 120, back, face), ('booth', x1 - 110, back + (-side) * 60, face), ('pot', x1 - 60, front, 0), ('monitor', cx, back, face)]
+    elif t == 'lounge':
+        out += [('booth', x0 + 110, back + (-side) * 60, face), ('booth', x1 - 110, back + (-side) * 60, face), ('rtable', cx, cy, 0),
+                ('pot', x0 + 60, front, 0), ('pot', x1 - 60, front, 0), ('shelves', cx, back, face), ('mug', cx, cy, 0)]
     elif t == 'iso':
         out += [('bed', cx, back + (-side) * 50, 90 if side < 0 else 270), ('iv', cx + 110, back, 0)]
     return out
 
-SIGN = {'xray': 'sign_xray', 'mri': 'sign_xray', 'ot': 'sign_surgery', 'scrub': 'sign_surgery', 'nicu': 'sign_nursery', 'lab': 'sign_lab',
+SIGN = {'maternity': 'sign_nursery', 'opd': 'sign_reception', 'emergency': 'sign_reception', 'xray': 'sign_xray', 'mri': 'sign_xray', 'ot': 'sign_surgery', 'scrub': 'sign_surgery', 'nicu': 'sign_nursery', 'lab': 'sign_lab',
         'blood': 'sign_lab', 'testing': 'sign_lab', 'reception': 'sign_reception', 'waiting': 'sign_reception'}
 
 def dressing(label, z, rooms, doors, clean, rnd):
