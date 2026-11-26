@@ -72,3 +72,10 @@ On Windows, the ICU copy step is usually not needed; if the game crashes at star
 ## Final Mac build (2026-11-26)
 - Compressed Shipping, includes Deep Labs. Built in ~1 min (incremental cook). App 1.4 GB, zip 1.0 GB (`~/Documents/Unreal Projects/Builds/HollowKin-Mac.zip`, contains `HollowKin.app` with the ICU data copied in).
 - RAM (macOS footprint, editor also open): **5.7 GB on the main menu** (was 6.4 GB before the caps, 8+ GB originally), **~7.7 GB in the wing**. Lumen is the biggest remaining cost (about −2.3 GB if switched off). In-game, Options → Graphics quality MEDIUM/LOW lowers it.
+
+## Two builds: regular + playtest (2026-11-26)
+- **HollowKin.app / HollowKin-Mac.zip**: the regular game (Shipping, no logging, smallest and fastest).
+- **HollowKin-Playtest.app / HollowKin-Playtest-Mac.zip**: a Development build with the playtest logger. Every 2 seconds it records Max's position, floor, health, sanity, ammo, reserve, gels, pistol/aim/torch state, plus every on-screen message, objective change, damage hit (amount and health before), death (cause: health or sanity breakdown), checkpoint, pause, lift ride, keycard, switch step (right/wrong), generator, cutscene start/end, and enemy kills. Lines start with `HKLOG|time|level|position|event`.
+- After a playtest session run `bash tools/playtest_report.sh`. It writes `~/Desktop/HollowKin_Playtest_<date>.txt` (the HKLOG lines + engine warnings/errors). Send that file to Claude for bug analysis.
+- Raw log location (if needed): `~/Library/Containers/com.YourCompany.HollowKin/Data/Library/Logs/HollowKin/HollowKin.log`.
+- Build commands: Shipping as above; playtest = same command with `-clientconfig=Development -stagingdirectory=<repo>/HollowKin/Saved/StagedPlaytest`.
