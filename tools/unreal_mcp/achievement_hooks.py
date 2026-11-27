@@ -40,8 +40,8 @@ def addvars(bp, vs):
     for n, t in vs:
         if n not in have: call(BT, 'add_variable', {'blueprint': {'refPath': bp}, 'name': n, 'type_name': t})
     call(BT, 'compile_blueprint', {'blueprint': {'refPath': bp}, 'warnings_as_errors': False})
-addvars(MAX, [('Drawings', 'int'), ('Files', 'int')])
-addvars(GI, [('CDrawings', 'int'), ('CFiles', 'int')])
+addvars(MAX, [('Drawings', 'int'), ('Files', 'int'), ('RunKills', 'int')])
+addvars(GI, [('CDrawings', 'int'), ('CFiles', 'int'), ('CRunKills', 'int')])
 GIC = '(Utilities|Casting|CastToBP_HKGameInstance (Game|GetGameInstance))'
 fn(MAX, 'Ach', [('Id', 'string'), ('Title', 'string')], '''(fn Ach (Id Title)
   (bind gi %s
@@ -54,7 +54,7 @@ fn(MAX, 'AchCraft', [], '''(fn AchCraft ()
 # ---- carry the per-run counters between levels (same pattern as deep_links.py) ----
 F = [('Health', 'float'), ('Sanity', 'float'), ('Bond', 'float'), ('Taint', 'float'),
      ('Ammo', 'int'), ('ReserveAmmo', 'int'), ('Gels', 'int'), ('Sedatives', 'int'), ('Bottles', 'int'), ('Parts', 'int'), ('Chem', 'int'), ('Tapes', 'int'),
-     ('Drawings', 'int'), ('Files', 'int')]
+     ('Drawings', 'int'), ('Files', 'int'), ('RunKills', 'int')]
 store = '\n      '.join('(Class|BPHKGameInstance|SetC%s :self gi :C%s (Variables|Default|Get%s))' % (n, n, n) for n, t in F)
 restore = '\n        '.join('(Variables|Default|Set%s (Class|BPHKGameInstance|GetC%s :self gi))' % (n, n) for n, t in F)
 w(MAX + ':StoreCarry', '''(fn StoreCarry ()
@@ -114,7 +114,15 @@ w(MAX + ':Collect', '''(fn Collect (Kind Amount)
                     (if (or (== (Variables|Default|GetFiles) 5) (== (Variables|Default|GetFiles) 10))
                       (Variables|Default|SetReserveAmmo (+ (Variables|Default|GetReserveAmmo) 6))
                       (CallFunction|ShowNote :Msg (Utilities|String|Append (Utilities|String|Append "PATIENT FILES  " (Utilities|String|ToString(Integer) (Variables|Default|GetFiles))) "/%d.   A security locker code was clipped to them:  +6 ROUNDS") :Seconds 5.0))
-                    (CallFunction|RecordRun)))))))))))''' % (
+                    (CallFunction|RecordRun)
+                    (elif (== Kind 9)
+                      (Variables|Default|SetHealth 100.0)
+                      (Variables|Default|SetSanity 100.0)
+                      (Variables|Default|SetTaint (+ (Variables|Default|GetTaint) 15.0))
+                      (Audio|PlaySound2D "/Game/Interface_And_Item_Sounds/WAV/Special_Powerup_03.Special_Powerup_03" 0.5)
+                      (CallFunction|HKLog :Msg "COLLECT serum")
+                      (CallFunction|Ach :Id "serum" :Title "Side Effects")
+                      (CallFunction|ShowNote :Msg "L-7 SERUM.  You push the needle in before you can think. The pain is gone, your head is clear... and something under your skin is listening now." :Seconds 6.0))))))))))))''' % (
     N('HEALTH GEL  +1     (open your backpack with B to use it)'), N('SEDATIVE  +1     (open your backpack with B to use it)'),
     N('FUSE COLLECTED'), N('SCRAP PARTS  +1     (workbench: I)', 2.5), N('CHEMICALS  +1     (workbench: I)', 2.5),
     N('GLASS BOTTLE  +1     (G throws it to lure Hollows away)', 2.5), TOTAL_DRAWINGS, TOTAL_DRAWINGS, lore, TOTAL_FILES))
@@ -163,6 +171,15 @@ w(MAX + ':HKLog', '''(fn HKLog (Msg)
         (if (Utilities|String|Contains Msg "ENDING KIN")
           (Class|BPHKGameInstance|Unlock :self gi :Id "end_kin" :Title "Kin")
           (Class|BPHKGameInstance|AddEnding :self gi :Name "KIN"))
+        (if (Utilities|String|Contains Msg "ENDING HOLLOW")
+          (Class|BPHKGameInstance|Unlock :self gi :Id "end_hollow" :Title "Hollow")
+          (Class|BPHKGameInstance|AddEnding :self gi :Name "HOLLOW"))
+        (if (Utilities|String|Contains Msg "ENDING SIXDOORS")
+          (Class|BPHKGameInstance|Unlock :self gi :Id "end_six" :Title "Six Doors")
+          (Class|BPHKGameInstance|AddEnding :self gi :Name "SIXDOORS"))
+        (if (Utilities|String|Contains Msg "ENDING LULLABY")
+          (Class|BPHKGameInstance|Unlock :self gi :Id "end_lullaby" :Title "Lullaby")
+          (Class|BPHKGameInstance|AddEnding :self gi :Name "LULLABY"))
         (if (Utilities|String|Contains Msg "ENDING LANTERN")
           (Class|BPHKGameInstance|Unlock :self gi :Id "end_lantern" :Title "Lantern")
           (Class|BPHKGameInstance|AddEnding :self gi :Name "LANTERN")))
@@ -197,6 +214,7 @@ print(call(BT, 'compile_blueprint', {'blueprint': {'refPath': MAX}, 'warnings_as
 w(DR + ':DroneDie', '''(fn DroneDie ()
   (Variables|Default|SetDead true)
   (bind m (Utilities|Casting|CastToBP_Max (Game|GetPlayerPawn 0)))
+  (Class|BPMax|SetRunKills :self m :RunKills (+ (Class|BPMax|GetRunKills :self m) 1))
   (Class|BPMax|HKLog :self m :Msg (Utilities|String|Append "ENEMY killed " (Utilities|String|ToString(Vector) (Transformation|GetActorLocation))))
   (Collision|SetCollisionEnabled :self (Variables|Character|GetCapsuleComponent) :NewType "NoCollision")
   (Collision|SetCollisionProfileName :self (Variables|Character|GetMesh) :InCollisionProfileName "Ragdoll")

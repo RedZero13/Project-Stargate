@@ -5,7 +5,7 @@ SID=open(D+'/sid').read().strip()
 def call(toolset,tool,args):
     p={'jsonrpc':'2.0','id':3,'method':'tools/call','params':{'name':'call_tool','arguments':{'toolset_name':toolset,'tool_name':tool,'arguments':args}}}
     r=urllib.request.Request('http://127.0.0.1:8000/mcp',json.dumps(p).encode(),{'Content-Type':'application/json','Accept':'application/json, text/event-stream','Mcp-Session-Id':SID})
-    d=json.load(urllib.request.urlopen(r,timeout=120))
+    d=json.load(urllib.request.urlopen(r,timeout=int(os.environ.get("HK_TIMEOUT","600"))))
     res=d.get('result',d)
     txt=''.join(c.get('text','') for c in res.get('content',[])) if isinstance(res,dict) and 'content' in res else json.dumps(res)
     try: return json.loads(txt)

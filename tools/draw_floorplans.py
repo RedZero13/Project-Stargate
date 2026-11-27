@@ -29,16 +29,16 @@ SIZE = {'bed': (95, 210), 'stretcher': (70, 200), 'treat': (80, 200), 'xray': (1
         'angiomon': (100, 40), 'bloodtest': (80, 60), 'micro': (40, 40)}
 def sheet(fl, d):
     z = fl['z']; lab = fl['label']
-    xs = [-50, FL.EAST + 1150]; ys = [-FL.CORR - FL.DEPTH - 80, FL.CORR + FL.DEPTH + 80]
+    xs = [-300, FL.EAST + 1400]; ys = [-FL.CORR - FL.DEPTH - 80, FL.CORR + FL.DEPTH + 80]
     W = int((xs[1] - xs[0]) * SC) + 2 * PAD; Hh = int((ys[1] - ys[0]) * SC) + 2 * PAD + 120
     im = Image.new('RGB', (W, Hh), BG); dr = ImageDraw.Draw(im)
     for gx in range(0, W, 25): dr.line([(gx, 0), (gx, Hh)], fill=GRID)
     for gy in range(0, Hh, 25): dr.line([(0, gy), (W, gy)], fill=GRID)
     P = lambda x, y: (PAD + (x - xs[0]) * SC, PAD + 60 + (y - ys[0]) * SC)
-    rooms = fl['cores'] + fl['rooms']
+    rooms = fl['cores'] + fl.get('wcs', []) + fl['rooms']
     # zones
-    corr = (FL.WEST - 350, -FL.CORR, FL.EAST + 350, FL.CORR)
-    dr.rectangle([P(corr[0], corr[1]), P(corr[2], corr[3])], fill=(34, 64, 98))
+    for corr in fl.get('corridors', [(FL.WEST - 350, -FL.CORR, FL.EAST + 350, FL.CORR)]):
+        dr.rectangle([P(corr[0], corr[1]), P(corr[2], corr[3])], fill=(34, 64, 98))
     for r in rooms:
         dr.rectangle([P(r['x0'], r['y0']), P(r['x1'], r['y1'])], fill=ZC.get(r['zone'], ZC['core']))
     # furniture

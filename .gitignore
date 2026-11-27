@@ -42,3 +42,7 @@ HollowKin/Content/__ExternalObjects__/*
 !HollowKin/Content/__ExternalActors__/ThirdPerson/
 !HollowKin/Content/__ExternalObjects__/ThirdPerson/
 HollowKin/*.png
+
+tools/voice/.venv/
+tools/voice/models/
+tools/voice/out/

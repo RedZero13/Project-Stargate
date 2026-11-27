@@ -20,7 +20,7 @@ KINDS = {
     'wastebin': 'SM_Medical_Waste_Bin_02_v01', 'curtain': 'SM_Curtain_01_v5', 'bedside': 'SM_Bedside_Table_04_p01',
     'cabinet': 'SM_Cabinet_01_p3', 'desk': 'SM_Desk_01_p02', 'chair': 'SM_Office_Chair_01_v01', 'monitor': 'SM_Computer_Monitor_01_v01',
     'barrier': 'SM_Medical_Barrier_01_p02', 'dentist': 'SM_Dentist_Chair_01_v01', 'scanmon': 'SM_Scanner_Monitor_01_v1',
-    'beddev': 'SM_Bed_Devices_01_v01', 'bloodcab': 'SM_Blood_Cabinet_01_v01', 'cam': 'SM_Security_Cam_01_v01', 'lift': 'SM_Lift_02_p02',
+    'beddev': 'SM_Bed_Devices_01_v01', 'bloodcab': 'SM_Blood_Cabinet_01_v01', 'cam': 'SM_Security_Cam_01_v01', 'lift': 'SM_Lift_02_p02', 'liftframe': 'SM_Lift_01_p01', 'toilet': 'SM_Toilet_01_v1', 'sink': 'SM_Washstand_01_v1', 'mirror': 'SM_Mirror_01_v1', 'box3': 'SM_Box_01_v01', 'cart': 'R:SM_UtilityCart', 'micro2': 'SM_Pathology_Microscope_01_v01', 'liftdoorL': 'SM_Lift_01_p02', 'liftdoorR': 'SM_Lift_01_p03',
     'reception': 'SM_Reception_02_v01', 'bench': 'SM_Bench_01_v01', 'disinf': 'SM_Disinfector_03_v01', 'cylinder': 'SM_Cylinder_01_v01',
     'tray': 'SM_Tray_02_v02', 'washstand': 'SM_Washstand_02_v1',
     'booth': 'R:SM_Booth', 'rtable': 'R:SM_Table', 'rchair': 'R:SM_Chair', 'shelves': 'R:SM_WallShelves', 'mug': 'R:SM_CoffeMug', 'pot': 'R:SM_PlantPot', 'sign_xray': 'SM_Sign_Text_Radiology_X_Ray', 'sign_surgery': 'SM_Sign_Text_Surgery',
@@ -28,6 +28,7 @@ KINDS = {
 }
 ON_DESK = {'monitor', 'micro'}          # sit on a desk (75 cm) instead of the floor
 WALL = {'cam'}                          # mounted high
+MIRROR = {'mirror'}                     # over the sinks
 TEMPLATE = r'''
 import json
 D = json.loads(%(data)r)
@@ -83,7 +84,7 @@ def floor_data(d, fl):
     for f in d['furnish']:
         if f['z'] != z: continue
         k = f['kind']
-        lift = 75 if k in ON_DESK else 230 if k in WALL else (f.get('dz', 0) if k.startswith('sign') else 0)
+        lift = 75 if k in ON_DESK else 230 if k in WALL else 115 if k in MIRROR else (f.get('dz', 0) if k.startswith('sign') else 0)
         mk = KINDS[k]
         mesh = ('/Game/RestaurantScene/Meshes/%s.%s' % (mk[2:], mk[2:])) if mk.startswith('R:') else HH + mk + '.' + mk
         g = dict(f, mesh=mesh, lift=(75 if k == 'mug' else lift))

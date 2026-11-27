@@ -31,9 +31,12 @@ I = 'Utilities|String|ToString(Integer)'
 header = cat(['"UNLOCKED  "', '(%s %s)' % (I, count), '" / %d\\n"' % len(ACH),
               '"BEST RUN:  Emilia\'s drawings  "', '(%s (Class|BPProgressSave|GetBestDrawings :self p))' % I, '" / %d      Patient files  "' % TOTAL_DRAWINGS,
               '(%s (Class|BPProgressSave|GetBestFiles :self p))' % I, '" / %d\\n"' % TOTAL_FILES,
-              '"ENDINGS SEEN:  "', '(select (Utilities|String|Contains (Class|BPProgressSave|GetEndings :self p) "|LANTERN|") "Lantern  " "")',
+              '"ENDINGS SEEN (of 6):  "', '(select (Utilities|String|Contains (Class|BPProgressSave|GetEndings :self p) "|LANTERN|") "Lantern  " "")',
               '(select (Utilities|String|Contains (Class|BPProgressSave|GetEndings :self p) "|KIN|") "Kin  " "")',
-              '(select (Utilities|String|Contains (Class|BPProgressSave|GetEndings :self p) "|HOMECOMING|") "Homecoming" "")',
+              '(select (Utilities|String|Contains (Class|BPProgressSave|GetEndings :self p) "|HOMECOMING|") "Homecoming  " "")',
+              '(select (Utilities|String|Contains (Class|BPProgressSave|GetEndings :self p) "|HOLLOW|") "Hollow  " "")',
+              '(select (Utilities|String|Contains (Class|BPProgressSave|GetEndings :self p) "|SIXDOORS|") "Six Doors  " "")',
+              '(select (Utilities|String|Contains (Class|BPProgressSave|GetEndings :self p) "|LULLABY|") "Lullaby" "")',
               '"\\nHOLLOWS PUT DOWN:  "', '(%s (Class|BPProgressSave|GetKills :self p))' % I,
               '"\\n\\nREWARDS:  every 5 drawings hides a health gel, every 5 patient files a box of rounds.\\n\\n"'])
 dsl = '''(event UserInterface|EventConstruct
@@ -60,6 +63,7 @@ b2[6]('BtnAchievements', 'Left', 'ACHIEVEMENTS')
 f = json.loads(call(O, 'get_properties', {'instance': {'refPath': W2.widget('BtnQuitLabel')}, 'properties': ['Font']})['returnValue'])['Font']
 setp(W2.widget('BtnAchievementsLabel'), {'font': f})
 call(U, 'ToggleWidgetAsVariable', {'widgetBlueprint': W2.ref, 'widget': {'refPath': W2.widget('BtnAchievements')}, 'bIsVariable': True})
+import subprocess, sys; subprocess.run([sys.executable, 'menu_fit.py'])   # align the new button with the others
 # same big hit area as the other buttons (bigger_buttons.py)
 PAD = {'left': 20, 'top': 10, 'right': 80, 'bottom': 10}
 for x in call(U, 'GetWidgets', {'widgetBlueprint': W2.ref})['returnValue']['widgets']:

@@ -69,36 +69,37 @@ def wall_decal(L, cat, x, wall_y, normal, z, size):
 for fl in floors:
     L = fl['label']
     if only and L not in only: continue
-    z = fl['z']; rnd = random.Random(hash(L) & 0xffffff); random.seed(hash(L) & 0xffff)
+    z = fl['z']; rnd = random.Random(sum(map(ord, L)) * 31 + 5); random.seed(sum(map(ord, L)))
     for a in call(S, 'find_actors', {'name': '', 'tag': 'Dress_' + L, 'collision_channels': []})['returnValue']:
         call(S, 'remove_from_scene', {'actor': a})
     clean = (m == 'clinic')
-    # ---------- corridor ----------
-    cx0, cx1 = 1200 - 350, 4400 + 350
-    for side in (-1, 1):
-        wy = side * CORR; nrm = -side      # wall plane and the direction into the corridor
-        doors = [(r['x'] - 140, r['x'] + 140) for r in fl['rooms'] if r['side'] == side]
-        free = lambda x: all(not (a - 60 < x < b + 60) for a, b in doors)
-        xs = [x for x in range(int(cx0) + 150, int(cx1) - 150, 120) if free(x)]
-        for i, x in enumerate(xs):
-            if i % 9 == 2: prop(L, 'bench', x, wy, z, wall=('y', wy, nrm))
-            elif i % 9 == 5: prop(L, rnd.choice(['poster', 'poster2', 'board']), x, wy, z, wall=('y', wy, nrm))
-            elif i % 9 == 7: prop(L, 'extbox' if side < 0 else 'firept', x, wy, z, wall=('y', wy, nrm))
-        for x in range(int(cx0) + 400, int(cx1) - 200, 900):
-            prop(L, 'ac', x, wy, z, wall=('y', wy, nrm))
-    prop(L, 'exit', cx1 - 40, -CORR, z, wall=('y', -CORR, 1)); prop(L, 'exit', cx0 + 120, CORR, z, wall=('y', CORR, -1))
-    prop(L, 'wheelchair', 2050, CORR - 70, z, yaw=200); prop(L, 'stretcher', 3550, -CORR + 70, z, yaw=0)
-    if not clean or rnd.random() < 0.5: prop(L, 'cart', 2900, CORR - 60, z, yaw=90)
-    for k in range(int(6 * GRIME) + 2): prop(L, rnd.choice(['paper', 'paper2']), rnd.uniform(cx0, cx1), rnd.uniform(-120, 120), z, yaw=rnd.uniform(0, 360))
-    # corridor decals
-    for k in range(int(10 * GRIME) + 2): decal(L, 'dirt', rnd.uniform(cx0, cx1), rnd.uniform(-150, 150), z + 2, rnd.uniform(90, 170), yaw=rnd.uniform(0, 360))
-    for k in range(int(6 * GRIME) + 1):
-        side = rnd.choice((-1, 1)); wall_decal(L, rnd.choice(['grunge', 'grunge', 'leak', 'crack', 'chip']), rnd.uniform(cx0, cx1), side * CORR, -side, rnd.uniform(60, 280), rnd.uniform(70, 150))
-    for k in range(int(5 * GRIME * GRIME)):
-        decal(L, 'blood', rnd.uniform(cx0, cx1), rnd.uniform(-140, 140), z + 2, rnd.uniform(50, 110), yaw=rnd.uniform(0, 360))
-    if GRIME > 0.5:
-        for k in range(int(3 * GRIME)):
-            side = rnd.choice((-1, 1)); wall_decal(L, 'bloodwall', rnd.uniform(cx0, cx1), side * CORR, -side, rnd.uniform(80, 200), rnd.uniform(60, 120))
+    # ---------- corridors (any shape: spine / ring / jog / hall) ----------
+    FR = fl.get('floor_rects', [])
+    def solid(x, y):        # is (x, y) inside a wall (not on any floor area)?
+        return not any(r[0] - 1 <= x <= r[2] + 1 and r[1] - 1 <= y <= r[3] + 1 for r in FR)
+    cors = fl.get('corridors', [[850, -CORR, 4750, CORR]])
+    for ci, (cx0, cy0, cx1, cy1) in enumerate(cors):
+        if cx1 - cx0 < 600: continue
+        for wy, nrm in ((cy0, 1), (cy1, -1)):          # the two long walls
+            xs = [x for x in range(int(cx0) + 150, int(cx1) - 150, 120)
+                  if solid(x, wy - nrm * 13) and solid(x - 60, wy - nrm * 13) and solid(x + 60, wy - nrm * 13)]
+            for i, x in enumerate(xs):
+                if i % 9 == 2: prop(L, 'bench', x, wy, z, wall=('y', wy, nrm))
+                elif i % 9 == 5: prop(L, rnd.choice(['poster', 'poster2', 'board']), x, wy, z, wall=('y', wy, nrm))
+                elif i % 9 == 7: prop(L, 'extbox' if nrm > 0 else 'firept', x, wy, z, wall=('y', wy, nrm))
+                elif i % 9 == 0 and i: prop(L, 'ac', x, wy, z, wall=('y', wy, nrm))
+            if xs and nrm > 0 and ci == 0: prop(L, 'exit', xs[-1], wy, z, wall=('y', wy, nrm))
+        cxm = (cx0 + cx1) / 2; cym = (cy0 + cy1) / 2; hw = (cy1 - cy0) / 2 - 70
+        if ci == 0:
+            prop(L, 'wheelchair', cx0 + 0.27 * (cx1 - cx0), cy1 - 70, z, yaw=200); prop(L, 'stretcher', cx0 + 0.7 * (cx1 - cx0), cy0 + 70, z, yaw=0)
+            if not clean or rnd.random() < 0.5: prop(L, 'cart', cxm, cy1 - 60, z, yaw=90)
+        area = (cx1 - cx0) * (cy1 - cy0) / 1e6
+        for k in range(int((3 * GRIME + 1) * area)): prop(L, rnd.choice(['paper', 'paper2']), rnd.uniform(cx0 + 40, cx1 - 40), rnd.uniform(cy0 + 40, cy1 - 40), z, yaw=rnd.uniform(0, 360))
+        for k in range(int((5 * GRIME + 1) * area)): decal(L, 'dirt', rnd.uniform(cx0, cx1), rnd.uniform(cy0 + 30, cy1 - 30), z + 2, rnd.uniform(90, 170), yaw=rnd.uniform(0, 360))
+        for k in range(int(3 * GRIME * GRIME * area)): decal(L, 'blood', rnd.uniform(cx0, cx1), rnd.uniform(cy0 + 30, cy1 - 30), z + 2, rnd.uniform(50, 110), yaw=rnd.uniform(0, 360))
+        for k in range(int((3 * GRIME + 1) * area / 2)):
+            wy, nrm = rnd.choice(((cy0, 1), (cy1, -1))); x = rnd.uniform(cx0 + 50, cx1 - 50)
+            if solid(x, wy - nrm * 13): wall_decal(L, rnd.choice(['grunge', 'grunge', 'leak', 'crack', 'chip'] + (['bloodwall'] if GRIME > 0.5 else [])), x, wy, nrm, rnd.uniform(60, 280), rnd.uniform(70, 150))
     # ---------- rooms: dressed by zone ----------
     # type -> (back-wall items left->right, floor items [(kind, fx 0..1 across, fy 0..1 from corridor to back)])
     WALL = {

@@ -174,3 +174,17 @@ D. Whisper has its own animations (walk/run/attack x3/hit/death) — an Anim Blu
 - Builds: `bash tools/make_builds.sh` makes both builds (Shipping + Development playtest), copies ICU data, zips, deletes staging.
 - Play-time estimate: first clear ~2 h; 100% ~5–5.5 h (three endings need three runs because EndRun deletes the save). Chapter select would cut 100% to ~3.5 h.
 - Known limit: drawing/file counters are not in the checkpoint save, so Continue after quitting resets the per-run count (the best count stays in the progress save).
+
+### 2026-11-27 (layout v2, real lifts, doors, puzzles, endings, voice)
+- **Layout v2** (`tools/floors_layout.py`): every floor has its own shape: `spine`, `ring` (two corridors around central rooms), `jog` (offset corridors + hub), `hall` (corridor + open hall). Fixed on all floors: west lift lobby + west stairs + washroom 1, east lift room + east basement stairwell + washroom 2. Washrooms: 3 toilets in stalls, sinks + mirror, a glass shower cabin. One break room per floor; cafeteria on G. Programs in `PROGRAM`, clinic floors curated in `CURATED`; no room type repeats next to itself; a fill pass lines sparse rooms; basements get machinery along the walls and cold, desaturated light. Plans: `docs/floorplans/*.png` (`tools/draw_floorplans.py`, run with `tools/voice/.venv/bin/python`).
+- **Basement stairwell** (StairE): a flight down to a landing; blocked by rubble except on B3, B6, B11 (`OPEN_STAIR`).
+- **Clinic**: real 2-storey building (`FLOOR_DZ_MAP['clinic']=470`), box-step stairs G->F1 in StairW. Two lifts side by side on G: passenger lift out of order (gate 6), service lift doors forced open on an empty 20 m shaft (cabin parked on F1). Max climbs to F1 (cutscene CS_F1_Wrong, "something is off"), solves the switch puzzle, takes the F1 service lift down.
+- **Real lifts** (`lift_doors.py`): BP_FloorLift builds frame + sliding doors + cabin light + floor indicator; stand in the cabin 1 s -> doors close, 4 s ride, doors open in the next floor's arrival lift (west cabin). Old B9 lift uses `NoDoors` (legacy fade).
+- **Doors** (`BP_Door`): every room + washroom; E opens; Hollows open doors they reach.
+- **Puzzles** (`puzzles2.py`): E = interact (IA_Interact; E is no longer a spare fire key). BP_Breaker (4-breaker "lights out", gate 4), BP_Dial (3-digit counters, digits on 3 notes, gate 5), BP_CellConsole (B15, needs 5 patient files). Gate overrides in `place_floors.py`.
+- **Endings: 6** (`endings6.py`): Hollow (Taint >= 80), Six Doors (cells opened + Bond 70 + Taint < 40), Lullaby (no kills + Bond 40), Homecoming, Kin, Lantern. L-7 serum pickup (kind 9: full heal, +15 Taint). More Hollow Child choices on B3, B7, B11, B13.
+- **Anti-clipping** (`declip.py`): pushes props/bodies inside rooms and slides overlaps apart (run last; `rebuild_map.py <map>` runs build -> dress -> place -> declip; `rebuild_all.sh` all maps).
+- Lights sit under lit LED panels; inlays/windows raised off coplanar faces (z-fighting).
+- **Voice** (Kokoro, offline): `tools/voice/` (venv + models git-ignored). `lines.py` holds every line (Max = am_echo). Import: copy wavs into Content/HollowKin/Audio/VO and accept the editor's import prompt. `vo_hookup.py` adds Voice1-3 to BP_Cutscene.
+- Prologue (`prologue_events.py`, BP_StreetEvent): police car + radio, missing posters, the child in the gown, Jaz's second call, crashed ambulance, door line.
+- Map / journal / objectives (`journal_map.py`, M / J), chapter select (`chapter_select.py`), fullscreen fix (`fullscreen_fix3.py`), main menu fit (`menu_fit.py`).
