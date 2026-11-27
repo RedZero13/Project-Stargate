@@ -38,10 +38,6 @@ have = call(BT, 'list_variables', {'blueprint': {'refPath': MAX}}).get('returnVa
 for n in ('Journal', 'ObjLog', 'MapsFound'):
     if n not in have: call(BT, 'add_variable', {'blueprint': {'refPath': MAX}, 'name': n, 'type_name': 'string'})
 call(BT, 'compile_blueprint', {'blueprint': {'refPath': MAX}, 'warnings_as_errors': False})
-fn(MAX, 'JournalAdd', '''(fn JournalAdd (Text)
-  (if (and (not (Utilities|String|Contains (Variables|Default|GetJournal) Text))
-           (and (> (Utilities|String|Len Text) 30) (and (not (Utilities|String|Contains Text "WASD")) (not (Utilities|String|Contains Text "NEW OBJECTIVE")))))
-    (Variables|Default|SetJournal (Utilities|String|Append (Utilities|String|Append (Utilities|String|Append (CallFunction|FloorLabel) "  -  ") (Utilities|String|Append Text "\\n\\n")) (Variables|Default|GetJournal)))))''', params=[('Text', 'string')])
 fn(MAX, 'FloorLabel', '''(fn FloorLabel ()
   (bind lvl (Game|GetCurrentLevelName true))
   (bind z (Math|Vector|DotProduct (Transformation|GetActorLocation) (Math|Vector|MakeVector 0.0 0.0 1.0)))
@@ -50,6 +46,10 @@ fn(MAX, 'FloorLabel', '''(fn FloorLabel ()
       (select (Utilities|String|Contains lvl "Wards") (Utilities|String|Append "B" (Utilities|String|ToString(Integer) (+ 2 (Math|Float|Round (/ (- 0.0 z) 1500.0)))))
         (select (Utilities|String|Contains lvl "Deep") (select (> z -1000.0) "B9" (Utilities|String|Append "B" (Utilities|String|ToString(Integer) (+ 10 (Math|Float|Round (/ (- -2000.0 z) 1500.0))))))
           (select (Utilities|String|Contains lvl "Containment") "B1" "MILLBROOK"))))))''', outs=[('Label', 'string')])
+fn(MAX, 'JournalAdd', '''(fn JournalAdd (Text)
+  (if (and (not (Utilities|String|Contains (Variables|Default|GetJournal) Text))
+           (and (> (Utilities|String|Len Text) 30) (and (not (Utilities|String|Contains Text "WASD")) (not (Utilities|String|Contains Text "NEW OBJECTIVE")))))
+    (Variables|Default|SetJournal (Utilities|String|Append (Utilities|String|Append (Utilities|String|Append (CallFunction|FloorLabel) "  -  ") (Utilities|String|Append Text "\\n\\n")) (Variables|Default|GetJournal)))))''', params=[('Text', 'string')])
 # ShowNote -> JournalAdd (ShowNote only forwarded to Notify before); SetObjectiveNote also keeps an objective log
 fn(MAX, 'ShowNote', """(fn ShowNote (Msg Seconds)
   (CallFunction|JournalAdd :Text Msg)
@@ -81,7 +81,7 @@ w(MB + ':EventGraph', """(event EventBeginPlay
   (Components|StaticMesh|SetStaticMesh c "/Game/Horror_Hospital/Meshes/SM_Board_04_v01.SM_Board_04_v01")
   (Transformation|SetRelativeScale3D :self c :NewScale3D (Math|Vector|MakeVector 1.3 1.3 1.3))
   (bind t (Utilities|Casting|CastToTextRenderComponent (Game|AddComponentbyClass self "/Script/Engine.TextRenderComponent")))
-  (Rendering|Components|TextRender|SetText :self t :Value "EVACUATION PLAN")
+  (Rendering|Components|TextRender|SetText :self t :Value (Utilities|Text|ToText(String) "EVACUATION PLAN"))
   (Rendering|Components|TextRender|SetWorldSize :self t :Value 12.0)
   (Rendering|Components|TextRender|SetHorizontalAlignment :self t :Value "EHTA_Center")
   (Rendering|Components|TextRender|SetTextRenderColor :self t :Value (Math|Color|MakeColor 0.2 0.9 0.4 1.0))
@@ -102,7 +102,7 @@ if call(A, 'exists', {'path': P}).get('returnValue'):
     call(A, 'delete', {'path': P})
 call(A, 'duplicate', {'path': '/Game/HollowKin/UI/Menus/WBP_Credits', 'new_path': P})
 W = Wbp(WJ)
-for g in ('CloseCredits', 'OnKeyDown'):
+for g in ('OnKeyDown',):
     call(BT, 'remove_function_graph', {'blueprint': W.ref, 'graph_name': g})
 for n in ('Cap', 'Scroll', 'Body', 'BtnBack', 'Hint'):
     call(U, 'RemoveWidget', {'widgetBlueprint': W.ref, 'widget': {'refPath': W.widget(n)}})
@@ -116,7 +116,7 @@ for name, label in (('BtnMap', 'MAP'), ('BtnJournal', 'JOURNAL'), ('BtnObj', 'OB
     button(name, 'Tabs', label, pad=(0, 0, 24, 0))
 # map panel
 cv, s = W.add('CanvasPanel', 'MapPanel', 'Root'); cslot(s, 0, 0, 140, 210, 1640, 760)
-im, s = W.add('Image', 'MapImg', 'MapPanel'); cslot(s, 0, 0, 0, 0, 1640, 650)
+im, s = W.add('Border', 'MapImg', 'MapPanel'); cslot(s, 0, 0, 0, 0, 1640, 650)
 t, s = W.add('TextBlock', 'MapNote', 'MapPanel'); setp(t, {'text': '', 'font': font(22), 'colorAndOpacity': color(WHITE, 0.85), 'autoWrapText': True})
 cslot(s, 0, 0, 0, 670, 1600, 80)
 # journal panel (paper)
@@ -144,13 +144,15 @@ VIS = lambda n, on: '(Widget|SetVisibility :self %s :InVisibility "%s")' % (G(n)
 mapset = '(Widget|SetText(Text) %s (Utilities|Text|ToText(String) "No plan of this floor yet. Look for the EVACUATION PLAN board in the lift lobby."))' % G('MapNote')
 for L in reversed(LABELS):
     mapset = '''(if (and (Utilities|String|EqualExactly(String) fl "%(L)s") (or (Utilities|String|Contains (Class|BPMax|GetMapsFound :self m) "|%(L)s|") (or (Utilities|String|EqualExactly(String) fl "G") (Utilities|String|EqualExactly(String) fl "F1"))))
-          (Appearance|SetBrushfromTexture :self %(img)s :Texture "/Game/HollowKin/UI/Maps/T_Plan_%(L)s.T_Plan_%(L)s" :bMatchSize false)
+          (Appearance|SetBrushfromTexture :self %(img)s :Texture "/Game/HollowKin/UI/Maps/T_Plan_%(L)s.T_Plan_%(L)s")
           (Widget|SetVisibility :self %(img)s :InVisibility "Visible")
           (Widget|SetText(Text) %(note)s (Utilities|Text|ToText(String) "%(L)s  -  you are on this floor. The exit lift is at the east end."))
           (else %(rest)s))''' % {'L': L, 'img': G('MapImg'), 'note': G('MapNote'), 'rest': mapset}
 for name, body in [
     ('SetTab', '''(fn SetTab (Tab)
-  %s %s %s
+  (if (== Tab 0) %s (else %s))
+  (if (== Tab 1) %s (else %s))
+  (if (== Tab 2) %s (else %s))
   (bind m %s
     (:then
       (bind fl (Class|BPMax|FloorLabel :self m))
@@ -159,9 +161,7 @@ for name, body in [
       (Widget|SetText(Text) %s (Utilities|Text|ToText(String) (select (Utilities|String|EqualExactly(String) (Class|BPMax|GetJournal :self m) "") "Nothing written down yet." (Class|BPMax|GetJournal :self m))))
       (Widget|SetText(Text) %s (Utilities|Text|ToText(String) (Class|BPMax|GetLastObjective :self m)))
       (Widget|SetText(Text) %s (Utilities|Text|ToText(String) (Class|BPMax|GetObjLog :self m))))
-    (:CastFailed)))''' % ('(Widget|SetVisibility :self %s :InVisibility (select (== Tab 0) "Visible" "Collapsed"))' % G('MapPanel'),
-                          '(Widget|SetVisibility :self %s :InVisibility (select (== Tab 1) "Visible" "Collapsed"))' % G('Paper'),
-                          '(Widget|SetVisibility :self %s :InVisibility (select (== Tab 2) "Visible" "Collapsed"))' % G('ObjPanel'),
+    (:CastFailed)))''' % (VIS('MapPanel', True), VIS('MapPanel', False), VIS('Paper', True), VIS('Paper', False), VIS('ObjPanel', True), VIS('ObjPanel', False),
                           MAXC, G('MapImg'), mapset, G('JText'), G('OCur'), G('OLog'))),
     ('TabMap', '(fn TabMap ()\n  (CallFunction|SetTab :Tab 0))'), ('TabJournal', '(fn TabJournal ()\n  (CallFunction|SetTab :Tab 1))'), ('TabObj', '(fn TabObj ()\n  (CallFunction|SetTab :Tab 2))'),
     ('CloseJournal', '''(fn CloseJournal ()
@@ -170,6 +170,7 @@ for name, body in [
   (Game|SetGamePaused false)
   (Input|SetInputModeGameOnly pc false)
   (Class|PlayerController|SetShowMouseCursor :self pc :bShowMouseCursor false))'''),
+    ('CloseCredits', '(fn CloseCredits ()\n  (CallFunction|CloseJournal))'),
     ('OnKeyDown', '''(fn OnKeyDown (MyGeometry InKeyEvent)
   (bind k (Utilities|String|ToString(Text) (Input|Key|GetKeyDisplayName (Input|KeyEvent|GetKey InKeyEvent))))
   (if (or (or (Utilities|String|Equal,CaseInsensitive(String) k "Escape") (Utilities|String|Equal,CaseInsensitive(String) k "Tab")) (or (Utilities|String|Equal,CaseInsensitive(String) k "M") (Utilities|String|Equal,CaseInsensitive(String) k "J")))

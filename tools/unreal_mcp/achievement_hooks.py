@@ -15,17 +15,17 @@ from achievements_data import TOTAL_DRAWINGS, TOTAL_FILES
 FILES = [  # file number -> lore line (shown when picked up)
     "PATIENT FILE 01 - 'Admitted for observation. Mother told the child is in quarantine. No visits.'",
     "PATIENT FILE 02 - 'Maternity referral: twins, healthy. Flag for the Halvorsen Programme. Inform family of stillbirth.'",
-    "PATIENT FILE 03 - 'Subject 11 asks for her brother every night. Increase sedation.'",
+    "PATIENT FILE 03 - 'L-01, NOOR (8), asks for her brother every night. She draws him with a torch. Increase sedation.'",
     "PATIENT FILE 04 - 'Bed 6 transferred below. Paperwork to read: discharged to family.'",
     "PATIENT FILE 05 - 'X-ray shows bone density rising past adult levels. Subject is seven.'",
     "PATIENT FILE 06 - 'Surgery note: the graft took. The child no longer feels cold. Or pain.'",
-    "PATIENT FILE 07 - 'Blood draw HUNT, E. - antibodies unlike anything on record. Priority sample.'",
+    "PATIENT FILE 07 - 'L-05, VARGAS, SOFI (9). Father (paramedic, St. Brigid's) asked at reception twice. Security informed. Blood draw HUNT, E.: antibodies unlike anything on record.'",
     "PATIENT FILE 08 - 'Morgue intake: two orderlies. Bite marks. Do not report to the city.'",
     "PATIENT FILE 09 - 'Security memo: a man has been asking about his sister at the front desk. Name: Max Hunt.'",
     "PATIENT FILE 10 - 'Specimen jar 40 moved on its own last night. Night staff refuse B10.'",
-    "PATIENT FILE 11 - 'Lab A: the children hum the same song together. None of them were taught it.'",
+    "PATIENT FILE 11 - 'Lab A: THEO (L-02) and MILA (L-04) hum the same song together. Nobody taught it to them. L-03 says it is her mother's lullaby.'",
     "PATIENT FILE 12 - 'Lab B: the adults we changed do not stop. The children still answer to their names.'",
-    "PATIENT FILE 13 - 'Observation log: L-03 drew a man with a torch again. She says he is coming.'",
+    "PATIENT FILE 13 - 'Observation log: L-03 drew a man with a torch again. She says he is coming. L-06, IVY (6), has stopped speaking. She holds L-03's hand through the glass.'",
     "PATIENT FILE 14 - 'Final order, Dr. Halvorsen: move L-01 to L-06 to isolation. Seal the lifts if anyone gets past B8.'",
 ]
 def w(g, dsl):
@@ -54,7 +54,7 @@ fn(MAX, 'AchCraft', [], '''(fn AchCraft ()
 # ---- carry the per-run counters between levels (same pattern as deep_links.py) ----
 F = [('Health', 'float'), ('Sanity', 'float'), ('Bond', 'float'), ('Taint', 'float'),
      ('Ammo', 'int'), ('ReserveAmmo', 'int'), ('Gels', 'int'), ('Sedatives', 'int'), ('Bottles', 'int'), ('Parts', 'int'), ('Chem', 'int'), ('Tapes', 'int'),
-     ('Drawings', 'int'), ('Files', 'int'), ('RunKills', 'int')]
+     ('Drawings', 'int'), ('Files', 'int'), ('RunKills', 'int'), ('Flags', 'string'), ('Journal', 'string'), ('ObjLog', 'string'), ('MapsFound', 'string')]
 store = '\n      '.join('(Class|BPHKGameInstance|SetC%s :self gi :C%s (Variables|Default|Get%s))' % (n, n, n) for n, t in F)
 restore = '\n        '.join('(Variables|Default|Set%s (Class|BPHKGameInstance|GetC%s :self gi))' % (n, n) for n, t in F)
 w(MAX + ':StoreCarry', '''(fn StoreCarry ()
@@ -162,7 +162,7 @@ w(MAX + ':HKTrace', '''(fn HKTrace ()
 # HKLog: print line + ending hook
 w(MAX + ':HKLog', '''(fn HKLog (Msg)
   (Development|PrintString :InString %s :bPrintToScreen false :bPrintToLog true)
-  (if (Utilities|String|Contains Msg "ENDING ")
+  (if (or (Utilities|String|Contains Msg "ENDING ") (Utilities|String|Contains Msg "FLAG "))
     (bind gi %s
       (:then
         (if (Utilities|String|Contains Msg "ENDING HOMECOMING")
@@ -171,6 +171,11 @@ w(MAX + ':HKLog', '''(fn HKLog (Msg)
         (if (Utilities|String|Contains Msg "ENDING KIN")
           (Class|BPHKGameInstance|Unlock :self gi :Id "end_kin" :Title "Kin")
           (Class|BPHKGameInstance|AddEnding :self gi :Name "KIN"))
+        (if (Utilities|String|Contains Msg "ENDING LANTERNLIT")
+          (Class|BPHKGameInstance|Unlock :self gi :Id "end_true" :Title "Lantern Lit"))
+        (if (Utilities|String|Contains Msg "FLAG forgave_okafor") (Class|BPHKGameInstance|Unlock :self gi :Id "absolution" :Title "Absolution"))
+        (if (Utilities|String|Contains Msg "FLAG hale_stand") (Class|BPHKGameInstance|Unlock :self gi :Id "last_stand" :Title "Last Stand"))
+        (if (Utilities|String|Contains Msg "FLAG evidence") (Class|BPHKGameInstance|Unlock :self gi :Id "whistle" :Title "Whistleblower"))
         (if (Utilities|String|Contains Msg "ENDING HOLLOW")
           (Class|BPHKGameInstance|Unlock :self gi :Id "end_hollow" :Title "Hollow")
           (Class|BPHKGameInstance|AddEnding :self gi :Name "HOLLOW"))

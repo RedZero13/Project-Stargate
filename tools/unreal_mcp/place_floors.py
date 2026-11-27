@@ -151,7 +151,7 @@ for k, fl in enumerate(floors):
         put(DR, '%s_%s%d' % (L, 'UndeadNurse' if nurse else 'Hollow', i), dx, dy + r['side'] * 130, z + 120, folder='Enemies', tags=(('Nurse',) if nurse else ()))
     if m == 'deep' and L in ('B12', 'B14'):
         r = rooms[1]; dx, dy = r.get('door', (r['x'], r['y']))
-        put(DR, '%s_Experiment' % L, dx, dy + r['side'] * 160, z + 120, scale=1.25, tags=('Elite',), folder='Enemies')
+        put(DR, '%s_Experiment' % L, dx, dy + r['side'] * 160, z + 120, scale=1.25, tags=('Elite', L + 'Exp'), folder='Enemies')
     # dead staff / soldiers: the clinic only has one dead nurse; the basements are where the guards fell
     nb = 1 if m == 'clinic' else 5 if m == 'wards' else 6
     for i in range(nb):

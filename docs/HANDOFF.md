@@ -188,3 +188,13 @@ D. Whisper has its own animations (walk/run/attack x3/hit/death) — an Anim Blu
 - **Voice** (Kokoro, offline): `tools/voice/` (venv + models git-ignored). `lines.py` holds every line (Max = am_echo). Import: copy wavs into Content/HollowKin/Audio/VO and accept the editor's import prompt. `vo_hookup.py` adds Voice1-3 to BP_Cutscene.
 - Prologue (`prologue_events.py`, BP_StreetEvent): police car + radio, missing posters, the child in the gown, Jaz's second call, crashed ambulance, door line.
 - Map / journal / objectives (`journal_map.py`, M / J), chapter select (`chapter_select.py`), fullscreen fix (`fullscreen_fix3.py`), main menu fit (`menu_fit.py`).
+
+### 2026-11-28 (choices, NPC arcs, New Game+, prologue)
+- **Choices** (`choices.py`, placed by `choices_place.py`, tag `Choices`): BP_Choice (E -> WBP_Choice, two options; Bond/Taint/gels/rounds, a flag on Max, voice, spawns, KillTag) and BP_FlagGate (keeps/removes actors tagged GateTag by NeedFlag/ForbidFlag, 1.5 s after level start). Flags, journal, objective log and maps carry between levels.
+  City paramedic Leo Vargas; F1 nurse Okafor (freed -> B2 med cache + B5 confession: forgive/condemn; left -> undead on B3); B4 paediatric medicine; B8 Sgt. Hale (spared -> B9 ammo cache + B12: mercy or last stand, which kills B12's Experiment; robbed -> his squad on B9); B11 archive (send to Jaz -> alarm, or wipe); B14 sedated patients. Jaz calls on B2 and B9; NG+ only: Jaz's reveal on B15 and Emilia's echoes (F1, B4, B11).
+- **Endings: 7.** LANTERN LIT (NG+ only): cells opened + evidence + left_meds + nurse_freed + Taint < 20. Epilogue lines depend on evidence/wiped, forgave_okafor, hale_stand.
+- **New Game+**: unlocked after any ending (progress save NGUnlocked + LastJournal). Main menu NEW GAME + (shown by RefreshNG). Start: pistol, 8+24 rounds, 2 gels, last journal as MEMORIES, flag NG+; Hollows +30% health (NGBoostAll at level start).
+- Achievements added: Lantern Lit, Absolution, Last Stand, Whistleblower.
+- Prologue (`prologue_events.py`) placed in Lvl_City. Voice lines: 32 (tools/voice/lines.py); keep the source wavs next to the assets in Content/HollowKin/Audio/VO (git-ignored) or the editor deletes the assets.
+- Tested in PIE: lift ride B10 -> B11 (doors open, cabin closes, 4 s ride, arrive in B11 cabin), map board, journal capture.
+- Rebuild lesson: never run other editor calls while build_floors runs (it stalls past the timeout); alone each floor takes ~1 minute.

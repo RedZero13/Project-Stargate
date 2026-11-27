@@ -33,7 +33,7 @@ def bounds(a):
 def overlap(a, b, pad=2):
     ix = min(a[3], b[3]) - max(a[0], b[0]) - pad; iy = min(a[4], b[4]) - max(a[1], b[1]) - pad; iz = min(a[5], b[5]) - max(a[2], b[2])
     return ix > 0 and iy > 0 and iz > 8
-def move(a, dx, dy):
+def base_move(a, dx, dy):
     t = call(AT, 'get_actor_transform', {'actor': a})['returnValue']
     loc = t['location']; loc = {'x': loc['x'] + dx, 'y': loc['y'] + dy, 'z': loc['z']}
     xf = {'location': loc, 'rotation': t['rotation']}
@@ -79,13 +79,28 @@ for fl in floors:
                 else: continue                                                 # enemies, hints
             bb = bounds(a)
             if bb and bb[3] - bb[0] < 2000: acts.append([a, name, role, bb])
+    # desk-top items (monitors, microscopes, mugs) ride along with the furniture they stand on
+    ONTOP = ('monitor', 'micro', 'mug', 'tray')
+    riders = {}
+    tops = [it for it in acts if it[2] == 'fixed' and any(w in it[1].split('_')[1] for w in ONTOP) if it[1].count('_') >= 2]
+    for t_ in tops:
+        cx_, cy_ = (t_[3][0] + t_[3][3]) / 2, (t_[3][1] + t_[3][4]) / 2
+        for it in acts:
+            if it[2] == 'fixed': continue
+            b_ = it[3]
+            if b_[0] <= cx_ <= b_[3] and b_[1] <= cy_ <= b_[4] and abs(t_[3][2] - b_[5]) < 25:
+                riders.setdefault(id(it), []).append(t_); break
+    def move(a, dx, dy, _it=None):
+        base_move(a, dx, dy)
+        for t_ in riders.get(id(_it), []) if _it is not None else []:
+            base_move(t_[0], dx, dy); t_[3] = sh(t_[3], dx, dy)
     # 1) inside the room
     for it in acts:
         if it[2] == 'fixed': continue
         bb = it[3]; r = room_of(rs, (bb[0] + bb[3]) / 2, (bb[1] + bb[4]) / 2)
         dx, dy = fit(bb, r)
         if abs(dx) > 1 or abs(dy) > 1:
-            move(it[0], dx, dy); it[3] = sh(bb, dx, dy); total['pushed'] += 1
+            move(it[0], dx, dy, it); it[3] = sh(bb, dx, dy); total['pushed'] += 1
     # 2) separate overlaps, biggest first
     area = lambda bb: (bb[3] - bb[0]) * (bb[4] - bb[1])
     placed = [it for it in acts if it[2] == 'fixed']
@@ -99,7 +114,7 @@ for fl in floors:
             nb = sh(bb, dx, dy); fx, fy = fit(nb, r)
             if abs(fx) > 1 or abs(fy) > 1: continue
             if not any(overlap(nb, p[3]) for p in placed):
-                move(it[0], dx, dy); it[3] = nb; placed.append(it); total['slid'] += 1; done = True; break
+                move(it[0], dx, dy, it); it[3] = nb; placed.append(it); total['slid'] += 1; done = True; break
         if not done:
             if it[2] == 'drop':
                 call(S, 'remove_from_scene', {'actor': it[0]}); total['removed'] += 1

@@ -38,6 +38,7 @@ w(PC + ':EventGraph', '''(event EventBeginPlay
   (CallFunction|FitWindow)
   (bind wm (UserInterface|CreateWidget "/Game/HollowKin/UI/Menus/WBP_MainMenu.WBP_MainMenu_C" self))
   (UserInterface|Viewport|AddToViewport wm)
+  (Class|WBPMainMenu|RefreshNG :self (Utilities|Casting|CastToWBP_MainMenu wm))
   (Variables|MouseInterface|SetShowMouseCursor true)
   (Input|SetInputModeGameAndUI :PlayerController self :InWidgetToFocus wm :InMouseLockMode "DoNotLock" :bHideCursorDuringCapture false))''')
 print(call(BT, 'compile_blueprint', {'blueprint': {'refPath': PC}, 'warnings_as_errors': False}))

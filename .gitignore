@@ -46,3 +46,4 @@ HollowKin/*.png
 tools/voice/.venv/
 tools/voice/models/
 tools/voice/out/
+HollowKin/Content/HollowKin/Audio/VO/*.wav

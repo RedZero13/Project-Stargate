@@ -20,6 +20,25 @@ LINES = {
     'max_b15': ('am_echo', 0.9, "It's okay. I'm here to take you home. All of you."),
     'emilia_1': ('af_sky', 1.0, "Max? You came. They told me you'd forgotten me."),
     'emilia_2': ('af_sky', 0.95, "The others are like me now. The lantern in my head is so bright, Max. Don't let them put it out."),
+    # choices
+    'paramedic': ('bm_george', 0.9, "Service lift... first floor. The drawing on the nurse glass... tells you the order."),
+    'nurse_okafor': ('af_bella', 1.05, "Thank God. There's a med kit in the B2 nurse station, take it. And whatever you do, don't trust the quiet floors."),
+    'guard_hale': ('am_adam', 0.95, "You're not one of them. Okay. My squad's on B9. I'll tell them to hold fire. Ammo cache by the lift. Go."),
+    # New Game+ only: Emilia's echoes (hints toward the hidden ending)
+    'echo_1': ('af_sky', 0.9, "Max... the medicine on the fourth floor. Leave it. It's for us."),
+    'echo_2': ('af_sky', 0.9, "The nurse knows the way out. Let her go."),
+    'echo_3': ('af_sky', 0.9, "Tell everyone, Max. Send them everything."),
+    # NPC arcs
+    'leo_2': ('bm_george', 0.85, "I drove her in. Your sister. Three weeks ago... If you see a little girl called Sofi... tell her Daddy's sorry he was late."),
+    'okafor_b5': ('af_bella', 1.0, "You came back down. I owe you the truth. I sedated them. Every night, the little ones. They paid for my boy's treatment, and I told myself they were just sick children. Can you forgive that?"),
+    'okafor_forgive': ('af_bella', 0.95, "Then I'll help you carry them out. Every one of them. I'll be at the bottom when you need me."),
+    'okafor_condemn': ('af_bella', 0.95, "No. You're right. I don't deserve it."),
+    'hale_b12': ('am_adam', 0.9, "Hey. Hunt. Told you I'd hold them off... the bite's spreading. I can feel it in my teeth. I don't want to become one of those things."),
+    'hale_mercy': ('am_adam', 0.85, "Thank you. Find your sister."),
+    'hale_stand': ('am_adam', 0.95, "One bullet's enough. Go. Whatever's coming down that corridor goes through me first."),
+    'jaz_wards': ('af_sarah', 1.0, "Max, you're in the wards. I wrote the dosing schedules for those children. I need you to know that before you trust anything else I say."),
+    'jaz_deep': ('af_sarah', 1.0, "Emilia's cell is L-03. The others are Noor, Theo, Mila, Sofi and Ivy. I gave them names, because nobody else would."),
+    'jaz_reveal': ('af_sarah', 0.9, "My name is Jasmine Halvorsen. Doctor Halvorsen is my father. Every door you've opened tonight... I should have opened years ago."),
 }
 if __name__ == '__main__':
     import os, soundfile as sf
