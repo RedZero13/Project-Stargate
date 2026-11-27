@@ -1,0 +1,44 @@
+# Unreal Engine generated folders (rebuilt on demand)
+Binaries/
+DerivedDataCache/
+Intermediate/
+Saved/
+Build/
+.vs/
+*.xcworkspace
+*.xcodeproj
+.idea/
+.DS_Store
+
+# Local-only editor/MCP settings
+.mcp.json
+
+# Game Animation Sample assets: kept on the developer's Mac only (about 1.2 GB, too big for GitHub LFS).
+# See docs/LOCAL_ASSETS.md for how to restore them.
+HollowKin/Content/Audio/
+HollowKin/Content/Blueprints/
+HollowKin/Content/Levels/
+HollowKin/Content/Misc/
+HollowKin/Content/Characters/UEFN_Mannequin/
+HollowKin/Content/Input/IA_*.uasset
+HollowKin/Content/Input/IMC_Sandbox.uasset
+tools/unreal_mcp/sid
+HollowKin/SourceAudio/
+
+# Fab / Marketplace packs stay local-only (large). Allow-list: only our own Content folders are committed.
+# Any new pack folder under Content/ is ignored automatically. See docs/LOCAL_ASSETS.md.
+HollowKin/Content/*
+!HollowKin/Content/HollowKin/
+!HollowKin/Content/Input/
+!HollowKin/Content/LevelPrototyping/
+!HollowKin/Content/ThirdPerson/
+!HollowKin/Content/Characters/
+!HollowKin/Content/__ExternalActors__/
+!HollowKin/Content/__ExternalObjects__/
+HollowKin/Content/__ExternalActors__/*
+HollowKin/Content/__ExternalObjects__/*
+!HollowKin/Content/__ExternalActors__/HollowKin/
+!HollowKin/Content/__ExternalObjects__/HollowKin/
+!HollowKin/Content/__ExternalActors__/ThirdPerson/
+!HollowKin/Content/__ExternalObjects__/ThirdPerson/
+HollowKin/*.png
