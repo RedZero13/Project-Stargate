@@ -1,6 +1,6 @@
 """Longer prologue on Main Street (Lvl_City; open it first). Voiced with the Kokoro lines (tools/voice/lines.py).
 Beats, south to north:
-  start      title, controls, Jaz's call (now voiced) and Max's reply after it
+  start      title, Jaz's call (voiced) and Max's reply after it (controls: tutorials.py prompts, not a list)
   -5200      abandoned police car, lights still flashing, radio: quarantine order (voiced) + a glass bottle (G throw)
   -1800      fence of MISSING posters, all children from state care (Max, voiced)
    1500      cutscene: a small figure in a hospital gown under a far streetlight; it is gone when you look again
@@ -85,8 +85,7 @@ w(PHONE + ':EventGraph', '''(event EventBeginPlay
     (Utilities|FlowControl|Delay 1.0)
     (Class|BPMax|ShowNote m "MILLBROOK  //  11:47 PM  //  SIX DAYS AFTER THE LETTER" 5.0)
     (Utilities|FlowControl|Delay 5.0)
-    (Class|BPMax|ShowNote m "WASD  move     Mouse  look     Shift  run     F  flashlight     RMB / Q  aim  (T toggles)     LMB  fire     E  interact / doors     V  punch     B  backpack     I  workbench     G  throw     M  map     J  journal     P / Esc  pause" 10.0)
-    (Utilities|FlowControl|Delay 10.0)
+    (Utilities|FlowControl|Delay 2.0)
     (Audio|SpawnSound2D "/Game/Interface_And_Item_Sounds/WAV/Ringtone_01.Ringtone_01" 0.7)
     (Class|BPMax|ShowNote m "*  Your phone buzzes.  UNKNOWN NUMBER  *" 3.5)
     (Utilities|FlowControl|Delay 3.5)

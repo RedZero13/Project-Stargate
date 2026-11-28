@@ -122,7 +122,8 @@ Toolsets used most: `editor_toolset.toolsets.blueprint.BlueprintTools` (graphs a
 - A variable named like another class's bool (e.g. `Unlocked` vs `BP_FloorLift.bUnlocked`) resolves to the wrong
   class. Rename (`AchList`).
 - `(bind x (Cast...) (:then ...) (:CastFailed))` and `IsValid` with `(:"Is Valid" ...)` are branches: any statement
-  after them in the same block is "unreachable". Put them last or restructure.
+  after them in the same block is "unreachable". Put them last or restructure. `(if (Utilities|IsValid x) ...)` is the
+  same branch, not a bool: it silently ended BP_Door's tick and froze the prologue cutscene (fixed 2026-11-28).
 - `select` cannot output asset objects or enums; use `if` branches. Enum pins need literal strings in `if` arms.
 - Use keyword pins for class literals: `:ComponentClass`, `:Tag`, `:InPlayRate`; positional class pins can be lost.
 - Functions with underscores are called without them in the DSL (`HK_God` -> `CallFunction|HKGod`).
@@ -160,7 +161,7 @@ Run with `python3 <script>` from `tools/unreal_mcp`, editor open. Grouped by are
 | Player | `inventory_logic.py`, `fire_fix.py`, `gameplay_fixes2.py`, `torch_and_gun.py`, `apply_settings_max.py`, `tickfx.py`, `wing_objectives.py`, `fix_restart_torch.py`, `deep_links.py` (carry), `debug_tools.py` |
 | AI | `enemy_anims.py`, `guards.py`, `nurses.py`, `hazard_fix.py`, `fix_looks.py`, `child_look.py`, `soldier_fix.py` |
 | Progress | `progress_system.py`, `achievements_data.py`, `achievement_hooks.py`, `chapter_select.py`, `journal_map.py` |
-| UI | `build_title*.py`, `build_options*.py`, `build_backpack*.py`, `build_credits.py`, `build_achievements.py` (+ `../make_trophies.py`, `import_trophies.py`), `fix_menu_fonts.py`, `audit_ui.py`, `build_loading.py`, `build_hud_ring.py`, `build_objective.py`, `build_msg.py`, `menu_fit.py`, `menu_dedupe.py`, `bigger_buttons.py`, `controller.py`, `touch_hud.py` |
+| UI | `build_title*.py`, `build_options*.py`, `build_backpack*.py`, `build_credits.py`, `build_achievements.py` (+ `../make_trophies.py`, `import_trophies.py`), `fix_menu_fonts.py`, `audit_ui.py`, `build_loading.py`, `build_hud_ring.py`, `build_objective.py`, `build_msg.py`, `menu_fit.py`, `menu_dedupe.py`, `bigger_buttons.py`, `controller.py`, `touch_hud.py`, `touch_sticks.py`, `tutorials.py` |
 | Window / input | `fit_window.py`, `fullscreen_fix3.py`, `input_prefs.py`, `build_look_imcs.py`, `backpack_hooks.py` |
 | Levels (hand-built) | `build_slice.py`, `dress_slice.py`, `place_*.py`, `build_city.py`, `city_night.py`, `city_colliders.py`, `lighting_pass.py`, `light_south.py` |
 | Testing | `scan_runtime.py` (play-mode scan for visible mannequins / grey engine shapes), `scan_placeholders.py`, `fix_placeholders.py`, `apply_choices_parts.py`, `playtest_full.py`, `test_route.py`, `collect_positions.py`, `pie_probe.py`, `capview.py`, `playtest_log.py` |

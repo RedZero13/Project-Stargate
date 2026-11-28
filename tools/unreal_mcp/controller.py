@@ -3,7 +3,7 @@ Gameplay (IMC_Sandbox from the sample + IMC_Combat):
   Left stick move, right stick look, LB sprint, A jump / climb, B crouch, LT aim, RT fire, X reload, RB melee,
   Y interact (doors, puzzles, choices), D-pad up torch, D-pad down throw, D-pad left map / journal, D-pad right
   workbench, View backpack, Menu pause, R3 swap shoulder.
-  Removed from the sample's map: D-pad left/right (debug 'next pawn' / 'next look') and RB walk.
+  Removed from the sample's map: its debug actions (next pawn N, next look M, teleport J; D-pad left/right) and RB walk.
 Menus: the first button gets focus as soon as a pad button is pressed (D-pad / stick moves between buttons, A
 presses), and B / Menu / View close the screen (main menu: B does nothing)."""
 import json
@@ -17,7 +17,8 @@ IA = lambda n: {'refPath': '/Game/Input/Actions/%s.%s' % (n, n)}
 d = maps(SAND)
 for m in d['mappings']:
     a = m['action']['refPath'].split('.')[-1]
-    if (m['key'] in ('Gamepad_DPad_Left', 'Gamepad_DPad_Right') and a in ('IA_NextPawn', 'IA_NextVisualOverride')) or (m['key'] == 'Gamepad_RightShoulder' and a == 'IA_Walk'):
+    if (m['key'] in ('Gamepad_DPad_Left', 'Gamepad_DPad_Right') and a in ('IA_NextPawn', 'IA_NextVisualOverride')) or (m['key'] == 'Gamepad_RightShoulder' and a == 'IA_Walk') \
+       or a in ('IA_NextPawn', 'IA_NextVisualOverride', 'IA_TeleportToTarget'):   # sample debug keys N / M / J clashed with Map (M) and Journal (J)
         m['key'] = 'None'
 put(SAND, d)
 # --- combat map: same size changes first ---
