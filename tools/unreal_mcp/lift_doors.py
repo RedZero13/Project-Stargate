@@ -160,10 +160,11 @@ fn(DOOR, 'EnemyCheck', '''(fn EnemyCheck ()
 fn(DOOR, 'Press', '''(fn Press ()
   (Variables|Default|SetOpen (not (Variables|Default|GetOpen)))
   (Audio|PlaySound2D "/Game/Interface_And_Item_Sounds/WAV/Flick_Switch_04.Flick_Switch_04" 0.5))''')
+# second leaf exists when Width > 200 (as in BeginPlay); an IsValid branch here used to end the tick (fixed 2026-11-28)
 w(DOOR + ':EventGraph', '''(event EventTick (DeltaSeconds)
   (Variables|Default|SetAlpha (Math|Float|Clamp(Float) (+ (Variables|Default|GetAlpha) (* DeltaSeconds (select (Variables|Default|GetOpen) 1.6 -1.6))) 0.0 1.0))
   (Transformation|SetRelativeRotation :self (Variables|Default|GetLeafA) :NewRotation (Math|Rotator|MakeRotator 0.0 (* (Variables|Default|GetOpenYaw) (Variables|Default|GetAlpha)) 0.0))
-  (if (Utilities|IsValid (Variables|Default|GetLeafB))
+  (if (> (Variables|Default|GetWidth) 200.0)
     (Transformation|SetRelativeRotation :self (Variables|Default|GetLeafB) :NewRotation (Math|Rotator|MakeRotator 0.0 (- 180.0 (* (Variables|Default|GetOpenYaw) (Variables|Default|GetAlpha))) 0.0)))
   (bind m %s
     (:then

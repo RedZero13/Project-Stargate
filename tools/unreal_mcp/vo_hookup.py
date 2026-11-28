@@ -1,7 +1,10 @@
 """Voice lines (Kokoro, tools/voice/lines.py -> /Game/HollowKin/Audio/VO/VO_<id>) wired into the game:
 - BP_Cutscene: Voice1..Voice3 (Sound) play with Line1..Line3.
 - Cutscene actors get their voices set (place_cutscenes.py / place_floors.py also set them on re-runs).
-Run after the VO wavs are imported."""
+Run after the VO wavs are imported.
+The voice IsValid checks in StepScene must come LAST: IsValid is a branch whose 'not valid' side leads nowhere, so a
+line without a voice used to stop the scene before the next step was scheduled (the prologue child cutscene froze the
+game with controls locked; fixed 2026-11-28)."""
 import json
 from ui_lib import call
 BT = 'editor_toolset.toolsets.blueprint.BlueprintTools'; A = 'editor_toolset.toolsets.asset.AssetTools'
@@ -26,10 +29,8 @@ r = call(BT, 'write_graph_dsl', {'graph': {'refPath': CS + ':StepScene'}, 'code'
       (if (<= st 3)
         (if (not (Utilities|String|EqualExactly(String) msg ""))
           (Class|BPMax|ShowNote :self m :Msg msg :Seconds (- (Variables|Default|GetHold) 0.2))
-          (if (== st 1) %s)
-          (if (== st 2) %s)
-          (if (== st 3) %s)
           (Utilities|Time|SetTimerbyFunctionName :Object self :FunctionName "StepScene" :Time (Variables|Default|GetHold) :bLooping false)
+          (if (== st 1) %s (else (if (== st 2) %s (else %s))))
           (else (Utilities|Time|SetTimerbyFunctionName :Object self :FunctionName "StepScene" :Time 0.05 :bLooping false)))
         (elif (== st 4)
           (Game|Player|SetViewTargetwithBlend :self (Game|GetPlayerController 0) :NewViewTarget m :BlendTime 1.0)
