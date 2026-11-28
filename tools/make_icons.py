@@ -1,5 +1,7 @@
 """App icons + mouse cursor in the logo-B style (own art). Writes:
 - HollowKin/Build/Mac/Resources/Assets.xcassets/AppIcon.appiconset/*.png (+ Contents.json) - packaged Mac app icon
+- HollowKin/Build/IOS/Resources/Assets.xcassets/AppIcon.appiconset/*.png - iPad/iPhone icon (full-bleed, no alpha;
+  iOS rounds the corners itself). Without it the iPad app shows the Unreal logo.
 - HollowKin/Build/Windows/Application.ico - Windows build icon
 - marketing/icon/HollowKin_Icon_1024.png
 - HollowKin/SourceArt/T_Cursor.png (64x64, hotspot top-left) - imported as the in-game cursor."""
@@ -51,6 +53,21 @@ xc = os.path.join(R, 'HollowKin', 'Build', 'Mac', 'Resources', 'Assets.xcassets'
 if not os.path.exists(xc): json.dump({'info': {'author': 'xcode', 'version': 1}}, open(xc, 'w'), indent=2)
 os.makedirs(os.path.join(R, 'HollowKin', 'Build', 'Windows'), exist_ok=True)
 big.save(os.path.join(R, 'HollowKin', 'Build', 'Windows', 'Application.ico'), sizes=[(16, 16), (32, 32), (48, 48), (64, 64), (128, 128), (256, 256)])
+# iOS: full-bleed square without transparency (crop the inner plate, flatten on the background colour)
+ios = os.path.join(R, 'HollowKin', 'Build', 'IOS', 'Resources', 'Assets.xcassets', 'AppIcon.appiconset')
+os.makedirs(ios, exist_ok=True)
+pad = int(1024 * 0.06) + 4
+full = Image.new('RGBA', (1024, 1024), BG + (255,))
+full.alpha_composite(big.crop((pad, pad, 1024 - pad, 1024 - pad)).resize((1024, 1024), Image.LANCZOS))
+full = full.convert('RGB')
+IOS = [('IPhoneIcon60@2x.png', 120, '60x60', 'iphone', '2x'), ('IPadIcon76@2x.png', 152, '76x76', 'ipad', '2x'),
+       ('IPadIcon83.5@2x.png', 167, '83.5x83.5', 'ipad', '2x'), ('Icon1024.png', 1024, '1024x1024', 'ios-marketing', '1x')]
+for name, px, size, idiom, scale in IOS:
+    full.resize((px, px), Image.LANCZOS).save(os.path.join(ios, name))
+json.dump({'images': [{'size': sz, 'idiom': idm, 'filename': n, 'scale': sc} for n, px, sz, idm, sc in IOS], 'info': {'version': 1, 'author': 'xcode'}},
+          open(os.path.join(ios, 'Contents.json'), 'w'), indent=2)
+xi = os.path.join(R, 'HollowKin', 'Build', 'IOS', 'Resources', 'Assets.xcassets', 'Contents.json')
+if not os.path.exists(xi): json.dump({'info': {'author': 'xcode', 'version': 1}}, open(xi, 'w'), indent=2)
 # cursor: clinical arrow, teal outline, amber tip dot
 S = 64; cur = Image.new('RGBA', (S, S), (0, 0, 0, 0)); d = ImageDraw.Draw(cur)
 arrow = [(2, 2), (2, 46), (14, 35), (22, 54), (30, 50), (22, 32), (38, 32)]
