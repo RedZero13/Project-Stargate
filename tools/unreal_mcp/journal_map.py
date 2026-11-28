@@ -49,7 +49,7 @@ fn(MAX, 'FloorLabel', '''(fn FloorLabel ()
 fn(MAX, 'JournalAdd', '''(fn JournalAdd (Text)
   (if (and (not (Utilities|String|Contains (Variables|Default|GetJournal) Text))
            (and (> (Utilities|String|Len Text) 30) (and (not (Utilities|String|Contains Text "WASD")) (not (Utilities|String|Contains Text "NEW OBJECTIVE")))))
-    (Variables|Default|SetJournal (Utilities|String|Append (Utilities|String|Append (Utilities|String|Append (CallFunction|FloorLabel) "  -  ") (Utilities|String|Append Text "\\n\\n")) (Variables|Default|GetJournal)))))''', params=[('Text', 'string')])
+    (Variables|Default|SetJournal (Utilities|String|Append (Utilities|String|Append (Utilities|String|Append (CallFunction|FloorLabel) "  -  ") (Utilities|String|Append Text "\n\n")) (Variables|Default|GetJournal)))))''', params=[('Text', 'string')])
 # ShowNote -> JournalAdd (ShowNote only forwarded to Notify before); SetObjectiveNote also keeps an objective log
 fn(MAX, 'ShowNote', """(fn ShowNote (Msg Seconds)
   (CallFunction|JournalAdd :Text Msg)

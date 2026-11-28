@@ -133,6 +133,8 @@ Toolsets used most: `editor_toolset.toolsets.blueprint.BlueprintTools` (graphs a
 - Some node names: `Appearance|SetBrushfromTexture` (Border, not Image), `Rendering|SetBoundsScale`,
   `Widget|HasAnyUserFocusedDescendants`, `Game|GetPlatformName`, `Math|Vector|DotProduct`.
 - `read_graph_dsl` output is not always round-trippable; write fresh DSL from the scripts.
+- **Newlines in DSL string literals must be real newline characters** (`"\n"` in a normal Python string). `"\\n"` is
+  stored as a backslash + n and shows on screen as `\n` (this broke the Achievements screen and the journal).
 
 ### 5.3 Operational rules
 - **Never send other MCP calls while `build_floors.py` runs** (it stalls past the timeout). Alone: ~1 min per floor.
@@ -154,7 +156,7 @@ Run with `python3 <script>` from `tools/unreal_mcp`, editor open. Grouped by are
 | Player | `inventory_logic.py`, `fire_fix.py`, `gameplay_fixes2.py`, `torch_and_gun.py`, `apply_settings_max.py`, `tickfx.py`, `wing_objectives.py`, `fix_restart_torch.py`, `deep_links.py` (carry), `debug_tools.py` |
 | AI | `enemy_anims.py`, `guards.py`, `nurses.py`, `hazard_fix.py`, `fix_looks.py`, `child_look.py`, `soldier_fix.py` |
 | Progress | `progress_system.py`, `achievements_data.py`, `achievement_hooks.py`, `chapter_select.py`, `journal_map.py` |
-| UI | `build_title*.py`, `build_options*.py`, `build_backpack*.py`, `build_credits.py`, `build_achievements.py`, `build_loading.py`, `build_hud_ring.py`, `build_objective.py`, `build_msg.py`, `menu_fit.py`, `menu_dedupe.py`, `bigger_buttons.py`, `controller.py`, `touch_hud.py` |
+| UI | `build_title*.py`, `build_options*.py`, `build_backpack*.py`, `build_credits.py`, `build_achievements.py` (+ `../make_trophies.py`, `import_trophies.py`), `fix_menu_fonts.py`, `audit_ui.py`, `build_loading.py`, `build_hud_ring.py`, `build_objective.py`, `build_msg.py`, `menu_fit.py`, `menu_dedupe.py`, `bigger_buttons.py`, `controller.py`, `touch_hud.py` |
 | Window / input | `fit_window.py`, `fullscreen_fix3.py`, `input_prefs.py`, `build_look_imcs.py`, `backpack_hooks.py` |
 | Levels (hand-built) | `build_slice.py`, `dress_slice.py`, `place_*.py`, `build_city.py`, `city_night.py`, `city_colliders.py`, `lighting_pass.py`, `light_south.py` |
 | Testing | `playtest_full.py`, `test_route.py`, `collect_positions.py`, `pie_probe.py`, `capview.py`, `playtest_log.py` |
@@ -257,6 +259,9 @@ run kills, flags, journal, objective log, maps found, pistol) via `StoreCarry` /
 List in `tools/unreal_mcp/achievements_data.py`; unlocked through `BP_HKGameInstance.Unlock(Id, Title)` (toast +
 sound + save). Sources: `AchTick` (every 2 s: pistol, power, reached Wards / Deep Labs / B15, collectibles), `HKLog`
 lines (`ENDING …`, `FLAG …`), `DroneDie` (kills, elite), craft functions, Hollow Child, choices, breakers, dials.
+Screen: `WBP_Achievements` = summary + 3-column grid of trophy cards (badge, title, description, UNLOCKED/LOCKED;
+locked cards dimmed). Badges are own art: `tools/make_trophies.py` (bronze/silver/gold/red by tier, glyph by category)
+-> `HollowKin/SourceArt/Trophies/` -> `import_trophies.py` -> `/Game/HollowKin/UI/Trophies/T_Trophy_<id>`.
 
 ### 6.11 UI
 Diegetic-first: objective panel top-left, message panel, RE4-style ammo/health ring bottom-right (`WBP_ScreenFX`).

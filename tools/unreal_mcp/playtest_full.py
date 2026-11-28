@@ -8,7 +8,7 @@ import json, time, subprocess, os, re
 from ui_lib import call
 S = 'editor_toolset.toolsets.scene.SceneTools'; AT = 'editor_toolset.toolsets.actor.ActorTools'; O = 'editor_toolset.toolsets.object.ObjectTools'
 E = 'EditorToolset.EditorAppToolset'
-SP = '/private/tmp/claude-501/-Users-piyushbanerjee-Documents-Unreal-Projects/3ad6895c-a061-4731-8ef0-b5a63d097acb/scratchpad/full/'
+SP = os.environ.get('HK_SHOTS', '/tmp/hk_playtest/')
 os.makedirs(SP, exist_ok=True)
 POS = json.load(open('route_positions.json'))
 FOLDER = {'Lvl_City': 'City', 'Lvl_Clinic': 'Clinic', 'Lvl_ContainmentWing': 'Containment', 'Lvl_Wards': 'Wards', 'Lvl_DeepLabs': 'Deep'}

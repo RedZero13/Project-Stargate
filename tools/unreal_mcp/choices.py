@@ -161,16 +161,29 @@ fn(FG, 'Check', '''(fn Check ()
     (:CastFailed)))''' % MAXC)
 print(call(BT, 'compile_blueprint', {'blueprint': {'refPath': FG}, 'warnings_as_errors': False}))
 # ---------------- Max.Interact includes choices ----------------
-near = lambda cls, v, folder='Floors': '''(for %s (Actor|GetAllActorsOfClass "/Game/HollowKin/Blueprints/%s/%s.%s_C")
-      (if (< (Transformation|GetDistanceTo self %s) 200.0)
-        (Class|%s|Press :self (Utilities|Casting|CastTo%s %s))))''' % (v, folder, cls, cls, v, cls.replace('_', ''), cls, v)
+# Interact presses only the NEAREST interactable within 2 m (pressing every one in range turned all three counters /
+# all four breakers at once and made those puzzles unsolvable; fixed 2026-11-28).
+vars_(MAX, [('IntDist', 'float'), ('IntFound', 'bool')], editable=False)
+if 'IntBest' not in (call(BT, 'list_variables', {'blueprint': {'refPath': MAX}}).get('returnValue') or []):
+    call(BT, 'add_object_variable', {'blueprint': {'refPath': MAX}, 'name': 'IntBest', 'object_class': {'refPath': '/Script/Engine.Actor'}})
+INTER = [('BP_Breaker', 'Floors'), ('BP_Dial', 'Floors'), ('BP_CellConsole', 'Floors'), ('BP_Door', 'Floors'), ('BP_Choice', 'Interactables')]
+scan = lambda cls, folder: '''(for x (Actor|GetAllActorsOfClass "/Game/HollowKin/Blueprints/%s/%s.%s_C")
+      (if (< (Transformation|GetDistanceTo self x) (Variables|Default|GetIntDist))
+        (Variables|Default|SetIntDist (Transformation|GetDistanceTo self x))
+        (Variables|Default|SetIntBest x)
+        (Variables|Default|SetIntFound true)))''' % (folder, cls, cls)
+def press_chain(items):
+    cls, _ = items[0]; k = cls.replace('_', '')
+    rest = press_chain(items[1:]) if len(items) > 1 else ''
+    v = 'o%d' % len(items)
+    return '(bind %s (Utilities|Casting|CastTo%s (Variables|Default|GetIntBest)) (:then (Class|%s|Press :self %s)) (:CastFailed %s))' % (v, cls, k, v, rest)
 w(MAX + ':Interact', '''(fn Interact ()
   (if (not (Variables|Default|GetDead))
+    (Variables|Default|SetIntDist 200.0)
+    (Variables|Default|SetIntFound false)
     %s
-    %s
-    %s
-    %s
-    %s))''' % (near('BP_Breaker', 'b'), near('BP_Dial', 'd'), near('BP_CellConsole', 'c'), near('BP_Door', 'o'), near('BP_Choice', 'h', 'Interactables')))
+    (if (Variables|Default|GetIntFound)
+      %s)))''' % ('\n    '.join(scan(c, f) for c, f in INTER), press_chain(INTER)))
 print(call(BT, 'compile_blueprint', {'blueprint': {'refPath': MAX}, 'warnings_as_errors': False}))
 # ---------------- NG+: tougher Hollows ----------------
 fn(DR, 'NGPlusBoost', '''(fn NGPlusBoost ()
@@ -195,7 +208,7 @@ w(MAX + ':SetObjectiveNote', r"""(fn SetObjectiveNote (Msg)
     (CallFunction|HKLog :Msg (Utilities|String|Append "OBJECTIVE " Msg)))
   (Utilities|IsValid (Variables|Default|GetScreenFXRef)
     (:"Is Valid"
-      (Class|WBPScreenFX|SetObjective :self (Variables|Default|GetScreenFXRef) :Msg Msg))))""")
+      (Class|WBPScreenFX|SetObjective :self (Variables|Default|GetScreenFXRef) :Msg Msg))))""".replace('\\n', '\n'))
 print(call(BT, 'compile_blueprint', {'blueprint': {'refPath': MAX}, 'warnings_as_errors': False}))
 # ---------------- NG+ unlock (called from ShowEnding) and start ----------------
 vars_(GI, [('CFlags', 'string'), ('CJournal', 'string'), ('CObjLog', 'string'), ('CMapsFound', 'string')], editable=False)
@@ -216,7 +229,7 @@ fn(GI, 'StartNG', r"""(fn StartNG ()
   (Variables|Default|SetCarryPistol true)
   (Variables|Default|SetCAmmo 8) (Variables|Default|SetCReserveAmmo 24) (Variables|Default|SetCGels 2)
   (Variables|Default|SetCFlags "|NG+|")
-  (Variables|Default|SetCJournal (Utilities|String|Append "MEMORIES.  You have done this before.  You remember:\n\n" (Class|BPProgressSave|GetLastJournal :self (Variables|Default|GetProgress)))))""")
+  (Variables|Default|SetCJournal (Utilities|String|Append "MEMORIES.  You have done this before.  You remember:\n\n" (Class|BPProgressSave|GetLastJournal :self (Variables|Default|GetProgress)))))""".replace('\\n', '\n'))
 print(call(BT, 'compile_blueprint', {'blueprint': {'refPath': GI}, 'warnings_as_errors': False}))
 # main menu: NEW GAME + (shown only after an ending)
 W2 = Wbp(MM); b2 = mk(W2)
