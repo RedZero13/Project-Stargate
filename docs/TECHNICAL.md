@@ -133,6 +133,10 @@ Toolsets used most: `editor_toolset.toolsets.blueprint.BlueprintTools` (graphs a
 - Some node names: `Appearance|SetBrushfromTexture` (Border, not Image), `Rendering|SetBoundsScale`,
   `Widget|HasAnyUserFocusedDescendants`, `Game|GetPlatformName`, `Math|Vector|DotProduct`.
 - `read_graph_dsl` output is not always round-trippable; write fresh DSL from the scripts.
+- Never compile Blueprints while PIE runs (crashed the editor 2026-11-28); `playtest_full.py` now always stops PIE.
+- `ObjectTools.get_properties` fails the whole call if one requested property is missing on that class.
+- Placed actors keep their own saved component values: editing a Blueprint component template does not reach them;
+  change looks at BeginPlay instead (`fix_placeholders.py`). Give such functions unique names.
 - **Newlines in DSL string literals must be real newline characters** (`"\n"` in a normal Python string). `"\\n"` is
   stored as a backslash + n and shows on screen as `\n` (this broke the Achievements screen and the journal).
 
@@ -159,7 +163,7 @@ Run with `python3 <script>` from `tools/unreal_mcp`, editor open. Grouped by are
 | UI | `build_title*.py`, `build_options*.py`, `build_backpack*.py`, `build_credits.py`, `build_achievements.py` (+ `../make_trophies.py`, `import_trophies.py`), `fix_menu_fonts.py`, `audit_ui.py`, `build_loading.py`, `build_hud_ring.py`, `build_objective.py`, `build_msg.py`, `menu_fit.py`, `menu_dedupe.py`, `bigger_buttons.py`, `controller.py`, `touch_hud.py` |
 | Window / input | `fit_window.py`, `fullscreen_fix3.py`, `input_prefs.py`, `build_look_imcs.py`, `backpack_hooks.py` |
 | Levels (hand-built) | `build_slice.py`, `dress_slice.py`, `place_*.py`, `build_city.py`, `city_night.py`, `city_colliders.py`, `lighting_pass.py`, `light_south.py` |
-| Testing | `playtest_full.py`, `test_route.py`, `collect_positions.py`, `pie_probe.py`, `capview.py`, `playtest_log.py` |
+| Testing | `scan_runtime.py` (play-mode scan for visible mannequins / grey engine shapes), `scan_placeholders.py`, `fix_placeholders.py`, `apply_choices_parts.py`, `playtest_full.py`, `test_route.py`, `collect_positions.py`, `pie_probe.py`, `capview.py`, `playtest_log.py` |
 
 ---
 
@@ -341,6 +345,8 @@ library (FabToolset can install them) before the project opens cleanly.
 ---
 
 ## 12. Known issues and limits
+- `playtest_full.py`: reading Max's position in PIE through ActorTools returns zeros after a teleport, and E key
+  presses do not reach the game, so lift rides and breaker/counter puzzles are not verified by the script (2026-11-28).
 - The editor viewport captures are dark; judge lighting in PIE or a build.
 - Floating/clipping props: `declip.py` handles most; report leftovers with screenshots.
 - `read_graph_dsl` loses some literal pins (e.g. Notify messages) — keep scripts as the source of truth.

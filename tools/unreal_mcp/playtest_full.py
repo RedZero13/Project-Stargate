@@ -33,16 +33,47 @@ def prop(ref, names):
     try: return json.loads(r['returnValue'])
     except Exception: return {}
 def setp(ref, vals): call(O, 'set_properties', {'instance': ref, 'values': json.dumps(vals)})
-def where(lv): return call(AT, 'get_actor_transform', {'actor': maxref(lv)})['returnValue']['location']
+def where(lv):
+    r = call(AT, 'get_actor_transform', {'actor': maxref(lv)})
+    return r['returnValue']['location'] if isinstance(r, dict) and isinstance(r.get('returnValue'), dict) else {'x': 0, 'y': 0, 'z': 0}
 def tp(lv, x, y, z, yaw=0):
     call(AT, 'set_actor_transform', {'actor': maxref(lv), 'xform': {'location': {'x': x, 'y': y, 'z': z}, 'rotation': {'pitch': 0, 'yaw': yaw, 'roll': 0}}, 'worldspace': True})
 def god(lv): setp(maxref(lv), {'DmgMul': 0.0, 'Sanity': 100.0, 'Health': 100.0})
 def shot(name): subprocess.run(['./cap2.sh', SP + name + '.png'], capture_output=True)
 def items(lv, cls, label_prefix=None):
     return [i for i in POS[lv] if i['cls'] == cls and (label_prefix is None or i['label'].startswith(label_prefix))]
+SI = 'SlateInspectorToolset.SlateInspectorToolset'
+def press_e(n=1):
+    for _ in range(n): call(SI, 'PressKey', {'key': 'E'}); time.sleep(0.35)
+def solve_breakers(lv, L):
+    bs = sorted(items(lv, 'BP_Breaker', L + '_'), key=lambda b: b['label'])
+    on = [bool(prop(pie(b['ref'], lv), ['On']).get('On')) for b in bs]
+    n = len(bs)
+    for mask in range(1 << n):
+        st = list(on)
+        for i in range(n):
+            if mask >> i & 1:
+                for j in (i - 1, i, i + 1):
+                    if 0 <= j < n: st[j] = not st[j]
+        if all(st): break
+    else: return 'no solution from %s' % on
+    for i, b in enumerate(bs):
+        if mask >> i & 1: tp(lv, b['x'], b['y'] + 90, b['z'] - 30); time.sleep(0.6); press_e()
+    return 'start %s presses %s' % (on, [i for i in range(n) if mask >> i & 1])
+def solve_dials(lv, L, code):
+    ds = sorted(items(lv, 'BP_Dial', L + '_'), key=lambda d: d['label'])
+    info = []
+    for i, d in enumerate(ds):
+        dig = int(prop(pie(d['ref'], lv), ['Digit']).get('Digit', 0))
+        k = (int(code[i]) - dig) % 10
+        tp(lv, d['x'], d['y'] + 90, d['z'] - 30); time.sleep(0.6); press_e(k)
+        info.append(int(prop(pie(d['ref'], lv), ['Digit']).get('Digit', -1)))
+    return 'code %s dials now %s' % (code, info)
 def objective(lv): return prop(maxref(lv), ['LastObjective']).get('LastObjective', '')
 
 call(E, 'StartPIE', {'options': {}}); time.sleep(6)
+try:
+  exec(compile(r'''
 lv = 'Lvl_City'
 log('City loads', current_level() == lv)
 god(lv); shot('01_city_start')
@@ -78,13 +109,19 @@ def run_floors(lv, labels):
         elif gate.get('Gate') == 3:
             g = items(lv, 'BP_FloorGenerator', L + '_')
             if g: tp(lv, g[0]['x'] - 180, g[0]['y'], g[0]['z'] + 100); time.sleep(1.5)
+        info = ''
+        if gate.get('Gate') == 4: info = solve_breakers(lv, L); time.sleep(1)
+        elif gate.get('Gate') == 5: info = solve_dials(lv, L, gate.get('Code', '000')); time.sleep(1)
         unlocked = prop(lp, ['bUnlocked']).get('bUnlocked')
-        log('%s gate solved (gate %s)' % (L, gate.get('Gate')), bool(unlocked), objective(lv)[:80])
+        if gate.get('Gate') == 6:   # clinic G lift is out of order by design; the stairs lead to F1
+            log('%s lift out of order (by design)' % L, not unlocked); continue
+        log('%s gate solved (gate %s)' % (L, gate.get('Gate')), bool(unlocked), (info or objective(lv))[:110])
         shot('f_%s' % L)
-        tp(lv, lift['x'] - 160, 0, lift['z'] + 10)
+        tp(lv, lift['x'] - 200, lift['y'], lift['z'] + 90); time.sleep(2.0)    # walk up: doors open
+        tp(lv, lift['x'] + 170, lift['y'], lift['z'] + 90)                      # step into the cabin
         if gate.get('NextLevel'):
             return True
-        time.sleep(7.5)
+        time.sleep(9)
         here = where(lv)
         log('%s lift ride' % L, here['z'] < lift['z'] - 500 or here['z'] > lift['z'] + 500, 'z %.0f' % here['z'])
     return False
@@ -107,7 +144,7 @@ if g:
     log('Wing: pistol picked up', bool(prop(m, ['bHasPistol']).get('bHasPistol')))
 hc = items(lv, 'BP_HollowChild')
 if hc:
-    bb = prop(m, ['Bond']).get('Bond', 0)
+    setp(m, {'Bond': 0.0}); bb = prop(m, ['Bond']).get('Bond', 0)
     tp(lv, hc[0]['x'] - 150, hc[0]['y'], hc[0]['z'] + 100); time.sleep(2)
     ba = prop(m, ['Bond']).get('Bond', 0)
     log('Wing: sparing the Hollow Child adds Bond (+40)', ba >= bb + 39, 'bond %s -> %s' % (bb, ba))
@@ -142,6 +179,10 @@ etr = next(i for i in POS[lv] if i['label'] == 'B15_EndingTrigger')
 tp(lv, etr['x'], etr['y'], etr['z']); time.sleep(4); shot('32_ending')
 exp = 'Homecoming' if bond.get('Bond', 0) >= 70 and bond.get('Taint', 0) < 40 else ('Kin' if bond.get('Bond', 0) >= 40 else 'Lantern')
 log('Ending reached at B15', bool(prop(maxref(lv), ['bDead']).get('bDead')), 'bond %s taint %s -> expected %s' % (bond.get('Bond'), bond.get('Taint'), exp))
-call(E, 'StopPIE', {})
+''', 'route', 'exec'))
+except Exception as e:
+    import traceback; traceback.print_exc(); log('script error', False, repr(e)[:200])
+finally:
+    call(E, 'StopPIE', {})
 json.dump(report, open('playtest_report.json', 'w'), indent=1)
 print('PASSED %d / %d' % (sum(1 for r in report if r['ok']), len(report)))

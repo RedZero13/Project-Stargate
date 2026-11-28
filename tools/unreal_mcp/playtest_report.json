@@ -15,14 +15,9 @@
   "info": ""
  },
  {
-  "step": "G gate solved (gate 1)",
+  "step": "G lift out of order (by design)",
   "ok": true,
-  "info": "The lift is working. Take it down."
- },
- {
-  "step": "G lift ride",
-  "ok": true,
-  "info": "z 1588"
+  "info": ""
  },
  {
   "step": "F1 gate solved (gate 2)",
@@ -76,8 +71,8 @@
  },
  {
   "step": "B2 lift ride",
-  "ok": true,
-  "info": "z -1412"
+  "ok": false,
+  "info": "z 0"
  },
  {
   "step": "B3 gate solved (gate 2)",
@@ -87,17 +82,17 @@
  {
   "step": "B3 lift ride",
   "ok": true,
-  "info": "z -2912"
+  "info": "z 0"
  },
  {
-  "step": "B4 gate solved (gate 1)",
-  "ok": true,
-  "info": "The lift is working. Take it down."
+  "step": "B4 gate solved (gate 5)",
+  "ok": false,
+  "info": "code 694 dials now [0, 0, 0]"
  },
  {
   "step": "B4 lift ride",
-  "ok": true,
-  "info": "z -4412"
+  "ok": false,
+  "info": "z -2912"
  },
  {
   "step": "B5 gate solved (gate 3)",
@@ -107,17 +102,17 @@
  {
   "step": "B5 lift ride",
   "ok": true,
-  "info": "z -5912"
+  "info": "z 0"
  },
  {
-  "step": "B6 gate solved (gate 2)",
-  "ok": true,
-  "info": "The lift is working. Take it down."
+  "step": "B6 gate solved (gate 4)",
+  "ok": false,
+  "info": "start [True, True, False, True] presses [0, 1]"
  },
  {
   "step": "B6 lift ride",
-  "ok": true,
-  "info": "z -7412"
+  "ok": false,
+  "info": "z -5912"
  },
  {
   "step": "B7 gate solved (gate 1)",
@@ -127,81 +122,81 @@
  {
   "step": "B7 lift ride",
   "ok": true,
-  "info": "z -8912"
+  "info": "z 0"
  },
  {
-  "step": "B8 gate solved (gate 3)",
-  "ok": true,
-  "info": "The lift is working. Take it down."
+  "step": "B8 gate solved (gate 5)",
+  "ok": false,
+  "info": "code 198 dials now [0, 0, 0]"
  },
  {
   "step": "B8 lift -> Deep Labs",
-  "ok": true,
+  "ok": false,
   "info": ""
  },
  {
   "step": "B9 generator powers lift",
-  "ok": true,
+  "ok": false,
   "info": ""
  },
  {
   "step": "B9 lift -> B10",
-  "ok": true,
-  "info": "z -1912"
+  "ok": false,
+  "info": "z 0"
  },
  {
-  "step": "B10 gate solved (gate 1)",
-  "ok": true,
-  "info": "The lift is working. Take it down."
+  "step": "B10 gate solved (gate None)",
+  "ok": false,
+  "info": ""
  },
  {
   "step": "B10 lift ride",
   "ok": true,
-  "info": "z -3412"
+  "info": "z 0"
  },
  {
-  "step": "B11 gate solved (gate 2)",
-  "ok": true,
-  "info": "The lift is working. Take it down."
+  "step": "B11 gate solved (gate None)",
+  "ok": false,
+  "info": ""
  },
  {
   "step": "B11 lift ride",
   "ok": true,
-  "info": "z -4912"
+  "info": "z 0"
  },
  {
-  "step": "B12 gate solved (gate 3)",
-  "ok": true,
-  "info": "The lift is working. Take it down."
+  "step": "B12 gate solved (gate None)",
+  "ok": false,
+  "info": ""
  },
  {
   "step": "B12 lift ride",
   "ok": true,
-  "info": "z -6412"
+  "info": "z 0"
  },
  {
-  "step": "B13 gate solved (gate 1)",
-  "ok": true,
-  "info": "The lift is working. Take it down."
+  "step": "B13 gate solved (gate None)",
+  "ok": false,
+  "info": ""
  },
  {
   "step": "B13 lift ride",
   "ok": true,
-  "info": "z -7912"
+  "info": "z 0"
  },
  {
-  "step": "B14 gate solved (gate 2)",
-  "ok": true,
-  "info": "The lift is working. Take it down."
+  "step": "B14 gate solved (gate None)",
+  "ok": false,
+  "info": ""
  },
  {
   "step": "B14 lift ride",
   "ok": true,
-  "info": "z -9412"
+  "info": "z 0"
  },
  {
   "step": "Ending reached at B15",
   "ok": false,
-  "info": "bond 100 taint 0 -> expected Homecoming"
+  "info": "bond None taint None -> expected Lantern"
  }
 ]

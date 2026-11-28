@@ -6,7 +6,8 @@
    "ref": "/Game/HollowKin/Maps/City/Lvl_City.Lvl_City:PersistentLevel.PlayerStart_1",
    "x": -8700,
    "y": -800,
-   "z": 120
+   "z": 120,
+   "yaw": 0
   },
   {
    "cls": "BP_LevelDoor",
@@ -14,7 +15,8 @@
    "ref": "/Game/HollowKin/Maps/City/Lvl_City.Lvl_City:PersistentLevel.BP_LevelDoor_C_0",
    "x": 8470,
    "y": -800,
-   "z": 150
+   "z": 150,
+   "yaw": 0
   },
   {
    "cls": "BP_PhoneCall",
@@ -22,7 +24,8 @@
    "ref": "/Game/HollowKin/Maps/City/Lvl_City.Lvl_City:PersistentLevel.BP_PhoneCall_C_0",
    "x": -8150,
    "y": -800,
-   "z": 150
+   "z": 150,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -31,6 +34,7 @@
    "x": -5050,
    "y": -520,
    "z": 40,
+   "yaw": 0,
    "PickupKind": 6,
    "Amount": 1
   },
@@ -40,7 +44,8 @@
    "ref": "/Game/HollowKin/Maps/City/Lvl_City.Lvl_City:PersistentLevel.BP_Cutscene_C_1",
    "x": 1500,
    "y": -800,
-   "z": 100
+   "z": 100,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -49,6 +54,7 @@
    "x": 6950,
    "y": -420,
    "z": 40,
+   "yaw": 0,
    "PickupKind": 1,
    "Amount": 1
   }
@@ -61,8 +67,18 @@
    "x": 4235,
    "y": -672,
    "z": 510,
+   "yaw": 0,
    "PickupKind": 4,
    "Amount": 1
+  },
+  {
+   "cls": "BP_Door",
+   "label": "G_Door_N1",
+   "ref": "/Game/HollowKin/Maps/Clinic/Lvl_Clinic.Lvl_Clinic:PersistentLevel.BP_Door_C_UAID_70F94AE71E72051903_1836679542",
+   "x": 1800,
+   "y": -212.5,
+   "z": 0,
+   "yaw": 0
   },
   {
    "cls": "BP_FloorLift",
@@ -70,7 +86,17 @@
    "ref": "/Game/HollowKin/Maps/Clinic/Lvl_Clinic.Lvl_Clinic:PersistentLevel.BP_FloorLift_C_UAID_70F94AE71E72051903_1837895556",
    "x": 5457,
    "y": 130,
-   "z": 470
+   "z": 470,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "F1_Door_S4",
+   "ref": "/Game/HollowKin/Maps/Clinic/Lvl_Clinic.Lvl_Clinic:PersistentLevel.BP_Door_C_UAID_70F94AE71E72051903_1839128570",
+   "x": 1725,
+   "y": 212.5,
+   "z": 470,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -79,6 +105,7 @@
    "x": 1331,
    "y": -692,
    "z": 40,
+   "yaw": 0,
    "PickupKind": 0,
    "Amount": 6
   },
@@ -89,8 +116,18 @@
    "x": 3267.5,
    "y": 735,
    "z": 510,
+   "yaw": 0,
    "PickupKind": 7,
    "Amount": 3
+  },
+  {
+   "cls": "BP_Door",
+   "label": "F1_Door_N1",
+   "ref": "/Game/HollowKin/Maps/Clinic/Lvl_Clinic.Lvl_Clinic:PersistentLevel.BP_Door_C_UAID_70F94AE71E72051903_1838900567",
+   "x": 2825,
+   "y": -212.5,
+   "z": 470,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -99,6 +136,7 @@
    "x": 3735.5,
    "y": -739,
    "z": 40,
+   "yaw": 0,
    "PickupKind": 5,
    "Amount": 1
   },
@@ -108,7 +146,8 @@
    "ref": "/Game/HollowKin/Maps/Clinic/Lvl_Clinic.Lvl_Clinic:PersistentLevel.BP_HollowDrone_C_UAID_70F94AE71E720A1903_2070173204",
    "x": 3812.5,
    "y": -575,
-   "z": 120
+   "z": 120,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -117,6 +156,7 @@
    "x": 1962,
    "y": 767,
    "z": 510,
+   "yaw": 0,
    "PickupKind": 5,
    "Amount": 1
   },
@@ -127,8 +167,18 @@
    "x": 1667.5,
    "y": 735,
    "z": 40,
+   "yaw": 0,
    "PickupKind": 7,
    "Amount": 3
+  },
+  {
+   "cls": "BP_Door",
+   "label": "F1_Door_N3",
+   "ref": "/Game/HollowKin/Maps/Clinic/Lvl_Clinic.Lvl_Clinic:PersistentLevel.BP_Door_C_UAID_70F94AE71E72051903_1839045569",
+   "x": 4125,
+   "y": -212.5,
+   "z": 470,
+   "yaw": 0
   },
   {
    "cls": "BP_Cutscene",
@@ -136,7 +186,8 @@
    "ref": "/Game/HollowKin/Maps/Clinic/Lvl_Clinic.Lvl_Clinic:PersistentLevel.BP_Cutscene_C_UAID_70F94AE71E72051903_1837796555",
    "x": 1115,
    "y": -100,
-   "z": 570
+   "z": 570,
+   "yaw": 0
   },
   {
    "cls": "PlayerStart",
@@ -144,7 +195,35 @@
    "ref": "/Game/HollowKin/Maps/Clinic/Lvl_Clinic.Lvl_Clinic:PersistentLevel.PlayerStart_UAID_F4A475FF15A3736A02_1961960731",
    "x": 250,
    "y": 0,
-   "z": 100
+   "z": 100,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "F1_Door_WC2",
+   "ref": "/Game/HollowKin/Maps/Clinic/Lvl_Clinic.Lvl_Clinic:PersistentLevel.BP_Door_C_UAID_70F94AE71E72051903_1839546575",
+   "x": 4662.5,
+   "y": 212.5,
+   "z": 470,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "G_Door_N3",
+   "ref": "/Game/HollowKin/Maps/Clinic/Lvl_Clinic.Lvl_Clinic:PersistentLevel.BP_Door_C_UAID_70F94AE71E72051903_1836845544",
+   "x": 3800,
+   "y": -212.5,
+   "z": 0,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "F1_Door_S7",
+   "ref": "/Game/HollowKin/Maps/Clinic/Lvl_Clinic.Lvl_Clinic:PersistentLevel.BP_Door_C_UAID_70F94AE71E72051903_1839379573",
+   "x": 4100,
+   "y": 212.5,
+   "z": 470,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -153,8 +232,27 @@
    "x": 3992.5,
    "y": -615,
    "z": 40,
+   "yaw": 0,
    "PickupKind": 8,
    "Amount": 1
+  },
+  {
+   "cls": "BP_Door",
+   "label": "G_Door_WC2",
+   "ref": "/Game/HollowKin/Maps/Clinic/Lvl_Clinic.Lvl_Clinic:PersistentLevel.BP_Door_C_UAID_70F94AE71E72051903_1837429551",
+   "x": 4662.5,
+   "y": 212.5,
+   "z": 0,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "G_Door_S7",
+   "ref": "/Game/HollowKin/Maps/Clinic/Lvl_Clinic.Lvl_Clinic:PersistentLevel.BP_Door_C_UAID_70F94AE71E72051903_1837179548",
+   "x": 4150,
+   "y": 212.5,
+   "z": 0,
+   "yaw": 0
   },
   {
    "cls": "BP_FloorLift",
@@ -162,7 +260,44 @@
    "ref": "/Game/HollowKin/Maps/Clinic/Lvl_Clinic.Lvl_Clinic:PersistentLevel.BP_FloorLift_C_UAID_70F94AE71E72051903_1836062535",
    "x": 5457,
    "y": -130,
-   "z": 0
+   "z": 0,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "G_Door_N2",
+   "ref": "/Game/HollowKin/Maps/Clinic/Lvl_Clinic.Lvl_Clinic:PersistentLevel.BP_Door_C_UAID_70F94AE71E72051903_1836762543",
+   "x": 2200,
+   "y": -212.5,
+   "z": 0,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "G_Door_S6",
+   "ref": "/Game/HollowKin/Maps/Clinic/Lvl_Clinic.Lvl_Clinic:PersistentLevel.BP_Door_C_UAID_70F94AE71E72051903_1837095547",
+   "x": 3550,
+   "y": 212.5,
+   "z": 0,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "G_Door_WC1",
+   "ref": "/Game/HollowKin/Maps/Clinic/Lvl_Clinic.Lvl_Clinic:PersistentLevel.BP_Door_C_UAID_70F94AE71E72051903_1837345550",
+   "x": 962.5,
+   "y": 212.5,
+   "z": 0,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "G_Door_N4",
+   "ref": "/Game/HollowKin/Maps/Clinic/Lvl_Clinic.Lvl_Clinic:PersistentLevel.BP_Door_C_UAID_70F94AE71E72051903_1836929545",
+   "x": 2800,
+   "y": -587.5,
+   "z": 0,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -171,6 +306,7 @@
    "x": 2706,
    "y": -768,
    "z": 510,
+   "yaw": 0,
    "PickupKind": 0,
    "Amount": 6
   },
@@ -181,8 +317,18 @@
    "x": 2244,
    "y": -675,
    "z": 40,
+   "yaw": 0,
    "PickupKind": 4,
    "Amount": 1
+  },
+  {
+   "cls": "BP_Door",
+   "label": "F1_Door_N2",
+   "ref": "/Game/HollowKin/Maps/Clinic/Lvl_Clinic.Lvl_Clinic:PersistentLevel.BP_Door_C_UAID_70F94AE71E72051903_1838962568",
+   "x": 3475,
+   "y": -212.5,
+   "z": 470,
+   "yaw": 0
   },
   {
    "cls": "BP_SeqSwitch",
@@ -190,7 +336,8 @@
    "ref": "/Game/HollowKin/Maps/Clinic/Lvl_Clinic.Lvl_Clinic:PersistentLevel.BP_SeqSwitch_C_UAID_70F94AE71E72051903_1838095558",
    "x": 3187.5,
    "y": 425,
-   "z": 472
+   "z": 472,
+   "yaw": 0
   },
   {
    "cls": "BP_SeqSwitch",
@@ -198,7 +345,26 @@
    "ref": "/Game/HollowKin/Maps/Clinic/Lvl_Clinic.Lvl_Clinic:PersistentLevel.BP_SeqSwitch_C_UAID_70F94AE71E72051903_1837995557",
    "x": 1675,
    "y": -425,
-   "z": 472
+   "z": 472,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "F1_Door_S5",
+   "ref": "/Game/HollowKin/Maps/Clinic/Lvl_Clinic.Lvl_Clinic:PersistentLevel.BP_Door_C_UAID_70F94AE71E72051903_1839212571",
+   "x": 2625,
+   "y": 212.5,
+   "z": 470,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "G_Door_S5",
+   "ref": "/Game/HollowKin/Maps/Clinic/Lvl_Clinic.Lvl_Clinic:PersistentLevel.BP_Door_C_UAID_70F94AE71E72051903_1837012546",
+   "x": 1775,
+   "y": 212.5,
+   "z": 0,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -207,8 +373,27 @@
    "x": 1756,
    "y": -695,
    "z": 40,
+   "yaw": 0,
    "PickupKind": 1,
    "Amount": 40
+  },
+  {
+   "cls": "BP_Door",
+   "label": "G_Door_N0",
+   "ref": "/Game/HollowKin/Maps/Clinic/Lvl_Clinic.Lvl_Clinic:PersistentLevel.BP_Door_C_UAID_70F94AE71E72051903_1836595541",
+   "x": 1400,
+   "y": -212.5,
+   "z": 0,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "F1_Door_S6",
+   "ref": "/Game/HollowKin/Maps/Clinic/Lvl_Clinic.Lvl_Clinic:PersistentLevel.BP_Door_C_UAID_70F94AE71E72051903_1839295572",
+   "x": 3375,
+   "y": 212.5,
+   "z": 470,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -217,6 +402,7 @@
    "x": 3419,
    "y": -696,
    "z": 510,
+   "yaw": 0,
    "PickupKind": 2,
    "Amount": 40
   },
@@ -227,8 +413,18 @@
    "x": 1905,
    "y": 495,
    "z": 510,
+   "yaw": 0,
    "PickupKind": 8,
    "Amount": 2
+  },
+  {
+   "cls": "BP_Door",
+   "label": "F1_Door_N0",
+   "ref": "/Game/HollowKin/Maps/Clinic/Lvl_Clinic.Lvl_Clinic:PersistentLevel.BP_Door_C_UAID_70F94AE71E72051903_1838795566",
+   "x": 1875,
+   "y": -212.5,
+   "z": 470,
+   "yaw": 0
   },
   {
    "cls": "BP_SeqSwitch",
@@ -236,7 +432,26 @@
    "ref": "/Game/HollowKin/Maps/Clinic/Lvl_Clinic.Lvl_Clinic:PersistentLevel.BP_SeqSwitch_C_UAID_70F94AE71E72051903_1838195559",
    "x": 1525,
    "y": 425,
-   "z": 472
+   "z": 472,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "G_Door_S8",
+   "ref": "/Game/HollowKin/Maps/Clinic/Lvl_Clinic.Lvl_Clinic:PersistentLevel.BP_Door_C_UAID_70F94AE71E72051903_1837262549",
+   "x": 2800,
+   "y": 587.5,
+   "z": 0,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "F1_Door_WC1",
+   "ref": "/Game/HollowKin/Maps/Clinic/Lvl_Clinic.Lvl_Clinic:PersistentLevel.BP_Door_C_UAID_70F94AE71E72051903_1839462574",
+   "x": 962.5,
+   "y": 212.5,
+   "z": 470,
+   "yaw": 0
   }
  ],
  "Lvl_ContainmentWing": [
@@ -246,7 +461,8 @@
    "ref": "/Game/HollowKin/Maps/Containment/Lvl_ContainmentWing.Lvl_ContainmentWing:PersistentLevel.BP_HollowDrone_C_UAID_70F94AE71E72161803_2095519156",
    "x": 2450,
    "y": 0,
-   "z": 100
+   "z": 100,
+   "yaw": 180
   },
   {
    "cls": "BP_Pickup",
@@ -255,6 +471,7 @@
    "x": 5250,
    "y": 480,
    "z": 60,
+   "yaw": 0,
    "PickupKind": 0,
    "Amount": 6
   },
@@ -264,7 +481,8 @@
    "ref": "/Game/HollowKin/Maps/Containment/Lvl_ContainmentWing.Lvl_ContainmentWing:PersistentLevel.BP_HollowDrone_C_UAID_70F94AE71E72331803_1714998648",
    "x": 5050,
    "y": 380,
-   "z": 120
+   "z": 120,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -273,6 +491,7 @@
    "x": 600,
    "y": 120,
    "z": 60,
+   "yaw": 0,
    "PickupKind": 0,
    "Amount": 6
   },
@@ -283,6 +502,7 @@
    "x": 640,
    "y": 170,
    "z": 40,
+   "yaw": 0,
    "PickupKind": 6,
    "Amount": 1
   },
@@ -293,6 +513,7 @@
    "x": 1500,
    "y": -150,
    "z": 60,
+   "yaw": 0,
    "PickupKind": 1,
    "Amount": 50
   },
@@ -302,7 +523,8 @@
    "ref": "/Game/HollowKin/Maps/Containment/Lvl_ContainmentWing.Lvl_ContainmentWing:PersistentLevel.PlayerStart_UAID_F4A475FF15A3736A02_1961960731",
    "x": 200,
    "y": 0,
-   "z": 100
+   "z": 100,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -311,6 +533,7 @@
    "x": 3000,
    "y": 200,
    "z": 100,
+   "yaw": 0,
    "PickupKind": 2,
    "Amount": 40
   },
@@ -320,7 +543,8 @@
    "ref": "/Game/HollowKin/Maps/Containment/Lvl_ContainmentWing.Lvl_ContainmentWing:PersistentLevel.BP_Guard_C_UAID_70F94AE71E72161803_2125213171",
    "x": 5500,
    "y": -1000,
-   "z": 100
+   "z": 100,
+   "yaw": 0
   },
   {
    "cls": "BP_HollowDrone",
@@ -328,7 +552,8 @@
    "ref": "/Game/HollowKin/Maps/Containment/Lvl_ContainmentWing.Lvl_ContainmentWing:PersistentLevel.BP_HollowDrone_C_UAID_70F94AE71E72161803_2109201163",
    "x": 3900,
    "y": -850,
-   "z": 100
+   "z": 100,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -337,6 +562,7 @@
    "x": 4700,
    "y": 1000,
    "z": 60,
+   "yaw": 0,
    "PickupKind": 4,
    "Amount": 1
   },
@@ -346,7 +572,8 @@
    "ref": "/Game/HollowKin/Maps/Containment/Lvl_ContainmentWing.Lvl_ContainmentWing:PersistentLevel.BP_PowerDoor_C_UAID_70F94AE71E72161803_2134884176",
    "x": 6512,
    "y": -1125,
-   "z": 0
+   "z": 0,
+   "yaw": 89.99999999437944
   },
   {
    "cls": "BP_Pickup",
@@ -355,6 +582,7 @@
    "x": 4037,
    "y": -1400,
    "z": 60,
+   "yaw": 0,
    "PickupKind": 0,
    "Amount": 6
   },
@@ -365,6 +593,7 @@
    "x": 4560,
    "y": 1320,
    "z": 60,
+   "yaw": 0,
    "PickupKind": 3,
    "Amount": 1
   },
@@ -374,7 +603,8 @@
    "ref": "/Game/HollowKin/Maps/Containment/Lvl_ContainmentWing.Lvl_ContainmentWing:PersistentLevel.BP_HollowDrone_C_UAID_70F94AE71E72161803_2111201164",
    "x": 4850,
    "y": -1000,
-   "z": 100
+   "z": 100,
+   "yaw": 180
   },
   {
    "cls": "BP_EndingTrigger",
@@ -382,7 +612,8 @@
    "ref": "/Game/HollowKin/Maps/Containment/Lvl_ContainmentWing.Lvl_ContainmentWing:PersistentLevel.BP_EndingTrigger_C_UAID_70F94AE71E72161803_2136884177",
    "x": 7050,
    "y": -1100,
-   "z": 100
+   "z": 100,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -391,6 +622,7 @@
    "x": 1500,
    "y": 120,
    "z": 40,
+   "yaw": 0,
    "PickupKind": 1,
    "Amount": 40
   },
@@ -401,6 +633,7 @@
    "x": 6350,
    "y": -1450,
    "z": 60,
+   "yaw": 0,
    "PickupKind": 5,
    "Amount": 1
   },
@@ -411,6 +644,7 @@
    "x": 4350,
    "y": 1150,
    "z": 40,
+   "yaw": 0,
    "PickupKind": 7,
    "Amount": 20
   },
@@ -420,7 +654,8 @@
    "ref": "/Game/HollowKin/Maps/Containment/Lvl_ContainmentWing.Lvl_ContainmentWing:PersistentLevel.BP_HollowChild_C_UAID_70F94AE71E72161803_2117212167",
    "x": 4400,
    "y": 1050,
-   "z": 100
+   "z": 100,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -429,6 +664,7 @@
    "x": 3700,
    "y": 700,
    "z": 60,
+   "yaw": 0,
    "PickupKind": 2,
    "Amount": 40
   },
@@ -438,7 +674,8 @@
    "ref": "/Game/HollowKin/Maps/Containment/Lvl_ContainmentWing.Lvl_ContainmentWing:PersistentLevel.BP_GunPickup_C_UAID_70F94AE71E725A1803_1129517037",
    "x": 480,
    "y": -135,
-   "z": 100
+   "z": 100,
+   "yaw": -89.99999999437944
   },
   {
    "cls": "BP_Pickup",
@@ -447,6 +684,7 @@
    "x": 3450,
    "y": 220,
    "z": 100,
+   "yaw": 0,
    "PickupKind": 4,
    "Amount": 1
   },
@@ -457,6 +695,7 @@
    "x": 3700,
    "y": -420,
    "z": 40,
+   "yaw": 0,
    "PickupKind": 6,
    "Amount": 1
   },
@@ -467,6 +706,7 @@
    "x": 5250,
    "y": -1450,
    "z": 60,
+   "yaw": 0,
    "PickupKind": 1,
    "Amount": 50
   },
@@ -477,6 +717,7 @@
    "x": 6150,
    "y": -1400,
    "z": 40,
+   "yaw": 0,
    "PickupKind": 7,
    "Amount": 20
   },
@@ -487,6 +728,7 @@
    "x": 4527,
    "y": -1400,
    "z": 60,
+   "yaw": 0,
    "PickupKind": 3,
    "Amount": 1
   },
@@ -497,6 +739,7 @@
    "x": 3750,
    "y": -500,
    "z": 60,
+   "yaw": 0,
    "PickupKind": 5,
    "Amount": 1
   },
@@ -507,6 +750,7 @@
    "x": 3900,
    "y": 450,
    "z": 40,
+   "yaw": 0,
    "PickupKind": 2,
    "Amount": 35
   },
@@ -516,7 +760,8 @@
    "ref": "/Game/HollowKin/Maps/Containment/Lvl_ContainmentWing.Lvl_ContainmentWing:PersistentLevel.BP_SaveTerminal_C_UAID_70F94AE71E72161803_2099186158",
    "x": 3350,
    "y": -200,
-   "z": 0
+   "z": 0,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -525,6 +770,7 @@
    "x": 5900,
    "y": -800,
    "z": 60,
+   "yaw": 0,
    "PickupKind": 4,
    "Amount": 1
   },
@@ -535,6 +781,7 @@
    "x": 3350,
    "y": 220,
    "z": 40,
+   "yaw": 0,
    "PickupKind": 7,
    "Amount": 20
   },
@@ -545,6 +792,7 @@
    "x": 2250,
    "y": -120,
    "z": 40,
+   "yaw": 0,
    "PickupKind": 6,
    "Amount": 1
   },
@@ -554,17 +802,28 @@
    "ref": "/Game/HollowKin/Maps/Containment/Lvl_ContainmentWing.Lvl_ContainmentWing:PersistentLevel.BP_BreakerPanel_C_UAID_70F94AE71E72161803_2127215172",
    "x": 6420,
    "y": -800,
-   "z": 100
+   "z": 100,
+   "yaw": 0
   }
  ],
  "Lvl_Wards": [
+  {
+   "cls": "BP_Door",
+   "label": "B3_Door_S6",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Door_C_UAID_70F94AE71E72061903_1451010397",
+   "x": 3375,
+   "y": 362.5,
+   "z": -1500,
+   "yaw": 0
+  },
   {
    "cls": "BP_HollowDrone",
    "label": "B2_Hollow1",
    "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_HollowDrone_C_UAID_70F94AE71E72061903_1446058344",
    "x": 3125,
    "y": -157.5,
-   "z": 120
+   "z": 120,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -573,6 +832,7 @@
    "x": 2244,
    "y": -615,
    "z": -8960,
+   "yaw": 0,
    "PickupKind": 8,
    "Amount": 9
   },
@@ -583,8 +843,36 @@
    "x": 3569,
    "y": 737,
    "z": -4460,
+   "yaw": 0,
    "PickupKind": 4,
    "Amount": 1
+  },
+  {
+   "cls": "BP_Dial",
+   "label": "B4_Dial1",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Dial_C_UAID_70F94AE71E72061903_1451976407",
+   "x": 5132,
+   "y": -388,
+   "z": -2890,
+   "yaw": 180
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B4_Door_S8",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Door_C_UAID_70F94AE71E72061903_1454401434",
+   "x": 3925,
+   "y": 212.5,
+   "z": -3000,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B5_Door_N0",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Door_C_UAID_70F94AE71E72061903_1456445456",
+   "x": 1775,
+   "y": -212.5,
+   "z": -4500,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -593,6 +881,7 @@
    "x": 4050,
    "y": -706,
    "z": -5960,
+   "yaw": 0,
    "PickupKind": 9,
    "Amount": 1
   },
@@ -603,6 +892,7 @@
    "x": 1894,
    "y": 615,
    "z": -2960,
+   "yaw": 0,
    "PickupKind": 8,
    "Amount": 5
   },
@@ -613,6 +903,7 @@
    "x": 3213,
    "y": -749,
    "z": -2960,
+   "yaw": 0,
    "PickupKind": 0,
    "Amount": 6
   },
@@ -622,7 +913,26 @@
    "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_FloorLift_C_UAID_70F94AE71E72061903_1445563339",
    "x": 18,
    "y": 0,
-   "z": 0
+   "z": 0,
+   "yaw": 180
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B6_Door_N5",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Door_C_UAID_70F94AE71E72061903_1460143495",
+   "x": 1925,
+   "y": 287.5,
+   "z": -6000,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B4_Door_S7",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Door_C_UAID_70F94AE71E72061903_1454290433",
+   "x": 3025,
+   "y": 212.5,
+   "z": -3000,
+   "yaw": 0
   },
   {
    "cls": "BP_FloorLift",
@@ -630,7 +940,8 @@
    "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_FloorLift_C_UAID_70F94AE71E72061903_1451776405",
    "x": 5457,
    "y": 0,
-   "z": -3000
+   "z": -3000,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -639,6 +950,7 @@
    "x": 2905,
    "y": 131,
    "z": 40,
+   "yaw": 0,
    "PickupKind": 5,
    "Amount": 1
   },
@@ -648,7 +960,8 @@
    "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_HollowDrone_C_UAID_70F94AE71E72061903_1452527413",
    "x": 1825,
    "y": 342.5,
-   "z": -2880
+   "z": -2880,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -657,8 +970,27 @@
    "x": 2039,
    "y": -794,
    "z": 40,
+   "yaw": 0,
    "PickupKind": 0,
    "Amount": 6
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B8_Door_WC2",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Door_C_UAID_70F94AE71E72061903_1466759564",
+   "x": 4662.5,
+   "y": 212.5,
+   "z": -9000,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B8_Door_WC1",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Door_C_UAID_70F94AE71E72061903_1466676563",
+   "x": 962.5,
+   "y": 212.5,
+   "z": -9000,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -667,6 +999,7 @@
    "x": 3530.5,
    "y": -794,
    "z": 40,
+   "yaw": 0,
    "PickupKind": 1,
    "Amount": 40
   },
@@ -677,8 +1010,54 @@
    "x": 1331,
    "y": 771,
    "z": -4460,
+   "yaw": 0,
    "PickupKind": 0,
    "Amount": 6
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B7_Door_N4",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Door_C_UAID_70F94AE71E72061903_1462828524",
+   "x": 2900,
+   "y": -562.5,
+   "z": -7500,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B4_Door_N2",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Door_C_UAID_70F94AE71E72061903_1453827428",
+   "x": 3225,
+   "y": -212.5,
+   "z": -3000,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B7_Door_N0",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Door_C_UAID_70F94AE71E72061903_1462460520",
+   "x": 1550,
+   "y": -362.5,
+   "z": -7500,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B3_Door_S4",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Door_C_UAID_70F94AE71E72061903_1450826395",
+   "x": 2900,
+   "y": 562.5,
+   "z": -1500,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B6_Door_N2",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Door_C_UAID_70F94AE71E72061903_1459861492",
+   "x": 3900,
+   "y": -562.5,
+   "z": -6000,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -687,6 +1066,7 @@
    "x": 1756,
    "y": 776,
    "z": -2960,
+   "yaw": 0,
    "PickupKind": 5,
    "Amount": 1
   },
@@ -696,7 +1076,8 @@
    "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_HollowDrone_C_UAID_70F94AE71E72061903_1452593414",
    "x": 3025,
    "y": 342.5,
-   "z": -2880
+   "z": -2880,
+   "yaw": 0
   },
   {
    "cls": "BP_SeqSwitch",
@@ -704,7 +1085,8 @@
    "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_SeqSwitch_C_UAID_70F94AE71E72061903_1448776373",
    "x": 1712.5,
    "y": -500,
-   "z": -1498
+   "z": -1498,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -713,8 +1095,18 @@
    "x": 1887.5,
    "y": 694,
    "z": -4460,
+   "yaw": 0,
    "PickupKind": 2,
    "Amount": 40
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B3_Door_S7",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Door_C_UAID_70F94AE71E72061903_1451110398",
+   "x": 4000,
+   "y": 362.5,
+   "z": -1500,
+   "yaw": 0
   },
   {
    "cls": "BP_HollowDrone",
@@ -722,7 +1114,8 @@
    "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_HollowDrone_C_UAID_70F94AE71E72061903_1449376379",
    "x": 3375,
    "y": 492.5,
-   "z": -1380
+   "z": -1380,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -731,8 +1124,36 @@
    "x": 3544.5,
    "y": 697,
    "z": -8960,
+   "yaw": 0,
    "PickupKind": 0,
    "Amount": 6
+  },
+  {
+   "cls": "BP_Dial",
+   "label": "B4_Dial2",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Dial_C_UAID_70F94AE71E72061903_1452076408",
+   "x": 5207,
+   "y": -388,
+   "z": -2890,
+   "yaw": 180
+  },
+  {
+   "cls": "BP_Dial",
+   "label": "B8_Dial1",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Dial_C_UAID_70F94AE71E72061903_1464010536",
+   "x": 5132,
+   "y": -388,
+   "z": -8890,
+   "yaw": 180
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B7_Door_S3",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Door_C_UAID_70F94AE71E72061903_1462743523",
+   "x": 2300,
+   "y": 12.5,
+   "z": -7500,
+   "yaw": 0
   },
   {
    "cls": "BP_HollowDrone",
@@ -740,7 +1161,8 @@
    "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_HollowDrone_C_UAID_70F94AE71E72061903_1461227506",
    "x": 3775,
    "y": -142.5,
-   "z": -7380
+   "z": -7380,
+   "yaw": 0
   },
   {
    "cls": "BP_HollowDrone",
@@ -748,7 +1170,8 @@
    "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_HollowDrone_C_UAID_70F94AE71E72061903_1464643543",
    "x": 2800,
    "y": -717.5,
-   "z": -8880
+   "z": -8880,
+   "yaw": 0
   },
   {
    "cls": "BP_FloorLift",
@@ -756,7 +1179,8 @@
    "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_FloorLift_C_UAID_70F94AE71E72061903_1457576468",
    "x": 18,
    "y": 0,
-   "z": -6000
+   "z": -6000,
+   "yaw": 180
   },
   {
    "cls": "BP_HollowDrone",
@@ -764,7 +1188,8 @@
    "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_HollowDrone_C_UAID_70F94AE71E72061903_1452444412",
    "x": 3950,
    "y": -342.5,
-   "z": -2880
+   "z": -2880,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -773,6 +1198,7 @@
    "x": 2580,
    "y": -22.5,
    "z": 40,
+   "yaw": 0,
    "PickupKind": 7,
    "Amount": 3
   },
@@ -782,7 +1208,17 @@
    "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_HollowChild_C_UAID_70F94AE71E72061903_1450276389",
    "x": 3775,
    "y": -475,
-   "z": -1400
+   "z": -1400,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B2_Door_N1",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Door_C_UAID_70F94AE71E72061903_1447312358",
+   "x": 3675,
+   "y": -562.5,
+   "z": 0,
+   "yaw": 0
   },
   {
    "cls": "BP_HollowDrone",
@@ -790,7 +1226,35 @@
    "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_HollowDrone_C_UAID_70F94AE71E72061903_1446110345",
    "x": 2700,
    "y": 157.5,
-   "z": 120
+   "z": 120,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B7_Door_S7",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Door_C_UAID_70F94AE71E72061903_1463110527",
+   "x": 3775,
+   "y": 362.5,
+   "z": -7500,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B6_Door_N6",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Door_C_UAID_70F94AE71E72061903_1460243496",
+   "x": 3225,
+   "y": 287.5,
+   "z": -6000,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B8_Door_N1",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Door_C_UAID_70F94AE71E72061903_1465945556",
+   "x": 2125,
+   "y": -212.5,
+   "z": -9000,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -799,6 +1263,7 @@
    "x": 1552.5,
    "y": 515,
    "z": -8960,
+   "yaw": 0,
    "PickupKind": 9,
    "Amount": 1
   },
@@ -808,7 +1273,8 @@
    "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_HollowDrone_C_UAID_70F94AE71E72061903_1455443445",
    "x": 1775,
    "y": -342.5,
-   "z": -4380
+   "z": -4380,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -817,6 +1283,7 @@
    "x": 2781,
    "y": 794,
    "z": -1460,
+   "yaw": 0,
    "PickupKind": 5,
    "Amount": 1
   },
@@ -827,8 +1294,18 @@
    "x": 2905,
    "y": 735,
    "z": -2960,
+   "yaw": 0,
    "PickupKind": 7,
    "Amount": 3
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B3_Door_N3",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Door_C_UAID_70F94AE71E72061903_1450726394",
+   "x": 2900,
+   "y": -562.5,
+   "z": -1500,
+   "yaw": 0
   },
   {
    "cls": "BP_FloorLift",
@@ -836,7 +1313,8 @@
    "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_FloorLift_C_UAID_70F94AE71E72061903_1448477370",
    "x": 18,
    "y": 0,
-   "z": -1500
+   "z": -1500,
+   "yaw": 180
   },
   {
    "cls": "BP_SeqSwitch",
@@ -844,7 +1322,17 @@
    "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_SeqSwitch_C_UAID_70F94AE71E72061903_1448893374",
    "x": 3265,
    "y": 500,
-   "z": -1498
+   "z": -1498,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B7_Door_S5",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Door_C_UAID_70F94AE71E72061903_1462926525",
+   "x": 2900,
+   "y": 562.5,
+   "z": -7500,
+   "yaw": 0
   },
   {
    "cls": "BP_FloorLift",
@@ -852,7 +1340,8 @@
    "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_FloorLift_C_UAID_70F94AE71E72061903_1448661372",
    "x": 5457,
    "y": 0,
-   "z": -1500
+   "z": -1500,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -861,8 +1350,27 @@
    "x": 3543.5,
    "y": 131,
    "z": -5960,
+   "yaw": 0,
    "PickupKind": 0,
    "Amount": 6
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B2_Door_S3",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Door_C_UAID_70F94AE71E72061903_1447510360",
+   "x": 3125,
+   "y": -287.5,
+   "z": 0,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B8_Door_N3",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Door_C_UAID_70F94AE71E72061903_1466161558",
+   "x": 2800,
+   "y": -587.5,
+   "z": -9000,
+   "yaw": 0
   },
   {
    "cls": "BP_HollowDrone",
@@ -870,7 +1378,17 @@
    "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_HollowDrone_C_UAID_70F94AE71E72061903_1449210377",
    "x": 2275,
    "y": 142.5,
-   "z": -1380
+   "z": -1380,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Breaker",
+   "label": "B6_Breaker0",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Breaker_C_UAID_70F94AE71E72061903_1457876471",
+   "x": 1832.5,
+   "y": 10,
+   "z": -5880,
+   "yaw": 180
   },
   {
    "cls": "BP_HollowDrone",
@@ -878,7 +1396,8 @@
    "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_HollowDrone_C_UAID_70F94AE71E72061903_1458427476",
    "x": 1925,
    "y": 157.5,
-   "z": -5880
+   "z": -5880,
+   "yaw": 0
   },
   {
    "cls": "BP_HollowDrone",
@@ -886,7 +1405,8 @@
    "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_HollowDrone_C_UAID_70F94AE71E72061903_1455360444",
    "x": 4050,
    "y": 342.5,
-   "z": -4380
+   "z": -4380,
+   "yaw": 0
   },
   {
    "cls": "BP_FloorLift",
@@ -894,7 +1414,8 @@
    "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_FloorLift_C_UAID_70F94AE71E72061903_1451593403",
    "x": 18,
    "y": 0,
-   "z": -3000
+   "z": -3000,
+   "yaw": 180
   },
   {
    "cls": "BP_FloorLift",
@@ -902,7 +1423,8 @@
    "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_FloorLift_C_UAID_70F94AE71E72061903_1445728341",
    "x": 5457,
    "y": 0,
-   "z": 0
+   "z": 0,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -911,8 +1433,18 @@
    "x": 3019,
    "y": 794,
    "z": -7460,
+   "yaw": 0,
    "PickupKind": 0,
    "Amount": 6
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B4_Door_WC1",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Door_C_UAID_70F94AE71E72061903_1454462435",
+   "x": 962.5,
+   "y": 212.5,
+   "z": -3000,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -921,8 +1453,18 @@
    "x": 1335,
    "y": 713,
    "z": -2960,
+   "yaw": 0,
    "PickupKind": 4,
    "Amount": 1
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B8_Door_S7",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Door_C_UAID_70F94AE71E72061903_1466576562",
+   "x": 2800,
+   "y": 587.5,
+   "z": -9000,
+   "yaw": 0
   },
   {
    "cls": "BP_HollowDrone",
@@ -930,7 +1472,8 @@
    "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_HollowDrone_C_UAID_70F94AE71E72061903_1455260443",
    "x": 1950,
    "y": 342.5,
-   "z": -4380
+   "z": -4380,
+   "yaw": 0
   },
   {
    "cls": "BP_Keycard",
@@ -938,7 +1481,8 @@
    "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Keycard_C_UAID_70F94AE71E72061903_1445843342",
    "x": 3750,
    "y": 855,
-   "z": 95
+   "z": 95,
+   "yaw": 0
   },
   {
    "cls": "BP_Keycard",
@@ -946,7 +1490,35 @@
    "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Keycard_C_UAID_70F94AE71E72061903_1461127505",
    "x": 3937.5,
    "y": 770,
-   "z": -7405
+   "z": -7405,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B5_Door_WC1",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Door_C_UAID_70F94AE71E72061903_1457193464",
+   "x": 962.5,
+   "y": 212.5,
+   "z": -4500,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B8_Door_N2",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Door_C_UAID_70F94AE71E72061903_1466060557",
+   "x": 3800,
+   "y": -212.5,
+   "z": -9000,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B5_Door_S6",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Door_C_UAID_70F94AE71E72061903_1457010462",
+   "x": 4050,
+   "y": 212.5,
+   "z": -4500,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -955,8 +1527,45 @@
    "x": 2580,
    "y": -794,
    "z": -5960,
+   "yaw": 0,
    "PickupKind": 7,
    "Amount": 3
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B3_Door_WC1",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Door_C_UAID_70F94AE71E72061903_1451194399",
+   "x": 962.5,
+   "y": 212.5,
+   "z": -1500,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B5_Door_S5",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Door_C_UAID_70F94AE71E72061903_1456911461",
+   "x": 3450,
+   "y": 212.5,
+   "z": -4500,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B2_Door_N0",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Door_C_UAID_70F94AE71E72061903_1447226357",
+   "x": 2075,
+   "y": -562.5,
+   "z": 0,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B4_Door_N3",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Door_C_UAID_70F94AE71E72061903_1453927429",
+   "x": 3950,
+   "y": -212.5,
+   "z": -3000,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -965,8 +1574,36 @@
    "x": 2708,
    "y": 794,
    "z": -5960,
+   "yaw": 0,
    "PickupKind": 5,
    "Amount": 1
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B4_Door_S4",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Door_C_UAID_70F94AE71E72061903_1454010430",
+   "x": 1400,
+   "y": 212.5,
+   "z": -3000,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B5_Door_N1",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Door_C_UAID_70F94AE71E72061903_1456543457",
+   "x": 3800,
+   "y": -212.5,
+   "z": -4500,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B7_Door_WC1",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Door_C_UAID_70F94AE71E72061903_1463210528",
+   "x": 962.5,
+   "y": 212.5,
+   "z": -7500,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -975,6 +1612,7 @@
    "x": 1927.5,
    "y": 750,
    "z": 40,
+   "yaw": 0,
    "PickupKind": 1,
    "Amount": 1
   },
@@ -985,6 +1623,7 @@
    "x": 3349,
    "y": -51.5,
    "z": -5960,
+   "yaw": 0,
    "PickupKind": 4,
    "Amount": 1
   },
@@ -995,6 +1634,7 @@
    "x": 1720.5,
    "y": 131,
    "z": -5960,
+   "yaw": 0,
    "PickupKind": 1,
    "Amount": 40
   },
@@ -1004,7 +1644,8 @@
    "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_HollowDrone_C_UAID_70F94AE71E72061903_1458510477",
    "x": 2800,
    "y": 692.5,
-   "z": -5880
+   "z": -5880,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -1013,8 +1654,18 @@
    "x": 1604.5,
    "y": 614,
    "z": -1460,
+   "yaw": 0,
    "PickupKind": 0,
    "Amount": 6
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B6_Door_WC2",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Door_C_UAID_70F94AE71E72061903_1460509499",
+   "x": 4662.5,
+   "y": 212.5,
+   "z": -6000,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -1023,8 +1674,27 @@
    "x": 3817.5,
    "y": 144,
    "z": 40,
+   "yaw": 0,
    "PickupKind": 9,
    "Amount": 1
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B6_Door_S7",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Door_C_UAID_70F94AE71E72061903_1460326497",
+   "x": 2800,
+   "y": 562.5,
+   "z": -6000,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B3_Door_N0",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Door_C_UAID_70F94AE71E72061903_1450443391",
+   "x": 1900,
+   "y": -362.5,
+   "z": -1500,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -1033,8 +1703,27 @@
    "x": 4172,
    "y": -733,
    "z": -2960,
+   "yaw": 0,
    "PickupKind": 1,
    "Amount": 40
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B4_Door_S6",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Door_C_UAID_70F94AE71E72061903_1454177432",
+   "x": 2325,
+   "y": 212.5,
+   "z": -3000,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B3_Door_WC2",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Door_C_UAID_70F94AE71E72061903_1451277400",
+   "x": 4662.5,
+   "y": 212.5,
+   "z": -1500,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -1043,6 +1732,7 @@
    "x": 1467.5,
    "y": 635,
    "z": -7460,
+   "yaw": 0,
    "PickupKind": 7,
    "Amount": 3
   },
@@ -1052,7 +1742,35 @@
    "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_HollowDrone_C_UAID_70F94AE71E72061903_1449293378",
    "x": 2900,
    "y": 692.5,
-   "z": -1380
+   "z": -1380,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B2_Door_N4",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Door_C_UAID_70F94AE71E72061903_1447593361",
+   "x": 1850,
+   "y": 287.5,
+   "z": 0,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B3_Door_S1",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Door_C_UAID_70F94AE71E72061903_1450543392",
+   "x": 1550,
+   "y": 12.5,
+   "z": -1500,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B8_Door_S4",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Door_C_UAID_70F94AE71E72061903_1466276559",
+   "x": 1450,
+   "y": 212.5,
+   "z": -9000,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -1061,8 +1779,27 @@
    "x": 1987.5,
    "y": 750,
    "z": 40,
+   "yaw": 0,
    "PickupKind": 1,
    "Amount": 1
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B2_Door_N6",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Door_C_UAID_70F94AE71E72061903_1447793363",
+   "x": 3625,
+   "y": 287.5,
+   "z": 0,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Dial",
+   "label": "B4_Dial0",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Dial_C_UAID_70F94AE71E72061903_1451893406",
+   "x": 5057,
+   "y": -388,
+   "z": -2890,
+   "yaw": 180
   },
   {
    "cls": "BP_Pickup",
@@ -1071,6 +1808,7 @@
    "x": 4242.5,
    "y": 615,
    "z": -4460,
+   "yaw": 0,
    "PickupKind": 8,
    "Amount": 6
   },
@@ -1081,8 +1819,18 @@
    "x": 1612,
    "y": -704,
    "z": -8960,
+   "yaw": 0,
    "PickupKind": 4,
    "Amount": 1
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B7_Door_N6",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Door_C_UAID_70F94AE71E72061903_1463026526",
+   "x": 3775,
+   "y": -12.5,
+   "z": -7500,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -1091,6 +1839,7 @@
    "x": 1464,
    "y": -760,
    "z": -7460,
+   "yaw": 0,
    "PickupKind": 5,
    "Amount": 1
   },
@@ -1101,6 +1850,7 @@
    "x": 2627,
    "y": 764,
    "z": -8960,
+   "yaw": 0,
    "PickupKind": 1,
    "Amount": 40
   },
@@ -1111,6 +1861,7 @@
    "x": 1869.5,
    "y": 131,
    "z": 40,
+   "yaw": 0,
    "PickupKind": 4,
    "Amount": 1
   },
@@ -1120,7 +1871,35 @@
    "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_FloorLift_C_UAID_70F94AE71E72061903_1455060441",
    "x": 5457,
    "y": 0,
-   "z": -4500
+   "z": -4500,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B5_Door_S4",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Door_C_UAID_70F94AE71E72061903_1456826460",
+   "x": 1950,
+   "y": 212.5,
+   "z": -4500,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B8_Door_S6",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Door_C_UAID_70F94AE71E72061903_1466479561",
+   "x": 3800,
+   "y": 212.5,
+   "z": -9000,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Dial",
+   "label": "B8_Dial0",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Dial_C_UAID_70F94AE71E72061903_1463910535",
+   "x": 5057,
+   "y": -388,
+   "z": -8890,
+   "yaw": 180
   },
   {
    "cls": "BP_FloorLift",
@@ -1128,7 +1907,26 @@
    "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_FloorLift_C_UAID_70F94AE71E72061903_1463810534",
    "x": 5457,
    "y": 0,
-   "z": -9000
+   "z": -9000,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B6_Door_S4",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Door_C_UAID_70F94AE71E72061903_1460060494",
+   "x": 3425,
+   "y": -287.5,
+   "z": -6000,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Dial",
+   "label": "B8_Dial2",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Dial_C_UAID_70F94AE71E72061903_1464110537",
+   "x": 5207,
+   "y": -388,
+   "z": -8890,
+   "yaw": 180
   },
   {
    "cls": "BP_HollowDrone",
@@ -1136,7 +1934,44 @@
    "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_HollowDrone_C_UAID_70F94AE71E720A1903_2074086213",
    "x": 3387.5,
    "y": 650,
-   "z": -1380
+   "z": -1380,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B2_Door_WC1",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Door_C_UAID_70F94AE71E72061903_1448077366",
+   "x": 962.5,
+   "y": 212.5,
+   "z": 0,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B6_Door_N1",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Door_C_UAID_70F94AE71E72061903_1459776491",
+   "x": 2700,
+   "y": -562.5,
+   "z": -6000,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B5_Door_WC2",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Door_C_UAID_70F94AE71E72061903_1457277465",
+   "x": 4662.5,
+   "y": 212.5,
+   "z": -4500,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Breaker",
+   "label": "B6_Breaker3",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Breaker_C_UAID_70F94AE71E72061903_1458210474",
+   "x": 2042.5,
+   "y": 10,
+   "z": -5880,
+   "yaw": 180
   },
   {
    "cls": "BP_FloorLift",
@@ -1144,7 +1979,62 @@
    "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_FloorLift_C_UAID_70F94AE71E72061903_1460826502",
    "x": 18,
    "y": 0,
-   "z": -7500
+   "z": -7500,
+   "yaw": 180
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B6_Door_WC1",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Door_C_UAID_70F94AE71E72061903_1460426498",
+   "x": 962.5,
+   "y": 212.5,
+   "z": -6000,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B2_Door_S2",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Door_C_UAID_70F94AE71E72061903_1447410359",
+   "x": 1825,
+   "y": -287.5,
+   "z": 0,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Breaker",
+   "label": "B6_Breaker2",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Breaker_C_UAID_70F94AE71E72061903_1458110473",
+   "x": 1972.5,
+   "y": 10,
+   "z": -5880,
+   "yaw": 180
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B4_Door_N0",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Door_C_UAID_70F94AE71E72061903_1453643426",
+   "x": 1750,
+   "y": -212.5,
+   "z": -3000,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B3_Door_N5",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Door_C_UAID_70F94AE71E72061903_1450912396",
+   "x": 3775,
+   "y": -12.5,
+   "z": -1500,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B4_Door_S5",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Door_C_UAID_70F94AE71E72061903_1454093431",
+   "x": 1825,
+   "y": 212.5,
+   "z": -3000,
+   "yaw": 0
   },
   {
    "cls": "BP_HollowDrone",
@@ -1152,7 +2042,8 @@
    "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_HollowDrone_C_UAID_70F94AE71E72061903_1461310507",
    "x": 1550,
    "y": -492.5,
-   "z": -7380
+   "z": -7380,
+   "yaw": 0
   },
   {
    "cls": "BP_FloorLift",
@@ -1160,7 +2051,8 @@
    "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_FloorLift_C_UAID_70F94AE71E72061903_1454876439",
    "x": 18,
    "y": 0,
-   "z": -4500
+   "z": -4500,
+   "yaw": 180
   },
   {
    "cls": "BP_SeqSwitch",
@@ -1168,7 +2060,17 @@
    "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_SeqSwitch_C_UAID_70F94AE71E72061903_1448994375",
    "x": 2740,
    "y": 665,
-   "z": -1498
+   "z": -1498,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B2_Door_WC2",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Door_C_UAID_70F94AE71E72061903_1448159367",
+   "x": 4662.5,
+   "y": 212.5,
+   "z": 0,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -1177,6 +2079,7 @@
    "x": 2999,
    "y": -794,
    "z": -1460,
+   "yaw": 0,
    "PickupKind": 4,
    "Amount": 1
   },
@@ -1187,6 +2090,7 @@
    "x": 2680,
    "y": -794,
    "z": -8960,
+   "yaw": 0,
    "PickupKind": 7,
    "Amount": 3
   },
@@ -1196,7 +2100,8 @@
    "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_FloorLift_C_UAID_70F94AE71E72061903_1463611532",
    "x": 18,
    "y": 0,
-   "z": -9000
+   "z": -9000,
+   "yaw": 180
   },
   {
    "cls": "BP_Pickup",
@@ -1205,8 +2110,18 @@
    "x": 2047.5,
    "y": 750,
    "z": 40,
+   "yaw": 0,
    "PickupKind": 0,
    "Amount": 12
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B2_Door_S8",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Door_C_UAID_70F94AE71E72061903_1447976365",
+   "x": 3600,
+   "y": 562.5,
+   "z": 0,
+   "yaw": 0
   },
   {
    "cls": "BP_FloorGenerator",
@@ -1214,7 +2129,26 @@
    "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_FloorGenerator_C_UAID_70F94AE71E72061903_1455176442",
    "x": 1415,
    "y": 635,
-   "z": -4498
+   "z": -4498,
+   "yaw": 89.99999999437944
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B6_Door_S3",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Door_C_UAID_70F94AE71E72061903_1459960493",
+   "x": 2150,
+   "y": -287.5,
+   "z": -6000,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B8_Door_N0",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Door_C_UAID_70F94AE71E72061903_1465843555",
+   "x": 1525,
+   "y": -212.5,
+   "z": -9000,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -1223,6 +2157,7 @@
    "x": 4206.5,
    "y": 794,
    "z": -7460,
+   "yaw": 0,
    "PickupKind": 4,
    "Amount": 1
   },
@@ -1233,6 +2168,7 @@
    "x": 3728,
    "y": -625,
    "z": -7460,
+   "yaw": 0,
    "PickupKind": 2,
    "Amount": 40
   },
@@ -1242,7 +2178,8 @@
    "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_HollowDrone_C_UAID_70F94AE71E72061903_1464563542",
    "x": 2125,
    "y": -342.5,
-   "z": -8880
+   "z": -8880,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -1251,6 +2188,7 @@
    "x": 4015,
    "y": 515,
    "z": -2960,
+   "yaw": 0,
    "PickupKind": 9,
    "Amount": 1
   },
@@ -1261,8 +2199,27 @@
    "x": 3019,
    "y": 790,
    "z": -1460,
+   "yaw": 0,
    "PickupKind": 8,
    "Amount": 4
+  },
+  {
+   "cls": "BP_Breaker",
+   "label": "B6_Breaker1",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Breaker_C_UAID_70F94AE71E72061903_1458016472",
+   "x": 1902.5,
+   "y": 10,
+   "z": -5880,
+   "yaw": 180
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B5_Door_S7",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Door_C_UAID_70F94AE71E72061903_1457110463",
+   "x": 2800,
+   "y": 587.5,
+   "z": -4500,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -1271,6 +2228,7 @@
    "x": 2980,
    "y": 790,
    "z": -5960,
+   "yaw": 0,
    "PickupKind": 8,
    "Amount": 7
   },
@@ -1280,7 +2238,8 @@
    "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_HollowDrone_C_UAID_70F94AE71E72061903_1461380508",
    "x": 1575,
    "y": 142.5,
-   "z": -7380
+   "z": -7380,
+   "yaw": 0
   },
   {
    "cls": "BP_FloorLift",
@@ -1288,7 +2247,8 @@
    "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_FloorLift_C_UAID_70F94AE71E72061903_1457773470",
    "x": 5457,
    "y": 0,
-   "z": -6000
+   "z": -6000,
+   "yaw": 0
   },
   {
    "cls": "BP_HollowDrone",
@@ -1296,7 +2256,8 @@
    "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_HollowDrone_C_UAID_70F94AE71E72061903_1464477541",
    "x": 2800,
    "y": 717.5,
-   "z": -8880
+   "z": -8880,
+   "yaw": 0
   },
   {
    "cls": "BP_HollowDrone",
@@ -1304,7 +2265,53 @@
    "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_HollowDrone_C_UAID_70F94AE71E72061903_1445926343",
    "x": 3675,
    "y": -692.5,
-   "z": 120
+   "z": 120,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B5_Door_S3",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Door_C_UAID_70F94AE71E72061903_1456726459",
+   "x": 1350,
+   "y": 212.5,
+   "z": -4500,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B4_Door_WC2",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Door_C_UAID_70F94AE71E72061903_1454560436",
+   "x": 4662.5,
+   "y": 212.5,
+   "z": -3000,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B7_Door_N1",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Door_C_UAID_70F94AE71E72061903_1462560521",
+   "x": 2275,
+   "y": -362.5,
+   "z": -7500,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B7_Door_S2",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Door_C_UAID_70F94AE71E72061903_1462643522",
+   "x": 1575,
+   "y": 12.5,
+   "z": -7500,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B3_Door_S2",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Door_C_UAID_70F94AE71E72061903_1450643393",
+   "x": 2275,
+   "y": 12.5,
+   "z": -1500,
+   "yaw": 0
   },
   {
    "cls": "BP_HollowChild",
@@ -1312,7 +2319,17 @@
    "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_HollowChild_C_UAID_70F94AE71E72061903_1462293518",
    "x": 2275,
    "y": -650,
-   "z": -7400
+   "z": -7400,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B2_Door_N5",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Door_C_UAID_70F94AE71E72061903_1447693362",
+   "x": 2700,
+   "y": 287.5,
+   "z": 0,
+   "yaw": 0
   },
   {
    "cls": "BP_HollowDrone",
@@ -1320,7 +2337,17 @@
    "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_HollowDrone_C_UAID_70F94AE71E72061903_1458593478",
    "x": 2700,
    "y": -692.5,
-   "z": -5880
+   "z": -5880,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B4_Door_N1",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Door_C_UAID_70F94AE71E72061903_1453743427",
+   "x": 2650,
+   "y": -212.5,
+   "z": -3000,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -1329,6 +2356,7 @@
    "x": 3306,
    "y": 794,
    "z": -1460,
+   "yaw": 0,
    "PickupKind": 7,
    "Amount": 3
   },
@@ -1339,6 +2367,7 @@
    "x": 3967.5,
    "y": 680,
    "z": -4460,
+   "yaw": 0,
    "PickupKind": 5,
    "Amount": 1
   },
@@ -1349,6 +2378,7 @@
    "x": 1667.5,
    "y": -735,
    "z": -4460,
+   "yaw": 0,
    "PickupKind": 7,
    "Amount": 3
   },
@@ -1359,6 +2389,7 @@
    "x": 2311,
    "y": 679,
    "z": -1460,
+   "yaw": 0,
    "PickupKind": 2,
    "Amount": 40
   },
@@ -1368,7 +2399,8 @@
    "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.PlayerStart_UAID_F4A475FF15A3736A02_1961960731",
    "x": 250,
    "y": 0,
-   "z": 100
+   "z": 100,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -1377,6 +2409,7 @@
    "x": 1730,
    "y": -690,
    "z": -7460,
+   "yaw": 0,
    "PickupKind": 8,
    "Amount": 8
   },
@@ -1386,7 +2419,44 @@
    "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_FloorLift_C_UAID_70F94AE71E72061903_1461010504",
    "x": 5457,
    "y": 0,
-   "z": -7500
+   "z": -7500,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B6_Door_N0",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Door_C_UAID_70F94AE71E72061903_1459678490",
+   "x": 1600,
+   "y": -562.5,
+   "z": -6000,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B5_Door_N2",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Door_C_UAID_70F94AE71E72061903_1456643458",
+   "x": 2800,
+   "y": -587.5,
+   "z": -4500,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B2_Door_S7",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Door_C_UAID_70F94AE71E72061903_1447877364",
+   "x": 1975,
+   "y": 562.5,
+   "z": 0,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B7_Door_WC2",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Door_C_UAID_70F94AE71E72061903_1463295529",
+   "x": 4662.5,
+   "y": 212.5,
+   "z": -7500,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -1395,8 +2465,18 @@
    "x": 3305,
    "y": -140,
    "z": 40,
+   "yaw": 0,
    "PickupKind": 8,
    "Amount": 3
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B8_Door_S5",
+   "ref": "/Game/HollowKin/Maps/Wards/Lvl_Wards.Lvl_Wards:PersistentLevel.BP_Door_C_UAID_70F94AE71E72061903_1466376560",
+   "x": 2050,
+   "y": 212.5,
+   "z": -9000,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -1405,6 +2485,7 @@
    "x": 2006,
    "y": -737,
    "z": -8960,
+   "yaw": 0,
    "PickupKind": 5,
    "Amount": 1
   }
@@ -1416,7 +2497,8 @@
    "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_FloorLift_C_UAID_70F94AE71E720A1903_1793144168",
    "x": 18,
    "y": 0,
-   "z": -9500
+   "z": -9500,
+   "yaw": 180
   },
   {
    "cls": "BP_HollowDrone",
@@ -1424,7 +2506,35 @@
    "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_HollowDrone_C_UAID_70F94AE71E720A1903_2079171229",
    "x": 1900,
    "y": -150,
-   "z": 220
+   "z": 220,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B11_Door_S2",
+   "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_Door_C_UAID_70F94AE71E720A1903_1778944056",
+   "x": 2150,
+   "y": -287.5,
+   "z": -3500,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B11_Door_N0",
+   "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_Door_C_UAID_70F94AE71E720A1903_1778693054",
+   "x": 2275,
+   "y": -562.5,
+   "z": -3500,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B12_Door_S7",
+   "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_Door_C_UAID_70F94AE71E720A1903_1783619093",
+   "x": 2800,
+   "y": 587.5,
+   "z": -5000,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -1433,8 +2543,27 @@
    "x": 3980,
    "y": 790,
    "z": -7960,
+   "yaw": 0,
    "PickupKind": 8,
    "Amount": 14
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B10_Door_S5",
+   "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_Door_C_UAID_70F94AE71E720A1903_1774868024",
+   "x": 2900,
+   "y": 562.5,
+   "z": -2000,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B13_Door_S6",
+   "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_Door_C_UAID_70F94AE71E720A1903_1787968128",
+   "x": 3975,
+   "y": 212.5,
+   "z": -6500,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -1443,6 +2572,7 @@
    "x": 3704.5,
    "y": -690,
    "z": -6460,
+   "yaw": 0,
    "PickupKind": 0,
    "Amount": 6
   },
@@ -1453,6 +2583,7 @@
    "x": 3838.5,
    "y": -792,
    "z": -4960,
+   "yaw": 0,
    "PickupKind": 0,
    "Amount": 6
   },
@@ -1463,6 +2594,7 @@
    "x": 2300,
    "y": 300,
    "z": 40,
+   "yaw": 0,
    "PickupKind": 5,
    "Amount": 1
   },
@@ -1472,7 +2604,8 @@
    "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.PlayerStart_UAID_F4A475FF15A3736A02_1961960731",
    "x": 200,
    "y": 0,
-   "z": 100
+   "z": 100,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -1481,6 +2614,7 @@
    "x": 2739,
    "y": 692,
    "z": -9460,
+   "yaw": 0,
    "PickupKind": 0,
    "Amount": 6
   },
@@ -1490,7 +2624,8 @@
    "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_Guard_C_UAID_70F94AE71E725A1803_1903416193",
    "x": 6950,
    "y": -800,
-   "z": 100
+   "z": 100,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -1499,6 +2634,7 @@
    "x": 4155,
    "y": 615,
    "z": -6460,
+   "yaw": 0,
    "PickupKind": 8,
    "Amount": 13
   },
@@ -1509,8 +2645,36 @@
    "x": 5400,
    "y": -800,
    "z": 40,
+   "yaw": 0,
    "PickupKind": 1,
    "Amount": 40
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B14_Door_S2",
+   "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_Door_C_UAID_70F94AE71E720A1903_1791843158",
+   "x": 1925,
+   "y": -287.5,
+   "z": -8000,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B10_Door_S2",
+   "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_Door_C_UAID_70F94AE71E720A1903_1774494021",
+   "x": 1550,
+   "y": 12.5,
+   "z": -2000,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B11_Door_WC1",
+   "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_Door_C_UAID_70F94AE71E720A1903_1779695062",
+   "x": 962.5,
+   "y": 212.5,
+   "z": -3500,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -1519,6 +2683,7 @@
    "x": 2656,
    "y": 540,
    "z": -6460,
+   "yaw": 0,
    "PickupKind": 4,
    "Amount": 1
   },
@@ -1528,7 +2693,8 @@
    "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_HollowDrone_C_UAID_70F94AE71E725A1803_1903125189",
    "x": 2900,
    "y": 650,
-   "z": 100
+   "z": 100,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -1537,6 +2703,7 @@
    "x": 3605,
    "y": -794,
    "z": -7960,
+   "yaw": 0,
    "PickupKind": 7,
    "Amount": 3
   },
@@ -1547,6 +2714,7 @@
    "x": 2493.5,
    "y": -787,
    "z": -9460,
+   "yaw": 0,
    "PickupKind": 5,
    "Amount": 1
   },
@@ -1556,7 +2724,8 @@
    "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_HollowDrone_C_UAID_70F94AE71E720A1903_1789845142",
    "x": 3925,
    "y": -692.5,
-   "z": -7880
+   "z": -7880,
+   "yaw": 0
   },
   {
    "cls": "BP_HollowDrone",
@@ -1564,7 +2733,17 @@
    "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_HollowDrone_C_UAID_70F94AE71E720A1903_1789944143",
    "x": 3925,
    "y": -722.5,
-   "z": -7880
+   "z": -7880,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B11_Door_N4",
+   "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_Door_C_UAID_70F94AE71E720A1903_1779194058",
+   "x": 2275,
+   "y": 287.5,
+   "z": -3500,
+   "yaw": 0
   },
   {
    "cls": "BP_FloorLift",
@@ -1572,7 +2751,8 @@
    "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_FloorLift_C_UAID_70F94AE71E720A1903_1771894000",
    "x": 18,
    "y": 0,
-   "z": -2000
+   "z": -2000,
+   "yaw": 180
   },
   {
    "cls": "BP_Pickup",
@@ -1581,6 +2761,7 @@
    "x": 4264,
    "y": -794,
    "z": -3460,
+   "yaw": 0,
    "PickupKind": 0,
    "Amount": 6
   },
@@ -1590,7 +2771,26 @@
    "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_HollowDrone_C_UAID_70F94AE71E720A1903_1785444107",
    "x": 1775,
    "y": 342.5,
-   "z": -6380
+   "z": -6380,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B11_Door_S6",
+   "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_Door_C_UAID_70F94AE71E720A1903_1779444060",
+   "x": 1975,
+   "y": 562.5,
+   "z": -3500,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Dial",
+   "label": "B13_Dial2",
+   "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_Dial_C_UAID_70F94AE71E720A1903_1784944103",
+   "x": 5207,
+   "y": -388,
+   "z": -6390,
+   "yaw": 180
   },
   {
    "cls": "BP_HollowDrone",
@@ -1598,7 +2798,44 @@
    "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_HollowDrone_C_UAID_70F94AE71E720A1903_1772419004",
    "x": 2325,
    "y": -492.5,
-   "z": -1880
+   "z": -1880,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B10_Door_N0",
+   "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_Door_C_UAID_70F94AE71E720A1903_1774244019",
+   "x": 1600,
+   "y": -362.5,
+   "z": -2000,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B11_Door_N5",
+   "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_Door_C_UAID_70F94AE71E720A1903_1779318059",
+   "x": 3575,
+   "y": 287.5,
+   "z": -3500,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B13_Door_WC1",
+   "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_Door_C_UAID_70F94AE71E720A1903_1788094129",
+   "x": 962.5,
+   "y": 212.5,
+   "z": -6500,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B13_Door_WC2",
+   "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_Door_C_UAID_70F94AE71E720A1903_1788218130",
+   "x": 4662.5,
+   "y": 212.5,
+   "z": -6500,
+   "yaw": 0
   },
   {
    "cls": "BP_HollowDrone",
@@ -1606,7 +2843,53 @@
    "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_HollowDrone_C_UAID_70F94AE71E720A1903_1777119041",
    "x": 1975,
    "y": 692.5,
-   "z": -3380
+   "z": -3380,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_CellConsole",
+   "label": "B15_CellConsole",
+   "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_CellConsole_C_UAID_70F94AE71E720A1903_1795469188",
+   "x": 1812.5,
+   "y": -165,
+   "z": -9500,
+   "yaw": 180
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B15_Door_WC2",
+   "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_Door_C_UAID_70F94AE71E720A1903_1796819199",
+   "x": 4662.5,
+   "y": 212.5,
+   "z": -9500,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Breaker",
+   "label": "B11_Breaker3",
+   "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_Breaker_C_UAID_70F94AE71E720A1903_1776644037",
+   "x": 4005,
+   "y": -915,
+   "z": -3380,
+   "yaw": 180
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B15_Door_N3",
+   "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_Door_C_UAID_70F94AE71E720A1903_1796194194",
+   "x": 3925,
+   "y": -212.5,
+   "z": -9500,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B14_Door_WC1",
+   "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_Door_C_UAID_70F94AE71E720A1903_1792594164",
+   "x": 962.5,
+   "y": 212.5,
+   "z": -8000,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -1615,6 +2898,7 @@
    "x": 3760.5,
    "y": -170,
    "z": -3460,
+   "yaw": 0,
    "PickupKind": 4,
    "Amount": 1
   },
@@ -1624,7 +2908,8 @@
    "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_FloorLift_C_UAID_70F94AE71E720A1903_1780494068",
    "x": 5457,
    "y": 0,
-   "z": -5000
+   "z": -5000,
+   "yaw": 0
   },
   {
    "cls": "BP_HollowDrone",
@@ -1632,7 +2917,8 @@
    "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_HollowDrone_C_UAID_70F94AE71E720A1903_1776919039",
    "x": 2150,
    "y": -157.5,
-   "z": -3380
+   "z": -3380,
+   "yaw": 0
   },
   {
    "cls": "BP_Cutscene",
@@ -1640,7 +2926,17 @@
    "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_Cutscene_C_UAID_70F94AE71E720A1903_1982396201",
    "x": 2025,
    "y": -132.5,
-   "z": -4900
+   "z": -4900,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B14_Door_N4",
+   "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_Door_C_UAID_70F94AE71E720A1903_1792094160",
+   "x": 2800,
+   "y": 287.5,
+   "z": -8000,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -1649,8 +2945,18 @@
    "x": 4166,
    "y": 712,
    "z": -9460,
+   "yaw": 0,
    "PickupKind": 2,
    "Amount": 40
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B11_Door_WC2",
+   "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_Door_C_UAID_70F94AE71E720A1903_1779818063",
+   "x": 4662.5,
+   "y": 212.5,
+   "z": -3500,
+   "yaw": 0
   },
   {
    "cls": "BP_Emilia",
@@ -1658,7 +2964,8 @@
    "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_Emilia_C_UAID_70F94AE71E720A1903_1793694173",
    "x": 1725,
    "y": 535,
-   "z": -9498
+   "z": -9498,
+   "yaw": -89.99999999437944
   },
   {
    "cls": "BP_Pickup",
@@ -1667,6 +2974,7 @@
    "x": 3846,
    "y": 695,
    "z": -6460,
+   "yaw": 0,
    "PickupKind": 5,
    "Amount": 1
   },
@@ -1677,8 +2985,18 @@
    "x": 1897.5,
    "y": 794,
    "z": -3460,
+   "yaw": 0,
    "PickupKind": 7,
    "Amount": 3
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B12_Door_N2",
+   "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_Door_C_UAID_70F94AE71E720A1903_1782994088",
+   "x": 3800,
+   "y": -212.5,
+   "z": -5000,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -1687,8 +3005,36 @@
    "x": 1528.5,
    "y": 595,
    "z": -1960,
+   "yaw": 0,
    "PickupKind": 4,
    "Amount": 1
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B11_Door_S7",
+   "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_Door_C_UAID_70F94AE71E720A1903_1779569061",
+   "x": 3600,
+   "y": 562.5,
+   "z": -3500,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B14_Door_S7",
+   "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_Door_C_UAID_70F94AE71E720A1903_1792468163",
+   "x": 3800,
+   "y": 562.5,
+   "z": -8000,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Breaker",
+   "label": "B11_Breaker1",
+   "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_Breaker_C_UAID_70F94AE71E720A1903_1776344035",
+   "x": 3865,
+   "y": -915,
+   "z": -3380,
+   "yaw": 180
   },
   {
    "cls": "BP_FloorLift",
@@ -1696,7 +3042,8 @@
    "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_FloorLift_C_UAID_70F94AE71E720A1903_1776043033",
    "x": 5457,
    "y": 0,
-   "z": -3500
+   "z": -3500,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -1705,6 +3052,7 @@
    "x": 2467.5,
    "y": 131,
    "z": -3460,
+   "yaw": 0,
    "PickupKind": 8,
    "Amount": 11
   },
@@ -1715,6 +3063,7 @@
    "x": 8900,
    "y": 100,
    "z": 40,
+   "yaw": 0,
    "PickupKind": 6,
    "Amount": 1
   },
@@ -1724,7 +3073,8 @@
    "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_HollowDrone_C_UAID_70F94AE71E720A1903_1772544005",
    "x": 2275,
    "y": 142.5,
-   "z": -1880
+   "z": -1880,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -1733,6 +3083,7 @@
    "x": 8700,
    "y": -1300,
    "z": 40,
+   "yaw": 0,
    "PickupKind": 0,
    "Amount": 6
   },
@@ -1743,6 +3094,7 @@
    "x": 3300,
    "y": -300,
    "z": 40,
+   "yaw": 0,
    "PickupKind": 4,
    "Amount": 1
   },
@@ -1752,7 +3104,8 @@
    "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_Guard_C_UAID_70F94AE71E725A1803_1903484194",
    "x": 8500,
    "y": 450,
-   "z": 100
+   "z": 100,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -1761,8 +3114,18 @@
    "x": 760,
    "y": -250,
    "z": 140,
+   "yaw": 0,
    "PickupKind": 0,
    "Amount": 12
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B12_Door_N1",
+   "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_Door_C_UAID_70F94AE71E720A1903_1782869087",
+   "x": 2025,
+   "y": -212.5,
+   "z": -5000,
+   "yaw": 0
   },
   {
    "cls": "BP_EndingTrigger",
@@ -1770,7 +3133,26 @@
    "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_EndingTrigger_C_UAID_70F94AE71E720A1903_1793794174",
    "x": 1845,
    "y": 635,
-   "z": -9400
+   "z": -9400,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B12_Door_WC2",
+   "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_Door_C_UAID_70F94AE71E720A1903_1783869095",
+   "x": 4662.5,
+   "y": 212.5,
+   "z": -5000,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B14_Door_N1",
+   "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_Door_C_UAID_70F94AE71E720A1903_1791719157",
+   "x": 3925,
+   "y": -562.5,
+   "z": -8000,
+   "yaw": 0
   },
   {
    "cls": "BP_FloorLift",
@@ -1778,7 +3160,8 @@
    "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_FloorLift_C_UAID_70F94AE71E720A1903_1780244066",
    "x": 18,
    "y": 0,
-   "z": -5000
+   "z": -5000,
+   "yaw": 180
   },
   {
    "cls": "BP_HollowDrone",
@@ -1786,7 +3169,26 @@
    "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_HollowDrone_C_UAID_70F94AE71E725A1803_1903194190",
    "x": 5900,
    "y": 1200,
-   "z": 100
+   "z": 100,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B14_Door_S3",
+   "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_Door_C_UAID_70F94AE71E720A1903_1791969159",
+   "x": 3225,
+   "y": -287.5,
+   "z": -8000,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B13_Door_N3",
+   "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_Door_C_UAID_70F94AE71E720A1903_1787594125",
+   "x": 3925,
+   "y": -212.5,
+   "z": -6500,
+   "yaw": 0
   },
   {
    "cls": "BP_FloorLift",
@@ -1794,7 +3196,26 @@
    "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_FloorLift_C_UAID_70F94AE71E720A1903_1784294098",
    "x": 18,
    "y": 0,
-   "z": -6500
+   "z": -6500,
+   "yaw": 180
+  },
+  {
+   "cls": "BP_Dial",
+   "label": "B13_Dial1",
+   "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_Dial_C_UAID_70F94AE71E720A1903_1784819102",
+   "x": 5132,
+   "y": -388,
+   "z": -6390,
+   "yaw": 180
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B12_Door_N0",
+   "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_Door_C_UAID_70F94AE71E720A1903_1782744086",
+   "x": 1425,
+   "y": -212.5,
+   "z": -5000,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -1803,6 +3224,7 @@
    "x": 1550.5,
    "y": 794,
    "z": -7960,
+   "yaw": 0,
    "PickupKind": 1,
    "Amount": 40
   },
@@ -1813,6 +3235,7 @@
    "x": 2205,
    "y": -735,
    "z": -6460,
+   "yaw": 0,
    "PickupKind": 7,
    "Amount": 3
   },
@@ -1823,6 +3246,7 @@
    "x": 820,
    "y": -250,
    "z": 140,
+   "yaw": 0,
    "PickupKind": 1,
    "Amount": 1
   },
@@ -1833,6 +3257,7 @@
    "x": 2494,
    "y": -794,
    "z": -1960,
+   "yaw": 0,
    "PickupKind": 1,
    "Amount": 40
   },
@@ -1843,6 +3268,7 @@
    "x": 2111,
    "y": 605,
    "z": -1960,
+   "yaw": 0,
    "PickupKind": 5,
    "Amount": 1
   },
@@ -1853,6 +3279,7 @@
    "x": 1515,
    "y": -425,
    "z": -4960,
+   "yaw": 0,
    "PickupKind": 9,
    "Amount": 1
   },
@@ -1862,7 +3289,8 @@
    "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_HollowDrone_C_UAID_70F94AE71E720A1903_1789745141",
    "x": 3800,
    "y": 692.5,
-   "z": -7880
+   "z": -7880,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -1871,6 +3299,7 @@
    "x": 3865,
    "y": -415,
    "z": -1960,
+   "yaw": 0,
    "PickupKind": 9,
    "Amount": 1
   },
@@ -1881,8 +3310,18 @@
    "x": 5500,
    "y": 1720,
    "z": 40,
+   "yaw": 0,
    "PickupKind": 7,
    "Amount": 20
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B15_Door_S5",
+   "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_Door_C_UAID_70F94AE71E720A1903_1796443196",
+   "x": 2800,
+   "y": 212.5,
+   "z": -9500,
+   "yaw": 0
   },
   {
    "cls": "BP_HollowDrone",
@@ -1890,7 +3329,35 @@
    "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_HollowDrone_C_UAID_70F94AE71E720A1903_1772644006",
    "x": 2900,
    "y": 692.5,
-   "z": -1880
+   "z": -1880,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B14_Door_N0",
+   "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_Door_C_UAID_70F94AE71E720A1903_1791594156",
+   "x": 2300,
+   "y": -562.5,
+   "z": -8000,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B12_Door_N3",
+   "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_Door_C_UAID_70F94AE71E720A1903_1783119089",
+   "x": 2800,
+   "y": -587.5,
+   "z": -5000,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B10_Door_S3",
+   "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_Door_C_UAID_70F94AE71E720A1903_1774619022",
+   "x": 2275,
+   "y": 12.5,
+   "z": -2000,
+   "yaw": 0
   },
   {
    "cls": "BP_FloorLift",
@@ -1898,7 +3365,8 @@
    "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_FloorLift_C_UAID_70F94AE71E720A1903_1788643133",
    "x": 18,
    "y": 0,
-   "z": -8000
+   "z": -8000,
+   "yaw": 180
   },
   {
    "cls": "BP_FloorLift",
@@ -1906,7 +3374,8 @@
    "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_FloorLift_C_UAID_70F94AE71E720A1903_1784544100",
    "x": 5457,
    "y": 0,
-   "z": -6500
+   "z": -6500,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -1915,8 +3384,18 @@
    "x": 1343,
    "y": 748,
    "z": -4960,
+   "yaw": 0,
    "PickupKind": 4,
    "Amount": 1
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B15_Door_S4",
+   "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_Door_C_UAID_70F94AE71E720A1903_1796319195",
+   "x": 1725,
+   "y": 212.5,
+   "z": -9500,
+   "yaw": 0
   },
   {
    "cls": "BP_HollowDrone",
@@ -1924,7 +3403,8 @@
    "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_HollowDrone_C_UAID_70F94AE71E725A1803_1902970187",
    "x": 1650,
    "y": 300,
-   "z": 100
+   "z": 100,
+   "yaw": 0
   },
   {
    "cls": "BP_FloorLift",
@@ -1932,7 +3412,8 @@
    "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_FloorLift_C_UAID_70F94AE71E726D1803_1569882797",
    "x": 10850,
    "y": 0,
-   "z": 100
+   "z": 100,
+   "yaw": 0
   },
   {
    "cls": "BP_FloorGenerator",
@@ -1940,7 +3421,17 @@
    "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_FloorGenerator_C_UAID_70F94AE71E726D1803_1569982798",
    "x": 8600,
    "y": -1150,
-   "z": 2
+   "z": 2,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B12_Door_S4",
+   "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_Door_C_UAID_70F94AE71E720A1903_1783244090",
+   "x": 1550,
+   "y": 212.5,
+   "z": -5000,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -1949,6 +3440,7 @@
    "x": 2710,
    "y": 794,
    "z": -4960,
+   "yaw": 0,
    "PickupKind": 7,
    "Amount": 3
   },
@@ -1958,7 +3450,8 @@
    "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_FloorGenerator_C_UAID_70F94AE71E720A1903_1780644069",
    "x": 1770,
    "y": 635,
-   "z": -4998
+   "z": -4998,
+   "yaw": 89.99999999437944
   },
   {
    "cls": "BP_Pickup",
@@ -1967,8 +3460,18 @@
    "x": 5500,
    "y": 1820,
    "z": 40,
+   "yaw": 0,
    "PickupKind": 0,
    "Amount": 12
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B12_Door_S6",
+   "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_Door_C_UAID_70F94AE71E720A1903_1783494092",
+   "x": 3800,
+   "y": 212.5,
+   "z": -5000,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -1977,6 +3480,7 @@
    "x": 1399.5,
    "y": -793,
    "z": -9460,
+   "yaw": 0,
    "PickupKind": 4,
    "Amount": 1
   },
@@ -1986,7 +3490,8 @@
    "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_Keycard_C_UAID_70F94AE71E720A1903_1772294003",
    "x": 3937.5,
    "y": 770,
-   "z": -1905
+   "z": -1905,
+   "yaw": 0
   },
   {
    "cls": "BP_HollowDrone",
@@ -1994,7 +3499,17 @@
    "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_HollowDrone_C_UAID_70F94AE71E720A1903_1789619140",
    "x": 1675,
    "y": 692.5,
-   "z": -7880
+   "z": -7880,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Breaker",
+   "label": "B11_Breaker2",
+   "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_Breaker_C_UAID_70F94AE71E720A1903_1776493036",
+   "x": 3935,
+   "y": -915,
+   "z": -3380,
+   "yaw": 180
   },
   {
    "cls": "BP_Pickup",
@@ -2003,6 +3518,7 @@
    "x": 3967,
    "y": 794,
    "z": -7960,
+   "yaw": 0,
    "PickupKind": 5,
    "Amount": 1
   },
@@ -2013,8 +3529,18 @@
    "x": 2575.5,
    "y": 794,
    "z": -7960,
+   "yaw": 0,
    "PickupKind": 4,
    "Amount": 1
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B14_Door_WC2",
+   "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_Door_C_UAID_70F94AE71E720A1903_1792718165",
+   "x": 4662.5,
+   "y": 212.5,
+   "z": -8000,
+   "yaw": 0
   },
   {
    "cls": "BP_SeqSwitch",
@@ -2022,7 +3548,8 @@
    "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_SeqSwitch_C_UAID_70F94AE71E720A1903_1789344138",
    "x": 2600,
    "y": 185,
-   "z": -7998
+   "z": -7998,
+   "yaw": 0
   },
   {
    "cls": "BP_HollowDrone",
@@ -2030,7 +3557,17 @@
    "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_HollowDrone_C_UAID_70F94AE71E720A1903_1785644109",
    "x": 2325,
    "y": -342.5,
-   "z": -6380
+   "z": -6380,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Breaker",
+   "label": "B11_Breaker0",
+   "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_Breaker_C_UAID_70F94AE71E720A1903_1776194034",
+   "x": 3795,
+   "y": -915,
+   "z": -3380,
+   "yaw": 180
   },
   {
    "cls": "BP_Pickup",
@@ -2039,6 +3576,7 @@
    "x": 2300,
    "y": -900,
    "z": 40,
+   "yaw": 0,
    "PickupKind": 0,
    "Amount": 6
   },
@@ -2048,7 +3586,44 @@
    "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_Cutscene_C_UAID_70F94AE71E720A1903_1982271200",
    "x": 450,
    "y": 0,
-   "z": 100
+   "z": 100,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B13_Door_N0",
+   "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_Door_C_UAID_70F94AE71E720A1903_1787219122",
+   "x": 1625,
+   "y": -212.5,
+   "z": -6500,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B13_Door_S4",
+   "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_Door_C_UAID_70F94AE71E720A1903_1787718126",
+   "x": 1775,
+   "y": 212.5,
+   "z": -6500,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B15_Door_N1",
+   "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_Door_C_UAID_70F94AE71E720A1903_1795944192",
+   "x": 2300,
+   "y": -212.5,
+   "z": -9500,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Dial",
+   "label": "B13_Dial0",
+   "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_Dial_C_UAID_70F94AE71E720A1903_1784694101",
+   "x": 5057,
+   "y": -388,
+   "z": -6390,
+   "yaw": 180
   },
   {
    "cls": "BP_Pickup",
@@ -2057,6 +3632,7 @@
    "x": 2981,
    "y": 794,
    "z": -1960,
+   "yaw": 0,
    "PickupKind": 7,
    "Amount": 3
   },
@@ -2067,8 +3643,18 @@
    "x": 2154,
    "y": 743,
    "z": -4960,
+   "yaw": 0,
    "PickupKind": 5,
    "Amount": 1
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B10_Door_N6",
+   "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_Door_C_UAID_70F94AE71E720A1903_1774994025",
+   "x": 3775,
+   "y": -12.5,
+   "z": -2000,
+   "yaw": 0
   },
   {
    "cls": "BP_HollowChild",
@@ -2076,7 +3662,8 @@
    "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_HollowChild_C_UAID_70F94AE71E720A1903_1778469052",
    "x": 3575,
    "y": 137.5,
-   "z": -3400
+   "z": -3400,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -2085,6 +3672,7 @@
    "x": 3000,
    "y": 80,
    "z": 40,
+   "yaw": 0,
    "PickupKind": 6,
    "Amount": 1
   },
@@ -2094,7 +3682,8 @@
    "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_FloorLift_C_UAID_70F94AE71E720A1903_1775794031",
    "x": 18,
    "y": 0,
-   "z": -3500
+   "z": -3500,
+   "yaw": 180
   },
   {
    "cls": "BP_Pickup",
@@ -2103,8 +3692,18 @@
    "x": 700,
    "y": -250,
    "z": 140,
+   "yaw": 0,
    "PickupKind": 0,
    "Amount": 12
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B15_Door_N0",
+   "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_Door_C_UAID_70F94AE71E720A1903_1795818191",
+   "x": 1550,
+   "y": -212.5,
+   "z": -9500,
+   "yaw": 0
   },
   {
    "cls": "BP_HollowDrone",
@@ -2112,7 +3711,17 @@
    "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_HollowDrone_C_UAID_70F94AE71E725A1803_1903263191",
    "x": 6300,
    "y": -300,
-   "z": 100
+   "z": 100,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B10_Door_WC2",
+   "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_Door_C_UAID_70F94AE71E720A1903_1775369028",
+   "x": 4662.5,
+   "y": 212.5,
+   "z": -2000,
+   "yaw": 0
   },
   {
    "cls": "BP_HollowDrone",
@@ -2120,7 +3729,8 @@
    "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_HollowDrone_C_UAID_70F94AE71E720A1903_2079015228",
    "x": 1600,
    "y": 150,
-   "z": 220
+   "z": 220,
+   "yaw": 0
   },
   {
    "cls": "BP_HollowDrone",
@@ -2128,7 +3738,8 @@
    "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_HollowDrone_C_UAID_70F94AE71E720A1903_1777020040",
    "x": 2275,
    "y": 157.5,
-   "z": -3380
+   "z": -3380,
+   "yaw": 0
   },
   {
    "cls": "BP_HollowDrone",
@@ -2136,7 +3747,17 @@
    "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_HollowDrone_C_UAID_70F94AE71E720A1903_1781094073",
    "x": 2025,
    "y": -372.5,
-   "z": -4880
+   "z": -4880,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B10_Door_N4",
+   "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_Door_C_UAID_70F94AE71E720A1903_1774744023",
+   "x": 2900,
+   "y": -562.5,
+   "z": -2000,
+   "yaw": 0
   },
   {
    "cls": "BP_HollowDrone",
@@ -2144,7 +3765,17 @@
    "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_HollowDrone_C_UAID_70F94AE71E725A1803_1903057188",
    "x": 2800,
    "y": -500,
-   "z": 100
+   "z": 100,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B13_Door_N2",
+   "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_Door_C_UAID_70F94AE71E720A1903_1787469124",
+   "x": 3025,
+   "y": -212.5,
+   "z": -6500,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -2153,6 +3784,7 @@
    "x": 3250,
    "y": 850,
    "z": 40,
+   "yaw": 0,
    "PickupKind": 2,
    "Amount": 35
   },
@@ -2162,7 +3794,8 @@
    "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_SaveTerminal_C_UAID_70F94AE71E725A1803_1905049214",
    "x": 4400,
    "y": -450,
-   "z": 0
+   "z": 0,
+   "yaw": 0
   },
   {
    "cls": "BP_SeqSwitch",
@@ -2170,7 +3803,8 @@
    "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_SeqSwitch_C_UAID_70F94AE71E720A1903_1789044136",
    "x": 2112.5,
    "y": -665,
-   "z": -7998
+   "z": -7998,
+   "yaw": 0
   },
   {
    "cls": "BP_FloorLift",
@@ -2178,7 +3812,8 @@
    "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_FloorLift_C_UAID_70F94AE71E720A1903_1788894135",
    "x": 5457,
    "y": 0,
-   "z": -8000
+   "z": -8000,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -2187,6 +3822,7 @@
    "x": 7300,
    "y": -1300,
    "z": 40,
+   "yaw": 0,
    "PickupKind": 1,
    "Amount": 40
   },
@@ -2197,6 +3833,7 @@
    "x": 1710,
    "y": -794,
    "z": -1960,
+   "yaw": 0,
    "PickupKind": 0,
    "Amount": 6
   },
@@ -2206,7 +3843,8 @@
    "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_HollowDrone_C_UAID_70F94AE71E720A1903_1785544108",
    "x": 3975,
    "y": 342.5,
-   "z": -6380
+   "z": -6380,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -2215,6 +3853,7 @@
    "x": 2487.5,
    "y": -14.5,
    "z": -3460,
+   "yaw": 0,
    "PickupKind": 5,
    "Amount": 1
   },
@@ -2224,7 +3863,17 @@
    "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_HollowChild_C_UAID_70F94AE71E720A1903_1786994120",
    "x": 1625,
    "y": -575,
-   "z": -6400
+   "z": -6400,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B10_Door_N1",
+   "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_Door_C_UAID_70F94AE71E720A1903_1774369020",
+   "x": 2325,
+   "y": -362.5,
+   "z": -2000,
+   "yaw": 0
   },
   {
    "cls": "BP_HollowDrone",
@@ -2232,7 +3881,17 @@
    "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_HollowDrone_C_UAID_70F94AE71E720A1903_1780769070",
    "x": 2800,
    "y": -717.5,
-   "z": -4880
+   "z": -4880,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B11_Door_N1",
+   "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_Door_C_UAID_70F94AE71E720A1903_1778819055",
+   "x": 3900,
+   "y": -562.5,
+   "z": -3500,
+   "yaw": 0
   },
   {
    "cls": "BP_SeqSwitch",
@@ -2240,7 +3899,8 @@
    "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_SeqSwitch_C_UAID_70F94AE71E720A1903_1789194137",
    "x": 2487.5,
    "y": 665,
-   "z": -7998
+   "z": -7998,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -2249,8 +3909,45 @@
    "x": 1000,
    "y": -350,
    "z": 40,
+   "yaw": 0,
    "PickupKind": 0,
    "Amount": 6
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B13_Door_S5",
+   "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_Door_C_UAID_70F94AE71E720A1903_1787844127",
+   "x": 2950,
+   "y": 212.5,
+   "z": -6500,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B15_Door_WC1",
+   "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_Door_C_UAID_70F94AE71E720A1903_1796694198",
+   "x": 962.5,
+   "y": 212.5,
+   "z": -9500,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B10_Door_WC1",
+   "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_Door_C_UAID_70F94AE71E720A1903_1775244027",
+   "x": 962.5,
+   "y": 212.5,
+   "z": -2000,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B12_Door_WC1",
+   "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_Door_C_UAID_70F94AE71E720A1903_1783744094",
+   "x": 962.5,
+   "y": 212.5,
+   "z": -5000,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -2259,8 +3956,18 @@
    "x": 2558,
    "y": -764,
    "z": -4960,
+   "yaw": 0,
    "PickupKind": 1,
    "Amount": 40
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B15_Door_N2",
+   "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_Door_C_UAID_70F94AE71E720A1903_1796069193",
+   "x": 3050,
+   "y": -212.5,
+   "z": -9500,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -2269,6 +3976,7 @@
    "x": 2455,
    "y": 515,
    "z": -1960,
+   "yaw": 0,
    "PickupKind": 8,
    "Amount": 10
   },
@@ -2279,6 +3987,7 @@
    "x": 5450,
    "y": -760,
    "z": 40,
+   "yaw": 0,
    "PickupKind": 5,
    "Amount": 1
   },
@@ -2288,7 +3997,8 @@
    "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_HollowDrone_C_UAID_70F94AE71E725A1803_1903330192",
    "x": 8000,
    "y": -200,
-   "z": 120
+   "z": 120,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -2297,6 +4007,7 @@
    "x": 2244,
    "y": 615,
    "z": -4960,
+   "yaw": 0,
    "PickupKind": 8,
    "Amount": 12
   },
@@ -2306,7 +4017,17 @@
    "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_HollowDrone_C_UAID_70F94AE71E720A1903_1780894071",
    "x": 2150,
    "y": 342.5,
-   "z": -4880
+   "z": -4880,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B11_Door_S3",
+   "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_Door_C_UAID_70F94AE71E720A1903_1779069057",
+   "x": 3425,
+   "y": -287.5,
+   "z": -3500,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -2315,6 +4036,7 @@
    "x": 2027.5,
    "y": -210,
    "z": -7960,
+   "yaw": 0,
    "PickupKind": 9,
    "Amount": 1
   },
@@ -2325,8 +4047,18 @@
    "x": 1969,
    "y": 705,
    "z": -6460,
+   "yaw": 0,
    "PickupKind": 2,
    "Amount": 40
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B13_Door_N1",
+   "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_Door_C_UAID_70F94AE71E720A1903_1787344123",
+   "x": 2325,
+   "y": -212.5,
+   "z": -6500,
+   "yaw": 0
   },
   {
    "cls": "BP_FloorLift",
@@ -2334,7 +4066,8 @@
    "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_FloorLift_C_UAID_70F94AE71E720A1903_1772144002",
    "x": 5457,
    "y": 0,
-   "z": -2000
+   "z": -2000,
+   "yaw": 0
   },
   {
    "cls": "BP_Cutscene",
@@ -2342,7 +4075,17 @@
    "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_Cutscene_C_UAID_70F94AE71E720A1903_1982646203",
    "x": 1725,
    "y": 132.5,
-   "z": -9400
+   "z": -9400,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B14_Door_S5",
+   "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_Door_C_UAID_70F94AE71E720A1903_1792219161",
+   "x": 1675,
+   "y": 562.5,
+   "z": -8000,
+   "yaw": 0
   },
   {
    "cls": "BP_Cutscene",
@@ -2350,7 +4093,35 @@
    "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_Cutscene_C_UAID_70F94AE71E720A1903_1982521202",
    "x": 1250,
    "y": 0,
-   "z": -9400
+   "z": -9400,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B12_Door_S5",
+   "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_Door_C_UAID_70F94AE71E720A1903_1783368091",
+   "x": 2150,
+   "y": 212.5,
+   "z": -5000,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B10_Door_S7",
+   "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_Door_C_UAID_70F94AE71E720A1903_1775118026",
+   "x": 3775,
+   "y": 362.5,
+   "z": -2000,
+   "yaw": 0
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B15_Door_S6",
+   "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_Door_C_UAID_70F94AE71E720A1903_1796569197",
+   "x": 3875,
+   "y": 212.5,
+   "z": -9500,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -2359,6 +4130,7 @@
    "x": 2857,
    "y": 131,
    "z": -7960,
+   "yaw": 0,
    "PickupKind": 0,
    "Amount": 6
   },
@@ -2368,7 +4140,8 @@
    "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_HollowDrone_C_UAID_70F94AE71E720A1903_1780994072",
    "x": 2800,
    "y": 717.5,
-   "z": -4880
+   "z": -4880,
+   "yaw": 0
   },
   {
    "cls": "BP_Pickup",
@@ -2377,8 +4150,18 @@
    "x": 2002,
    "y": 131,
    "z": -3460,
+   "yaw": 0,
    "PickupKind": 2,
    "Amount": 40
+  },
+  {
+   "cls": "BP_Door",
+   "label": "B14_Door_S6",
+   "ref": "/Game/HollowKin/Maps/Deep/Lvl_DeepLabs.Lvl_DeepLabs:PersistentLevel.BP_Door_C_UAID_70F94AE71E720A1903_1792343162",
+   "x": 2675,
+   "y": 562.5,
+   "z": -8000,
+   "yaw": 0
   }
  ]
 }
