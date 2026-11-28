@@ -79,3 +79,14 @@ On Windows, the ICU copy step is usually not needed; if the game crashes at star
 - After a playtest session run `bash tools/playtest_report.sh`. It writes `~/Desktop/HollowKin_Playtest_<date>.txt` (the HKLOG lines + engine warnings/errors). Send that file to Claude for bug analysis.
 - Raw log location (if needed): `~/Library/Containers/com.YourCompany.HollowKin/Data/Library/Logs/HollowKin/HollowKin.log`.
 - Build commands: Shipping as above; playtest = same command with `-clientconfig=Development -stagingdirectory=<repo>/HollowKin/Saved/StagedPlaytest`.
+
+## One command for both builds (2026-11-27)
+`bash tools/make_builds.sh` builds the regular (Shipping) and playtest (Development) apps, copies the ICU data, zips
+them into `~/Documents/Unreal Projects/Builds/` and deletes the staging folders. `make_builds.sh regular` or
+`make_builds.sh playtest` builds one. Close nothing: the editor can stay open.
+
+## Debug console in the playtest build
+Press ` (left of 1) and type `ke * HK_Help`. Developer mode: `ke * HK_Dev`. Full list: `TECHNICAL.md` §7.
+
+## iPad
+Configured; needs an Apple ID in Xcode and the iPad connected (`PLATFORMS.md` §2).

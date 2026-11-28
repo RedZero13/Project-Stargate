@@ -76,7 +76,7 @@ ev(BRK, '''(event EventBeginPlay
   (Rendering|Lighting|SetAttenuationRadius :self l :NewRadius 120.0)
   (Variables|Default|SetLamp l)
   (CallFunction|SetOn :V (Variables|Default|GetOn)))''' % (HH, TR, PL))
-ev(BRK, prompt('E   flip breaker   (it flips its neighbours too)'))
+ev(BRK, prompt('E / (Y)   flip breaker   (it flips its neighbours too)'))
 fn(BRK, 'Press', '''(fn Press ()
   (Audio|PlaySound2D "/Game/Interface_And_Item_Sounds/WAV/Flick_Switch_03.Flick_Switch_03" 0.9)
   (for x (Actor|GetAllActorsOfClass "/Game/HollowKin/Blueprints/Floors/BP_FloorLift.BP_FloorLift_C")
@@ -100,7 +100,7 @@ ev(DIAL, '''(event EventBeginPlay
   (Rendering|Components|Light|SetIntensity :self l :NewIntensity 30.0)
   (Rendering|Components|Light|SetLightColor :self l :NewLightColor (Math|Color|MakeColor 0.4 1.0 0.7 1.0))
   (Rendering|Lighting|SetAttenuationRadius :self l :NewRadius 120.0))''' % (HH, TR, PL))
-ev(DIAL, prompt('E   turn the counter'))
+ev(DIAL, prompt('E / (Y)   turn the counter'))
 fn(DIAL, 'Press', '''(fn Press ()
   (Variables|Default|SetDigit (select (>= (Variables|Default|GetDigit) 9) 0 (+ (Variables|Default|GetDigit) 1)))
   (Rendering|Components|TextRender|SetText :self (Variables|Default|GetTxt) :Value (Utilities|String|ToString(Integer) (Variables|Default|GetDigit)))
@@ -118,7 +118,7 @@ ev(CON, '''(event EventBeginPlay
   (Rendering|Components|Light|SetIntensity :self l :NewIntensity 60.0)
   (Rendering|Components|Light|SetLightColor :self l :NewLightColor (Math|Color|MakeColor 0.5 0.7 1.0 1.0))
   (Rendering|Lighting|SetAttenuationRadius :self l :NewRadius 260.0))''' % (HH, PL))
-ev(CON, prompt('E   use the cell release console'))
+ev(CON, prompt('E / (Y)   use the cell release console'))
 fn(CON, 'Press', '''(fn Press ()
   (bind m %s
     (:then

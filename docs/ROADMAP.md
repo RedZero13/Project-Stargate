@@ -20,6 +20,34 @@
 
 ---
 
+
+## Status — 2026-11-28 (read this first)
+
+**Built (playable end to end):** prologue street; two-storey clinic with stairs and real lifts; Containment Wing slice;
+Wards B2–B8 and Deep Labs B9–B15 with unique per-floor layouts, doors, washrooms, break rooms, cafeteria, basement
+stairwell; Max (motion matching, torch, pistol, melee, bottle lure, sanity); Hollows, guards, undead nurses, Elites,
+Hollow Children; keycard / switch / breaker / counter / generator / fuse / cell puzzles; backpack + workbench; map,
+journal, objectives; six choices with NPC arcs (Leo, Okafor, Hale, Jaz); seven endings incl. hidden LANTERN LIT; New
+Game+; chapter select; 30 achievements; collectibles; cutscenes; 32 voice lines (Kokoro); main/pause/options menus;
+controller support; playtest logging + debug console; Mac builds (regular + playtest); iPad configuration and touch UI.
+
+**Remaining (owner / Claude):**
+| Area | Item | Who |
+|------|------|-----|
+| Test | Owner playtest of the latest build; re-run the automated full route for the new layouts | You + Claude |
+| Platforms | iPad build (add Apple ID to Xcode) · Windows PC + Windows build · Steam Deck check | You (accounts/PC) + Claude |
+| Characters | MetaHumans for Max and Emilia (Creator UI), facial animation, lip-sync | You + Claude |
+| Content | Bosses (Huckley / Halvorsen), ally Nate, more weapons, drugs, hiding spots, stealth noise radii | Claude |
+| Audio | Final voices (actors or ElevenLabs), adaptive music states, more SFX | You (source) + Claude |
+| Story art | Prologue storybook panels, mood board, trailer | You + Claude |
+| UX | Button glyphs per platform, rebinding UI, subtitles/accessibility options, aim assist, rumble | Claude |
+| Production | Trademark search, Steam page, store assets, age rating (IARC), localisation | You + Claude |
+| Consoles | ID@Xbox / PlayStation Partners applications, devkits, cert work (`PLATFORMS.md`) | You + Claude |
+
+The phase plan below is the original roadmap; the table above supersedes its checkboxes.
+
+---
+
 ## 1. Is Unreal better than Unity for this game?
 
 **For a realistic horror game, yes.** Most of what made the realistic version too big for one developer in Unity comes free and built in with Unreal.

@@ -169,7 +169,7 @@ w(DOOR + ':EventGraph', '''(event EventTick (DeltaSeconds)
     (:then
       (if (and (not (Variables|Default|GetOpen)) (and (< (Transformation|GetDistanceTo self m) 170.0) (> (Utilities|Time|GetTimeSeconds) (Variables|Default|GetNextNag))))
         (Variables|Default|SetNextNag (+ (Utilities|Time|GetTimeSeconds) 10.0))
-        (Class|BPMax|Notify :self m :Msg "E   open the door" :Seconds 2.0)))
+        (Class|BPMax|Notify :self m :Msg "E / (Y)   open the door" :Seconds 2.0)))
     (:CastFailed)))''' % MAXCAST)
 print('door', call(BT, 'compile_blueprint', {'blueprint': {'refPath': DOOR}, 'warnings_as_errors': False}))
 # ------------------------------------------------------------------ Max: Interact also opens doors (nearest only)

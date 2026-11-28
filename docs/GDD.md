@@ -1,26 +1,10 @@
-# HOLLOW KIN — Game Design Document v4 (Unreal Engine 5, realistic 3D)
+# HOLLOW KIN — Game Design Document v5 (as built, 2026-11-28)
 
-> Supersedes *Project Stargate – The Following Saga* (GDD v1).
-> Status: **draft for review**, round 4. v4 moves the game to **Unreal Engine 5** as a **realistic, over-the-shoulder 3D** survival horror game. Story, cast, systems and endings are unchanged from v3; the pixel-art version is kept in git history.
-> Companion docs: [`ART_BIBLE.md`](ART_BIBLE.md) · [`levels/CONTAINMENT_WING.md`](levels/CONTAINMENT_WING.md) · [`ROADMAP.md`](ROADMAP.md)
-
-## 0. Change log vs. v1
-
-| v1 | v2 | Why |
-|----|----|-----|
-| Title *Project Stargate: Remnants* | **HOLLOW KIN** (working title) | "Stargate" is an MGM trademark, and *Remnant* is an existing game franchise (*Remnant: From the Ashes*). |
-| In-world *Project Stargate* | **Project LANTERN** | Avoids the trademark. A "lantern" is also the faint glow the subjects' nervous systems give off. |
-| Enemies called *Remnants* | **Hollows** | Same franchise conflict. "Hollow" ties into the title: people emptied of themselves. |
-| ~13 named characters | **6 core characters** + 3 children told through notes and enemy encounters | Cuts modelling, rigging and voice work roughly in half. |
-| Sanity = 100→0 level timer | **Sanity = resource** that drains and refills | A timer punishes the exploration the genre is built on. |
-| Souls-like "restart the whole run" | **Ironman** mode, unlocked after the first clear | Optional for players who want it, and not something to balance around. |
-| 7 endings | **3 at launch**, 4 saved for post-launch | Cuts cutscene and QA cost. |
-| Contradictory backstory (adopted vs. "every foster home"; receptionist vs. security-guard job (too close to the *FNAF* film's setup); 1st vs. 3rd person prose) | One canonical timeline (§3) | Consistency. |
-| Platform: Mac, Windows, iPad | **Windows + macOS** at launch; iPad dropped | Windows is about 95% of Steam players. A realistic UE5 game is too heavy for iPad. |
-| 2D-platformer MVP table | Vertical-slice backlog (`ROADMAP.md` §4) | The old table was for a different game. |
-| Engine "Unity/Unreal/Godot" | **Unreal Engine 5**, realistic 3D, over-the-shoulder | Lumen lighting, MetaHuman characters, Fab/Megascans environments and Epic's own MCP integration make realistic horror achievable for one developer. (A 2D pixel version was explored in v3 and dropped.) |
-
-✅ **Title confirmed: *Hollow Kin*.** Still needs a USPTO/EUIPO and Steam search before the store page goes up.
+> v5 describes the game **as it is built today** and keeps the remaining design as clearly marked plans.
+> v4 (the original Unreal design: Dr. Mán, Huckley boss, Nate, drugs, ink-ribbon modes) is in git history and its
+> unbuilt parts are listed in §12. Companion docs: [`TECHNICAL.md`](TECHNICAL.md) (how it is built) ·
+> [`ART_BIBLE.md`](ART_BIBLE.md) · [`UI_DESIGN.md`](UI_DESIGN.md) · [`EXPANSION_PLAN.md`](EXPANSION_PLAN.md) ·
+> [`narrative/`](narrative/) · [`ROADMAP.md`](ROADMAP.md) · [`PLATFORMS.md`](PLATFORMS.md).
 
 ---
 
@@ -28,216 +12,203 @@
 
 | | |
 |---|---|
-| **Genre** | Third-person survival horror / sci-fi thriller |
-| **Camera** | Over-the-shoulder (RE2 Remake / RE4 Remake style), switching shoulders, with a tighter camera when aiming |
-| **Visual references** | *Resident Evil 2 / 4 Remake* (camera, inventory, pacing), *Silent Hill 2 Remake* (fog, sound), *Alan Wake 2* (flashlight, darkness), *The Callisto Protocol* (sci-fi facility) |
-| **Inspirations** | Resident Evil 2 & 7, Silent Hill 2, *Venom* (2018), *Stranger Things* (the Lab) |
-| **Audience** | 20–45, story-first and casual-to-core horror players |
-| **Platforms** | **Windows** (Steam) first, with Steam Deck via Proton; **macOS** (Apple Silicon) alongside; iPad dropped (a realistic UE5 game is too heavy for it) |
-| **Engine** | **Unreal Engine 5** (latest 5.x with the Model Context Protocol plugin): Lumen, Nanite, MetaHuman, Enhanced Input, StateTree/Behavior Trees, Sequencer |
-| **Length (Chapter 1)** | 5–7 hours for a first clear |
-| **Business model** | Premium, single-player, no live service |
+| **Title** | HOLLOW KIN (working title; trademark search still to do before a store page) |
+| **Genre** | Third-person survival horror, story-first, with hidden-variable endings |
+| **Camera** | Over-the-shoulder (RE2/RE4 Remake style), shoulder swap, tighter when aiming |
+| **Engine** | Unreal Engine 5.8, realistic 3D, Lumen on High/Epic |
+| **Platforms** | macOS now · Windows next · iPad (M-series) prepared · consoles planned (`PLATFORMS.md`) |
+| **Requirements** | Mac: min Apple M1 / 8 GB / macOS 14, recommended M2 Pro–M3 Pro+ / 16 GB · iPad: min M1 / 8 GB, recommended M4 iPad Pro 16 GB (`PLATFORMS.md` §0) |
+| **Length** | First clear about 2–2.5 h; 100% (all 7 endings, collectibles, achievements) about 6–7 h with chapter select and New Game+ |
+| **Model** | Premium, single-player, offline |
+| **Studio** | Terratales Media Entertainment Private Limited |
 
-**Logline:** A broke 21-year-old breaks into a shut-down government lab to bring his little sister home, and finds the thing hunting him through its corridors *is* her.
+**Logline:** A broke 21-year-old breaks into a shut-down children's clinic to bring his little sister home, and finds
+the hospital goes fifteen floors down, and what is waiting at the bottom is her.
 
-### Design pillars
-1. **Dread over action.** Combat is always a cost, never a reward.
-2. **Every resource is a choice.** Ammo, health, sanity and drugs all compete for the same few inventory slots (6 at the start, 10 at most).
-3. **The monster is family.** Every system eventually points back at Emilia.
-
----
-
-## 2. Core loop
-
-```
-Explore ──► find key items / notes / Emilia's drawings
-   ▲                     │
-   │                     ▼
-Safe room ◄── fight or evade ◄── solve puzzle → unlock shortcut / new sector
-(save, item box,           (spend ammo, health, sanity)
- craft, recover sanity)
-```
-
-The game is semi-open in the RE2 style: one central sector (Containment) with locked shortcuts into the other three. You backtrack once you've found new keys or tools.
+### Pillars
+1. **Dread over action.** Fighting always costs something: ammo, health, sanity, or a piece of who Max is.
+2. **Every choice is remembered.** Small decisions change who you meet later and how the story ends — deterministic,
+   but hidden on the first run.
+3. **The monster is family.** Every system points back at Emilia and the five other children.
 
 ---
 
-## 3. Story: canonical version
+## 2. Story
 
-### Timeline
-| When | Event |
-|------|-------|
-| **−5 yrs** | The Hunts' car crash. The parents die. Max is **16** and Emilia is **10**. Paramedics' bloodwork flags an anomaly in Emilia's blood. Within days she is taken into state custody, and from there quietly transferred to Project LANTERN. Max is told she was "placed with a specialist medical foster program". |
-| −5 yrs | Max is placed with **Walter and June Hale**, an elderly couple, as his only foster placement. They are warm and decent. |
-| −3 yrs | Max falls in with the wrong crowd. When a dealer the Hales owe money to threatens them, Max takes a **felony possession-with-intent charge** that wasn't his, to keep them out of it. |
-| −1 yr | The Hales turn cold and then openly hostile. (Late-game reveal: LANTERN had been paying them a monthly stipend to report on Max, who may share Emilia's anomaly. When the project began shutting down, the payments stopped and the pressure began.) Max moves into a studio apartment he can barely afford. |
-| −1 yr → now | **Dr. Lorraine Huckley** begins smuggling letters from Emilia to Max. |
-| −1 month | Broke, Max sells blood for $300 at a **mobile "Halvorsen Biologics" donation van** parked outside Dell's Hardware. The van keeps coming back, and the phlebotomist keeps asking him back for a "follow-up panel". (Halvorsen is a LANTERN front. Max's sample confirmed he carries the same anomaly as Emilia, and the project was preparing to take him in as her replacement once the shutdown wiped her records. In Act 3, Max finds his own subject file: `L-04 / HUNT, M. — PENDING INTAKE`.) |
-| **Day 0** | Huckley's last letter: *Emilia is being released. Meet at the old St. Brigid's clinic on the 14th.* |
-| Day 0 + 6 | Nobody comes, and Huckley stops answering. Max goes to St. Brigid's himself. |
+### 2.1 Setting
+Millbrook, a rainy small town. **St. Brigid's Clinic**, a bright, too-clean private clinic run by **Halvorsen
+Biologics**, sits at the end of Main Street. Under it, fifteen basement floors: common wards, a paediatric ward,
+radiology, surgery, pharmacy and blood lab, morgue, security, then the **Deep Labs** (B9) and below them the secret
+government-contract levels (specimen storage, two testing labs, observation, sedation) and **B15, the isolation
+chambers**, where six children are kept in glass cells: **L-01 Noor (8), L-02 Theo, L-03 Emilia Hunt, L-04 Mila,
+L-05 Sofi Vargas (9), L-06 Ivy (6).** Project **LANTERN** gives these children an anomaly in the blood; the "lantern"
+is the glow their nervous systems give off. The adults it was tried on became **Hollows**.
 
-**Max's current life (canonical):** receptionist at Dell's Hardware, a family-run shop that is slowly going under. Job applications bounce because of his record and his lack of qualifications.
+### 2.2 Backstory (canonical)
+- Max Hunt (21) and Emilia (15) lost their parents; Emilia was taken into state care at six and never reached her
+  foster home. Six days ago a letter told Max she never existed in the foster system.
+- **Halvorsen Biologics** runs LANTERN under a government contract. Dr. Halvorsen's daughter **Jasmine ("Jaz")** wrote
+  the dosing schedules, gave the children names because nobody else would, and is now trying to undo it.
+- Tonight the clinic is being shut down and everything below it erased — including the children.
 
-**What happened inside:** LANTERN was ordered to shut down. The night before Emilia's release, **Dr. Sebastian Mán** injected her with **L-7**, an unstable serum, to recover his life's work before the shutdown. It worked too well. Emilia became a **Hollow** with telekinesis and mind control. In a single night she broke the facility, and broke Huckley's mind. She is still down there, still ten years old inside, waiting for her brother.
+### 2.3 Chapters (as built)
+| Chapter | Where | What happens |
+|---------|-------|--------------|
+| **Prologue — Millbrook** | Main Street, night, rain | Jaz's call ("your sister is alive"), an abandoned police car with quarantine chatter, a fence of MISSING posters (all state-care children), a child in a hospital gown under a streetlight who vanishes, Jaz calling back, a crashed ambulance and **Leo Vargas**, the dying paramedic who drove Emilia in. **Choice 1.** |
+| **1 — St. Brigid's Clinic** | G (OPD, emergency, cafeteria) and F1 (maternity, NICU) | The passenger lift is out of order and its neighbour's doors have been forced open on an empty shaft. Max climbs the stairs; on F1 every bed is made and every drip still runs into an empty bed; a small figure watches from the NICU. Nurse **Okafor** knocks from a locked office (**choice 2**). Three floor switches in the order shown by a child's drawing power the service lift to the basements. |
+| **2 — Containment Wing (B1)** | Hand-built slice | Fuses, Emilia's first drawings, the **Hollow Child** (spare or hurt), the pistol from a dead guard, the breaker, the power door. |
+| **3 — The Wards (B2–B8)** | Seven generated floors | One lift puzzle per floor (keycard, switches, counters, generator, breakers). Okafor again (B5, confession) or her Hollow (B3). Paediatric medicine (B4, **choice 3**). Sgt. **Hale**, a bitten guard (B8, **choice 4**). Jaz confesses she wrote the dosing schedules. |
+| **4 — The Deep Labs (B9–B15)** | Hand-built B9 + six generated floors | Hale's cache or his squad (B9). The research archive (B11, **choice 5**). Hale turning (B12, mercy or last stand). Sedated patients (B14, **choice 6**). The six children, Emilia's cell, the release console, the ending. |
 
-### Act structure (Chapter 1)
-
-| Act | Location | Beats |
-|-----|----------|-------|
-| **Prologue** | Max's walk to work → his apartment → the letter | Tone, poverty, loneliness. Emilia's letter (see `narrative/PROLOGUE.md`). |
-| **Act 1** | St. Brigid's clinic (surface front) → lift to the **Containment Wing** | Tutorial. First Hollow. Meet **Jaz** over the radio. Find the children's dormitory and drawings. |
-| **Act 2** | **Research Labs** + **Maintenance Tunnels** | Meet **Nate**. Learn what L-7 is. Huckley's audio logs grow more and more broken. Boss: **Huckley Hollow**. |
-| **Act 3** | **Security Hub** → Emilia's test chamber | Dr. Mán's reveal. Dr. Mán boss (a human with a psychic-dampening rig). Emilia confrontation. The ending is decided. |
-
----
-
-## 4. Characters
-
-### Core cast (MetaHuman, fully voiced)
-
-| Character | Age | Role | Notes |
-|-----------|-----|------|-------|
-| **Max Hunt** | 21 | Protagonist | Brunette, thin, a worn hoodie and work jacket. Dry humour that hides guilt for not finding her sooner. |
-| **Emilia Hunt** | 15 (10 inside) | Sister / Hollow | Two versions: a **human** MetaHuman, and a **Hollow** form (the MetaHuman with a custom sculpted overlay, gown and glow materials). Naive, optimistic, with a twisted streak. Talks to Max through intercoms, PA systems and *in his head*. |
-| **Dr. Lorraine Huckley** | mid-30s | Fallen mentor → boss | Blonde, a prodigy psychiatrist. She was kind to Emilia and smuggled the letters. Emilia's power broke her mind; she's now a Hollow boss. Her audio logs trace her decline. |
-| **Dr. Sebastian Mán** | 50s | Antagonist | Chinese-born biochemist, a near-Nobel laureate believed dead. Holds that the ends justify any means. Also absorbs Dr. Marlowe's role (the cruel conditioning programme). |
-| **Jasmine "Jaz" Hawkins** | late 20s | Insider ally (radio) | A former LANTERN technician hiding in the Maintenance Tunnels. **Merged from three v1 characters:** Jaz (layout and security knowledge), Dr. Kline (the saboteur who leaves clues) and Agent Thompson (gathering evidence). Mostly a voice on the radio, so cheap to produce. |
-| **Nathaniel "Nate" Carter** | early 30s | Combat ally | An ex-soldier turned subject who escaped containment. Joins for a few set pieces. His fate depends on your choices. |
-
-### Told through notes, drawings and encounters (not full characters)
-- **Vicky (9), Jasper (7), Jade (11):** the other children. Their drawings and diaries are the key collectible. **Two of them are met as Hollows**, and whether you spare them feeds the ending.
-
-### Cut (possible DLC or sequel)
-- **Dr. Edward Kline** and **Dr. Eliza Marlowe**: folded into Jaz and Dr. Mán.
-- **Agent Sarah Thompson**: her agency becomes the "unknown force" behind a post-launch ending.
-
-### Emilia: art direction note
-v1 pointed straight at Eveline (RE7). Keep her as a *mood* reference only. Emilia's own silhouette:
-- A hospital gown with laminated subject tags (`L-03 / HUNT, E.`) and child's drawings taped to her arms.
-- Telekinetic **halo**: a slow orbit of debris (pens, syringes, toys) around her.
-- Her nervous system glows through her skin (the "lantern"), and the glow pulses with her mood.
-- No "creepy-girl" tropes such as hair over the face or crab-walking. She should be heartbreaking first and frightening second.
+### 2.4 Characters
+| Character | Role | Arc |
+|-----------|------|-----|
+| **Max Hunt** (21) | Protagonist (voice: Kokoro `am_echo`) | Dry humour over guilt; how far he goes decides what he becomes (Bond vs Taint). |
+| **Emilia Hunt** (15) | Sister, subject L-03 | Draws "the man with a torch" coming for her. Speaks in the B15 reunion; in New Game+ her whispers guide Max. |
+| **Jaz (Jasmine Halvorsen)** | Voice on the phone | Calls in the prologue, at the Wards and at the Deep Labs, more honest each time; in New Game+ she admits Dr. Halvorsen is her father. |
+| **Leo Vargas** | Paramedic | Dying beside his ambulance; drove Emilia in; asks Max to tell his daughter Sofi (L-05) he's sorry he was late. |
+| **Nurse Adaeze Okafor** | Staff, complicit | Sedated the children to pay for her son's treatment. Freed: confesses on B5 (forgive / condemn). Left: becomes a Hollow on B3. Forgiven: carries the last child out in the good endings. |
+| **Sgt. Elias Hale** | Halvorsen guard | Bitten on B8. Spared: his squad holds fire, and on B12 he either gets a merciful end or holds the corridor with one bullet (and kills the Experiment). Robbed: his squad hunts Max on B9. |
+| **The children** | Noor, Theo, Mila, Sofi, Ivy | Told through patient files, drawings and the B15 cells; whether they leave depends on Max. |
+| **Dr. Halvorsen** | Unseen antagonist | Present in files, orders and Jaz's confession. |
 
 ---
 
-## 5. Systems
-
-### 5.1 Exploration & puzzles
-- RE-style lock-and-key progression, with cross-sector shortcuts.
-- Puzzle types: logic (circuit routing), observation (clues hidden in notes and drawings), and skill (timed valve or cooling sequences).
-- **Narrative puzzles:** the solutions come from Emilia's letters and the children's drawings, so the lore *is* the key.
-- Hidden rooms are opened by examining items closely (rotate, find a seam), which supports replays.
-- "Time-waster" puzzles (from v1) appear only as optional side rooms, never on the critical path.
-
-### 5.2 Combat
-- **Aiming:** hold Aim to raise the weapon. The camera tightens over the shoulder, and the reticle closes in the longer you hold still (RE2 Remake style). You can walk slowly while aiming, but not run.
-- **Ranged:** pistol, shotgun, and a nail-gun-style lab tool (sci-fi flavour). Ammo is scarce.
-- **Weak points:** headshots, plus each Hollow's glowing "lantern node", do extra damage. Limbs can be shot to stagger or cripple an enemy.
-- **Melee:** a knife that breaks, used for defensive counters and escaping grabs.
-- **Psychic push** (late game, from the L-7 serum): staggers enemies but raises **Taint** (§5.6).
-- **Enemies (Chapter 1):**
-  - **Hollow Drone:** shambling, hits hard, weak to headshots.
-  - **Hollow Screamer:** a psychic shriek that drains sanity, and it calls in other enemies.
-  - **Hollow Child:** fast and evasive. Can be *spared*, which affects the ending.
-  - **Guard:** human, uses cover, investigates noise.
-  - **Bosses:** Huckley Hollow, Dr. Mán.
-
-### 5.3 Stealth
-- **Noise:** each action has a sound radius, in metres (walk 2, run 8, gunshot 25, thrown bottle as a lure), using Unreal's AI Perception hearing sense. On Easy, a subtle HUD pulse shows when you're heard. Guards and Hollows investigate the last noise they heard.
-- **Sight:** enemies have a vision cone, reduced by darkness. Darkness is real: with Lumen lighting, unlit areas are genuinely black, and the flashlight is the player's main light source. Turning the flashlight off cuts detection but costs sanity over time.
-- **Hiding:** lockers, under beds, vents. Some Hollows can sense you; hold your breath (a stamina meter) to stay hidden.
-
-### 5.4 Sanity (redesigned)
-**0–100, a resource rather than a timer.**
-
-| Drains | Restores |
-|--------|----------|
-| Time in darkness (flashlight off) | Safe rooms (slow refill, up to a 60 cap) |
-| Hollow psychic attacks and shrieks | Bright, lit areas (stops the drain) |
-| Witnessing set-piece horrors | **Emilia's drawings** (rare, +25, also raise Bond) |
-| Drug come-downs | **Sedative** item (+40, slows aim) |
-
-| Band | Effects |
-|------|---------|
-| 100–70 | Normal |
-| 70–40 | Whispers, edge vignette, colour grading shifts toward a sickly tone, occasional footsteps that aren't real |
-| 40–15 | **Hallucinated enemies** that vanish when shot, aim sway, objects and bodies that move when you look away, a distorted map |
-| 15–1 | Fast heartbeat, the screen darkens (as in v1), Emilia's voice gives false directions |
-| 0 | **Breakdown:** a cutscene, then reload from the last save |
-
-v1's countdown survives only in **set-piece escapes** (for example, the Security Hub lockdown), where a hard timer is the right tool.
-
-### 5.5 Drugs & boosts (temporary, with trade-offs)
-| Item | Upside | Downside | Duration |
-|------|--------|----------|----------|
-| **Adrenal** | +30% move speed | −25% damage resistance | 60 s |
-| **Stonewall** | +40% damage resistance | −30% move speed | 60 s |
-| **Clarity** | Stops sanity drain | Heavy aim sway when it wears off | 90 s |
-| **L-7 trace** | Unlocks / charges the psychic push | +Taint (affects the ending), −10 max sanity | permanent |
-
-**Permanent upgrades:** inventory pouches (6 → 8 → 10 slots), weapon parts found in the world, and holster speed. No XP or skill tree; upgrades are found by exploring, which fits the genre.
-
-### 5.6 Hidden ending variables
-- **Bond (0–100):** raised by collecting Emilia's drawings, sparing Hollow Children, answering her intercom calls kindly, and keeping her letters in your inventory.
-- **Taint (0–100):** raised by using L-7 and by killing Hollow Children.
-
-### 5.7 Difficulty
-| Mode | Notes |
-|------|-------|
-| Easy | More ammo, slower sanity drain, aim assist |
-| **Normal** (default) | **Dynamic difficulty** on by default (can be turned off). Loot and sanity drain adapt to recent deaths, how much ammo you carry, and accuracy |
-| Hard | Fixed scarcity, smarter guards |
-| Nightmare | Hard, plus limited saves (ink-ribbon style) and extra Hollows |
-| **Ironman** | Unlocks after a first clear. One life; death ends the run (the "souls-like" mode from v1) |
-
-Balancing is done on **Normal**. The other modes are multipliers on top of it.
-
-### 5.8 Map & save
-- An auto-filling map that colours rooms once they're fully looted (RE2 style), with player pins.
-- Saving happens only at safe-room terminals, plus autosaves at chapter boundaries.
+## 3. Core loop
+Explore a floor -> read notes and drawings (they hold the puzzle answers, all saved in the journal) -> find the
+floor's evacuation plan (map) -> solve the lift puzzle while avoiding or fighting Hollows -> make the floor's choice if
+there is one -> ride the lift down. Resources (ammo, gels, sedatives, parts, chemicals, bottles) are always scarce;
+the workbench turns parts and chemicals into what you need.
 
 ---
 
-## 6. Endings
+## 4. Systems (as built)
 
-### Launch (3)
-| Ending | Condition |
-|--------|-----------|
-| **Homecoming:** Emilia is restored to human | Bond ≥ 70 **and** Taint < 40 |
-| **Kin:** Emilia survives as a Hollow and leaves with Max | Bond ≥ 40 (and the Homecoming condition not met) |
-| **Lantern:** Max sacrifices himself so she can live | Bond < 40, *or* the player chooses it in the final scene |
+### 4.1 Movement and camera
+Motion-matched locomotion (walk, run, crouch, jump, vault), over-the-shoulder camera, shoulder swap, aim zoom.
 
-### Post-launch (4)
-Emilia is killed · Emilia sacrifices herself · Emilia keeps walking the corridors · **an unknown force** (Thompson's agency) takes them both, which sets up a sequel.
+### 4.2 Combat
+- **Pistol** (M1911): hitscan, 6-round magazine, auto-reload, reserve capped at 40. Aim with RMB/Q (T toggles).
+- **Melee** punch; **glass bottles** thrown as a noise lure (Hollows walk to the sound).
+- **Enemies:** Hollow (melee, red eye glow, alert stinger), **guard** (rifle, warning shot first), **undead nurse**,
+  **brute / Experiment** (Elite, 60% damage taken), **Hollow Child** (spare or hurt), hazards (shock floors,
+  explosive barrels). Hollows open doors they reach.
+- **Difficulty:** EASY (less damage, more supplies) / NORMAL / BRUTAL (harder hits, fewer supplies). New Game+ adds
+  +30% Hollow health.
+
+### 4.3 Sanity
+0–100. Drops in darkness and when hurt; sedatives restore 35. Low sanity tints and distorts the screen; at 0 Max
+breaks down (death screen, reload). Hallucinated enemies exist (`BP_Hallucination`).
+
+### 4.4 Inventory and crafting
+RE4-style backpack (B): items with real models. Workbench (I): **6 rounds** = 2 parts + 1 chemical; **sedative** =
+2 chemicals; **health gel** = 1 part + 1 chemical. Health gel +40 HP.
+
+### 4.5 Exploration aids
+- **Map (M):** each floor's plan once its **EVACUATION PLAN** board in the lift lobby is photographed (clinic plans
+  are always known).
+- **Journal (J):** every note, clue, file and choice outcome, newest first, in Max's handwriting — including the
+  mission-critical ones (switch order, counter digits, breaker instructions).
+- **Objectives** tab: current goal plus the history.
+
+### 4.6 Puzzles
+Keycard search · three floor switches in a drawn order · **breaker panel** (four breakers wired in a chain: each flips
+its neighbours; all green powers the lift) · **counter lock** (3-digit code, one digit on each of three notes) ·
+generator restart · B1 fuses + breaker · B15 cell release (needs 5 patient files).
+
+### 4.7 Floors and layouts
+Every basement floor has its own plan: straight spine, ring (two corridors around a block of rooms), jog (offset
+corridors with a central hub) or hall (corridor with an open hall). Always present: two washrooms (toilets, sinks,
+shower), a break room, two stair cores, the lift lobby and the lift room. G adds a cafeteria. Real doors on every
+room. Above ground is bright and clean; the basements are cold, desaturated and clinical, full of machinery, dead
+staff and — from the Wards down — dead guards. A separate basement stairwell is collapsed on most floors (open to a
+landing on B3, B6, B11).
+
+### 4.8 Lifts
+Real lifts: doors open as you approach a working lift, close once you are inside, the cabin hums for a few seconds,
+and you step out of the next floor's lift. No loading screen between floors.
+
+### 4.9 Collectibles and rewards
+17 of Emilia's drawings (Bond; every 5 hides a health gel) and 14 patient files (lore, the children's names; every 5
+gives rounds). L-7 serum vials heal fully but add Taint.
+
+### 4.10 Achievements
+30, including all endings, the hidden ending, NPC arcs (Absolution, Last Stand, Whistleblower), collectibles, kills,
+crafting and puzzles. Kept across runs; shown on the main menu.
 
 ---
 
-## 7. Facility: Chapter 1 sectors
+## 5. Choices
+Each choice is a two-option prompt (E / Y). Consequences are **deterministic** but not shown; most surface floors
+later or only in the ending.
 
-| Sector | Mood / lighting | Function |
-|--------|---------------|----------|
-| **St. Brigid's Clinic** (surface) | Decaying 1970s clinic, sodium-orange light | Tutorial and the front for the facility |
-| **Containment Wing** (hub) | Rust-red emergency light, padded cells, the children's dorm | Central hub with locked shortcuts |
-| **Research Labs** | Sterile teal and white, flickering fluorescents | Puzzles, L-7 lore, Huckley boss |
-| **Maintenance Tunnels** | Black, wet, flashlight only | Stealth, Jaz's hideout, shortcuts |
-| **Security Hub** | Cold blue monitor glow | Timed lockdown escape, Dr. Mán |
-
-All sectors are built from **one modular sci-fi/hospital kit from Fab**, with Megascans surfaces and decals for wear, re-dressed per sector by lighting and material instances. Hero props are modelled in Blender.
+| # | Where | Option A | Option B |
+|---|-------|----------|----------|
+| 1 | City — Leo Vargas | Give him your gel: +Bond, he explains the F1 lift | Search his pockets: supplies, +Taint; a Hollow paramedic waits on G |
+| 2 | F1 — Okafor | Free her: +Bond, med cache on B2, her confession on B5 | Leave her: +Taint, she is a Hollow on B3 |
+| 2b | B5 — Okafor's confession | Forgive: +Bond, she helps carry the children out | Condemn: +Taint, she disappears |
+| 3 | B4 — paediatric medicine | Take it: 2 gels + sedative | Leave it for the children: +15 Bond (needed for LANTERN LIT) |
+| 4 | B8 — Sgt. Hale | Bandage him (1 gel): +Bond, ammo cache on B9, his squad holds fire | Take his ammo: +12 rounds, +Taint, two of his squad hunt you on B9 |
+| 4b | B12 — Hale turning | End it quickly: +Taint | Leave him one bullet: +Bond, he kills the B12 Experiment for you |
+| 5 | B11 — the archive | Send it to Jaz: an alarm brings two Hollows; endings expose Halvorsen | Wipe it: −10 Taint; Halvorsen reopens under a new name |
+| 6 | B14 — sedated patients | Wake them: +Bond, but two have already turned | Let them sleep: +Taint |
+Plus: sparing or hurting the Hollow Children (B1, B3, B7, B11, B13), taking L-7 serums, killing at all (Lullaby).
 
 ---
 
-## 8. Art (realistic)
-Full spec: [`ART_BIBLE.md`](ART_BIBLE.md).
-- **Style:** grounded realism with a gritty sci-fi edge. Lighting does most of the horror work: Lumen global illumination, volumetric fog, the flashlight as the main light source, emergency strobes and monitor glow.
-- **Characters:** **MetaHuman** for every human (Max, Emilia, Huckley, Dr. Mán, Jaz, Nate, guards). It's free in Unreal and gives realistic faces and bodies without modelling skills. The Hollows start from MetaHuman bodies with custom sculpted damage (Blender) and lantern-glow materials.
-- **Environments:** a modular kit plus Megascans surfaces and decals from **Fab**, assembled in-engine. Hero props (the observation tank, Emilia's bed, L-7 injectors) are modelled in **Blender**.
-- **Animation:** Epic's free **Game Animation Sample** (motion-matched locomotion) as the base for Max, plus Fab and marketplace packs for combat and enemies. Facial animation comes from **MetaHuman Animator**, either driven from the ElevenLabs audio or captured with an iPhone.
-- **Concepts:** **AI-assisted** mood boards and character concepts, used as reference only, never shipped as final art.
-- **Cutscenes:** in-engine with **Sequencer**. Backstory flashbacks are **2D storybook panels** (painted, with a slow parallax pan) for contrast and to save cost.
-- **UI:** clinical, lab-equipment look, RE-style, **diegetic by default**: health and sanity on a glowing **wrist monitor** on Max's arm, ammo on a small display on the **pistol**, sanity and hits shown as screen tint / flash, inventory as a medical tray. A flat **screen overlay HUD** (HP / sanity / ammo meters) is a separate, optional setting, built but **off by default** and to be finished once the art style and overall design are final. No XP bar or skill tree. Full spec: [`UI_DESIGN.md`](UI_DESIGN.md).
+## 6. Endings (7)
+| Ending | Condition (checked in this order) | What happens |
+|--------|-----------------------------------|--------------|
+| **HOLLOW** | Taint ≥ 80 | The serum finishes what it started; Emilia holds her brother's hand as his eyes go dark. |
+| **LANTERN LIT** (hidden) | New Game+ and cells opened and archive sent and medicine left and Okafor freed and Taint < 20 | Max, Emilia and the five children walk out into the dawn. |
+| **SIX DOORS** | Cells opened, Bond ≥ 70, Taint < 40 | Six children walk out; the city finally hears their names. |
+| **LULLABY** | No kills this run, Bond ≥ 40, Taint < 40 | Emilia sings and every Hollow lies down to sleep. |
+| **HOMECOMING** | Bond ≥ 70, Taint < 40 | Emilia is human again; they walk out into the morning. |
+| **KIN** | Bond ≥ 40 | She survives as what she is, and leaves with him. |
+| **LANTERN** | otherwise | Max stays behind so she can live. |
+Epilogue lines change with the archive choice, Okafor's fate and Hale's last stand.
 
-## 9. Audio
-- **Voice:** ElevenLabs, one consistent voice per character, with direction notes per line (see `ROADMAP.md` §2.2 for licensing). **All story dialogue is voiced**: cutscenes, Jaz's radio calls, Emilia's intercom and in-head lines, bosses, and Max's examine comments. Files and notes stay text-only. MetaHuman Animator generates lip-sync from the ElevenLabs audio.
-- **Music:** adaptive states (calm / tension / combat / chase) driven by Audio Mixer snapshots. Emilia has her own melodic motif: a music-box lullaby that slowly distorts.
-- **SFX:** HVAC hum, surface-specific footsteps, Hollow vocals, and the heartbeat layer at low sanity (from v1).
-- **Main menu theme:** short and loopable, built on Emilia's lullaby.
+---
+
+## 7. Replay design
+- **Chapter select** (unlocked as chapters are reached) with a fixed kit per chapter; collectibles and Bond/Taint
+  start fresh so every ending is reachable from Chapters 3–4.
+- **New Game+** after any ending: pistol and 32 rounds from the start, last run's journal carried over as "memories",
+  tougher Hollows, Emilia's whispered hints (F1, B4, B11), Jaz's final confession (B15), and the only route to
+  LANTERN LIT.
+- Hidden, deterministic tallies in the Silent Hill 2 tradition: the game judges how you played rather than asking.
+
+---
+
+## 8. Art direction (as built)
+Realistic UE5 with Fab packs (Horror Hospital interiors, Assetsville town, Survival Character for Max, Whisper for
+Hollows, tactical outfit for guards, Zombie Nurse). Clean white/teal/yellow above ground; grime, decals, blood, dead
+LED panels and cold light below. Lights sit under LED ceiling panels. Full spec: `ART_BIBLE.md`. MetaHumans for Max
+and Emilia are still planned.
+
+## 9. UI (as built)
+Diegetic-first: objective top-left, message panel, ammo/health ring bottom-right; RE4-style backpack; 007-style
+Options page (Protocols); chapter cards; achievements; journal/map. Fonts: Cinzel, Barlow Semi Condensed, Patrick
+Hand. Controller and touch supported. Spec: `UI_DESIGN.md`.
+
+## 10. Audio (as built)
+Kokoro (offline TTS) voices for all spoken lines (32 lines: Max, Jaz, Emilia, Leo, Okafor, Hale, police radio);
+horror ambience, music-box lullaby, tension loops, interface sounds. Planned: final actor or ElevenLabs voices,
+lip-sync, adaptive music states.
+
+---
+
+## 11. Content warning
+Child endangerment and medical experiments on children (implied, never shown graphically), violence, gore, suicide
+implication (Hale). Shown at startup.
+
+---
+
+## 12. Not built yet (from v4 and later ideas)
+- Bosses (Huckley Hollow, Dr. Mán / Dr. Halvorsen confrontation); ally Nate.
+- Shotgun / nail gun, breakable knife, weak points, psychic push.
+- Drugs (Adrenal, Stonewall, Clarity), inventory pouch upgrades.
+- Hiding spots, stealth noise radii beyond the bottle lure, dynamic difficulty, Nightmare / Ironman modes.
+- Map auto-colouring and player pins; safe-room item box.
+- MetaHumans for Max and Emilia, facial animation and lip-sync, storybook prologue panels.
+- Localisation, subtitles options beyond text size, full accessibility pass.
